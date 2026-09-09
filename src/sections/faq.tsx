@@ -9,23 +9,32 @@ import {
 } from "@/components/ui/accordion"
 
 const settings = {
-  title: 'Frequently asked questions',
+  eyebrow: 'Questions',
+  title: 'Frequently Asked Questions',
   faqs: [
     {
-      question: 'Why is the sky blue?',
-      answer: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloremque laboriosam neque reprehenderit saepe eius dolorum vel consequuntur perspiciatis ad vero.',
+      question: 'What areas does Iron Bridge serve?',
+      answer: 'We operate throughout Maryland, Washington DC, and Northern Virginia, including Baltimore, Annapolis, Columbia, Silver Spring, Rockville, Bethesda, Arlington, Alexandria, Fairfax, and surrounding areas. Regional and Mid-Atlantic transportation may also be available depending on the assignment.',
     },
     {
-      question: 'Why did the chicken cross the road?',
-      answer: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloremque laboriosam neque reprehenderit saepe eius dolorum vel consequuntur perspiciatis ad vero.',
+      question: 'Are your drivers trained to handle medical specimens?',
+      answer: 'Personnel involved in medical courier work complete HIPAA privacy awareness and Bloodborne Pathogens training, and follow documented chain-of-custody and proof-of-delivery procedures.',
     },
     {
-      question: 'How many licks does it take to get to the center of a tootsie pop?',
-      answer: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloremque laboriosam neque reprehenderit saepe eius dolorum vel consequuntur perspiciatis ad vero.',
+      question: 'Do you handle temperature-sensitive or STAT shipments?',
+      answer: 'Yes. We support cold-packed and temperature-sensitive shipments as well as time-sensitive, expedited (STAT) courier requests. Let us know the requirements when you request a quote so we can confirm we’re a fit.',
     },
     {
-      question: "Where's Waldo?",
-      answer: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloremque laboriosam neque reprehenderit saepe eius dolorum vel consequuntur perspiciatis ad vero.',
+      question: 'Can we set up a recurring or dedicated route?',
+      answer: 'Yes, dedicated and recurring routes are one of our core offerings for businesses, laboratories, and healthcare organizations that need consistent daily, weekly, or scheduled transportation.',
+    },
+    {
+      question: 'Do you support organ or tissue transportation?',
+      answer: 'Specialized medical transportation, including organ and tissue logistics, is an emerging capability we are developing. It is provided once the appropriate client requirements, training, packaging, temperature-control, chain-of-custody, insurance, and regulatory requirements have been satisfied — not offered as a standard service today.',
+    },
+    {
+      question: 'How do I request service?',
+      answer: 'Submit a request through our Request a Quote form with your pickup and delivery details, and our team will follow up to confirm the plan.',
     },
   ]
 }
@@ -33,18 +42,23 @@ const settings = {
 export default function FAQ() {
   return (
     <div id='faq' className="space-y-6 sm:space-y-7 md:space-y-8 lg:space-y-10 mx-auto text-center">
+      {/* Eyebrow */}
+      <SlideEffect>
+        <span className="text-xs md:text-sm font-medium tracking-[0.14em] uppercase text-teal">{settings.eyebrow}</span>
+      </SlideEffect>
+
       {/* Title */}
       <SlideEffect>
-        <h2 className="text-2xl md:text-4xl lg:text-header capitalize text-transparent bg-clip-text bg-gradient-to-b from-black to-black/60 font-medium leading-normale">{settings.title}</h2>
+        <h2 className="font-serif text-2xl md:text-4xl lg:text-header font-semibold leading-tight text-navy">{settings.title}</h2>
       </SlideEffect>
 
       {/* Accordion */}
       <SlideEffect>
-        <Accordion type="single" collapsible className="max-w-2xl mx-auto text-base text-black">
+        <Accordion type="single" collapsible className="max-w-2xl mx-auto text-base text-navy text-left">
           {settings.faqs.map((faq, index) => (
             <AccordionItem key={index} value={index + '-item'}>
               <AccordionTrigger>{faq.question}</AccordionTrigger>
-              <AccordionContent>{faq.answer}</AccordionContent>
+              <AccordionContent className="text-foreground">{faq.answer}</AccordionContent>
             </AccordionItem>
           ))}
         </Accordion>

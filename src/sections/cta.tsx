@@ -2,30 +2,45 @@
 
 import SlideEffect from "@/components/slide-effect"
 import { Button } from "@/components/ui/button"
+import { ArrowRight } from "lucide-react"
 import Link from "next/link"
 
 const settings = {
-  title: 'Start using our app today.',
-  description: 'Incididunt sint fugiat pariatur cupidatat consectetur sit cillum anim id veniam aliqua proident excepteur commodo do ea.',
-  CTA: {
-    content: 'Start your free trial',
-    href: '#'
+  title: 'Ready to Move Something That Matters?',
+  description: 'Whether it’s a single time-sensitive delivery or a recurring route, tell us what you need and we’ll follow up with a plan.',
+  primaryCTA: {
+    content: 'Request a Quote',
+    href: '/request-a-quote'
+  },
+  secondaryCTA: {
+    content: 'Become a Driver',
+    href: '/become-a-driver'
   }
 }
 
 export default function CTA() {
   return (
-    <SlideEffect isSpring={false} className="space-y-6 sm:space-y-7 md:space-y-8 lg:space-y-10 mx-auto text-center p-8 md:p-16 flex flex-col items-center justify-center rounded-2xl bg-secondary">
+    <SlideEffect isSpring={false} className="space-y-6 sm:space-y-7 md:space-y-8 mx-auto text-center p-8 md:p-16 flex flex-col items-center justify-center rounded-2xl bg-navy">
       {/* Title */}
-      <h2 className="text-2xl md:text-4xl lg:text-header capitalize font-medium leading-normal text-transparent bg-clip-text bg-gradient-to-b from-black to-black/60">{settings.title}</h2>
+      <h2 className="font-serif text-2xl md:text-4xl lg:text-header font-semibold leading-tight text-white">{settings.title}</h2>
 
       {/* Description */}
-      <p className="px-0 sm:px-10 md:px-0 w-full max-w-full md:max-w-3/4 mx-auto text-sm lg:text-base">{settings.description}</p>
+      <p className="px-0 sm:px-10 md:px-0 w-full max-w-full md:max-w-2xl mx-auto text-sm lg:text-base text-white/75">{settings.description}</p>
 
       {/* CTA */}
-      <Link href={settings.CTA.href}>
-        <Button className="w-full" size='lg'>{settings.CTA.content}</Button>
-      </Link>
+      <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 w-full sm:w-fit">
+        <Link href={settings.primaryCTA.href} className="w-full sm:w-fit">
+          <Button className="w-full bg-white text-navy hover:opacity-90" size='lg'>
+            {settings.primaryCTA.content}
+            <ArrowRight />
+          </Button>
+        </Link>
+        <Link href={settings.secondaryCTA.href} className="w-full sm:w-fit">
+          <Button className="w-full bg-transparent border-white/30 text-white hover:bg-white/10" variant='outline' size='lg'>
+            {settings.secondaryCTA.content}
+          </Button>
+        </Link>
+      </div>
     </SlideEffect>
   )
 }

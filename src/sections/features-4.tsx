@@ -1,103 +1,77 @@
 'use client'
 
-import Badge from "@/components/badge"
-import Card from "@/components/card"
 import SlideEffect from "@/components/slide-effect"
-import Spinner from "@/components/spinner"
-import TextRevealEffect from "@/components/text-reveal-effect"
 import { Button } from "@/components/ui/button"
+import { MapPin } from "lucide-react"
 import Link from "next/link"
 
 const settings = {
-  badge: {
-    number: 4,
-    text: 'SMART TEAMWORK',
-  },
-  title: 'Empower People With Data',
-  description: 'Reduce friction and enhance productivity by getting the right information to the right people with minimal effort, enabling them to thrive and excel.',
-  card_1: {
-    title: 'Easily Manage Teams and Sites',
-    content: "Work happens in teams. That's why Pirsch enables collaboration right from the start: Simply invite team members or clients via email, assign them roles, and give them access to the dashboards they need to excel. All people, sites and custom themes in one place.",
-    CTA: {
-      content: 'Start 30-day Free Trial',
-      href: '#'
+  eyebrow: 'Where We Operate',
+  title: 'Service Area',
+  description: 'Iron Bridge is based in the DMV and built to run daily throughout Maryland, Washington DC, and Northern Virginia.',
+  regions: [
+    {
+      title: 'Maryland',
+      cities: ['Baltimore', 'Bowie', 'Annapolis', 'Columbia', 'Silver Spring', 'Rockville', 'Bethesda', 'Hyattsville'],
     },
-    labels: [
-      'my-site.com',
-      'example.com',
-      'my-saas.ai',
-      'my-blog.com',
-      'potfolio.me',
-      'new-site.com',
-      'client-site.io',
-    ],
-    avatars: [
-      'https://avatar.iran.liara.run/public/38',
-      'https://avatar.iran.liara.run/public/40',
-      'https://avatar.iran.liara.run/public/22',
-      'https://avatar.iran.liara.run/public/6',
-      'https://avatar.iran.liara.run/public/12',
-      'https://avatar.iran.liara.run/public/37',
-      'https://avatar.iran.liara.run/public/35'
-    ]
-  },
-  card_2: {
-    title: 'Receive Automatic Email Reports',
-    content: 'Keep colleagues, customers, or partners in the loop with automatic email reports. Regularly receive a concise summary of the latest activities with just one click.',
-  },
-  card_3: {
-    title: 'Share Dashboards With Anybody',
-    content: 'Working with external partners? Create unique access links to securely grant access to dashboards or make them public on your personal subdomain.',
-  },
+    {
+      title: 'Washington, DC',
+      cities: ['Washington, DC'],
+    },
+    {
+      title: 'Northern Virginia',
+      cities: ['Arlington', 'Alexandria', 'Fairfax', 'Reston', 'Sterling', 'Ashburn'],
+    },
+  ],
+  note: 'Regional and Mid-Atlantic transportation may also be available depending on the assignment.',
+  CTA: {
+    content: 'Discuss Your Service Area',
+    href: '/request-a-quote'
+  }
 }
 
 export default function Features4() {
   return (
-    <div className="space-y-6 sm:space-y-7 md:space-y-8 lg:space-y-10 mx-auto text-center">
-      {/* Badge */}
+    <div id='service-area' className="space-y-6 sm:space-y-7 md:space-y-8 lg:space-y-10 mx-auto text-center">
+      {/* Eyebrow */}
       <SlideEffect>
-        <Badge number={settings.badge.number} text={settings.badge.text} />
+        <span className="text-xs md:text-sm font-medium tracking-[0.14em] uppercase text-teal">{settings.eyebrow}</span>
       </SlideEffect>
 
       {/* Title */}
-      <TextRevealEffect className="text-2xl md:text-4xl lg:text-header text-transparent bg-clip-text bg-gradient-to-b from-black to-black/60 font-medium leading-normal">{settings.title}</TextRevealEffect>
+      <SlideEffect>
+        <h2 className="font-serif text-2xl md:text-4xl lg:text-header font-semibold leading-tight text-navy">{settings.title}</h2>
+      </SlideEffect>
 
       {/* Description */}
-      <SlideEffect className="px-2 sm:px-10 md:px-0 w-full md:max-w-3/4 mx-auto text-sm lg:text-base">{settings.description}</SlideEffect>
+      <SlideEffect className="px-2 sm:px-10 md:px-0 w-full md:max-w-2xl mx-auto text-sm lg:text-base">{settings.description}</SlideEffect>
 
-      {/* Cards */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-        {/* card 1 */}
-        <SlideEffect direction="top" className="grid-cols-1 lg:col-span-2 h-full" isSpring={false}>
-          <Card className="flex flex-col lg:flex-row justify-center items-center">
-            <div className="space-y-3 md:space-y-5 flex-1">
-              <h3 className="text-xl md:text-title text-black font-medium">{settings.card_1.title}</h3>
-              <p className="mb-8 lg:mb-16">{settings.card_1.content}</p>
-              <Link href={settings.card_1.CTA.href}>
-                <Button className="bg-accent">{settings.card_1.CTA.content}</Button>
-              </Link>
+      {/* Regions */}
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+        {settings.regions.map((region, i) => (
+          <SlideEffect key={region.title} direction="top" delay={0.1 * i} isSpring={false}>
+            <div className="rounded-2xl bg-secondary p-8 h-full text-left space-y-4">
+              <div className="flex items-center gap-2">
+                <MapPin size={18} className="text-teal shrink-0" />
+                <h3 className="text-lg text-navy font-medium">{region.title}</h3>
+              </div>
+              <div className="flex flex-wrap gap-2">
+                {region.cities.map(city => (
+                  <span key={city} className="text-xs rounded-full border border-border px-3 py-1 text-foreground">{city}</span>
+                ))}
+              </div>
             </div>
-
-            <Spinner labels={settings.card_1.labels} avatars={settings.card_1.avatars} />
-          </Card>
-        </SlideEffect>
-
-        {/* card 2 */}
-        <SlideEffect direction="right" className="col-span-1 h-full" isSpring={false}>
-          <Card>
-            <h3 className="text-xl md:text-title text-black font-medium">{settings.card_2.title}</h3>
-            <p>{settings.card_2.content}</p>
-          </Card>
-        </SlideEffect>
-
-        {/* card 3 */}
-        <SlideEffect direction="left" delay={0.2} className="col-span-1 h-full" isSpring={false}>
-          <Card>
-            <h3 className="text-xl md:text-title text-black font-medium">{settings.card_3.title}</h3>
-            <p>{settings.card_3.content}</p>
-          </Card>
-        </SlideEffect>
+          </SlideEffect>
+        ))}
       </div>
+
+      <SlideEffect className="text-xs md:text-sm text-foreground/80 italic">{settings.note}</SlideEffect>
+
+      <SlideEffect>
+        <Link href={settings.CTA.href}>
+          <Button variant='outline' size='lg'>{settings.CTA.content}</Button>
+        </Link>
+      </SlideEffect>
     </div>
   )
 }
