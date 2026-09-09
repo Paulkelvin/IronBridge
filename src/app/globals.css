@@ -2,19 +2,30 @@
 @import "tw-animate-css";
 
 @theme {
-  --color-background: #ffffff;
-  --color-foreground: #707070;
-  --color-primary: #6ECE9D;
-  --color-secondary: #F8F5ED;
-  --color-accent: #FFDA6E;
-  --color-muted: #F0F0F0;
-  --color-border: rgba(0, 0, 0, 0.1);
+  /* Iron Bridge brand palette */
+  --color-navy: #1B2A4A;
+  --color-navy-dark: #101A30;
+  --color-navy-light: #2A3E68;
+  --color-teal: #2E6F5E;
+  --color-teal-light: #4C9382;
+  --color-white: #FFFFFF;
 
-  --text-base: 18px;
-  --text-link: 16px;
-  --text-header: 64px;
-  --text-title: 28px;
-  --text-hero: 96px;
+  --color-background: #ffffff;
+  --color-foreground: #3A3F4B;
+  --color-primary: var(--color-navy);
+  --color-secondary: #F4F6F5;
+  --color-accent: var(--color-teal);
+  --color-muted: #F0F1F3;
+  --color-border: rgba(27, 42, 74, 0.12);
+
+  --font-serif: var(--font-ib-serif), Georgia, serif;
+  --font-sans: var(--font-ib-sans), system-ui, sans-serif;
+
+  --text-base: 17px;
+  --text-link: 15px;
+  --text-header: 56px;
+  --text-title: 26px;
+  --text-hero: 80px;
 }
 
 :root {
