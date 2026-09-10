@@ -1,4 +1,5 @@
 import type { Metadata } from "next"
+import BridgeIllustration from "@/components/graphics/bridge-illustration"
 import CTA from "@/sections/cta"
 import Footer from "@/sections/footer"
 import PageHeader from "@/components/page-header"
@@ -31,20 +32,25 @@ export default function AboutPage() {
         description="Iron Bridge Mobility Solutions was built around a simple idea: dependability isn't simply part of our service. It's the foundation of our company."
       />
 
-      <SlideEffect isSpring={false} className="max-w-3xl mx-auto text-center space-y-5">
-        <p className="text-sm md:text-lg leading-relaxed">
-          Iron Bridge Mobility Solutions is a medical courier and commercial logistics company
-          serving Maryland, Washington DC, and Northern Virginia. We work with healthcare
-          organizations, laboratories, and commercial businesses that need transportation they
-          can build their own operations around — not a one-off delivery gig, but a partner they
-          can count on daily.
-        </p>
-        <p className="text-sm md:text-lg leading-relaxed">
-          Every route, medical or commercial, runs on the same standards: trained personnel,
-          documented handling procedures, and clear communication when something needs attention.
-          That consistency is what we&rsquo;re building the company around.
-        </p>
-      </SlideEffect>
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
+        <SlideEffect direction="right" isSpring={false} className="space-y-5 text-left">
+          <p className="text-sm md:text-lg leading-relaxed">
+            Iron Bridge Mobility Solutions is a medical courier and commercial logistics company
+            serving Maryland, Washington DC, and Northern Virginia. We work with healthcare
+            organizations, laboratories, and commercial businesses that need transportation they
+            can build their own operations around — not a one-off delivery gig, but a partner they
+            can count on daily.
+          </p>
+          <p className="text-sm md:text-lg leading-relaxed">
+            Every route, medical or commercial, runs on the same standards: trained personnel,
+            documented handling procedures, and clear communication when something needs attention.
+            That consistency is what we&rsquo;re building the company around.
+          </p>
+        </SlideEffect>
+        <SlideEffect direction="left" isSpring={false}>
+          <BridgeIllustration className="w-full h-auto text-teal/25" />
+        </SlideEffect>
+      </div>
 
       <div className="space-y-8 md:space-y-10">
         <SectionHeader eyebrow="What We Stand On" title="Our Values" />
