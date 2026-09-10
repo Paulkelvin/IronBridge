@@ -23,10 +23,15 @@ export default function CTA() {
   return (
     <SlideEffect isSpring={false} className="relative overflow-hidden space-y-6 md:space-y-8 mx-auto text-center p-8 md:p-16 flex flex-col items-center justify-center rounded-2xl bg-navy">
       {/* Decorative background */}
-      <div className="absolute inset-0 -z-10 pointer-events-none" aria-hidden="true">
+      <div
+        className="absolute inset-0 -z-10 pointer-events-none"
+        aria-hidden="true"
+        style={{
+          backgroundImage:
+            'radial-gradient(140% 100% at 10% 0%, rgba(61,166,132,0.16) 0%, transparent 65%), radial-gradient(140% 100% at 90% 100%, rgba(61,166,132,0.10) 0%, transparent 65%)',
+        }}
+      >
         <DotGrid id="cta-dot-grid" className="absolute inset-0 h-full w-full text-white/[0.06]" />
-        <div className="absolute -top-20 -right-16 h-64 w-64 rounded-full bg-teal/25 blur-3xl" />
-        <div className="absolute -bottom-24 -left-16 h-64 w-64 rounded-full bg-teal-light/15 blur-3xl" />
       </div>
 
       {/* Title + description (tight to each other) */}

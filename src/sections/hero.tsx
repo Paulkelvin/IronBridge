@@ -33,9 +33,14 @@ export default function Hero() {
     <div className="space-y-10 md:space-y-16 lg:space-y-20">
       <section className="relative flex flex-col gap-6 lg:gap-8 items-center text-center overflow-hidden pt-6 pb-10 md:pb-16">
         {/* Decorative background */}
-        <div className="absolute inset-0 -z-10 pointer-events-none" aria-hidden="true">
-          <div className="absolute -top-16 right-[-8%] h-64 w-64 md:h-96 md:w-96 rounded-full bg-teal/10 blur-3xl" />
-          <div className="absolute bottom-[-10%] left-[-8%] h-64 w-64 md:h-96 md:w-96 rounded-full bg-navy/10 blur-3xl" />
+        <div
+          className="absolute inset-0 -z-10 pointer-events-none"
+          aria-hidden="true"
+          style={{
+            backgroundImage:
+              'radial-gradient(140% 80% at 90% 0%, rgba(18,130,98,0.07) 0%, transparent 65%), radial-gradient(140% 80% at 5% 100%, rgba(27,42,74,0.05) 0%, transparent 65%)',
+          }}
+        >
           <RouteLine className="absolute inset-x-0 top-1/4 w-full h-[200px] md:h-[300px] text-navy/[0.07]" />
         </div>
 
