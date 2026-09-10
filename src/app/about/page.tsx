@@ -1,5 +1,4 @@
 import type { Metadata } from "next"
-import BridgeIllustration from "@/components/graphics/bridge-illustration"
 import CTA from "@/sections/cta"
 import Footer from "@/sections/footer"
 import PageHeader from "@/components/page-header"
@@ -8,6 +7,7 @@ import SlideEffect from "@/components/slide-effect"
 import { CardBody, CardTitle } from "@/components/ui/card-text"
 import IconBadge from "@/components/ui/icon-badge"
 import { Handshake, MessageCircle, PackageCheck, ShieldCheck, Sparkles, UserCheck } from "lucide-react"
+import Image from "next/image"
 
 export const metadata: Metadata = {
   title: "About Us | Iron Bridge Mobility Solutions",
@@ -47,8 +47,13 @@ export default function AboutPage() {
             That consistency is what we&rsquo;re building the company around.
           </p>
         </SlideEffect>
-        <SlideEffect direction="left" isSpring={false}>
-          <BridgeIllustration className="w-full h-auto text-teal/25" />
+        <SlideEffect direction="left" isSpring={false} className="relative w-full aspect-[4/3]">
+          <Image
+            src="/brand/about-bridge.jpg"
+            alt="Illustration of a bridge"
+            fill
+            className="object-contain"
+          />
         </SlideEffect>
       </div>
 
