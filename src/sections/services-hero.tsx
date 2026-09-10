@@ -5,7 +5,7 @@ import DotGrid from "@/components/graphics/dot-grid"
 import HexDot from "@/components/graphics/hex-dot"
 import SlideEffect from "@/components/slide-effect"
 import TextBlurEffect from "@/components/text-blur-effect"
-import { Truck } from "lucide-react"
+import Image from "next/image"
 import Link from "next/link"
 
 export default function ServicesHero() {
@@ -13,6 +13,11 @@ export default function ServicesHero() {
     <section className="relative left-1/2 w-screen -translate-x-1/2 overflow-hidden bg-navy rounded-bl-[70px] md:rounded-bl-[140px]">
       {/* Decorative background */}
       <div className="absolute inset-0 -z-10 pointer-events-none" aria-hidden="true">
+        <div
+          className="absolute inset-0 bg-cover bg-center"
+          style={{ backgroundImage: "url('/brand/services-hero-bg.jpg')" }}
+        />
+        <div className="absolute inset-0 bg-navy/80" />
         <DotGrid id="services-hero-dot-grid" className="absolute inset-0 h-full w-full text-white/[0.05]" />
         <div
           className="absolute inset-0"
@@ -47,15 +52,15 @@ export default function ServicesHero() {
 
         {/* Right: cutout image with accent block behind it */}
         <SlideEffect direction="left" isSpring={false} className="relative flex justify-center md:justify-end">
-          <div className="absolute right-2 md:right-6 bottom-0 h-56 w-44 md:h-72 md:w-56 rounded-2xl bg-teal/80" aria-hidden="true" />
-          <div className="relative h-64 md:h-80 w-52 md:w-64 rounded-2xl overflow-hidden">
-            {/*
-              Swap this placeholder for the generated courier cutout once ready:
-              <Image src="/brand/services-hero-courier.png" alt="" fill className="object-contain object-bottom" />
-            */}
-            <div className="h-full w-full flex items-center justify-center bg-navy-light/40 border border-white/10 rounded-2xl">
-              <Truck size={64} strokeWidth={1} className="text-white/30" />
-            </div>
+          <div className="absolute right-2 md:right-8 bottom-0 h-56 w-44 md:h-72 md:w-56 rounded-2xl bg-teal/80" aria-hidden="true" />
+          <div className="relative h-72 w-56 md:h-96 md:w-72">
+            <Image
+              src="/brand/services-hero-courier.png"
+              alt="Iron Bridge courier"
+              fill
+              className="object-contain object-bottom"
+              priority
+            />
           </div>
         </SlideEffect>
       </div>
