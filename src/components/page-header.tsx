@@ -1,4 +1,3 @@
-import Navbar from "@/components/navbar"
 import SlideEffect from "@/components/slide-effect"
 import TextBlurEffect from "@/components/text-blur-effect"
 
@@ -12,9 +11,7 @@ export default function PageHeader({
   description: string
 }) {
   return (
-    <div className="space-y-8 md:space-y-10 z-50 relative">
-      <Navbar />
-
+    <div className="space-y-8 md:space-y-10">
       <section className="flex flex-col gap-8 lg:gap-10 items-center text-center pt-4 pb-4 md:pb-8">
         <div className="flex flex-col gap-2 lg:gap-2.5 items-center">
           <SlideEffect>

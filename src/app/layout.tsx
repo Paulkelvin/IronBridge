@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Inter, Playfair_Display } from "next/font/google";
 import "./globals.css";
+import Header from "@/components/header";
 import LenisProvider from "@/providers/lenis";
 
 const sans = Inter({
@@ -51,7 +52,8 @@ export default function RootLayout({
         className={`${sans.variable} ${serif.variable} ${sans.className} antialiased w-full min-h-screen overflow-x-hidden`}
       >
         <LenisProvider>
-          {children}
+          <Header />
+          <div className="pt-[72px]">{children}</div>
         </LenisProvider>
       </body>
     </html>

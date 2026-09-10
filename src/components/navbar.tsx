@@ -39,7 +39,7 @@ export default function Navbar() {
   }, [isOpen])
 
   return (
-    <nav className="w-full h-fit py-4 flex items-center justify-between">
+    <nav className="w-full flex items-center justify-between">
       {/* Logo */}
       <Link href='/' title="Home" id="Logo">
         <Logo />
@@ -88,7 +88,7 @@ export default function Navbar() {
             animate={{ height: '100vh', opacity: 1, y: 0 }}
             exit={{ height: 0, opacity: 1, y: -20 }}
             transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-            className="fixed flex flex-col md:hidden top-16 left-0 w-full bg-white z-50 overflow-hidden"
+            className="fixed flex flex-col md:hidden top-[72px] left-0 w-full bg-white z-40 overflow-hidden"
           >
             <div className="flex flex-col p-6 space-y-6">
               <ul className="flex flex-col space-y-2 text-black font-medium select-none text-base">

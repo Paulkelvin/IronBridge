@@ -1,6 +1,5 @@
 'use client'
 
-import Navbar from "@/components/navbar";
 import SlideEffect from "@/components/slide-effect";
 import TextBlurEffect from "@/components/text-blur-effect";
 import { Button } from "@/components/ui/button";
@@ -30,9 +29,7 @@ const settings = {
 
 export default function Hero() {
   return (
-    <div className="space-y-10 md:space-y-16 lg:space-y-20 z-50 relative">
-      <Navbar />
-
+    <div className="space-y-10 md:space-y-16 lg:space-y-20">
       <section className="relative flex flex-col gap-6 lg:gap-8 items-center text-center overflow-hidden pt-6 pb-10 md:pb-16">
         {/* Region indicator */}
         <SlideEffect>
