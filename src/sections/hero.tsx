@@ -4,7 +4,7 @@ import RouteLine from "@/components/graphics/route-line";
 import SlideEffect from "@/components/slide-effect";
 import TextBlurEffect from "@/components/text-blur-effect";
 import { Button } from "@/components/ui/button";
-import { ArrowRight, FileCheck, PackageCheck, ShieldCheck } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -13,7 +13,7 @@ const settings = {
   headlineTop: 'Dependability',
   headlineBottom: 'Delivered Daily.',
   descriptor: 'Medical Courier & Commercial Logistics',
-  subheadline: 'Reliable service, secure handling, and responsive coverage across Maryland, Washington DC, and Northern Virginia.',
+  subheadline: 'Reliable service, secure handling, and responsive coverage you can count on.',
   mainCTA: {
     content: 'Request a Quote',
     href: '/request-a-quote'
@@ -22,11 +22,6 @@ const settings = {
     content: 'Become a Driver',
     href: '/become-a-driver'
   },
-  trustPoints: [
-    { icon: ShieldCheck, label: 'HIPAA & BBP Trained Personnel' },
-    { icon: PackageCheck, label: 'Chain-of-Custody Handling' },
-    { icon: FileCheck, label: 'Proof of Delivery' },
-  ]
 }
 
 export default function Hero() {
@@ -82,42 +77,29 @@ export default function Hero() {
               {/* CTA */}
               <SlideEffect
                 delay={0.2}
-                className="flex flex-col gap-8 md:gap-6 items-center lg:items-start justify-center w-full md:w-fit"
+                className="flex flex-col md:flex-row items-center w-full md:w-fit justify-center lg:justify-start gap-3 md:gap-4 mt-1"
               >
-                {/* Buttons */}
-                <div className="flex flex-col md:flex-row items-center w-full justify-center lg:justify-start gap-3 md:gap-4 mt-1">
-                  <Link href={settings.mainCTA.href} className="w-full">
-                    <Button size='lg' className="w-full hidden lg:flex">
-                      {settings.mainCTA.content}
-                      <ArrowRight strokeWidth={1.5} />
-                    </Button>
+                <Link href={settings.mainCTA.href} className="w-full">
+                  <Button size='lg' className="w-full hidden lg:flex">
+                    {settings.mainCTA.content}
+                    <ArrowRight strokeWidth={1.5} />
+                  </Button>
 
-                    <Button size='default' className="w-full flex lg:hidden">
-                      {settings.mainCTA.content}
-                      <ArrowRight strokeWidth={1.5} />
-                    </Button>
-                  </Link>
+                  <Button size='default' className="w-full flex lg:hidden">
+                    {settings.mainCTA.content}
+                    <ArrowRight strokeWidth={1.5} />
+                  </Button>
+                </Link>
 
-                  <Link href={settings.secondaryCTA.href} className="w-full">
-                    <Button size='lg' className="w-full hidden lg:flex" variant='outline'>
-                      {settings.secondaryCTA.content}
-                    </Button>
+                <Link href={settings.secondaryCTA.href} className="w-full">
+                  <Button size='lg' className="w-full hidden lg:flex" variant='outline'>
+                    {settings.secondaryCTA.content}
+                  </Button>
 
-                    <Button size='default' className="w-full flex lg:hidden" variant='outline'>
-                      {settings.secondaryCTA.content}
-                    </Button>
-                  </Link>
-                </div>
-
-                {/* Trust points */}
-                <div className="flex flex-col md:flex-row flex-wrap gap-3 md:gap-6 justify-center lg:justify-start items-center">
-                  {settings.trustPoints.map((point) => (
-                    <div key={point.label} className="flex items-center gap-2 text-xs md:text-sm text-foreground">
-                      <point.icon size={16} strokeWidth={1.5} className="text-teal shrink-0" />
-                      <span>{point.label}</span>
-                    </div>
-                  ))}
-                </div>
+                  <Button size='default' className="w-full flex lg:hidden" variant='outline'>
+                    {settings.secondaryCTA.content}
+                  </Button>
+                </Link>
               </SlideEffect>
             </div>
 
