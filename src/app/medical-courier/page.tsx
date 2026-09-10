@@ -1,5 +1,6 @@
 import type { Metadata } from "next"
 import Card from "@/components/card"
+import CapabilityList from "@/components/capability-list"
 import CTA from "@/sections/cta"
 import Footer from "@/sections/footer"
 import PageHeader from "@/components/page-header"
@@ -39,21 +40,7 @@ export default function MedicalCourierPage() {
 
       <div className="space-y-8 md:space-y-10">
         <SectionHeader title="What We Handle" align="left" />
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
-          {capabilities.map((cap, i) => (
-            <SlideEffect key={cap.title} direction="top" delay={0.05 * i} isSpring={false}>
-              <Card>
-                <div className="flex flex-row items-start gap-4">
-                  <IconBadge icon={cap.icon} size={20} />
-                  <div className="space-y-1.5">
-                    <CardTitle className="text-base">{cap.title}</CardTitle>
-                    <CardBody className="text-sm">{cap.content}</CardBody>
-                  </div>
-                </div>
-              </Card>
-            </SlideEffect>
-          ))}
-        </div>
+        <CapabilityList items={capabilities} />
       </div>
 
       {/* Compliance callout */}

@@ -5,6 +5,7 @@ import Footer from "@/sections/footer"
 import ServicesHero from "@/sections/services-hero"
 import SectionHeader from "@/components/section-header"
 import SlideEffect from "@/components/slide-effect"
+import TimelineSteps from "@/components/timeline-steps"
 import { CardBody, CardTitle } from "@/components/ui/card-text"
 import IconBadge from "@/components/ui/icon-badge"
 import { ArrowRight, Repeat, Stethoscope, Truck } from "lucide-react"
@@ -14,6 +15,12 @@ export const metadata: Metadata = {
   title: "Services | Iron Bridge Mobility Solutions",
   description: "Medical courier and commercial logistics services throughout Maryland, Washington DC, and Northern Virginia — specimen transport, same-day delivery, and dedicated routes.",
 }
+
+const howWeWork = [
+  { title: '1. Tell us what you need', content: 'Submit a quote request with pickup/delivery details, timing, and any special handling requirements.' },
+  { title: '2. We confirm the plan', content: 'Our team follows up to confirm scope, timing, and any client-specific requirements before dispatch.' },
+  { title: '3. Delivered, documented', content: 'Your shipment is delivered following chain-of-custody procedures with proof-of-delivery documentation.' },
+]
 
 const services = [
   {
@@ -62,20 +69,7 @@ export default function ServicesPage() {
           title="Every Route Runs on the Same Standards"
           description="Whether it's a single lab specimen or a recurring commercial route, deliveries are handled with the same documented procedures."
         />
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 text-left">
-          <Card>
-            <CardTitle className="text-lg">1. Tell us what you need</CardTitle>
-            <CardBody className="text-sm">Submit a quote request with pickup/delivery details, timing, and any special handling requirements.</CardBody>
-          </Card>
-          <Card>
-            <CardTitle className="text-lg">2. We confirm the plan</CardTitle>
-            <CardBody className="text-sm">Our team follows up to confirm scope, timing, and any client-specific requirements before dispatch.</CardBody>
-          </Card>
-          <Card>
-            <CardTitle className="text-lg">3. Delivered, documented</CardTitle>
-            <CardBody className="text-sm">Your shipment is delivered following chain-of-custody procedures with proof-of-delivery documentation.</CardBody>
-          </Card>
-        </div>
+        <TimelineSteps steps={howWeWork} />
       </div>
 
       <CTA />
