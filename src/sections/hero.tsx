@@ -107,13 +107,13 @@ export default function Hero() {
             <SlideEffect
               direction="left"
               isSpring={false}
-              className="relative w-full max-w-[280px] aspect-[427/696] mx-auto lg:max-w-none lg:w-full lg:h-[420px] xl:h-[480px] lg:aspect-auto"
+              className="relative w-full max-w-md mx-auto lg:max-w-none aspect-[1000/784]"
             >
               <Image
-                src="/brand/services-hero-courier.png"
-                alt="Iron Bridge courier"
+                src="/brand/hero-van-courier.png"
+                alt="Iron Bridge delivery courier and van"
                 fill
-                className="object-contain object-bottom"
+                className="object-contain"
                 priority
               />
             </SlideEffect>
