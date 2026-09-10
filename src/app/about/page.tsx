@@ -60,7 +60,7 @@ export default function AboutPage() {
             />
           </div>
           <Image
-            src="/brand/about-bridge.jpg"
+            src="/brand/about-bridge.png"
             alt="Illustration of a bridge"
             fill
             className="object-contain"
