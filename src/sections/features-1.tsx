@@ -10,7 +10,7 @@ import Link from "next/link"
 
 const settings = {
   eyebrow: 'What We Do',
-  title: 'Regional Logistics Built Around Reliability',
+  title: 'Dependable By Design',
   description: 'Iron Bridge supports healthcare organizations and commercial businesses with dependable, professionally handled transportation across Maryland, Washington DC, and Northern Virginia.',
   services: [
     {

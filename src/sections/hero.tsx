@@ -40,7 +40,7 @@ export default function Hero() {
           <RouteLine className="absolute inset-x-0 top-1/4 w-full h-[200px] md:h-[300px] text-navy/[0.07]" />
         </div>
 
-        <section className="relative overflow-hidden pt-6 pb-10 md:pb-16">
+        <section className="relative overflow-hidden pt-10 pb-10 md:pt-16 md:pb-16 lg:pt-20 lg:pb-20">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-12 items-center">
             {/* Left: text content */}
             <div className="flex flex-col gap-6 lg:gap-8 items-center lg:items-start text-center lg:text-left">
