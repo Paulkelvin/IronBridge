@@ -15,7 +15,7 @@ export default function PageHeader({
     <div className="space-y-8 md:space-y-10 z-50 relative">
       <Navbar />
 
-      <section className="flex flex-col gap-5 lg:gap-6 items-center text-center pt-4 pb-4 md:pb-8">
+      <section className="flex flex-col gap-8 lg:gap-10 items-center text-center pt-4 pb-4 md:pb-8">
         <div className="flex flex-col gap-2 lg:gap-2.5 items-center">
           <SlideEffect>
             <span className="inline-flex items-center rounded-full border border-border bg-secondary px-4 py-1.5 text-[11px] md:text-xs font-medium tracking-[0.14em] text-navy uppercase">

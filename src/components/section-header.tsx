@@ -13,7 +13,7 @@ export default function SectionHeader({
 }) {
   const alignClass = align === 'center' ? 'text-center mx-auto' : 'text-left'
   return (
-    <div className={`space-y-4 md:space-y-5 ${alignClass}`}>
+    <div className={`space-y-6 md:space-y-8 ${alignClass}`}>
       <div className="space-y-1.5 md:space-y-2">
         {eyebrow && (
           <SlideEffect>
