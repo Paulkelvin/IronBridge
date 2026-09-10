@@ -1,5 +1,6 @@
 'use client'
 
+import DotGrid from "@/components/graphics/dot-grid"
 import SlideEffect from "@/components/slide-effect"
 import { Button } from "@/components/ui/button"
 import { ArrowRight } from "lucide-react"
@@ -20,7 +21,14 @@ const settings = {
 
 export default function CTA() {
   return (
-    <SlideEffect isSpring={false} className="space-y-6 md:space-y-8 mx-auto text-center p-8 md:p-16 flex flex-col items-center justify-center rounded-2xl bg-navy">
+    <SlideEffect isSpring={false} className="relative overflow-hidden space-y-6 md:space-y-8 mx-auto text-center p-8 md:p-16 flex flex-col items-center justify-center rounded-2xl bg-navy">
+      {/* Decorative background */}
+      <div className="absolute inset-0 -z-10 pointer-events-none" aria-hidden="true">
+        <DotGrid id="cta-dot-grid" className="absolute inset-0 h-full w-full text-white/[0.06]" />
+        <div className="absolute -top-20 -right-16 h-64 w-64 rounded-full bg-teal/25 blur-3xl" />
+        <div className="absolute -bottom-24 -left-16 h-64 w-64 rounded-full bg-teal-light/15 blur-3xl" />
+      </div>
+
       {/* Title + description (tight to each other) */}
       <div className="space-y-2 md:space-y-3">
         <h2 className="font-serif text-2xl md:text-4xl lg:text-header font-semibold leading-tight text-white">{settings.title}</h2>
