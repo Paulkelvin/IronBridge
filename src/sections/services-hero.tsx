@@ -10,9 +10,12 @@ import Link from "next/link"
 
 export default function ServicesHero() {
   return (
-    <section className="relative left-1/2 w-screen -translate-x-1/2 overflow-hidden bg-navy rounded-bl-[70px] md:rounded-bl-[140px]">
-      {/* Decorative background */}
-      <div className="absolute inset-0 -z-10 pointer-events-none" aria-hidden="true">
+    <section className="relative left-1/2 w-screen -translate-x-1/2">
+      {/* Dark background panel — clipped to the curved shape, but nothing else in this section is */}
+      <div
+        className="absolute inset-0 -z-20 overflow-hidden rounded-bl-[70px] md:rounded-bl-[140px] bg-navy pointer-events-none"
+        aria-hidden="true"
+      >
         <div
           className="absolute inset-0 bg-cover bg-center"
           style={{ backgroundImage: "url('/brand/services-hero-bg.jpg')" }}
@@ -28,15 +31,9 @@ export default function ServicesHero() {
         />
       </div>
 
-      {/* Small scattered accents */}
-      <HexDot className="hidden md:block absolute top-16 left-[42%] h-8 w-8 text-teal-light/50" aria-hidden="true" />
-      <span className="hidden md:block absolute bottom-24 left-[8%] h-2 w-2 rounded-full bg-white/40" aria-hidden="true" />
-      <span className="hidden md:block absolute top-28 right-[6%] h-10 w-10 rounded-full border border-white/15" aria-hidden="true" />
-      <CurvedArrow className="hidden lg:block absolute bottom-10 right-[38%] h-16 w-16 text-white/25" aria-hidden="true" />
-
-      <div className="relative mx-auto max-w-5xl px-4 xl:px-0 py-16 md:py-24 grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
+      <div className="relative mx-auto max-w-5xl px-4 xl:px-0 pt-16 pb-40 md:pt-24 md:pb-16 grid grid-cols-1 md:grid-cols-2 gap-10 items-start">
         {/* Left: text */}
-        <SlideEffect direction="right" isSpring={false} className="text-left space-y-4">
+        <SlideEffect direction="right" isSpring={false} className="text-left space-y-4 md:pt-6">
           <p className="text-xs md:text-sm text-white/55">
             <Link href="/" className="hover:text-white transition-colors">Home</Link>
             <span className="mx-2">/</span>
@@ -50,10 +47,17 @@ export default function ServicesHero() {
           </p>
         </SlideEffect>
 
-        {/* Right: cutout image with accent block behind it */}
-        <SlideEffect direction="left" isSpring={false} className="relative flex justify-center md:justify-end">
-          <div className="absolute right-2 md:right-8 bottom-0 h-56 w-44 md:h-72 md:w-56 rounded-2xl bg-teal/80" aria-hidden="true" />
-          <div className="relative h-72 w-56 md:h-96 md:w-72">
+        {/* Right: cropped cutout, sitting inside a colored panel, breaking past the hero's bottom edge */}
+        <SlideEffect direction="left" isSpring={false} className="relative flex justify-center md:justify-end items-start md:h-[280px]">
+          {/* Small accents clustered around the figure's head/shoulders */}
+          <HexDot className="hidden md:block absolute -top-8 right-10 h-8 w-8 text-teal-light/50" aria-hidden="true" />
+          <span className="hidden md:block absolute top-4 right-0 h-2 w-2 rounded-full bg-white/50" aria-hidden="true" />
+          <span className="hidden md:block absolute top-16 -right-8 h-9 w-9 rounded-full border border-white/15" aria-hidden="true" />
+          <CurvedArrow className="hidden lg:block absolute -top-4 left-2 h-16 w-16 text-white/25 -scale-x-100" aria-hidden="true" />
+
+          <div className="relative h-[300px] w-[184px] md:h-[440px] md:w-[270px]">
+            {/* Colored panel the figure sits inside — offset down-right so it peeks past his edges */}
+            <div className="absolute -right-4 top-16 md:-right-6 md:top-24 h-[190px] w-[145px] md:h-[300px] md:w-[210px] rounded-2xl bg-teal/75 -z-10" aria-hidden="true" />
             <Image
               src="/brand/services-hero-courier.png"
               alt="Iron Bridge courier"
