@@ -45,13 +45,13 @@ export default function AboutPage() {
         </p>
       </SlideEffect>
 
-      <div className="space-y-6 md:space-y-7">
+      <div className="space-y-8 md:space-y-10">
         <SectionHeader eyebrow="What We Stand On" title="Our Values" />
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {values.map((v, i) => (
             <SlideEffect key={v.title} direction="top" delay={0.06 * i} isSpring={false}>
               <Card>
-                <v.icon size={24} className="text-teal" />
+                <v.icon size={24} strokeWidth={1.5} className="text-teal" />
                 <h3 className="text-base text-navy font-medium">{v.title}</h3>
                 <p className="text-sm">{v.content}</p>
               </Card>

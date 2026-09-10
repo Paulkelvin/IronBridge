@@ -32,7 +32,7 @@ export default function DedicatedRoutesPage() {
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
         <SlideEffect direction="right" isSpring={false} className="space-y-5">
-          <Wallet size={30} className="text-teal" />
+          <Wallet size={30} strokeWidth={1.5} className="text-teal" />
           <h2 className="font-serif text-2xl md:text-3xl font-semibold text-navy leading-tight">
             Built for Organizations That Need Transportation Every Day
           </h2>
@@ -44,7 +44,7 @@ export default function DedicatedRoutesPage() {
         </SlideEffect>
         <SlideEffect direction="left" isSpring={false}>
           <Card>
-            <CalendarClock size={26} className="text-teal" />
+            <CalendarClock size={26} strokeWidth={1.5} className="text-teal" />
             <h3 className="text-lg text-navy font-medium">How It Works</h3>
             <ul className="text-sm space-y-2 list-disc pl-4">
               <li>Tell us your pickup/delivery points, stop count, and frequency</li>
@@ -55,13 +55,13 @@ export default function DedicatedRoutesPage() {
         </SlideEffect>
       </div>
 
-      <div className="space-y-6 md:space-y-7">
+      <div className="space-y-8 md:space-y-10">
         <SectionHeader eyebrow="Who This Is For" title="Built for Recurring Operations" align="left" />
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
           {audiences.map((a, i) => (
             <SlideEffect key={a.title} direction="top" delay={0.1 * i} isSpring={false}>
               <Card>
-                <a.icon size={24} className="text-teal" />
+                <a.icon size={24} strokeWidth={1.5} className="text-teal" />
                 <h3 className="text-base text-navy font-medium">{a.title}</h3>
                 <p className="text-sm">{a.content}</p>
               </Card>
@@ -74,7 +74,7 @@ export default function DedicatedRoutesPage() {
         <Link href="/request-a-quote">
           <Button size="lg">
             Discuss a Dedicated Route
-            <ArrowRight />
+            <ArrowRight strokeWidth={1.5} />
           </Button>
         </Link>
       </SlideEffect>

@@ -65,7 +65,7 @@ export default function DriverForm() {
       <div className="max-w-2xl mx-auto w-full space-y-8">
         <SlideEffect isSpring={false}>
           <div role="note" className="flex items-start gap-2.5 rounded-lg border border-border bg-secondary px-4 py-3 text-sm text-foreground">
-            <ShieldCheck size={18} className="shrink-0 mt-0.5 text-teal" aria-hidden="true" />
+            <ShieldCheck size={18} strokeWidth={1.5} className="shrink-0 mt-0.5 text-teal" aria-hidden="true" />
             <span>We do not collect Social Security numbers, banking information, or other highly sensitive details through this form. That information, if needed, is handled through a secure onboarding process later.</span>
           </div>
         </SlideEffect>
@@ -178,7 +178,7 @@ export default function DriverForm() {
 
               <Button type="submit" size="lg" className="w-full sm:w-fit" disabled={status === 'submitting'} aria-busy={status === 'submitting'}>
                 {status === 'submitting' ? 'Sending...' : 'Submit Application'}
-                {status !== 'submitting' && <ArrowRight aria-hidden="true" />}
+                {status !== 'submitting' && <ArrowRight strokeWidth={1.5} aria-hidden="true" />}
               </Button>
             </form>
           </SlideEffect>

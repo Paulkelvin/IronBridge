@@ -1,6 +1,7 @@
 'use client'
 
 import Card from "@/components/card"
+import SectionHeader from "@/components/section-header"
 import SlideEffect from "@/components/slide-effect"
 import { FileCheck, PackageCheck, ShieldCheck, UserCheck } from "lucide-react"
 
@@ -34,26 +35,15 @@ const settings = {
 
 export default function Features2() {
   return (
-    <div className="space-y-4 sm:space-y-5 md:space-y-6 lg:space-y-8 mx-auto text-center">
-      {/* Eyebrow */}
-      <SlideEffect>
-        <span className="text-xs md:text-sm font-medium tracking-[0.14em] uppercase text-teal">{settings.eyebrow}</span>
-      </SlideEffect>
-
-      {/* Title */}
-      <SlideEffect>
-        <h2 className="font-serif text-2xl md:text-4xl lg:text-header font-semibold leading-tight text-navy">{settings.title}</h2>
-      </SlideEffect>
-
-      {/* Description */}
-      <SlideEffect className="px-2 sm:px-10 md:px-0 w-full md:max-w-2xl mx-auto text-sm lg:text-base">{settings.description}</SlideEffect>
+    <div className="space-y-8 md:space-y-10 lg:space-y-12 mx-auto text-center">
+      <SectionHeader eyebrow={settings.eyebrow} title={settings.title} description={settings.description} />
 
       {/* Cards */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
         {settings.points.map((point, i) => (
           <SlideEffect key={point.title} direction="top" delay={0.08 * i} className="col-span-1 h-full" isSpring={false}>
             <Card className="items-start">
-              <point.icon size={26} className="text-teal" />
+              <point.icon size={26} strokeWidth={1.5} className="text-teal" />
               <h3 className="text-base md:text-lg text-navy font-medium">{point.title}</h3>
               <p className="text-sm">{point.content}</p>
             </Card>

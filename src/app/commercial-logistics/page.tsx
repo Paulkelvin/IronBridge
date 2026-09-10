@@ -34,14 +34,14 @@ export default function CommercialLogisticsPage() {
         description="Dependable transportation for businesses across Maryland, Washington DC, and Northern Virginia — beyond healthcare, built for everyday commercial delivery."
       />
 
-      <div className="space-y-6 md:space-y-7">
+      <div className="space-y-8 md:space-y-10">
         <SectionHeader title="What We Handle" align="left" />
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
           {capabilities.map((cap, i) => (
             <SlideEffect key={cap.title} direction="top" delay={0.05 * i} isSpring={false}>
               <Card>
                 <div className="flex flex-row items-start gap-4">
-                  <cap.icon size={22} className="text-teal shrink-0 mt-0.5" />
+                  <cap.icon size={22} strokeWidth={1.5} className="text-teal shrink-0 mt-0.5" />
                   <div className="space-y-1.5">
                     <h3 className="text-base text-navy font-medium">{cap.title}</h3>
                     <p className="text-sm">{cap.content}</p>

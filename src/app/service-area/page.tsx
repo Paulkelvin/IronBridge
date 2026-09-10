@@ -39,7 +39,7 @@ export default function ServiceAreaPage() {
           <SlideEffect key={region.title} direction="top" delay={0.1 * i} isSpring={false}>
             <div className="rounded-2xl bg-secondary p-8 h-full text-left space-y-4">
               <div className="flex items-center gap-2">
-                <MapPin size={18} className="text-teal shrink-0" />
+                <MapPin size={18} strokeWidth={1.5} className="text-teal shrink-0" />
                 <h3 className="text-lg text-navy font-medium">{region.title}</h3>
               </div>
               <div className="flex flex-wrap gap-2">

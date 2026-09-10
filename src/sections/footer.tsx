@@ -60,7 +60,7 @@ export default function Footer() {
           <Link href="/request-a-quote">
             <Button
               size='default'
-              className="rounded-none bg-navy text-white border border-navy uppercase tracking-[0.14em] text-xs font-semibold px-6 hover:bg-transparent hover:text-navy transition-colors"
+              className="rounded-md bg-navy text-white border border-navy/80 text-sm font-medium px-6 hover:bg-transparent hover:text-navy transition-colors"
             >
               Request a Quote
             </Button>

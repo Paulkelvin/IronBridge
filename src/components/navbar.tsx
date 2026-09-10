@@ -75,8 +75,8 @@ export default function Navbar() {
         aria-controls="mobile-menu"
         aria-label={isOpen ? "Close menu" : "Open menu"}
       >
-        {!isOpen && <AlignJustify size={20} aria-hidden="true" />}
-        {isOpen && <X size={20} aria-hidden="true" />}
+        {!isOpen && <AlignJustify size={20} strokeWidth={1.5} aria-hidden="true" />}
+        {isOpen && <X size={20} strokeWidth={1.5} aria-hidden="true" />}
       </motion.button>
 
       {/* mobile only - menu container with AnimatePresence for exit animations */}

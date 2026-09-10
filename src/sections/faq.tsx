@@ -1,5 +1,6 @@
 'use client'
 
+import SectionHeader from "@/components/section-header"
 import SlideEffect from "@/components/slide-effect"
 import {
   Accordion,
@@ -41,16 +42,8 @@ const settings = {
 
 export default function FAQ() {
   return (
-    <div id='faq' className="space-y-4 sm:space-y-5 md:space-y-6 lg:space-y-8 mx-auto text-center">
-      {/* Eyebrow */}
-      <SlideEffect>
-        <span className="text-xs md:text-sm font-medium tracking-[0.14em] uppercase text-teal">{settings.eyebrow}</span>
-      </SlideEffect>
-
-      {/* Title */}
-      <SlideEffect>
-        <h2 className="font-serif text-2xl md:text-4xl lg:text-header font-semibold leading-tight text-navy">{settings.title}</h2>
-      </SlideEffect>
+    <div id='faq' className="space-y-8 md:space-y-10 lg:space-y-12 mx-auto text-center">
+      <SectionHeader eyebrow={settings.eyebrow} title={settings.title} />
 
       {/* Accordion */}
       <SlideEffect>

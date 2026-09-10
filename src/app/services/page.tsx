@@ -47,18 +47,18 @@ export default function ServicesPage() {
         {services.map((service, i) => (
           <SlideEffect key={service.title} direction="top" delay={0.1 * i} className="col-span-1 h-full" isSpring={false}>
             <Card>
-              <service.icon size={28} className="text-teal" />
+              <service.icon size={28} strokeWidth={1.5} className="text-teal" />
               <h3 className="text-xl md:text-title text-navy font-medium">{service.title}</h3>
               <p>{service.content}</p>
               <Link href={service.href} className="inline-flex items-center gap-1.5 text-sm font-medium text-navy hover:text-teal transition-colors mt-auto">
-                Learn more <ArrowRight size={15} />
+                Learn more <ArrowRight size={15} strokeWidth={1.5} />
               </Link>
             </Card>
           </SlideEffect>
         ))}
       </div>
 
-      <div className="space-y-6 md:space-y-7">
+      <div className="space-y-8 md:space-y-10">
         <SectionHeader
           eyebrow="How We Work"
           title="Every Route Runs on the Same Standards"

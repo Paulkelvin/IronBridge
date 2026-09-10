@@ -68,7 +68,7 @@ export default function QuoteForm() {
         {/* PHI notice */}
         <SlideEffect isSpring={false}>
           <div role="note" className="flex items-start gap-2.5 rounded-lg border border-amber-200 bg-amber-50 px-4 py-3 text-sm text-amber-800">
-            <AlertTriangle size={18} className="shrink-0 mt-0.5" aria-hidden="true" />
+            <AlertTriangle size={18} strokeWidth={1.5} className="shrink-0 mt-0.5" aria-hidden="true" />
             <span>Please do not submit patient names, diagnoses, medical record numbers, or other protected health information through this form.</span>
           </div>
         </SlideEffect>
@@ -218,7 +218,7 @@ export default function QuoteForm() {
 
               <Button type="submit" size="lg" className="w-full sm:w-fit" disabled={status === 'submitting'} aria-busy={status === 'submitting'}>
                 {status === 'submitting' ? 'Sending...' : 'Submit Request'}
-                {status !== 'submitting' && <ArrowRight aria-hidden="true" />}
+                {status !== 'submitting' && <ArrowRight strokeWidth={1.5} aria-hidden="true" />}
               </Button>
             </form>
           </SlideEffect>

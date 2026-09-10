@@ -60,7 +60,7 @@ export default function ComplianceSafetyPage() {
         {pillars.map((p, i) => (
           <SlideEffect key={p.title} direction="top" delay={0.06 * i} isSpring={false}>
             <Card>
-              <p.icon size={24} className="text-teal" />
+              <p.icon size={24} strokeWidth={1.5} className="text-teal" />
               <h3 className="text-base text-navy font-medium">{p.title}</h3>
               <p className="text-sm">{p.content}</p>
             </Card>
@@ -68,7 +68,7 @@ export default function ComplianceSafetyPage() {
         ))}
       </div>
 
-      <div className="space-y-6 md:space-y-7">
+      <div className="space-y-8 md:space-y-10">
         <SectionHeader
           eyebrow="Every Assignment"
           title="Client-Specific Requirements"

@@ -1,6 +1,7 @@
 'use client'
 
 import Card from "@/components/card"
+import SectionHeader from "@/components/section-header"
 import SlideEffect from "@/components/slide-effect"
 import { ArrowRight, Repeat, Stethoscope, Truck } from "lucide-react"
 import Link from "next/link"
@@ -33,30 +34,19 @@ const settings = {
 
 export default function Features1() {
   return (
-    <div id='services' className="space-y-4 sm:space-y-5 md:space-y-6 lg:space-y-8 mx-auto text-center">
-      {/* Eyebrow */}
-      <SlideEffect>
-        <span className="text-xs md:text-sm font-medium tracking-[0.14em] uppercase text-teal">{settings.eyebrow}</span>
-      </SlideEffect>
-
-      {/* Title */}
-      <SlideEffect>
-        <h2 className="font-serif text-2xl md:text-4xl lg:text-header font-semibold leading-tight text-navy">{settings.title}</h2>
-      </SlideEffect>
-
-      {/* Description */}
-      <SlideEffect className="px-2 sm:px-10 md:px-0 w-full md:max-w-2xl mx-auto text-sm lg:text-base">{settings.description}</SlideEffect>
+    <div id='services' className="space-y-8 md:space-y-10 lg:space-y-12 mx-auto text-center">
+      <SectionHeader eyebrow={settings.eyebrow} title={settings.title} description={settings.description} />
 
       {/* Cards */}
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         {settings.services.map((service, i) => (
           <SlideEffect key={service.title} direction="top" delay={0.1 * i} className="col-span-1 h-full" isSpring={false}>
             <Card>
-              <service.icon size={28} className="text-teal" />
+              <service.icon size={28} strokeWidth={1.5} className="text-teal" />
               <h3 className="text-xl md:text-title text-navy font-medium">{service.title}</h3>
               <p>{service.content}</p>
               <Link href={service.href} className="inline-flex items-center gap-1.5 text-sm font-medium text-navy hover:text-teal transition-colors mt-auto">
-                Learn more <ArrowRight size={15} />
+                Learn more <ArrowRight size={15} strokeWidth={1.5} />
               </Link>
             </Card>
           </SlideEffect>
