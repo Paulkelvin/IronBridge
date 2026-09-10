@@ -36,7 +36,7 @@ export default function ServicesHero() {
       <span className="hidden md:block absolute top-20 right-[6%] h-9 w-9 rounded-full border border-white/15" aria-hidden="true" />
       <CurvedArrow className="hidden lg:block absolute bottom-12 right-[30%] h-16 w-16 text-white/25" aria-hidden="true" />
 
-      <div className="relative mx-auto max-w-5xl px-4 xl:px-0 py-12 md:py-24">
+      <div className="relative mx-auto max-w-7xl px-4 xl:px-0 py-12 md:py-24">
         <SlideEffect direction="right" isSpring={false} className="text-left space-y-4 max-w-xl">
           <p className="text-xs md:text-sm text-white/55">
             <Link href="/" className="hover:text-white transition-colors">Home</Link>

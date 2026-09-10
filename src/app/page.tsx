@@ -9,7 +9,7 @@ import Hero from "@/sections/hero";
 
 export default function HomePage() {
   return (
-    <div className="px-4 xl:px-0 max-w-5xl mx-auto space-y-14 sm:space-y-16 md:space-y-20 lg:space-y-24 scroll-smooth">
+    <div className="px-4 xl:px-0 max-w-7xl mx-auto space-y-14 sm:space-y-16 md:space-y-20 lg:space-y-24 scroll-smooth">
       <Hero />
       <Features1 />
       <Features2 />
