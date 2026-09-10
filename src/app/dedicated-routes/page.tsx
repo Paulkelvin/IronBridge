@@ -6,6 +6,7 @@ import PageHeader from "@/components/page-header"
 import SectionHeader from "@/components/section-header"
 import SlideEffect from "@/components/slide-effect"
 import { Button } from "@/components/ui/button"
+import IconBadge from "@/components/ui/icon-badge"
 import { Building2, CalendarClock, FlaskConical, Truck, Wallet } from "lucide-react"
 import { ArrowRight } from "lucide-react"
 import Link from "next/link"
@@ -32,7 +33,7 @@ export default function DedicatedRoutesPage() {
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
         <SlideEffect direction="right" isSpring={false} className="space-y-5">
-          <Wallet size={30} strokeWidth={1.5} className="text-teal" />
+          <IconBadge icon={Wallet} size={26} className="p-3" />
           <h2 className="font-serif text-2xl md:text-3xl font-semibold text-navy leading-tight">
             Built for Organizations That Need Transportation Every Day
           </h2>
@@ -44,7 +45,7 @@ export default function DedicatedRoutesPage() {
         </SlideEffect>
         <SlideEffect direction="left" isSpring={false}>
           <Card>
-            <CalendarClock size={26} strokeWidth={1.5} className="text-teal" />
+            <IconBadge icon={CalendarClock} size={24} />
             <h3 className="text-lg text-navy font-medium">How It Works</h3>
             <ul className="text-sm space-y-2 list-disc pl-4">
               <li>Tell us your pickup/delivery points, stop count, and frequency</li>
@@ -61,7 +62,7 @@ export default function DedicatedRoutesPage() {
           {audiences.map((a, i) => (
             <SlideEffect key={a.title} direction="top" delay={0.1 * i} isSpring={false}>
               <Card>
-                <a.icon size={24} strokeWidth={1.5} className="text-teal" />
+                <IconBadge icon={a.icon} size={22} />
                 <h3 className="text-base text-navy font-medium">{a.title}</h3>
                 <p className="text-sm">{a.content}</p>
               </Card>

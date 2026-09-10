@@ -5,6 +5,7 @@ import Footer from "@/sections/footer"
 import PageHeader from "@/components/page-header"
 import SectionHeader from "@/components/section-header"
 import SlideEffect from "@/components/slide-effect"
+import IconBadge from "@/components/ui/icon-badge"
 import { ArrowRight, Repeat, Stethoscope, Truck } from "lucide-react"
 import Link from "next/link"
 
@@ -47,7 +48,7 @@ export default function ServicesPage() {
         {services.map((service, i) => (
           <SlideEffect key={service.title} direction="top" delay={0.1 * i} className="col-span-1 h-full" isSpring={false}>
             <Card>
-              <service.icon size={28} strokeWidth={1.5} className="text-teal" />
+              <IconBadge icon={service.icon} size={26} />
               <h3 className="text-xl md:text-title text-navy font-medium">{service.title}</h3>
               <p>{service.content}</p>
               <Link href={service.href} className="inline-flex items-center gap-1.5 text-sm font-medium text-navy hover:text-teal transition-colors mt-auto">

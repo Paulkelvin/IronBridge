@@ -5,6 +5,7 @@ import Footer from "@/sections/footer"
 import PageHeader from "@/components/page-header"
 import SectionHeader from "@/components/section-header"
 import SlideEffect from "@/components/slide-effect"
+import IconBadge from "@/components/ui/icon-badge"
 import {
   Clock, FileCheck, PackageCheck, Snowflake, Stethoscope,
   ShieldCheck, Syringe, Truck as TruckIcon
@@ -42,7 +43,7 @@ export default function MedicalCourierPage() {
             <SlideEffect key={cap.title} direction="top" delay={0.05 * i} isSpring={false}>
               <Card>
                 <div className="flex flex-row items-start gap-4">
-                  <cap.icon size={22} strokeWidth={1.5} className="text-teal shrink-0 mt-0.5" />
+                  <IconBadge icon={cap.icon} size={20} />
                   <div className="space-y-1.5">
                     <h3 className="text-base text-navy font-medium">{cap.title}</h3>
                     <p className="text-sm">{cap.content}</p>
@@ -58,7 +59,7 @@ export default function MedicalCourierPage() {
       <SlideEffect isSpring={false}>
         <Card>
           <div className="flex flex-col md:flex-row items-start md:items-center gap-4">
-            <ShieldCheck size={32} strokeWidth={1.5} className="text-teal shrink-0" />
+            <IconBadge icon={ShieldCheck} size={28} className="p-3" />
             <div className="space-y-1.5">
               <h3 className="text-lg text-navy font-medium">HIPAA & Bloodborne Pathogens Trained Personnel</h3>
               <p className="text-sm">Iron Bridge personnel involved in medical courier work have completed HIPAA privacy awareness and Bloodborne Pathogens training as part of our medical courier standards, alongside documented chain-of-custody and proof-of-delivery procedures.</p>

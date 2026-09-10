@@ -5,6 +5,7 @@ import Footer from "@/sections/footer"
 import PageHeader from "@/components/page-header"
 import SectionHeader from "@/components/section-header"
 import SlideEffect from "@/components/slide-effect"
+import IconBadge from "@/components/ui/icon-badge"
 import { Handshake, MessageCircle, PackageCheck, ShieldCheck, Sparkles, UserCheck } from "lucide-react"
 
 export const metadata: Metadata = {
@@ -51,7 +52,7 @@ export default function AboutPage() {
           {values.map((v, i) => (
             <SlideEffect key={v.title} direction="top" delay={0.06 * i} isSpring={false}>
               <Card>
-                <v.icon size={24} strokeWidth={1.5} className="text-teal" />
+                <IconBadge icon={v.icon} size={22} />
                 <h3 className="text-base text-navy font-medium">{v.title}</h3>
                 <p className="text-sm">{v.content}</p>
               </Card>

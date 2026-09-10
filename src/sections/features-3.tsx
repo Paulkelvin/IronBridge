@@ -2,6 +2,7 @@
 
 import SectionHeader from "@/components/section-header"
 import SlideEffect from "@/components/slide-effect"
+import IconBadge from "@/components/ui/icon-badge"
 import { Briefcase, Building2, Car, HardHat, Landmark, Stethoscope, Store, Warehouse } from "lucide-react"
 
 const settings = {
@@ -30,7 +31,7 @@ export default function Features3() {
         {settings.industries.map((industry, i) => (
           <SlideEffect key={industry.title} direction="top" delay={0.05 * i} isSpring={false}>
             <div className="rounded-2xl border border-border bg-secondary p-6 flex flex-col items-center justify-center gap-3 h-full text-center">
-              <industry.icon size={24} strokeWidth={1.5} className="text-teal" />
+              <IconBadge icon={industry.icon} size={22} />
               <span className="text-sm font-medium text-navy leading-snug">{industry.title}</span>
             </div>
           </SlideEffect>

@@ -3,6 +3,7 @@ import CTA from "@/sections/cta"
 import Footer from "@/sections/footer"
 import PageHeader from "@/components/page-header"
 import SlideEffect from "@/components/slide-effect"
+import IconBadge from "@/components/ui/icon-badge"
 import { MapPin } from "lucide-react"
 
 export const metadata: Metadata = {
@@ -38,8 +39,8 @@ export default function ServiceAreaPage() {
         {regions.map((region, i) => (
           <SlideEffect key={region.title} direction="top" delay={0.1 * i} isSpring={false}>
             <div className="rounded-2xl bg-secondary p-8 h-full text-left space-y-4">
-              <div className="flex items-center gap-2">
-                <MapPin size={18} strokeWidth={1.5} className="text-teal shrink-0" />
+              <div className="flex items-center gap-2.5">
+                <IconBadge icon={MapPin} size={16} className="p-2 rounded-lg" />
                 <h3 className="text-lg text-navy font-medium">{region.title}</h3>
               </div>
               <div className="flex flex-wrap gap-2">

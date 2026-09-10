@@ -3,6 +3,7 @@
 import Card from "@/components/card"
 import SectionHeader from "@/components/section-header"
 import SlideEffect from "@/components/slide-effect"
+import IconBadge from "@/components/ui/icon-badge"
 import { FileCheck, PackageCheck, ShieldCheck, UserCheck } from "lucide-react"
 
 const settings = {
@@ -43,7 +44,7 @@ export default function Features2() {
         {settings.points.map((point, i) => (
           <SlideEffect key={point.title} direction="top" delay={0.08 * i} className="col-span-1 h-full" isSpring={false}>
             <Card className="items-start">
-              <point.icon size={26} strokeWidth={1.5} className="text-teal" />
+              <IconBadge icon={point.icon} size={24} />
               <h3 className="text-base md:text-lg text-navy font-medium">{point.title}</h3>
               <p className="text-sm">{point.content}</p>
             </Card>
