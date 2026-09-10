@@ -2,7 +2,7 @@ import type { Metadata } from "next"
 import Card from "@/components/card"
 import CTA from "@/sections/cta"
 import Footer from "@/sections/footer"
-import PageHeader from "@/components/page-header"
+import ServicesHero from "@/sections/services-hero"
 import SectionHeader from "@/components/section-header"
 import SlideEffect from "@/components/slide-effect"
 import { CardBody, CardTitle } from "@/components/ui/card-text"
@@ -39,11 +39,7 @@ const services = [
 export default function ServicesPage() {
   return (
     <div className="px-4 xl:px-0 max-w-5xl mx-auto space-y-14 sm:space-y-16 md:space-y-20 scroll-smooth">
-      <PageHeader
-        eyebrow="What We Do"
-        title="Services"
-        description="Iron Bridge supports healthcare organizations and commercial businesses with professionally handled transportation throughout Maryland, Washington DC, and Northern Virginia."
-      />
+      <ServicesHero />
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         {services.map((service, i) => (
