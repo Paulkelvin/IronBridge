@@ -1,4 +1,5 @@
 import type { Metadata } from "next"
+import DotGrid from "@/components/graphics/dot-grid"
 import CTA from "@/sections/cta"
 import Footer from "@/sections/footer"
 import PageHeader from "@/components/page-header"
@@ -47,7 +48,17 @@ export default function AboutPage() {
             That consistency is what we&rsquo;re building the company around.
           </p>
         </SlideEffect>
-        <SlideEffect direction="left" isSpring={false} className="relative w-full aspect-[4/3]">
+        <SlideEffect direction="left" isSpring={false} className="relative w-full h-[260px] md:h-[380px] rounded-2xl overflow-hidden">
+          <div className="absolute inset-0 -z-10" aria-hidden="true">
+            <DotGrid id="about-bridge-dot-grid" className="absolute inset-0 h-full w-full text-teal/[0.08]" />
+            <div
+              className="absolute inset-0"
+              style={{
+                backgroundImage:
+                  'radial-gradient(65% 75% at 50% 45%, rgba(18,130,98,0.08) 0%, transparent 70%)',
+              }}
+            />
+          </div>
           <Image
             src="/brand/about-bridge.jpg"
             alt="Illustration of a bridge"
