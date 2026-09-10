@@ -31,7 +31,7 @@ const settings = {
     },
     {
       question: 'Do you support organ or tissue transportation?',
-      answer: 'Specialized medical transportation, including organ and tissue logistics, is an emerging capability we are developing. It is provided once the appropriate client requirements, training, packaging, temperature-control, chain-of-custody, insurance, and regulatory requirements have been satisfied — not offered as a standard service today.',
+      answer: 'Specialized medical transportation, including organ and tissue logistics, is an emerging capability we are developing. It is provided once the appropriate client requirements, training, packaging, temperature-control, chain-of-custody, insurance, and regulatory requirements have been satisfied. It is not offered as a standard service today.',
     },
     {
       question: 'How do I request service?',

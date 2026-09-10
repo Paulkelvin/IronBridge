@@ -30,7 +30,7 @@ export default function CommercialLogisticsPage() {
       <PageHeader
         eyebrow="Commercial Logistics"
         title="Commercial Logistics"
-        description="Dependable transportation for businesses across Maryland, Washington DC, and Northern Virginia — beyond healthcare, built for everyday commercial delivery."
+        description="Reliable transportation for businesses across Maryland, Washington DC, and Northern Virginia, built for everyday commercial delivery beyond healthcare."
       />
 
       <div className="space-y-8 md:space-y-10">

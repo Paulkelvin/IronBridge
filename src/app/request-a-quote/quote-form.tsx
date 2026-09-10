@@ -76,7 +76,7 @@ export default function QuoteForm() {
         {status === 'success' ? (
           <FormSuccess
             title="Request received"
-            description="Thanks — we've received your request and sent a confirmation to your email. Our team will follow up shortly."
+            description="Thanks! We've received your request and sent a confirmation to your email. Our team will follow up shortly."
           />
         ) : (
           <SlideEffect isSpring={false}>

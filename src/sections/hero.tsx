@@ -10,9 +10,9 @@ import Link from "next/link";
 
 const settings = {
   region: 'Maryland · Washington, DC · Northern Virginia',
-  headlineTop: 'Dependability',
-  headlineBottom: 'Delivered Daily.',
-  descriptor: 'Medical Courier & Commercial Logistics',
+  headlineTop: 'Medical Courier',
+  headlineBottom: '& Commercial Logistics',
+  descriptor: 'Dependability Delivered Daily.',
   subheadline: 'Reliable service, secure handling, and responsive coverage you can count on.',
   mainCTA: {
     content: 'Request a Quote',

@@ -61,7 +61,7 @@ export default function MedicalCourierPage() {
         <SectionHeader eyebrow="Looking Ahead" title="Organ & Tissue Logistics" align="left" />
         <p className="text-sm md:text-base max-w-3xl">
           Specialized medical transportation, including organ and tissue logistics, is an emerging capability
-          we are developing — not a service we currently offer. It will be provided once the appropriate
+          we are developing, not a service we currently offer. It will be provided once the appropriate
           client requirements, training, packaging, temperature-control, chain-of-custody, insurance, and
           regulatory requirements have been satisfied for a given engagement.
         </p>

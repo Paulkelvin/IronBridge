@@ -4,11 +4,13 @@ export default function SectionHeader({
   eyebrow,
   title,
   description,
+  mobileDescription,
   align = 'center',
 }: {
   eyebrow?: string
   title: string
   description?: string
+  mobileDescription?: string
   align?: 'center' | 'left'
 }) {
   const alignClass = align === 'center' ? 'text-center mx-auto' : 'text-left'
@@ -26,7 +28,12 @@ export default function SectionHeader({
       </div>
       {description && (
         <SlideEffect className={`text-sm lg:text-base w-full ${align === 'center' ? 'md:max-w-2xl mx-auto' : 'md:max-w-2xl'}`}>
-          {description}
+          {mobileDescription ? (
+            <>
+              <span className="md:hidden">{mobileDescription}</span>
+              <span className="hidden md:inline">{description}</span>
+            </>
+          ) : description}
         </SlideEffect>
       )}
     </div>

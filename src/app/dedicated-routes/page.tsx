@@ -46,8 +46,8 @@ export default function DedicatedRoutesPage() {
           </h2>
           <p className="text-sm md:text-base">
             Running your own delivery fleet means vehicles, insurance, drivers, and management overhead.
-            A dedicated route with Iron Bridge gives you the same reliability — daily, weekly, or on
-            whatever schedule your operation runs on — without owning and managing that fleet yourself.
+            A dedicated route with Iron Bridge gives you the same reliability, daily, weekly, or on
+            whatever schedule your operation runs on, without owning and managing that fleet yourself.
           </p>
         </SlideEffect>
         <SlideEffect direction="left" isSpring={false} className="space-y-5">

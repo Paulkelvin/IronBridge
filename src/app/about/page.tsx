@@ -12,7 +12,7 @@ import Image from "next/image"
 
 export const metadata: Metadata = {
   title: "About Us | Iron Bridge Mobility Solutions",
-  description: "Iron Bridge Mobility Solutions is built on reliability, accountability, and professional handling — medical courier and commercial logistics across Maryland, Washington DC, and Northern Virginia.",
+  description: "Iron Bridge Mobility Solutions is built on reliability, accountability, and professional handling for medical courier and commercial logistics across Maryland, Washington DC, and Northern Virginia.",
 }
 
 const values = [
@@ -20,7 +20,7 @@ const values = [
   { icon: UserCheck, title: 'Accountability', content: 'Standing behind our work and taking responsibility for every shipment in our care.' },
   { icon: Sparkles, title: 'Professionalism', content: 'Representing our clients and their customers with a consistent, professional standard.' },
   { icon: MessageCircle, title: 'Communication', content: 'Keeping clients informed, especially when a route or timeline needs attention.' },
-  { icon: PackageCheck, title: 'Responsible Handling', content: 'Treating every shipment — medical or commercial — with the care its contents require.' },
+  { icon: PackageCheck, title: 'Responsible Handling', content: 'Treating every shipment, medical or commercial, with the care its contents require.' },
   { icon: Handshake, title: 'Long-Term Partnerships', content: 'Building relationships meant to last, not one-off deliveries.' },
 ]
 
@@ -29,23 +29,35 @@ export default function AboutPage() {
     <div className="px-4 xl:px-0 max-w-7xl mx-auto space-y-14 sm:space-y-16 md:space-y-20 scroll-smooth">
       <PageHeader
         eyebrow="About Us"
-        title="Dependability Is the Foundation"
-        description="Iron Bridge Mobility Solutions was built around a simple idea: dependability isn't simply part of our service. It's the foundation of our company."
+        title="Reliability Is the Foundation"
+        description="Iron Bridge Mobility Solutions was built around a simple idea: reliability isn't simply part of our service. It's the foundation of our company."
+        mobileDescription="Reliability isn't just part of our service. It's the foundation of our company."
       />
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
         <SlideEffect direction="right" isSpring={false} className="space-y-5 text-left">
           <p className="text-sm md:text-lg leading-relaxed">
-            Iron Bridge Mobility Solutions is a medical courier and commercial logistics company
-            serving Maryland, Washington DC, and Northern Virginia. We work with healthcare
-            organizations, laboratories, and commercial businesses that need transportation they
-            can build their own operations around — not a one-off delivery gig, but a partner they
-            can count on daily.
+            <span className="md:hidden">
+              We&rsquo;re a medical courier and commercial logistics partner serving Maryland,
+              Washington DC, and Northern Virginia.
+            </span>
+            <span className="hidden md:inline">
+              Iron Bridge Mobility Solutions is a medical courier and commercial logistics company
+              serving Maryland, Washington DC, and Northern Virginia. We work with healthcare
+              organizations, laboratories, and commercial businesses that need transportation they
+              can build their own operations around, not a one-off delivery gig, but a partner they
+              can count on daily.
+            </span>
           </p>
           <p className="text-sm md:text-lg leading-relaxed">
-            Every route, medical or commercial, runs on the same standards: trained personnel,
-            documented handling procedures, and clear communication when something needs attention.
-            That consistency is what we&rsquo;re building the company around.
+            <span className="md:hidden">
+              Every route runs on the same standard: trained personnel and documented handling.
+            </span>
+            <span className="hidden md:inline">
+              Every route, medical or commercial, runs on the same standards: trained personnel,
+              documented handling procedures, and clear communication when something needs attention.
+              That consistency is what we&rsquo;re building the company around.
+            </span>
           </p>
         </SlideEffect>
         <SlideEffect direction="left" isSpring={false} className="relative w-full h-[260px] md:h-[380px] rounded-2xl overflow-hidden">

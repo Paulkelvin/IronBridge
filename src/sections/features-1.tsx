@@ -10,8 +10,9 @@ import Link from "next/link"
 
 const settings = {
   eyebrow: 'What We Do',
-  title: 'Dependable By Design',
-  description: 'Iron Bridge supports healthcare organizations and commercial businesses with dependable, professionally handled transportation across Maryland, Washington DC, and Northern Virginia.',
+  title: 'Consistency By Design',
+  description: 'Iron Bridge supports healthcare organizations and commercial businesses with professionally handled transportation across Maryland, Washington DC, and Northern Virginia.',
+  mobileDescription: 'Professionally handled transportation for healthcare and commercial businesses.',
   services: [
     {
       icon: Stethoscope,
@@ -37,7 +38,7 @@ const settings = {
 export default function Features1() {
   return (
     <div id='services' className="space-y-8 md:space-y-10 lg:space-y-12 mx-auto text-center">
-      <SectionHeader eyebrow={settings.eyebrow} title={settings.title} description={settings.description} />
+      <SectionHeader eyebrow={settings.eyebrow} title={settings.title} description={settings.description} mobileDescription={settings.mobileDescription} />
 
       {/* Cards */}
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">

@@ -12,14 +12,14 @@ import {
 
 export const metadata: Metadata = {
   title: "Compliance & Safety | Iron Bridge Mobility Solutions",
-  description: "How Iron Bridge trains, qualifies, and documents medical courier and logistics operations — HIPAA and Bloodborne Pathogens training, chain-of-custody, and driver qualification standards.",
+  description: "How Iron Bridge trains, qualifies, and documents medical courier and logistics operations: HIPAA and Bloodborne Pathogens training, chain-of-custody, and driver qualification standards.",
 }
 
 const pillars = [
   {
     icon: ShieldCheck,
     title: 'HIPAA & Privacy Awareness',
-    content: 'Personnel involved in medical courier work complete HIPAA privacy awareness training. We do not describe this as "HIPAA certification" — training is documented and retained, and handling follows a minimum-necessary, need-to-know approach to any protected health information encountered.',
+    content: 'Personnel involved in medical courier work complete HIPAA privacy awareness training. We do not describe this as "HIPAA certification." Training is documented and retained, and handling follows a minimum-necessary, need-to-know approach to any protected health information encountered.',
   },
   {
     icon: ShieldAlert,
@@ -77,13 +77,13 @@ export default function ComplianceSafetyPage() {
         <SectionHeader
           eyebrow="Every Assignment"
           title="Client-Specific Requirements"
-          description="Some clients — particularly healthcare organizations and laboratories — have transportation requirements beyond our baseline standards."
+          description="Some clients, particularly healthcare organizations and laboratories, have transportation requirements beyond our baseline standards."
           align="left"
         />
         <SlideEffect isSpring={false}>
           <p className="text-sm md:text-base max-w-3xl">
-            Where a client has additional requirements — specific packaging, badging, site access
-            procedures, or training — those are completed before a route is assigned. Route-specific
+            Where a client has additional requirements, specific packaging, badging, site access
+            procedures, or training, those are completed before a route is assigned. Route-specific
             instructions may be more restrictive than our baseline standards, and drivers are directed
             to stop and confirm with Iron Bridge before taking any action that could compromise safety,
             custody, privacy, or specimen integrity.

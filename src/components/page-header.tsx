@@ -5,10 +5,12 @@ export default function PageHeader({
   eyebrow,
   title,
   description,
+  mobileDescription,
 }: {
   eyebrow: string
   title: string
   description: string
+  mobileDescription?: string
 }) {
   return (
     <div className="space-y-8 md:space-y-10">
@@ -26,7 +28,12 @@ export default function PageHeader({
         </div>
 
         <SlideEffect delay={0.15} className="text-sm lg:text-lg px-4 sm:px-10 md:px-0 md:max-w-2xl mx-auto text-foreground">
-          {description}
+          {mobileDescription ? (
+            <>
+              <span className="md:hidden">{mobileDescription}</span>
+              <span className="hidden md:inline">{description}</span>
+            </>
+          ) : description}
         </SlideEffect>
       </section>
     </div>

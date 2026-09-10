@@ -73,7 +73,7 @@ export default function DriverForm() {
         {status === 'success' ? (
           <FormSuccess
             title="Application received"
-            description="Thanks for your interest — we've received your application and sent a confirmation to your email. We'll follow up if there's a fit."
+            description="Thanks for your interest. We've received your application and sent a confirmation to your email. We'll follow up if there's a fit."
           />
         ) : (
           <SlideEffect isSpring={false}>

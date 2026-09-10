@@ -55,8 +55,8 @@ export default function ServiceAreaPage() {
       </div>
 
       <SlideEffect isSpring={false} className="text-center text-sm md:text-base text-foreground/80 italic max-w-2xl mx-auto">
-        Regional and Mid-Atlantic transportation may also be available depending on the assignment —
-        ask us when you request a quote.
+        Regional and Mid-Atlantic transportation may also be available depending on the assignment.
+        Ask us when you request a quote.
       </SlideEffect>
 
       <CTA />

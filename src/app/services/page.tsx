@@ -13,7 +13,7 @@ import Link from "next/link"
 
 export const metadata: Metadata = {
   title: "Services | Iron Bridge Mobility Solutions",
-  description: "Medical courier and commercial logistics services throughout Maryland, Washington DC, and Northern Virginia — specimen transport, same-day delivery, and dedicated routes.",
+  description: "Medical courier and commercial logistics services throughout Maryland, Washington DC, and Northern Virginia, including specimen transport, same-day delivery, and dedicated routes.",
 }
 
 const howWeWork = [
@@ -26,7 +26,7 @@ const services = [
   {
     icon: Stethoscope,
     title: 'Medical Courier',
-    content: 'Blood and lab specimen transportation, cold-packed and temperature-sensitive shipments, healthcare supply delivery, and time-sensitive STAT courier support — handled with chain-of-custody and proof-of-delivery procedures.',
+    content: 'Blood and lab specimen transportation, cold-packed and temperature-sensitive shipments, healthcare supply delivery, and time-sensitive STAT courier support, handled with chain-of-custody and proof-of-delivery procedures.',
     href: '/medical-courier',
   },
   {

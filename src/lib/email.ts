@@ -71,7 +71,7 @@ export async function sendQuoteRequestEmails(data: QuoteRequestInput) {
     from: FROM,
     to: QUOTE_NOTIFICATIONS_TO,
     replyTo: data.email,
-    subject: `New quote request — ${data.name}${data.company ? ` (${data.company})` : ""}`,
+    subject: `New quote request from ${data.name}${data.company ? ` (${data.company})` : ""}`,
     html: wrapper("New Quote Request", `
       <table style="border-collapse:collapse">${detailRows}</table>
       ${data.additionalInstructions ? `<p style="color:#5b6472;font-size:13px;margin-top:16px"><strong>Additional instructions:</strong><br/>${escapeHtml(data.additionalInstructions)}</p>` : ""}
@@ -81,7 +81,7 @@ export async function sendQuoteRequestEmails(data: QuoteRequestInput) {
   await resend.emails.send({
     from: FROM,
     to: data.email,
-    subject: "We received your request — Iron Bridge Mobility Solutions",
+    subject: "We received your request | Iron Bridge Mobility Solutions",
     html: wrapper("Thanks, we received your request", `
       <p style="color:#333;font-size:14px;line-height:1.6">
         Hi ${escapeHtml(data.name)}, thanks for reaching out to Iron Bridge Mobility Solutions.
@@ -121,7 +121,7 @@ export async function sendDriverApplicationEmails(data: DriverApplicationInput) 
     from: FROM,
     to,
     replyTo: data.email,
-    subject: `New driver application — ${data.name}`,
+    subject: `New driver application from ${data.name}`,
     html: wrapper("New Driver Application", `
       <table style="border-collapse:collapse">${detailRows}</table>
       ${data.additionalInfo ? `<p style="color:#5b6472;font-size:13px;margin-top:16px"><strong>Additional info:</strong><br/>${escapeHtml(data.additionalInfo)}</p>` : ""}
@@ -131,7 +131,7 @@ export async function sendDriverApplicationEmails(data: DriverApplicationInput) 
   await resend.emails.send({
     from: FROM,
     to: data.email,
-    subject: "We received your application — Iron Bridge Mobility Solutions",
+    subject: "We received your application | Iron Bridge Mobility Solutions",
     html: wrapper("Thanks for applying", `
       <p style="color:#333;font-size:14px;line-height:1.6">
         Hi ${escapeHtml(data.name)}, thanks for your interest in driving with Iron Bridge Mobility Solutions.
