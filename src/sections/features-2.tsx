@@ -1,6 +1,5 @@
 'use client'
 
-import Card from "@/components/card"
 import SectionHeader from "@/components/section-header"
 import SlideEffect from "@/components/slide-effect"
 import IconBadge from "@/components/ui/icon-badge"
@@ -40,15 +39,19 @@ export default function Features2() {
     <div className="space-y-8 md:space-y-10 lg:space-y-12 mx-auto text-center">
       <SectionHeader eyebrow={settings.eyebrow} title={settings.title} description={settings.description} />
 
-      {/* Cards */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+      {/* Points */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
         {settings.points.map((point, i) => (
-          <SlideEffect key={point.title} direction="top" delay={0.08 * i} className="col-span-1 h-full" isSpring={false}>
-            <Card className="items-start">
-              <IconBadge icon={point.icon} size={24} />
-              <CardTitle className="text-base md:text-lg">{point.title}</CardTitle>
-              <CardBody className="text-sm">{point.content}</CardBody>
-            </Card>
+          <SlideEffect
+            key={point.title}
+            direction="top"
+            delay={0.08 * i}
+            isSpring={false}
+            className="text-left space-y-3 border-l-2 border-teal/30 pl-5"
+          >
+            <IconBadge icon={point.icon} size={24} />
+            <CardTitle className="text-base md:text-lg">{point.title}</CardTitle>
+            <CardBody className="text-sm">{point.content}</CardBody>
           </SlideEffect>
         ))}
       </div>

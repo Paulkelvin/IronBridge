@@ -1,5 +1,4 @@
 import type { Metadata } from "next"
-import Card from "@/components/card"
 import CTA from "@/sections/cta"
 import Footer from "@/sections/footer"
 import PageHeader from "@/components/page-header"
@@ -49,14 +48,18 @@ export default function AboutPage() {
 
       <div className="space-y-8 md:space-y-10">
         <SectionHeader eyebrow="What We Stand On" title="Our Values" />
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
           {values.map((v, i) => (
-            <SlideEffect key={v.title} direction="top" delay={0.06 * i} isSpring={false}>
-              <Card>
-                <IconBadge icon={v.icon} size={22} />
-                <CardTitle className="text-base">{v.title}</CardTitle>
-                <CardBody className="text-sm">{v.content}</CardBody>
-              </Card>
+            <SlideEffect
+              key={v.title}
+              direction="top"
+              delay={0.06 * i}
+              isSpring={false}
+              className="space-y-3 border-l-2 border-teal/30 pl-5"
+            >
+              <IconBadge icon={v.icon} size={22} />
+              <CardTitle className="text-base">{v.title}</CardTitle>
+              <CardBody className="text-sm">{v.content}</CardBody>
             </SlideEffect>
           ))}
         </div>

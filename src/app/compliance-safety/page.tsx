@@ -1,5 +1,4 @@
 import type { Metadata } from "next"
-import Card from "@/components/card"
 import CTA from "@/sections/cta"
 import Footer from "@/sections/footer"
 import PageHeader from "@/components/page-header"
@@ -58,14 +57,18 @@ export default function ComplianceSafetyPage() {
         description="How we train personnel, qualify drivers, and document handling for medical courier and commercial logistics work."
       />
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
         {pillars.map((p, i) => (
-          <SlideEffect key={p.title} direction="top" delay={0.06 * i} isSpring={false}>
-            <Card>
-              <IconBadge icon={p.icon} size={22} />
-              <CardTitle className="text-base">{p.title}</CardTitle>
-              <CardBody className="text-sm">{p.content}</CardBody>
-            </Card>
+          <SlideEffect
+            key={p.title}
+            direction="top"
+            delay={0.06 * i}
+            isSpring={false}
+            className="space-y-3 border-l-2 border-teal/30 pl-5"
+          >
+            <IconBadge icon={p.icon} size={22} />
+            <CardTitle className="text-base">{p.title}</CardTitle>
+            <CardBody className="text-sm">{p.content}</CardBody>
           </SlideEffect>
         ))}
       </div>

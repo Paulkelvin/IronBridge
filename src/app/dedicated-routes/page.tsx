@@ -23,6 +23,12 @@ const audiences = [
   { icon: Truck, title: 'Organizations Needing Overflow Coverage', content: 'Backup or supplemental route coverage when your own fleet needs support.' },
 ]
 
+const howItWorks = [
+  'Tell us your pickup/delivery points, stop count, and frequency',
+  'We confirm a route plan and schedule',
+  'Your route runs on the agreed cadence, with proof-of-delivery on every stop',
+]
+
 export default function DedicatedRoutesPage() {
   return (
     <div className="px-4 xl:px-0 max-w-5xl mx-auto space-y-14 sm:space-y-16 md:space-y-20 scroll-smooth">
@@ -44,16 +50,22 @@ export default function DedicatedRoutesPage() {
             whatever schedule your operation runs on — without owning and managing that fleet yourself.
           </p>
         </SlideEffect>
-        <SlideEffect direction="left" isSpring={false}>
-          <Card>
+        <SlideEffect direction="left" isSpring={false} className="space-y-5">
+          <div className="flex items-center gap-3">
             <IconBadge icon={CalendarClock} size={24} />
             <CardTitle className="text-lg">How It Works</CardTitle>
-            <ul className="text-sm space-y-2 list-disc pl-4">
-              <li>Tell us your pickup/delivery points, stop count, and frequency</li>
-              <li>We confirm a route plan and schedule</li>
-              <li>Your route runs on the agreed cadence, with proof-of-delivery on every stop</li>
-            </ul>
-          </Card>
+          </div>
+          <ol className="relative space-y-5">
+            <div className="absolute left-[15px] top-2 bottom-2 border-l-2 border-dashed border-teal/30 -z-10" aria-hidden="true" />
+            {howItWorks.map((step, i) => (
+              <li key={step} className="flex items-start gap-4">
+                <span className="shrink-0 flex items-center justify-center h-8 w-8 rounded-full border-2 border-teal bg-background text-teal text-sm font-semibold">
+                  {i + 1}
+                </span>
+                <span className="text-sm text-slate-500 pt-1">{step}</span>
+              </li>
+            ))}
+          </ol>
         </SlideEffect>
       </div>
 
@@ -62,7 +74,7 @@ export default function DedicatedRoutesPage() {
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
           {audiences.map((a, i) => (
             <SlideEffect key={a.title} direction="top" delay={0.1 * i} isSpring={false}>
-              <Card>
+              <Card variant="outline">
                 <IconBadge icon={a.icon} size={22} />
                 <CardTitle className="text-base">{a.title}</CardTitle>
                 <CardBody className="text-sm">{a.content}</CardBody>

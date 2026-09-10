@@ -2,7 +2,6 @@
 
 import SectionHeader from "@/components/section-header"
 import SlideEffect from "@/components/slide-effect"
-import IconBadge from "@/components/ui/icon-badge"
 import { Briefcase, Building2, Car, HardHat, Landmark, Stethoscope, Store, Warehouse } from "lucide-react"
 
 const settings = {
@@ -26,17 +25,20 @@ export default function Features3() {
     <div id='industries' className="space-y-8 md:space-y-10 lg:space-y-12 mx-auto text-center">
       <SectionHeader eyebrow={settings.eyebrow} title={settings.title} description={settings.description} />
 
-      {/* Grid */}
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-5">
-        {settings.industries.map((industry, i) => (
-          <SlideEffect key={industry.title} direction="top" delay={0.05 * i} isSpring={false}>
-            <div className="rounded-2xl border border-border bg-secondary p-6 flex flex-col items-center justify-center gap-3 h-full text-center">
-              <IconBadge icon={industry.icon} size={22} />
-              <span className="text-sm font-medium text-navy leading-snug">{industry.title}</span>
-            </div>
-          </SlideEffect>
-        ))}
-      </div>
+      {/* Chips */}
+      <SlideEffect isSpring={false} className="rounded-2xl bg-secondary p-6 md:p-8">
+        <div className="flex flex-wrap justify-center gap-3">
+          {settings.industries.map((industry) => (
+            <span
+              key={industry.title}
+              className="inline-flex items-center gap-2 rounded-full border border-border bg-background px-4 py-2 text-sm font-medium text-navy"
+            >
+              <industry.icon size={16} strokeWidth={1.5} className="text-teal-dark shrink-0" />
+              {industry.title}
+            </span>
+          ))}
+        </div>
+      </SlideEffect>
     </div>
   )
 }
