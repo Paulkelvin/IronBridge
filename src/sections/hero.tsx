@@ -41,7 +41,7 @@ export default function Hero() {
         </div>
 
         <section className="relative overflow-hidden pt-10 pb-10 md:pt-16 md:pb-16 lg:pt-20 lg:pb-20">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-12 items-center">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-12 items-center xl:px-6">
             {/* Left: text content */}
             <div className="flex flex-col gap-6 lg:gap-8 items-center lg:items-start text-center lg:text-left">
               {/* Region indicator */}
@@ -107,7 +107,7 @@ export default function Hero() {
             <SlideEffect
               direction="left"
               isSpring={false}
-              className="relative w-full max-w-md mx-auto lg:max-w-none aspect-[1000/784]"
+              className="relative w-full max-w-sm mx-auto lg:max-w-lg aspect-[1000/784]"
             >
               <Image
                 src="/brand/hero-van-courier.png"
