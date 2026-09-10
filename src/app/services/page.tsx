@@ -5,6 +5,7 @@ import Footer from "@/sections/footer"
 import PageHeader from "@/components/page-header"
 import SectionHeader from "@/components/section-header"
 import SlideEffect from "@/components/slide-effect"
+import { CardBody, CardTitle } from "@/components/ui/card-text"
 import IconBadge from "@/components/ui/icon-badge"
 import { ArrowRight, Repeat, Stethoscope, Truck } from "lucide-react"
 import Link from "next/link"
@@ -49,9 +50,9 @@ export default function ServicesPage() {
           <SlideEffect key={service.title} direction="top" delay={0.1 * i} className="col-span-1 h-full" isSpring={false}>
             <Card>
               <IconBadge icon={service.icon} size={26} />
-              <h3 className="text-xl md:text-title text-navy font-medium">{service.title}</h3>
-              <p>{service.content}</p>
-              <Link href={service.href} className="inline-flex items-center gap-1.5 text-sm font-medium text-navy hover:text-teal transition-colors mt-auto">
+              <CardTitle className="text-xl md:text-title">{service.title}</CardTitle>
+              <CardBody>{service.content}</CardBody>
+              <Link href={service.href} className="inline-flex items-center gap-1.5 text-sm font-semibold text-primary hover:text-teal transition-colors mt-auto">
                 Learn more <ArrowRight size={15} strokeWidth={1.5} />
               </Link>
             </Card>
@@ -67,16 +68,16 @@ export default function ServicesPage() {
         />
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 text-left">
           <Card>
-            <h3 className="text-lg text-navy font-medium">1. Tell us what you need</h3>
-            <p className="text-sm">Submit a quote request with pickup/delivery details, timing, and any special handling requirements.</p>
+            <CardTitle className="text-lg">1. Tell us what you need</CardTitle>
+            <CardBody className="text-sm">Submit a quote request with pickup/delivery details, timing, and any special handling requirements.</CardBody>
           </Card>
           <Card>
-            <h3 className="text-lg text-navy font-medium">2. We confirm the plan</h3>
-            <p className="text-sm">Our team follows up to confirm scope, timing, and any client-specific requirements before dispatch.</p>
+            <CardTitle className="text-lg">2. We confirm the plan</CardTitle>
+            <CardBody className="text-sm">Our team follows up to confirm scope, timing, and any client-specific requirements before dispatch.</CardBody>
           </Card>
           <Card>
-            <h3 className="text-lg text-navy font-medium">3. Delivered, documented</h3>
-            <p className="text-sm">Your shipment is delivered following chain-of-custody procedures with proof-of-delivery documentation.</p>
+            <CardTitle className="text-lg">3. Delivered, documented</CardTitle>
+            <CardBody className="text-sm">Your shipment is delivered following chain-of-custody procedures with proof-of-delivery documentation.</CardBody>
           </Card>
         </div>
       </div>

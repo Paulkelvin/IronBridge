@@ -3,6 +3,7 @@
 import SectionHeader from "@/components/section-header"
 import SlideEffect from "@/components/slide-effect"
 import { Button } from "@/components/ui/button"
+import { CardTitle } from "@/components/ui/card-text"
 import IconBadge from "@/components/ui/icon-badge"
 import { MapPin } from "lucide-react"
 import Link from "next/link"
@@ -44,7 +45,7 @@ export default function Features4() {
             <div className="rounded-2xl bg-secondary p-8 h-full text-left space-y-4">
               <div className="flex items-center gap-2.5">
                 <IconBadge icon={MapPin} size={16} className="p-2 rounded-lg" />
-                <h3 className="text-lg text-navy font-medium">{region.title}</h3>
+                <CardTitle className="text-lg">{region.title}</CardTitle>
               </div>
               <div className="flex flex-wrap gap-2">
                 {region.cities.map(city => (

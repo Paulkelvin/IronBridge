@@ -5,6 +5,7 @@ import Footer from "@/sections/footer"
 import PageHeader from "@/components/page-header"
 import SectionHeader from "@/components/section-header"
 import SlideEffect from "@/components/slide-effect"
+import { CardBody, CardTitle } from "@/components/ui/card-text"
 import IconBadge from "@/components/ui/icon-badge"
 import { Handshake, MessageCircle, PackageCheck, ShieldCheck, Sparkles, UserCheck } from "lucide-react"
 
@@ -53,8 +54,8 @@ export default function AboutPage() {
             <SlideEffect key={v.title} direction="top" delay={0.06 * i} isSpring={false}>
               <Card>
                 <IconBadge icon={v.icon} size={22} />
-                <h3 className="text-base text-navy font-medium">{v.title}</h3>
-                <p className="text-sm">{v.content}</p>
+                <CardTitle className="text-base">{v.title}</CardTitle>
+                <CardBody className="text-sm">{v.content}</CardBody>
               </Card>
             </SlideEffect>
           ))}

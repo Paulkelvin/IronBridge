@@ -5,6 +5,7 @@ import Footer from "@/sections/footer"
 import PageHeader from "@/components/page-header"
 import SectionHeader from "@/components/section-header"
 import SlideEffect from "@/components/slide-effect"
+import { CardBody, CardTitle } from "@/components/ui/card-text"
 import IconBadge from "@/components/ui/icon-badge"
 import {
   FileCheck, IdCard, PackageCheck, ShieldAlert, ShieldCheck, Thermometer
@@ -62,8 +63,8 @@ export default function ComplianceSafetyPage() {
           <SlideEffect key={p.title} direction="top" delay={0.06 * i} isSpring={false}>
             <Card>
               <IconBadge icon={p.icon} size={22} />
-              <h3 className="text-base text-navy font-medium">{p.title}</h3>
-              <p className="text-sm">{p.content}</p>
+              <CardTitle className="text-base">{p.title}</CardTitle>
+              <CardBody className="text-sm">{p.content}</CardBody>
             </Card>
           </SlideEffect>
         ))}

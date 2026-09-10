@@ -5,6 +5,7 @@ import Footer from "@/sections/footer"
 import PageHeader from "@/components/page-header"
 import SectionHeader from "@/components/section-header"
 import SlideEffect from "@/components/slide-effect"
+import { CardBody, CardTitle } from "@/components/ui/card-text"
 import IconBadge from "@/components/ui/icon-badge"
 import {
   Boxes, Building2, Clock, MapPinned, Repeat, RotateCcw, Truck, Zap
@@ -44,8 +45,8 @@ export default function CommercialLogisticsPage() {
                 <div className="flex flex-row items-start gap-4">
                   <IconBadge icon={cap.icon} size={20} />
                   <div className="space-y-1.5">
-                    <h3 className="text-base text-navy font-medium">{cap.title}</h3>
-                    <p className="text-sm">{cap.content}</p>
+                    <CardTitle className="text-base">{cap.title}</CardTitle>
+                    <CardBody className="text-sm">{cap.content}</CardBody>
                   </div>
                 </div>
               </Card>

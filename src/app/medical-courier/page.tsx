@@ -5,6 +5,7 @@ import Footer from "@/sections/footer"
 import PageHeader from "@/components/page-header"
 import SectionHeader from "@/components/section-header"
 import SlideEffect from "@/components/slide-effect"
+import { CardBody, CardTitle } from "@/components/ui/card-text"
 import IconBadge from "@/components/ui/icon-badge"
 import {
   Clock, FileCheck, PackageCheck, Snowflake, Stethoscope,
@@ -45,8 +46,8 @@ export default function MedicalCourierPage() {
                 <div className="flex flex-row items-start gap-4">
                   <IconBadge icon={cap.icon} size={20} />
                   <div className="space-y-1.5">
-                    <h3 className="text-base text-navy font-medium">{cap.title}</h3>
-                    <p className="text-sm">{cap.content}</p>
+                    <CardTitle className="text-base">{cap.title}</CardTitle>
+                    <CardBody className="text-sm">{cap.content}</CardBody>
                   </div>
                 </div>
               </Card>
@@ -61,8 +62,8 @@ export default function MedicalCourierPage() {
           <div className="flex flex-col md:flex-row items-start md:items-center gap-4">
             <IconBadge icon={ShieldCheck} size={28} className="p-3" />
             <div className="space-y-1.5">
-              <h3 className="text-lg text-navy font-medium">HIPAA & Bloodborne Pathogens Trained Personnel</h3>
-              <p className="text-sm">Iron Bridge personnel involved in medical courier work have completed HIPAA privacy awareness and Bloodborne Pathogens training as part of our medical courier standards, alongside documented chain-of-custody and proof-of-delivery procedures.</p>
+              <CardTitle className="text-lg">HIPAA & Bloodborne Pathogens Trained Personnel</CardTitle>
+              <CardBody className="text-sm">Iron Bridge personnel involved in medical courier work have completed HIPAA privacy awareness and Bloodborne Pathogens training as part of our medical courier standards, alongside documented chain-of-custody and proof-of-delivery procedures.</CardBody>
             </div>
           </div>
         </Card>
