@@ -46,8 +46,9 @@ export default function Hero() {
 
         {/* Region indicator */}
         <SlideEffect>
-          <span className="inline-flex items-center rounded-full border border-border bg-secondary px-4 py-1.5 text-[11px] md:text-xs font-medium tracking-[0.14em] text-navy uppercase">
-            {settings.region}
+          <span className="inline-flex items-center rounded-full border border-border bg-secondary px-4 py-1.5 text-[11px] md:text-xs font-medium tracking-[0.1em] md:tracking-[0.14em] text-navy uppercase whitespace-nowrap">
+            <span className="sm:hidden">MD · DC · Northern VA</span>
+            <span className="hidden sm:inline">{settings.region}</span>
           </span>
         </SlideEffect>
 

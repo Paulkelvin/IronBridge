@@ -36,11 +36,14 @@ export default function Footer() {
         <div className="flex flex-col gap-4 max-w-xs">
           <Logo />
           <p className="text-foreground/80">Dependability Delivered Daily.</p>
-          <p className="text-xs text-foreground/60 uppercase tracking-[0.1em]">Maryland · Washington, DC · Northern Virginia</p>
+          <p className="text-[11px] sm:text-xs text-foreground/60 uppercase tracking-[0.08em] sm:tracking-[0.1em] whitespace-nowrap">
+            <span className="sm:hidden">MD · DC · Northern VA</span>
+            <span className="hidden sm:inline">Maryland · Washington, DC · Northern Virginia</span>
+          </p>
         </div>
 
         {/* Link columns */}
-        <div className="flex flex-wrap gap-10 md:gap-16">
+        <div className="flex flex-col sm:flex-row flex-wrap gap-8 sm:gap-10 md:gap-16">
           {settings.columns.map(col => (
             <div key={col.title} className="flex flex-col gap-3">
               <span className="text-xs font-medium tracking-[0.12em] uppercase text-navy">{col.title}</span>
@@ -55,7 +58,12 @@ export default function Footer() {
         <div className="flex flex-col gap-3 items-start md:items-end">
           <span className="text-xs font-medium tracking-[0.12em] uppercase text-navy">Get Started</span>
           <Link href="/request-a-quote">
-            <Button size='default'>Request a Quote</Button>
+            <Button
+              size='default'
+              className="rounded-none bg-navy text-white border border-navy uppercase tracking-[0.14em] text-xs font-semibold px-6 hover:bg-transparent hover:text-navy transition-colors"
+            >
+              Request a Quote
+            </Button>
           </Link>
         </div>
       </div>

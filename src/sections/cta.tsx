@@ -30,13 +30,20 @@ export default function CTA() {
       {/* CTA */}
       <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 w-full sm:w-fit">
         <Link href={settings.primaryCTA.href} className="w-full sm:w-fit">
-          <Button className="w-full bg-white text-navy hover:opacity-90" size='lg'>
+          <Button
+            size='lg'
+            className="w-full rounded-none bg-white text-navy border border-white uppercase tracking-[0.14em] text-xs sm:text-sm font-semibold hover:bg-transparent hover:text-white transition-colors"
+          >
             {settings.primaryCTA.content}
             <ArrowRight />
           </Button>
         </Link>
         <Link href={settings.secondaryCTA.href} className="w-full sm:w-fit">
-          <Button className="w-full bg-transparent border-white/30 text-white hover:bg-white/10" variant='outline' size='lg'>
+          <Button
+            variant='outline'
+            size='lg'
+            className="w-full rounded-none bg-transparent border border-white/60 text-white uppercase tracking-[0.14em] text-xs sm:text-sm font-semibold hover:bg-white hover:text-navy hover:border-white transition-colors"
+          >
             {settings.secondaryCTA.content}
           </Button>
         </Link>
