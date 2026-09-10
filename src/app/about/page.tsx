@@ -23,7 +23,7 @@ const values = [
 
 export default function AboutPage() {
   return (
-    <div className="px-4 xl:px-0 max-w-5xl mx-auto space-y-20 sm:space-y-24 md:space-y-32 scroll-smooth">
+    <div className="px-4 xl:px-0 max-w-5xl mx-auto space-y-14 sm:space-y-16 md:space-y-20 scroll-smooth">
       <PageHeader
         eyebrow="About Us"
         title="Dependability Is the Foundation"
@@ -45,7 +45,7 @@ export default function AboutPage() {
         </p>
       </SlideEffect>
 
-      <div className="space-y-10">
+      <div className="space-y-6 md:space-y-7">
         <SectionHeader eyebrow="What We Stand On" title="Our Values" />
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {values.map((v, i) => (

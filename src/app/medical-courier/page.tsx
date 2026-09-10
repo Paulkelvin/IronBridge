@@ -28,14 +28,14 @@ const capabilities = [
 
 export default function MedicalCourierPage() {
   return (
-    <div className="px-4 xl:px-0 max-w-5xl mx-auto space-y-20 sm:space-y-24 md:space-y-32 scroll-smooth">
+    <div className="px-4 xl:px-0 max-w-5xl mx-auto space-y-14 sm:space-y-16 md:space-y-20 scroll-smooth">
       <PageHeader
         eyebrow="Medical Courier"
         title="Medical Courier Services"
         description="Reliable, professionally handled specimen and healthcare logistics support throughout Maryland, Washington DC, and Northern Virginia."
       />
 
-      <div className="space-y-10">
+      <div className="space-y-6 md:space-y-7">
         <SectionHeader title="What We Handle" align="left" />
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
           {capabilities.map((cap, i) => (

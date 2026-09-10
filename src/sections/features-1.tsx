@@ -33,7 +33,7 @@ const settings = {
 
 export default function Features1() {
   return (
-    <div id='services' className="space-y-6 sm:space-y-7 md:space-y-8 lg:space-y-10 mx-auto text-center">
+    <div id='services' className="space-y-4 sm:space-y-5 md:space-y-6 lg:space-y-8 mx-auto text-center">
       {/* Eyebrow */}
       <SlideEffect>
         <span className="text-xs md:text-sm font-medium tracking-[0.14em] uppercase text-teal">{settings.eyebrow}</span>

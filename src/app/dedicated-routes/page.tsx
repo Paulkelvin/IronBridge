@@ -23,7 +23,7 @@ const audiences = [
 
 export default function DedicatedRoutesPage() {
   return (
-    <div className="px-4 xl:px-0 max-w-5xl mx-auto space-y-20 sm:space-y-24 md:space-y-32 scroll-smooth">
+    <div className="px-4 xl:px-0 max-w-5xl mx-auto space-y-14 sm:space-y-16 md:space-y-20 scroll-smooth">
       <PageHeader
         eyebrow="Dedicated Routes"
         title="Dedicated & Recurring Routes"
@@ -55,7 +55,7 @@ export default function DedicatedRoutesPage() {
         </SlideEffect>
       </div>
 
-      <div className="space-y-10">
+      <div className="space-y-6 md:space-y-7">
         <SectionHeader eyebrow="Who This Is For" title="Built for Recurring Operations" align="left" />
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
           {audiences.map((a, i) => (

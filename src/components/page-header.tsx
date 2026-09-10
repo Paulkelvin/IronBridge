@@ -12,10 +12,10 @@ export default function PageHeader({
   description: string
 }) {
   return (
-    <div className="space-y-10 md:space-y-14 z-50 relative">
+    <div className="space-y-8 md:space-y-10 z-50 relative">
       <Navbar />
 
-      <section className="flex flex-col gap-5 lg:gap-6 items-center text-center pt-4 pb-4 md:pb-8">
+      <section className="flex flex-col gap-3 lg:gap-4 items-center text-center pt-4 pb-4 md:pb-8">
         <SlideEffect>
           <span className="inline-flex items-center rounded-full border border-border bg-secondary px-4 py-1.5 text-[11px] md:text-xs font-medium tracking-[0.14em] text-navy uppercase">
             {eyebrow}

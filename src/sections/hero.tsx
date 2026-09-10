@@ -30,10 +30,10 @@ const settings = {
 
 export default function Hero() {
   return (
-    <div className="space-y-12 md:space-y-20 lg:space-y-24 z-50 relative">
+    <div className="space-y-10 md:space-y-16 lg:space-y-20 z-50 relative">
       <Navbar />
 
-      <section className="relative flex flex-col gap-8 lg:gap-10 items-center text-center overflow-hidden pt-6 pb-10 md:pb-16">
+      <section className="relative flex flex-col gap-5 lg:gap-7 items-center text-center overflow-hidden pt-6 pb-10 md:pb-16">
         {/* Brand watermark */}
         <Image
           src="/brand/shield-mark.png"

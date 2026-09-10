@@ -20,7 +20,7 @@ const settings = {
 
 export default function CTA() {
   return (
-    <SlideEffect isSpring={false} className="space-y-6 sm:space-y-7 md:space-y-8 mx-auto text-center p-8 md:p-16 flex flex-col items-center justify-center rounded-2xl bg-navy">
+    <SlideEffect isSpring={false} className="space-y-4 sm:space-y-5 md:space-y-6 mx-auto text-center p-8 md:p-16 flex flex-col items-center justify-center rounded-2xl bg-navy">
       {/* Title */}
       <h2 className="font-serif text-2xl md:text-4xl lg:text-header font-semibold leading-tight text-white">{settings.title}</h2>
 
