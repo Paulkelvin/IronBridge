@@ -1,10 +1,11 @@
 import { cn } from "@/lib/utils"
 
-export function Label({ children, required, className }: { children: React.ReactNode, required?: boolean, className?: string }) {
+export function Label({ children, required, className, htmlFor }: { children: React.ReactNode, required?: boolean, className?: string, htmlFor?: string }) {
   return (
-    <label className={cn("block text-sm font-medium text-navy mb-1.5", className)}>
+    <label htmlFor={htmlFor} className={cn("block text-sm font-medium text-navy mb-1.5", className)}>
       {children}
-      {required && <span className="text-teal ml-0.5">*</span>}
+      {required && <span className="text-teal ml-0.5" aria-hidden="true">*</span>}
+      {required && <span className="sr-only"> (required)</span>}
     </label>
   )
 }
@@ -27,9 +28,9 @@ export function Select({ children, ...props }: React.SelectHTMLAttributes<HTMLSe
   )
 }
 
-export function FieldError({ children }: { children?: string }) {
+export function FieldError({ children, id }: { children?: string, id?: string }) {
   if (!children) return null
-  return <p className="text-xs text-red-600 mt-1">{children}</p>
+  return <p id={id} role="alert" className="text-xs text-red-600 mt-1">{children}</p>
 }
 
 export function PillGroup({
@@ -37,14 +38,16 @@ export function PillGroup({
   value,
   onChange,
   name,
+  ariaLabel,
 }: {
   options: { label: string, value: string }[]
   value?: string
   onChange: (value: string) => void
   name: string
+  ariaLabel?: string
 }) {
   return (
-    <div className="flex flex-wrap gap-2" role="radiogroup" aria-label={name}>
+    <div className="flex flex-wrap gap-2" role="radiogroup" aria-label={ariaLabel || name}>
       {options.map((opt) => (
         <button
           key={opt.value}
@@ -71,17 +74,19 @@ export function CheckboxPillGroup({
   value,
   onChange,
   name,
+  ariaLabel,
 }: {
   options: { label: string, value: string }[]
   value: string[]
   onChange: (value: string[]) => void
   name: string
+  ariaLabel?: string
 }) {
   const toggle = (v: string) => {
     onChange(value.includes(v) ? value.filter(x => x !== v) : [...value, v])
   }
   return (
-    <div className="flex flex-wrap gap-2" role="group" aria-label={name}>
+    <div className="flex flex-wrap gap-2" role="group" aria-label={ariaLabel || name}>
       {options.map((opt) => (
         <button
           key={opt.value}

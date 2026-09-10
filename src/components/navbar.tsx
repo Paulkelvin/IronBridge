@@ -6,7 +6,7 @@ import { Button } from "./ui/button"
 import { AlignJustify, X } from "lucide-react"
 import { AnimatePresence } from 'motion/react'
 import * as motion from "motion/react-m"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 
 const settings = {
   navLinks: [
@@ -28,6 +28,15 @@ export default function Navbar() {
   const toggleMenu = () => {
     setIsOpen(!isOpen)
   }
+
+  useEffect(() => {
+    if (!isOpen) return
+    const onKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') setIsOpen(false)
+    }
+    window.addEventListener('keydown', onKeyDown)
+    return () => window.removeEventListener('keydown', onKeyDown)
+  }, [isOpen])
 
   return (
     <nav className="w-full h-fit py-4 flex items-center justify-between">
@@ -55,21 +64,26 @@ export default function Navbar() {
       </div>
 
       {/* mobile only - burger menu icon */}
-      <motion.div
+      <motion.button
+        type="button"
         initial={{ scale: 1, y: 0 }}
         whileTap={{ scale: 0.8 }}
         transition={{ duration: 0.3 }}
         className="bg-white shadow-none flex md:hidden cursor-pointer text-black"
         onClick={toggleMenu}
+        aria-expanded={isOpen}
+        aria-controls="mobile-menu"
+        aria-label={isOpen ? "Close menu" : "Open menu"}
       >
-        {!isOpen && <AlignJustify size={20} />}
-        {isOpen && <X size={20} />}
-      </motion.div>
+        {!isOpen && <AlignJustify size={20} aria-hidden="true" />}
+        {isOpen && <X size={20} aria-hidden="true" />}
+      </motion.button>
 
       {/* mobile only - menu container with AnimatePresence for exit animations */}
       <AnimatePresence>
         {isOpen && (
           <motion.div
+            id="mobile-menu"
             initial={{ height: 0, opacity: 1, y: -20 }}
             animate={{ height: '100vh', opacity: 1, y: 0 }}
             exit={{ height: 0, opacity: 1, y: -20 }}
