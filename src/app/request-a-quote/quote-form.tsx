@@ -8,7 +8,7 @@ import { FieldError, Input, Label, PhoneInput, PillGroup, Textarea } from "@/com
 import { FormError, FormSuccess } from "@/components/form-status"
 import { quoteRequestSchema, type QuoteRequestInput } from "@/lib/validations"
 import { zodResolver } from "@hookform/resolvers/zod"
-import { AlertTriangle, ArrowLeft, ArrowRight, Facebook, Linkedin, Mail, Phone } from "lucide-react"
+import { AlertTriangle, ArrowLeft, ArrowRight, CalendarDays, Facebook, Linkedin, Mail, Phone } from "lucide-react"
 import { Controller, useForm } from "react-hook-form"
 import { useEffect, useRef, useState } from "react"
 
@@ -158,7 +158,10 @@ export default function QuoteForm() {
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
                     <div className="min-w-0">
                       <Label required htmlFor="serviceDate">Requested Service Date</Label>
-                      <Input id="serviceDate" type="date" className="py-3 leading-normal min-w-0 max-w-full" {...register('serviceDate')} aria-invalid={!!errors.serviceDate} aria-describedby={errors.serviceDate ? "serviceDate-error" : undefined} />
+                      <div className="relative">
+                        <Input id="serviceDate" type="date" className="py-3 pr-10 leading-normal min-w-0 max-w-full" {...register('serviceDate')} aria-invalid={!!errors.serviceDate} aria-describedby={errors.serviceDate ? "serviceDate-error" : undefined} />
+                        <CalendarDays size={17} strokeWidth={1.5} className="pointer-events-none absolute right-3.5 top-1/2 -translate-y-1/2 text-teal" aria-hidden="true" />
+                      </div>
                       <FieldError id="serviceDate-error">{errors.serviceDate?.message}</FieldError>
                     </div>
                     <div className="min-w-0">
