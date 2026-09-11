@@ -42,11 +42,6 @@ html {
   scroll-behavior: smooth;
 }
 
-/* Mute the base map tiles so the brand-colored route overlay stands out */
-.service-area-map-gl .maplibregl-canvas {
-  filter: grayscale(0.45) contrast(1.05) brightness(1.04);
-}
-
 .service-area-map-gl .maplibregl-ctrl-attrib {
   font-size: 10px;
 }

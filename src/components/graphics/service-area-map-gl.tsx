@@ -68,7 +68,7 @@ export default function ServiceAreaMapGL({
 
     const map = new maplibregl.Map({
       container: containerRef.current,
-      style: 'https://tiles.openfreemap.org/styles/positron',
+      style: 'https://tiles.openfreemap.org/styles/liberty',
       center: [-77.05, 38.98],
       zoom: 8,
       attributionControl: false,
