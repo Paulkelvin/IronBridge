@@ -9,6 +9,9 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@deck.gl/core": "^9.4.0",
+    "@deck.gl/layers": "^9.4.0",
+    "@deck.gl/mapbox": "^9.4.0",
     "@hookform/resolvers": "^5.9.1",
     "@radix-ui/react-accordion": "^1.2.3",
     "@radix-ui/react-navigation-menu": "^1.2.5",
@@ -20,6 +23,7 @@
     "framer-motion": "^12.6.2",
     "lenis": "^1.2.3",
     "lucide-react": "^0.483.0",
+    "maplibre-gl": "^6.9.0",
     "motion": "^12.6.3",
     "next": "15.2.9",
     "react": "^19.0.0",
