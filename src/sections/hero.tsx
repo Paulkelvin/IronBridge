@@ -107,7 +107,7 @@ export default function Hero() {
             <SlideEffect
               direction="left"
               isSpring={false}
-              className="relative w-full max-w-sm mx-auto lg:max-w-lg aspect-[1000/784]"
+              className="relative w-full max-w-[22rem] mx-auto lg:max-w-[30rem] aspect-[1000/784]"
             >
               <Image
                 src="/brand/hero-van-courier.png"
