@@ -35,6 +35,7 @@ export default function ServiceAreaPage() {
         eyebrow="Service Area"
         title="Do We Deliver to You?"
         description="Find your city below. We run daily throughout Maryland, Washington DC, and Northern Virginia."
+        background="map"
       />
 
       <ServiceAreaExplorer regions={regions} />
