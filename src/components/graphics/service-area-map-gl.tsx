@@ -77,7 +77,12 @@ export default function ServiceAreaMapGL({
     })
     mapRef.current = map
 
-    map.on('error', () => setLoadFailed(true))
+    // Base tiles are cosmetic; never let a slow/unreachable tile host block
+    // our own brand-colored markers (drawn independently by deck.gl below).
+    map.on('error', (e) => {
+      console.warn('Service area basemap error (markers still render):', e.error)
+      setLoadFailed(true)
+    })
 
     map.addControl(new maplibregl.NavigationControl({ showCompass: false }), 'top-right')
     map.addControl(new maplibregl.AttributionControl({ compact: true }))
@@ -122,12 +127,12 @@ export default function ServiceAreaMapGL({
     }
     renderLayersRef.current = renderLayers
 
-    map.on('load', () => {
-      renderLayers()
-      const bounds = new maplibregl.LngLatBounds()
-      CITIES.forEach((c) => bounds.extend([c.lng, c.lat]))
-      map.fitBounds(bounds, { padding: 56, duration: 0 })
-    })
+    // Draw our markers/arcs and frame the camera immediately — this needs
+    // only the map's camera math, not the base tiles to have loaded.
+    renderLayers()
+    const bounds = new maplibregl.LngLatBounds()
+    CITIES.forEach((c) => bounds.extend([c.lng, c.lat]))
+    map.fitBounds(bounds, { padding: 56, duration: 0 })
 
     return () => {
       map.remove()
@@ -141,7 +146,7 @@ export default function ServiceAreaMapGL({
     renderLayersRef.current()
 
     const map = mapRef.current
-    if (!map || !map.isStyleLoaded()) return
+    if (!map) return
 
     if (activeRegion) {
       map.fitBounds(regionBounds(activeRegion), { padding: 70, duration: 700, maxZoom: 11 })
@@ -154,10 +159,18 @@ export default function ServiceAreaMapGL({
 
   return (
     <div className={cn("service-area-map-gl relative overflow-hidden rounded-2xl border border-border bg-secondary", className)}>
-      <div ref={containerRef} className="absolute inset-0" />
+      {/*
+        maplibre-gl's own stylesheet sets `.maplibregl-map { position: relative }`
+        on this element once it initializes, which can win the cascade over the
+        `absolute` utility class below (both single-class selectors, so it comes
+        down to sheet order) and collapse this div to zero height. Inline style
+        always wins regardless of cascade order, so position is set here rather
+        than via a class.
+      */}
+      <div ref={containerRef} style={{ position: 'absolute', inset: 0 }} />
       {loadFailed && (
-        <div className="absolute inset-0 flex items-center justify-center bg-secondary text-sm text-foreground/60 text-center px-8">
-          Map temporarily unavailable. See our service areas listed on the right.
+        <div className="absolute bottom-3 left-3 right-3 rounded-lg bg-white/90 backdrop-blur-sm px-3 py-2 text-xs text-foreground/70 text-center shadow-sm">
+          Map tiles unavailable right now, service areas are listed on the right.
         </div>
       )}
     </div>
