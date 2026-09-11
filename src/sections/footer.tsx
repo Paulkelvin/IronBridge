@@ -30,7 +30,8 @@ const settings = {
 
 export default function Footer() {
   return (
-    <footer className="w-full py-12 md:py-16 flex flex-col gap-10 md:gap-14 text-sm border-t border-border">
+    <footer className="relative w-full py-12 md:py-16 flex flex-col gap-10 md:gap-14 text-sm">
+      <div className="absolute top-0 left-1/2 w-screen -translate-x-1/2 border-t border-border" aria-hidden="true" />
       <div className="flex flex-col md:flex-row gap-10 md:gap-6 md:justify-between">
         {/* Brand */}
         <div className="flex flex-col gap-4 max-w-xs">
