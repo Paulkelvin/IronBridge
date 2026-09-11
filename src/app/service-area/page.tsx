@@ -30,7 +30,7 @@ const regions = [
 
 export default function ServiceAreaPage() {
   return (
-    <div className="px-4 xl:px-0 max-w-7xl mx-auto space-y-14 sm:space-y-16 md:space-y-20 scroll-smooth">
+    <div className="px-4 xl:px-0 max-w-7xl mx-auto space-y-24 sm:space-y-32 md:space-y-40 lg:space-y-56 scroll-smooth">
       <PageHeader
         eyebrow="Service Area"
         title="Do We Deliver to You?"

@@ -21,7 +21,7 @@ const settings = {
 
 export default function CTA() {
   return (
-    <SlideEffect isSpring={false} className="relative left-1/2 w-screen -translate-x-1/2 overflow-hidden bg-navy">
+    <SlideEffect isSpring={false} className="relative overflow-hidden rounded-3xl bg-navy">
       {/* Decorative background */}
       <div
         className="absolute inset-0 -z-10 pointer-events-none"
@@ -35,7 +35,7 @@ export default function CTA() {
       </div>
 
       {/* Content column */}
-      <div className="relative mx-auto max-w-7xl px-4 xl:px-0 py-16 md:py-24 flex flex-col items-center justify-center text-center space-y-6 md:space-y-8">
+      <div className="relative px-4 md:px-10 py-16 md:py-24 flex flex-col items-center justify-center text-center space-y-6 md:space-y-8">
         {/* Title + description (tight to each other) */}
         <div className="space-y-2 md:space-y-3">
           <h2 className="font-serif text-2xl md:text-4xl lg:text-header font-semibold leading-tight text-white">{settings.title}</h2>
