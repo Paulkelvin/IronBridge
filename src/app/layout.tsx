@@ -3,6 +3,7 @@ import { Inter, Playfair_Display } from "next/font/google";
 import "./globals.css";
 import Header from "@/components/header";
 import LenisProvider from "@/providers/lenis";
+import ScrollRestoration from "@/components/scroll-restoration";
 
 const sans = Inter({
   variable: "--font-ib-sans",
@@ -51,6 +52,7 @@ export default function RootLayout({
       <body
         className={`${sans.variable} ${serif.variable} ${sans.className} antialiased w-full min-h-screen overflow-x-hidden`}
       >
+        <ScrollRestoration />
         <LenisProvider>
           <Header />
           <div className="pt-[72px]">{children}</div>

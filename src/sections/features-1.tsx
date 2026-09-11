@@ -1,6 +1,7 @@
 'use client'
 
 import Card from "@/components/card"
+import DiagonalRoute from "@/components/graphics/diagonal-route"
 import SectionHeader from "@/components/section-header"
 import SlideEffect from "@/components/slide-effect"
 import IconBadge from "@/components/ui/icon-badge"
@@ -37,7 +38,11 @@ const settings = {
 
 export default function Features1() {
   return (
-    <div id='services' className="space-y-8 md:space-y-10 lg:space-y-12 mx-auto text-center">
+    <div id='services' className="relative space-y-8 md:space-y-10 lg:space-y-12 mx-auto text-center">
+      <div className="absolute top-0 left-1/2 w-screen -translate-x-1/2 h-[140px] md:h-[200px] -z-10 pointer-events-none overflow-hidden" aria-hidden="true">
+        <DiagonalRoute className="absolute top-0 left-0 w-[160px] md:w-[260px] h-full text-teal/[0.18]" />
+      </div>
+
       <SectionHeader eyebrow={settings.eyebrow} title={settings.title} description={settings.description} mobileDescription={settings.mobileDescription} />
 
       {/* Cards */}

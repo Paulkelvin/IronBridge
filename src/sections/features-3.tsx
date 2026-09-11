@@ -1,5 +1,6 @@
 'use client'
 
+import DiagonalRoute from "@/components/graphics/diagonal-route"
 import SectionHeader from "@/components/section-header"
 import SlideEffect from "@/components/slide-effect"
 import { Briefcase, Building2, Car, HardHat, Landmark, Stethoscope, Store, Warehouse } from "lucide-react"
@@ -22,7 +23,11 @@ const settings = {
 
 export default function Features3() {
   return (
-    <div id='industries' className="space-y-8 md:space-y-10 lg:space-y-12 mx-auto text-center">
+    <div id='industries' className="relative space-y-8 md:space-y-10 lg:space-y-12 mx-auto text-center">
+      <div className="absolute top-0 left-1/2 w-screen -translate-x-1/2 h-[120px] md:h-[180px] -z-10 pointer-events-none overflow-hidden" aria-hidden="true">
+        <DiagonalRoute className="absolute top-0 right-0 w-[140px] md:w-[220px] h-full text-navy/[0.16] scale-x-[-1] scale-y-[-1]" />
+      </div>
+
       <SectionHeader eyebrow={settings.eyebrow} title={settings.title} description={settings.description} />
 
       {/* Chips */}

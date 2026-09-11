@@ -1,3 +1,4 @@
+import DiagonalRoute from "@/components/graphics/diagonal-route"
 import SectionHeader from "@/components/section-header"
 import ServiceAreaExplorer from "@/components/service-area-explorer"
 import SlideEffect from "@/components/slide-effect"
@@ -34,7 +35,11 @@ const settings = {
 
 export default function Features4() {
   return (
-    <div id='service-area' className="space-y-10 md:space-y-12 lg:space-y-14 mx-auto text-center">
+    <div id='service-area' className="relative space-y-10 md:space-y-12 lg:space-y-14 mx-auto text-center">
+      <div className="absolute top-0 left-1/2 w-screen -translate-x-1/2 h-[140px] md:h-[200px] -z-10 pointer-events-none overflow-hidden" aria-hidden="true">
+        <DiagonalRoute className="absolute top-0 right-0 w-[160px] md:w-[260px] h-full text-navy/[0.16] scale-x-[-1]" />
+      </div>
+
       <SectionHeader eyebrow={settings.eyebrow} title={settings.title} description={settings.description} />
 
       <ServiceAreaExplorer regions={settings.regions} />

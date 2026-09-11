@@ -1,5 +1,6 @@
 'use client'
 
+import DiagonalRoute from "@/components/graphics/diagonal-route"
 import SectionHeader from "@/components/section-header"
 import SlideEffect from "@/components/slide-effect"
 import IconBadge from "@/components/ui/icon-badge"
@@ -36,7 +37,11 @@ const settings = {
 
 export default function Features2() {
   return (
-    <div className="space-y-8 md:space-y-10 lg:space-y-12 mx-auto text-center">
+    <div className="relative space-y-8 md:space-y-10 lg:space-y-12 mx-auto text-center">
+      <div className="absolute top-0 left-1/2 w-screen -translate-x-1/2 h-[120px] md:h-[180px] -z-10 pointer-events-none overflow-hidden" aria-hidden="true">
+        <DiagonalRoute className="absolute top-0 left-0 w-[140px] md:w-[220px] h-full text-teal/[0.16] scale-y-[-1]" />
+      </div>
+
       <SectionHeader eyebrow={settings.eyebrow} title={settings.title} description={settings.description} />
 
       {/* Points */}
