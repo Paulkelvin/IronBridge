@@ -9,24 +9,31 @@ import { useEffect, useRef, useState } from "react"
 
 export type RegionId = 'maryland' | 'dc' | 'virginia'
 
-type City = { name: string; region: RegionId; lng: number; lat: number }
+type City = {
+  name: string
+  region: RegionId
+  lng: number
+  lat: number
+  labelOffset: [number, number]
+  labelAnchor: 'start' | 'end'
+}
 
 const CITIES: City[] = [
-  { name: 'Baltimore', region: 'maryland', lng: -76.6122, lat: 39.2904 },
-  { name: 'Bowie', region: 'maryland', lng: -76.7302, lat: 38.9426 },
-  { name: 'Annapolis', region: 'maryland', lng: -76.4922, lat: 38.9784 },
-  { name: 'Columbia', region: 'maryland', lng: -76.8610, lat: 39.2037 },
-  { name: 'Silver Spring', region: 'maryland', lng: -77.0261, lat: 38.9907 },
-  { name: 'Rockville', region: 'maryland', lng: -77.1528, lat: 39.0840 },
-  { name: 'Bethesda', region: 'maryland', lng: -77.1003, lat: 38.9807 },
-  { name: 'Hyattsville', region: 'maryland', lng: -76.9455, lat: 38.9559 },
-  { name: 'Washington, DC', region: 'dc', lng: -77.0369, lat: 38.9072 },
-  { name: 'Arlington', region: 'virginia', lng: -77.0910, lat: 38.8816 },
-  { name: 'Alexandria', region: 'virginia', lng: -77.0469, lat: 38.8048 },
-  { name: 'Fairfax', region: 'virginia', lng: -77.3064, lat: 38.8462 },
-  { name: 'Reston', region: 'virginia', lng: -77.3570, lat: 38.9586 },
-  { name: 'Sterling', region: 'virginia', lng: -77.4286, lat: 39.0062 },
-  { name: 'Ashburn', region: 'virginia', lng: -77.4874, lat: 39.0438 },
+  { name: 'Baltimore', region: 'maryland', lng: -76.6122, lat: 39.2904, labelOffset: [8, -8], labelAnchor: 'start' },
+  { name: 'Bowie', region: 'maryland', lng: -76.7302, lat: 38.9426, labelOffset: [8, -8], labelAnchor: 'start' },
+  { name: 'Annapolis', region: 'maryland', lng: -76.4922, lat: 38.9784, labelOffset: [8, -8], labelAnchor: 'start' },
+  { name: 'Columbia', region: 'maryland', lng: -76.8610, lat: 39.2037, labelOffset: [8, -8], labelAnchor: 'start' },
+  { name: 'Silver Spring', region: 'maryland', lng: -77.0261, lat: 38.9907, labelOffset: [0, -14], labelAnchor: 'start' },
+  { name: 'Rockville', region: 'maryland', lng: -77.1528, lat: 39.0840, labelOffset: [8, -8], labelAnchor: 'start' },
+  { name: 'Bethesda', region: 'maryland', lng: -77.1003, lat: 38.9807, labelOffset: [-10, -10], labelAnchor: 'end' },
+  { name: 'Hyattsville', region: 'maryland', lng: -76.9455, lat: 38.9559, labelOffset: [10, -4], labelAnchor: 'start' },
+  { name: 'Washington, DC', region: 'dc', lng: -77.0369, lat: 38.9072, labelOffset: [0, 0], labelAnchor: 'start' },
+  { name: 'Arlington', region: 'virginia', lng: -77.0910, lat: 38.8816, labelOffset: [-12, 8], labelAnchor: 'end' },
+  { name: 'Alexandria', region: 'virginia', lng: -77.0469, lat: 38.8048, labelOffset: [8, 10], labelAnchor: 'start' },
+  { name: 'Fairfax', region: 'virginia', lng: -77.3064, lat: 38.8462, labelOffset: [8, 10], labelAnchor: 'start' },
+  { name: 'Reston', region: 'virginia', lng: -77.3570, lat: 38.9586, labelOffset: [8, -8], labelAnchor: 'start' },
+  { name: 'Sterling', region: 'virginia', lng: -77.4286, lat: 39.0062, labelOffset: [8, -8], labelAnchor: 'start' },
+  { name: 'Ashburn', region: 'virginia', lng: -77.4874, lat: 39.0438, labelOffset: [8, -8], labelAnchor: 'start' },
 ]
 
 const HUB = CITIES.find((c) => c.region === 'dc')!
@@ -55,8 +62,8 @@ const MAP_STYLE: google.maps.MapTypeStyle[] = [
 
 const REGION_LABELS: { region: RegionId; text: string; lat: number; lng: number; pixelOffset: [number, number] }[] = [
   { region: 'maryland', text: 'MARYLAND', lat: 39.32, lng: -76.85, pixelOffset: [0, 0] },
-  { region: 'dc', text: 'DC', lat: 38.9072, lng: -77.0369, pixelOffset: [0, 22] },
-  { region: 'virginia', text: 'NORTHERN VIRGINIA', lat: 38.78, lng: -77.29, pixelOffset: [0, 0] },
+  { region: 'dc', text: 'DC', lat: 38.9072, lng: -77.0369, pixelOffset: [34, -4] },
+  { region: 'virginia', text: 'NORTHERN VIRGINIA', lat: 38.72, lng: -77.32, pixelOffset: [0, 0] },
 ]
 
 function regionBounds(region: RegionId) {
@@ -154,6 +161,22 @@ export default function ServiceAreaMapGoogle({
                   }
                   onRegionHoverRef.current?.(info.object ? info.object.region : null)
                 },
+              }),
+              new TextLayer<City>({
+                id: 'city-labels',
+                data: CITIES.filter((c) => c.region !== 'dc'),
+                getPosition: (d) => [d.lng, d.lat],
+                getText: (d) => d.name,
+                getColor: (d) => [58, 63, 75, active === null ? 235 : active === d.region ? 255 : 60],
+                getSize: (d) => (active === d.region ? 12 : 11),
+                getPixelOffset: (d) => d.labelOffset,
+                getTextAnchor: (d) => d.labelAnchor,
+                getAlignmentBaseline: 'center',
+                fontFamily: 'system-ui, sans-serif',
+                fontWeight: 500,
+                fontSettings: { sdf: true },
+                outlineWidth: 2,
+                outlineColor: [255, 255, 255, 220],
               }),
               new TextLayer<(typeof REGION_LABELS)[number]>({
                 id: 'region-labels',
