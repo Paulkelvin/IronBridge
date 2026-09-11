@@ -2,7 +2,7 @@
 
 import { cn } from "@/lib/utils"
 import { GoogleMapsOverlay } from "@deck.gl/google-maps"
-import { ArcLayer, ScatterplotLayer } from "@deck.gl/layers"
+import { ArcLayer, ScatterplotLayer, TextLayer } from "@deck.gl/layers"
 import type { PickingInfo } from "@deck.gl/core"
 import { importLibrary, setOptions } from "@googlemaps/js-api-loader"
 import { useEffect, useRef, useState } from "react"
@@ -37,14 +37,26 @@ const REGION_COLOR: Record<RegionId, [number, number, number]> = {
   virginia: [18, 130, 98], // teal
 }
 
-// Declutter business/transit icon noise while keeping roads and place labels
-// (the "real map" look) — no Cloud-side Map ID/style config required.
+// A simplified regional backdrop, not a turn-by-turn street atlas: major
+// roads for geographic context only, no highway shields, no street names,
+// no unrelated town labels — our own region labels (below) replace those.
 const MAP_STYLE: google.maps.MapTypeStyle[] = [
-  { featureType: 'poi.business', stylers: [{ visibility: 'off' }] },
-  { featureType: 'poi', elementType: 'labels.icon', stylers: [{ visibility: 'off' }] },
+  { featureType: 'poi', stylers: [{ visibility: 'off' }] },
   { featureType: 'transit', stylers: [{ visibility: 'off' }] },
+  { featureType: 'road', elementType: 'labels', stylers: [{ visibility: 'off' }] },
+  { featureType: 'road.local', elementType: 'geometry', stylers: [{ visibility: 'off' }] },
+  { featureType: 'road.arterial', elementType: 'geometry', stylers: [{ visibility: 'simplified' }] },
+  { featureType: 'road.highway', elementType: 'geometry', stylers: [{ visibility: 'simplified' }] },
+  { featureType: 'administrative.locality', elementType: 'labels', stylers: [{ visibility: 'off' }] },
+  { featureType: 'administrative.neighborhood', stylers: [{ visibility: 'off' }] },
   { featureType: 'landscape', elementType: 'geometry', stylers: [{ color: '#f4f6f5' }] },
   { featureType: 'water', elementType: 'geometry', stylers: [{ color: '#dce8e3' }] },
+]
+
+const REGION_LABELS: { region: RegionId; text: string; lat: number; lng: number; pixelOffset: [number, number] }[] = [
+  { region: 'maryland', text: 'MARYLAND', lat: 39.32, lng: -76.85, pixelOffset: [0, 0] },
+  { region: 'dc', text: 'DC', lat: 38.9072, lng: -77.0369, pixelOffset: [0, 22] },
+  { region: 'virginia', text: 'NORTHERN VIRGINIA', lat: 38.78, lng: -77.29, pixelOffset: [0, 0] },
 ]
 
 function regionBounds(region: RegionId) {
@@ -142,6 +154,21 @@ export default function ServiceAreaMapGoogle({
                   }
                   onRegionHoverRef.current?.(info.object ? info.object.region : null)
                 },
+              }),
+              new TextLayer<(typeof REGION_LABELS)[number]>({
+                id: 'region-labels',
+                data: REGION_LABELS,
+                getPosition: (d) => [d.lng, d.lat],
+                getText: (d) => d.text,
+                getColor: (d) => [...REGION_COLOR[d.region], active === null ? 255 : active === d.region ? 255 : 110],
+                getSize: (d) => (active === d.region ? 15 : 13),
+                getPixelOffset: (d) => d.pixelOffset,
+                fontFamily: 'system-ui, sans-serif',
+                fontWeight: 700,
+                fontSettings: { sdf: true },
+                outlineWidth: 3,
+                outlineColor: [255, 255, 255, 220],
+                getTextAnchor: 'middle',
               }),
             ],
           })
