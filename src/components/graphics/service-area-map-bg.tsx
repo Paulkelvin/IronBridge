@@ -21,18 +21,18 @@ export default function ServiceAreaMapBg({ className }: { className?: string }) 
           key={i}
           d={`M${dc[0]} ${dc[1]} Q ${(dc[0] + x) / 2} ${Math.min(dc[1], y) - 30}, ${x} ${y}`}
           stroke="currentColor"
-          strokeWidth="1.5"
+          strokeWidth="2.25"
           strokeDasharray="2 10"
           strokeLinecap="round"
         />
       ))}
 
       {[...mdHubs, ...vaHubs].map(([x, y], i) => (
-        <circle key={i} cx={x} cy={y} r="4" fill="currentColor" />
+        <circle key={i} cx={x} cy={y} r="5.5" fill="currentColor" />
       ))}
 
-      <circle cx={dc[0]} cy={dc[1]} r="7" fill="currentColor" />
-      <circle cx={dc[0]} cy={dc[1]} r="14" stroke="currentColor" strokeWidth="1.5" />
+      <circle cx={dc[0]} cy={dc[1]} r="9" fill="currentColor" />
+      <circle cx={dc[0]} cy={dc[1]} r="17" stroke="currentColor" strokeWidth="2.25" />
     </svg>
   )
 }

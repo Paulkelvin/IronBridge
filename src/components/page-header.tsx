@@ -28,7 +28,7 @@ export default function PageHeader({
           }}
         >
           {background === 'map' ? (
-            <ServiceAreaMapBg className="absolute inset-x-0 top-0 w-full h-[280px] md:h-[380px] text-navy/[0.06]" />
+            <ServiceAreaMapBg className="absolute inset-x-0 top-0 w-full h-[280px] md:h-[380px] text-navy/[0.16]" />
           ) : (
             <RouteLine className="absolute inset-x-0 top-1/4 w-full h-[160px] md:h-[220px] text-navy/[0.07]" />
           )}
