@@ -8,7 +8,7 @@ import { FieldError, Input, Label, PhoneInput, PillGroup, Textarea } from "@/com
 import { FormError, FormSuccess } from "@/components/form-status"
 import { quoteRequestSchema, type QuoteRequestInput } from "@/lib/validations"
 import { zodResolver } from "@hookform/resolvers/zod"
-import { AlertTriangle, ArrowLeft, ArrowRight } from "lucide-react"
+import { AlertTriangle, ArrowLeft, ArrowRight, Facebook, Linkedin, Mail, Phone } from "lucide-react"
 import { Controller, useForm } from "react-hook-form"
 import { useEffect, useRef, useState } from "react"
 
@@ -156,12 +156,12 @@ export default function QuoteForm() {
                   <AddressFields prefix="delivery" label="Delivery Location" register={register} setValue={setValue} errors={errors} />
 
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
-                    <div>
+                    <div className="min-w-0">
                       <Label required htmlFor="serviceDate">Requested Service Date</Label>
-                      <Input id="serviceDate" type="date" className="py-3 leading-normal" {...register('serviceDate')} aria-invalid={!!errors.serviceDate} aria-describedby={errors.serviceDate ? "serviceDate-error" : undefined} />
+                      <Input id="serviceDate" type="date" className="py-3 leading-normal min-w-0 max-w-full" {...register('serviceDate')} aria-invalid={!!errors.serviceDate} aria-describedby={errors.serviceDate ? "serviceDate-error" : undefined} />
                       <FieldError id="serviceDate-error">{errors.serviceDate?.message}</FieldError>
                     </div>
-                    <div>
+                    <div className="min-w-0">
                       <Label htmlFor="timeRequirements">Pickup/Delivery Time Requirements</Label>
                       <Input id="timeRequirements" {...register('timeRequirements')} placeholder="e.g. before 10am" />
                     </div>
@@ -286,6 +286,28 @@ export default function QuoteForm() {
             </form>
           </div>
         )}
+
+        <div className="rounded-2xl border border-border bg-secondary/40 p-6 text-center space-y-4">
+          <h3 className="font-serif text-lg text-navy">Prefer to Talk to Someone?</h3>
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 text-sm text-foreground/70">
+            <span className="flex items-center gap-2">
+              <Phone size={16} strokeWidth={1.5} aria-hidden="true" />
+              Phone number coming soon
+            </span>
+            <span className="flex items-center gap-2">
+              <Mail size={16} strokeWidth={1.5} aria-hidden="true" />
+              Email coming soon
+            </span>
+          </div>
+          <div className="flex items-center justify-center gap-3">
+            <a href="#" aria-label="Iron Bridge on LinkedIn" className="flex items-center justify-center size-9 rounded-full border border-navy/20 text-navy/50 hover:text-navy hover:border-navy/40 transition-colors">
+              <Linkedin size={16} strokeWidth={1.5} aria-hidden="true" />
+            </a>
+            <a href="#" aria-label="Iron Bridge on Facebook" className="flex items-center justify-center size-9 rounded-full border border-navy/20 text-navy/50 hover:text-navy hover:border-navy/40 transition-colors">
+              <Facebook size={16} strokeWidth={1.5} aria-hidden="true" />
+            </a>
+          </div>
+        </div>
       </div>
 
       <Footer />
