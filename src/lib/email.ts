@@ -15,6 +15,11 @@ function getClient() {
   return new Resend(apiKey)
 }
 
+function formatAddress(street: string, unit: string | undefined, city: string, state: string, zip: string) {
+  const line1 = unit ? `${street}, ${unit}` : street
+  return `${line1}, ${city}, ${state} ${zip}`
+}
+
 function row(label: string, value?: string | null) {
   if (!value) return ""
   return `<tr><td style="padding:4px 12px 4px 0;color:#5b6472;font-size:13px;white-space:nowrap;vertical-align:top">${label}</td><td style="padding:4px 0;color:#1B2A4A;font-size:13px">${escapeHtml(value)}</td></tr>`
@@ -54,8 +59,8 @@ export async function sendQuoteRequestEmails(data: QuoteRequestInput) {
     row("Company", data.company),
     row("Email", data.email),
     row("Phone", data.phone),
-    row("Pickup location", data.pickupLocation),
-    row("Delivery location", data.deliveryLocation),
+    row("Pickup location", formatAddress(data.pickupStreet, data.pickupUnit, data.pickupCity, data.pickupState, data.pickupZip)),
+    row("Delivery location", formatAddress(data.deliveryStreet, data.deliveryUnit, data.deliveryCity, data.deliveryState, data.deliveryZip)),
     row("Requested date", data.serviceDate),
     row("Time requirements", data.timeRequirements),
     row("Shipment type", data.shipmentType),
