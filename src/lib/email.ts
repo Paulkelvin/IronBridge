@@ -137,6 +137,10 @@ export async function sendDriverApplicationEmails(data: DriverApplicationInput) 
         Hi ${escapeHtml(data.name)}, thanks for your interest in driving with Iron Bridge Mobility Solutions.
         We've received your application and will reach out if there's a fit for your vehicle, availability, and service area.
       </p>
+      <p style="color:#333;font-size:14px;line-height:1.6">
+        If it's a fit, we'll follow up with the next steps, including any license, insurance, and training
+        documentation needed before you're assigned a route.
+      </p>
     `),
   })
 }
