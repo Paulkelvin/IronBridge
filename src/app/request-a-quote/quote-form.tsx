@@ -13,12 +13,15 @@ import { Controller, useForm } from "react-hook-form"
 import { useState } from "react"
 
 const STEP_FIELDS = [
-  ['name', 'company', 'email', 'phone', 'pickupStreet', 'pickupCity', 'pickupState', 'pickupZip', 'deliveryStreet', 'deliveryCity', 'deliveryState', 'deliveryZip', 'serviceDate', 'timeRequirements'],
+  ['name', 'company', 'email', 'phone'],
+  ['pickupStreet', 'pickupCity', 'pickupState', 'pickupZip', 'deliveryStreet', 'deliveryCity', 'deliveryState', 'deliveryZip', 'serviceDate', 'timeRequirements'],
   ['shipmentType', 'serviceFrequency', 'stopCount', 'shipmentSize', 'temperatureSensitive', 'specialHandling', 'stat', 'additionalInstructions'],
 ] as const
 
+const STEP_TITLES = ['Contact Info', 'Shipment Route', 'Shipment Details'] as const
+
 export default function QuoteForm() {
-  const [step, setStep] = useState<1 | 2>(1)
+  const [step, setStep] = useState<1 | 2 | 3>(1)
   const [status, setStatus] = useState<'idle' | 'submitting' | 'success' | 'error'>('idle')
   const [errorMessage, setErrorMessage] = useState<string>('')
 
@@ -42,8 +45,8 @@ export default function QuoteForm() {
   })
 
   const goNext = async () => {
-    const valid = await trigger(STEP_FIELDS[0])
-    if (valid) setStep(2)
+    const valid = await trigger(STEP_FIELDS[step - 1])
+    if (valid) setStep((s) => (s + 1) as 1 | 2 | 3)
   }
 
   const onSubmit = async (data: QuoteRequestInput) => {
@@ -93,13 +96,13 @@ export default function QuoteForm() {
           <div className="rounded-2xl border border-border bg-white shadow-sm p-6 md:p-8">
             <div className="flex items-center gap-3 mb-6">
               <div className="flex-1 h-1 rounded-full bg-secondary overflow-hidden">
-                <div className="h-full bg-teal rounded-full transition-all duration-300" style={{ width: step === 1 ? '50%' : '100%' }} />
+                <div className="h-full bg-teal rounded-full transition-all duration-300" style={{ width: `${(step / 3) * 100}%` }} />
               </div>
-              <span className="text-xs font-medium text-foreground/60 tracking-wide whitespace-nowrap">Step {step} of 2</span>
+              <span className="text-xs font-medium text-foreground/60 tracking-wide whitespace-nowrap">Step {step} of 3</span>
             </div>
 
             <h2 className="font-serif text-xl text-navy mb-6">
-              {step === 1 ? 'Your Information' : 'Shipment Details'}
+              {STEP_TITLES[step - 1]}
             </h2>
 
             <form onSubmit={handleSubmit(onSubmit)} className="space-y-6" noValidate aria-label="Request a quote">
@@ -133,6 +136,13 @@ export default function QuoteForm() {
                     </div>
                   </div>
 
+                  <Button type="button" size="lg" className="w-full sm:w-fit" onClick={goNext}>
+                    Continue
+                    <ArrowRight strokeWidth={1.5} aria-hidden="true" />
+                  </Button>
+                </div>
+              ) : step === 2 ? (
+                <div className="space-y-5">
                   <AddressFields prefix="pickup" label="Pickup Location" register={register} setValue={setValue} errors={errors} />
                   <AddressFields prefix="delivery" label="Delivery Location" register={register} setValue={setValue} errors={errors} />
 
@@ -148,10 +158,16 @@ export default function QuoteForm() {
                     </div>
                   </div>
 
-                  <Button type="button" size="lg" className="w-full sm:w-fit" onClick={goNext}>
-                    Continue
-                    <ArrowRight strokeWidth={1.5} aria-hidden="true" />
-                  </Button>
+                  <div className="flex items-center gap-3">
+                    <Button type="button" variant="outline" size="lg" onClick={() => setStep(1)}>
+                      <ArrowLeft strokeWidth={1.5} aria-hidden="true" />
+                      Back
+                    </Button>
+                    <Button type="button" size="lg" className="flex-1 sm:flex-none" onClick={goNext}>
+                      Continue
+                      <ArrowRight strokeWidth={1.5} aria-hidden="true" />
+                    </Button>
+                  </div>
                 </div>
               ) : (
                 <div className="space-y-6">
@@ -253,7 +269,7 @@ export default function QuoteForm() {
                   {status === 'error' && <FormError message={errorMessage} />}
 
                   <div className="flex items-center gap-3">
-                    <Button type="button" variant="outline" size="lg" onClick={() => setStep(1)}>
+                    <Button type="button" variant="outline" size="lg" onClick={() => setStep(2)}>
                       <ArrowLeft strokeWidth={1.5} aria-hidden="true" />
                       Back
                     </Button>
