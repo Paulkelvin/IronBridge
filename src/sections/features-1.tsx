@@ -39,8 +39,8 @@ const settings = {
 export default function Features1() {
   return (
     <div id='services' className="relative space-y-8 md:space-y-10 lg:space-y-12 mx-auto text-center">
-      <div className="absolute top-0 left-1/2 w-screen -translate-x-1/2 h-[220px] md:h-[320px] -z-10 pointer-events-none overflow-hidden" aria-hidden="true">
-        <DiagonalRoute className="absolute top-0 left-0 w-[260px] md:w-[420px] h-full text-gold/80" />
+      <div className="absolute top-0 left-1/2 w-screen -translate-x-1/2 h-[70px] md:h-[320px] -z-10 pointer-events-none overflow-hidden" aria-hidden="true">
+        <DiagonalRoute className="absolute top-0 left-0 w-[90px] md:w-[420px] h-full text-gold/80" />
       </div>
 
       <SectionHeader eyebrow={settings.eyebrow} title={settings.title} description={settings.description} mobileDescription={settings.mobileDescription} />
