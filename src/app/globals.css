@@ -42,7 +42,3 @@ html {
   scroll-behavior: smooth;
 }
 
-.service-area-map-gl .maplibregl-ctrl-attrib {
-  font-size: 10px;
-}
-

@@ -1,6 +1,6 @@
 'use client'
 
-import type { RegionId } from "@/components/graphics/service-area-map-gl"
+import type { RegionId } from "@/components/graphics/service-area-map-google"
 import SlideEffect from "@/components/slide-effect"
 import { CardTitle } from "@/components/ui/card-text"
 import IconBadge from "@/components/ui/icon-badge"
@@ -9,7 +9,7 @@ import { MapPin } from "lucide-react"
 import dynamic from "next/dynamic"
 import { useState } from "react"
 
-const ServiceAreaMapGL = dynamic(() => import("@/components/graphics/service-area-map-gl"), {
+const ServiceAreaMapGoogle = dynamic(() => import("@/components/graphics/service-area-map-google"), {
   ssr: false,
   loading: () => (
     <div className="w-full h-[380px] md:h-[460px] lg:h-[560px] rounded-2xl border border-border bg-secondary animate-pulse" />
@@ -27,7 +27,7 @@ export default function ServiceAreaExplorer({
     <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-14 items-center text-left">
       {/* Map */}
       <SlideEffect direction="right" isSpring={false}>
-        <ServiceAreaMapGL
+        <ServiceAreaMapGoogle
           activeRegion={activeRegion}
           onRegionHover={setActiveRegion}
           className="w-full h-[380px] md:h-[460px] lg:h-[560px]"
