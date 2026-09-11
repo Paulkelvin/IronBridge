@@ -39,7 +39,7 @@ const pillars = [
   {
     icon: Thermometer,
     title: 'Temperature-Sensitive Handling',
-    content: 'Cold-packed and temperature-controlled shipments are transported following the client’s stated range and monitoring instructions. Cold packs, dry ice, or packaging are never altered except by personnel specifically trained and authorized to do so.',
+    content: 'Cold-packed and temperature-controlled shipments are transported following the client’s stated range and monitoring instructions. Cold packs, dry ice, or packaging are never altered except by personnel specifically trained and authorized to do so. For UN3373 Category B biological substances, transport follows the knowledge and training requirements of 49 CFR §173.199.',
   },
   {
     icon: IdCard,
