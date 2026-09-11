@@ -1,5 +1,6 @@
 'use client'
 
+import BlobShape from "@/components/graphics/blob-shape"
 import DotGrid from "@/components/graphics/dot-grid"
 import RouteLine from "@/components/graphics/route-line"
 import SlideEffect from "@/components/slide-effect"
@@ -136,8 +137,11 @@ export default function DriverForm() {
               className="relative w-full max-w-[19rem] mx-auto lg:max-w-[26rem] aspect-[1000/784]"
             >
               {/* Decorative backdrop behind the illustration */}
-              <div className="absolute -inset-6 md:-inset-10 -z-10 pointer-events-none" aria-hidden="true">
-                <div className="absolute inset-0 rounded-[2.5rem] bg-teal-tint/70" />
+              <div className="absolute -inset-8 md:-inset-12 -z-10 pointer-events-none" aria-hidden="true">
+                <BlobShape className="absolute inset-0 h-full w-full text-teal-tint" />
+                <div className="absolute top-3 right-6 md:top-4 md:right-10 size-3.5 md:size-4 rounded-full bg-gold" />
+                <div className="absolute bottom-10 right-2 md:bottom-14 md:right-4 size-2.5 md:size-3 rotate-45 bg-teal-light/70" />
+                <div className="absolute bottom-4 left-8 md:bottom-6 md:left-12 size-3 md:size-3.5 rounded-full border-2 border-navy/30" />
                 <DotGrid id="driver-hero-dots-tr" className="absolute -top-3 -right-3 w-20 h-20 md:w-24 md:h-24 text-teal/40" />
                 <DotGrid id="driver-hero-dots-bl" className="absolute -bottom-3 -left-3 w-16 h-16 md:w-20 md:h-20 text-navy/25" />
               </div>
