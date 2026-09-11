@@ -11,7 +11,7 @@ import Link from "next/link"
 
 const settings = {
   eyebrow: 'What We Do',
-  title: 'Consistency By Design',
+  title: 'What We Can Move For You',
   description: 'Iron Bridge supports healthcare organizations and commercial businesses with professionally handled transportation across Maryland, Washington DC, and Northern Virginia.',
   mobileDescription: 'Professionally handled transportation for healthcare and commercial businesses.',
   services: [
