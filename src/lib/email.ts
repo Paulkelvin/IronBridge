@@ -111,7 +111,7 @@ export async function sendDriverApplicationEmails(data: DriverApplicationInput) 
     row("Vehicle type", data.vehicleType),
     row("Year / Make / Model", data.vehicleYearMakeModel),
     row("Availability", data.availability.join(", ")),
-    row("Service areas", data.serviceAreas),
+    row("Service areas", data.serviceAreas.join(", ")),
     row("Medical courier experience", data.medicalCourierExperience),
     row("HIPAA/BBP training status", data.hipaaBbpStatus),
     row("Other certifications", data.otherCertifications),

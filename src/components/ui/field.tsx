@@ -1,4 +1,5 @@
 import { cn } from "@/lib/utils"
+import { formatPhoneNumber } from "@/lib/format"
 
 export function Label({ children, required, className, htmlFor }: { children: React.ReactNode, required?: boolean, className?: string, htmlFor?: string }) {
   return (
@@ -10,10 +11,35 @@ export function Label({ children, required, className, htmlFor }: { children: Re
   )
 }
 
-const fieldClasses = "w-full rounded-lg border border-navy/20 bg-white px-3.5 py-2.5 text-sm text-foreground placeholder:text-foreground/40 outline-none focus:border-teal focus:ring-2 focus:ring-teal/20 transition-colors"
+// text-[16px] is a floor, not a design choice: iOS Safari zooms the page in
+// on focus for any input rendering below 16px, regardless of the site's rem
+// scale, so this must stay a hard pixel value.
+const fieldClasses = "w-full rounded-lg border border-navy/20 bg-white px-3.5 py-2.5 text-[16px] text-foreground placeholder:text-foreground/40 outline-none focus:border-teal focus:ring-2 focus:ring-teal/20 transition-colors"
 
 export function Input(props: React.InputHTMLAttributes<HTMLInputElement>) {
   return <input {...props} className={cn(fieldClasses, props.className)} />
+}
+
+export function PhoneInput({
+  value,
+  onChange,
+  className,
+  ...props
+}: {
+  value: string
+  onChange: (value: string) => void
+} & Omit<React.InputHTMLAttributes<HTMLInputElement>, "value" | "onChange" | "type">) {
+  return (
+    <input
+      {...props}
+      type="tel"
+      inputMode="tel"
+      autoComplete="tel"
+      value={value}
+      onChange={(e) => onChange(formatPhoneNumber(e.target.value))}
+      className={cn(fieldClasses, className)}
+    />
+  )
 }
 
 export function Textarea(props: React.TextareaHTMLAttributes<HTMLTextAreaElement>) {

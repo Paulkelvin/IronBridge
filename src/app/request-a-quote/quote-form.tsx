@@ -3,13 +3,22 @@
 import PageHeader from "@/components/page-header"
 import Footer from "@/sections/footer"
 import { Button } from "@/components/ui/button"
-import { FieldError, Input, Label, PillGroup, Textarea } from "@/components/ui/field"
+import { FieldError, Input, Label, PhoneInput, PillGroup, Textarea } from "@/components/ui/field"
 import { FormError, FormSuccess } from "@/components/form-status"
 import { quoteRequestSchema, type QuoteRequestInput } from "@/lib/validations"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { AlertTriangle, ArrowLeft, ArrowRight } from "lucide-react"
 import { Controller, useForm } from "react-hook-form"
 import { useState } from "react"
+
+// Suggestions only (datalist doesn't restrict input) — a quote can come
+// from a pickup/delivery point anywhere in or near the service area, not
+// just these cities.
+const LOCATION_SUGGESTIONS = [
+  'Baltimore, MD', 'Bowie, MD', 'Annapolis, MD', 'Columbia, MD', 'Silver Spring, MD', 'Rockville, MD', 'Bethesda, MD', 'Hyattsville, MD',
+  'Washington, DC',
+  'Arlington, VA', 'Alexandria, VA', 'Fairfax, VA', 'Reston, VA', 'Sterling, VA', 'Ashburn, VA',
+]
 
 const STEP_FIELDS = [
   ['name', 'company', 'email', 'phone', 'pickupLocation', 'deliveryLocation', 'serviceDate', 'timeRequirements'],
@@ -120,19 +129,28 @@ export default function QuoteForm() {
                     </div>
                     <div>
                       <Label required htmlFor="phone">Phone</Label>
-                      <Input id="phone" type="tel" {...register('phone')} placeholder="(555) 555-5555" aria-invalid={!!errors.phone} aria-describedby={errors.phone ? "phone-error" : undefined} />
+                      <Controller
+                        control={control}
+                        name="phone"
+                        render={({ field }) => (
+                          <PhoneInput id="phone" value={field.value} onChange={field.onChange} onBlur={field.onBlur} placeholder="(555) 555-5555" aria-invalid={!!errors.phone} aria-describedby={errors.phone ? "phone-error" : undefined} />
+                        )}
+                      />
                       <FieldError id="phone-error">{errors.phone?.message}</FieldError>
                     </div>
                     <div>
                       <Label required htmlFor="pickupLocation">Pickup Location</Label>
-                      <Input id="pickupLocation" {...register('pickupLocation')} placeholder="City, State" aria-invalid={!!errors.pickupLocation} aria-describedby={errors.pickupLocation ? "pickupLocation-error" : undefined} />
+                      <Input id="pickupLocation" list="location-suggestions" {...register('pickupLocation')} placeholder="City, State" aria-invalid={!!errors.pickupLocation} aria-describedby={errors.pickupLocation ? "pickupLocation-error" : undefined} />
                       <FieldError id="pickupLocation-error">{errors.pickupLocation?.message}</FieldError>
                     </div>
                     <div>
                       <Label required htmlFor="deliveryLocation">Delivery Location</Label>
-                      <Input id="deliveryLocation" {...register('deliveryLocation')} placeholder="City, State" aria-invalid={!!errors.deliveryLocation} aria-describedby={errors.deliveryLocation ? "deliveryLocation-error" : undefined} />
+                      <Input id="deliveryLocation" list="location-suggestions" {...register('deliveryLocation')} placeholder="City, State" aria-invalid={!!errors.deliveryLocation} aria-describedby={errors.deliveryLocation ? "deliveryLocation-error" : undefined} />
                       <FieldError id="deliveryLocation-error">{errors.deliveryLocation?.message}</FieldError>
                     </div>
+                    <datalist id="location-suggestions">
+                      {LOCATION_SUGGESTIONS.map(city => <option key={city} value={city} />)}
+                    </datalist>
                     <div>
                       <Label required htmlFor="serviceDate">Requested Service Date</Label>
                       <Input id="serviceDate" type="date" {...register('serviceDate')} aria-invalid={!!errors.serviceDate} aria-describedby={errors.serviceDate ? "serviceDate-error" : undefined} />

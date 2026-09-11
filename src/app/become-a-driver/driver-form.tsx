@@ -3,7 +3,7 @@
 import PageHeader from "@/components/page-header"
 import Footer from "@/sections/footer"
 import { Button } from "@/components/ui/button"
-import { CheckboxPillGroup, FieldError, Input, Label, PillGroup, Select, Textarea } from "@/components/ui/field"
+import { CheckboxPillGroup, FieldError, Input, Label, PhoneInput, PillGroup, Select, Textarea } from "@/components/ui/field"
 import { FormError, FormSuccess } from "@/components/form-status"
 import { driverApplicationSchema, type DriverApplicationInput } from "@/lib/validations"
 import { zodResolver } from "@hookform/resolvers/zod"
@@ -15,6 +15,20 @@ const STEP_FIELDS = [
   ['name', 'email', 'phone', 'location', 'vehicleType', 'vehicleYearMakeModel'],
   ['availability', 'serviceAreas', 'medicalCourierExperience', 'hipaaBbpStatus', 'otherCertifications', 'additionalInfo'],
 ] as const
+
+const SERVICE_AREA_OPTIONS = [
+  'Baltimore', 'Bowie', 'Annapolis', 'Columbia', 'Silver Spring', 'Rockville', 'Bethesda', 'Hyattsville',
+  'Washington, DC',
+  'Arlington', 'Alexandria', 'Fairfax', 'Reston', 'Sterling', 'Ashburn',
+].map(city => ({ label: city, value: city }))
+
+// Suggestion only — a driver's home base doesn't have to be one of the
+// cities we already list as served.
+const LOCATION_SUGGESTIONS = [
+  'Baltimore, MD', 'Bowie, MD', 'Annapolis, MD', 'Columbia, MD', 'Silver Spring, MD', 'Rockville, MD', 'Bethesda, MD', 'Hyattsville, MD',
+  'Washington, DC',
+  'Arlington, VA', 'Alexandria, VA', 'Fairfax, VA', 'Reston, VA', 'Sterling, VA', 'Ashburn, VA',
+]
 
 export default function DriverForm() {
   const [step, setStep] = useState<1 | 2>(1)
@@ -32,6 +46,7 @@ export default function DriverForm() {
     resolver: zodResolver(driverApplicationSchema),
     defaultValues: {
       availability: [],
+      serviceAreas: [],
       otherCertifications: '',
       additionalInfo: '',
     },
@@ -114,13 +129,22 @@ export default function DriverForm() {
                     </div>
                     <div>
                       <Label required htmlFor="d-phone">Phone</Label>
-                      <Input id="d-phone" type="tel" {...register('phone')} placeholder="(555) 555-5555" aria-invalid={!!errors.phone} aria-describedby={errors.phone ? "d-phone-error" : undefined} />
+                      <Controller
+                        control={control}
+                        name="phone"
+                        render={({ field }) => (
+                          <PhoneInput id="d-phone" value={field.value} onChange={field.onChange} onBlur={field.onBlur} placeholder="(555) 555-5555" aria-invalid={!!errors.phone} aria-describedby={errors.phone ? "d-phone-error" : undefined} />
+                        )}
+                      />
                       <FieldError id="d-phone-error">{errors.phone?.message}</FieldError>
                     </div>
                     <div>
                       <Label required htmlFor="d-location">Location (City, State)</Label>
-                      <Input id="d-location" {...register('location')} placeholder="Baltimore, MD" aria-invalid={!!errors.location} aria-describedby={errors.location ? "d-location-error" : undefined} />
+                      <Input id="d-location" list="d-location-suggestions" {...register('location')} placeholder="Baltimore, MD" aria-invalid={!!errors.location} aria-describedby={errors.location ? "d-location-error" : undefined} />
                       <FieldError id="d-location-error">{errors.location?.message}</FieldError>
+                      <datalist id="d-location-suggestions">
+                        {LOCATION_SUGGESTIONS.map(city => <option key={city} value={city} />)}
+                      </datalist>
                     </div>
                     <div>
                       <Label required htmlFor="d-vehicleType">Vehicle Type</Label>
@@ -165,9 +189,21 @@ export default function DriverForm() {
                   </div>
 
                   <div>
-                    <Label required htmlFor="d-serviceAreas">Service Areas You Can Cover</Label>
-                    <Input id="d-serviceAreas" {...register('serviceAreas')} placeholder="e.g. Baltimore, Columbia, Silver Spring" aria-invalid={!!errors.serviceAreas} aria-describedby={errors.serviceAreas ? "d-serviceAreas-error" : undefined} />
-                    <FieldError id="d-serviceAreas-error">{errors.serviceAreas?.message}</FieldError>
+                    <Label required>Service Areas You Can Cover</Label>
+                    <Controller
+                      control={control}
+                      name="serviceAreas"
+                      render={({ field }) => (
+                        <CheckboxPillGroup
+                          name="serviceAreas"
+                          ariaLabel="Service areas you can cover"
+                          value={field.value}
+                          onChange={field.onChange}
+                          options={SERVICE_AREA_OPTIONS}
+                        />
+                      )}
+                    />
+                    <FieldError>{errors.serviceAreas?.message}</FieldError>
                   </div>
 
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
