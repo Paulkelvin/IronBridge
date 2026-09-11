@@ -22,6 +22,7 @@ export default function ServiceAreaExplorer({
   regions: { id: RegionId; title: string; cities: string[] }[]
 }) {
   const [activeRegion, setActiveRegion] = useState<RegionId | null>(null)
+  const [activeCity, setActiveCity] = useState<string | null>(null)
 
   return (
     <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-14 items-center text-left">
@@ -29,6 +30,7 @@ export default function ServiceAreaExplorer({
       <SlideEffect direction="right" isSpring={false}>
         <ServiceAreaMapGoogle
           activeRegion={activeRegion}
+          activeCityName={activeCity}
           onRegionHover={setActiveRegion}
           className="w-full h-[380px] md:h-[460px] lg:h-[560px]"
         />
@@ -52,7 +54,17 @@ export default function ServiceAreaExplorer({
               </div>
               <div className="flex flex-wrap gap-2">
                 {region.cities.map(city => (
-                  <span key={city} className="text-xs rounded-full border border-border px-3 py-1 text-foreground">{city}</span>
+                  <button
+                    key={city}
+                    type="button"
+                    onClick={() => setActiveCity(prev => prev === city ? null : city)}
+                    className={cn(
+                      "text-xs rounded-full border px-3 py-1 transition-colors",
+                      activeCity === city ? "border-teal bg-teal text-white" : "border-border text-foreground hover:border-teal/50"
+                    )}
+                  >
+                    {city}
+                  </button>
                 ))}
               </div>
             </div>

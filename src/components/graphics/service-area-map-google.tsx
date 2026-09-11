@@ -66,25 +66,57 @@ const REGION_LABELS: { region: RegionId; text: string; lat: number; lng: number;
   { region: 'virginia', text: 'NORTHERN VIRGINIA', lat: 38.72, lng: -77.32, pixelOffset: [0, 0] },
 ]
 
-function regionBounds(region: RegionId) {
+const EARTH_RADIUS_MILES = 3958.8
+
+function milesBetween(a: { lat: number; lng: number }, b: { lat: number; lng: number }) {
+  const dLat = (b.lat - a.lat) * Math.PI / 180
+  const dLng = (b.lng - a.lng) * Math.PI / 180
+  const lat1 = a.lat * Math.PI / 180
+  const lat2 = b.lat * Math.PI / 180
+  const h = Math.sin(dLat / 2) ** 2 + Math.cos(lat1) * Math.cos(lat2) * Math.sin(dLng / 2) ** 2
+  return 2 * EARTH_RADIUS_MILES * Math.asin(Math.sqrt(h))
+}
+
+// Google's fitBounds zooms all the way in on a single point (e.g. the DC
+// region, whose only city is the hub itself), which then makes the meter-
+// sized dots cover the entire viewport. Pad degenerate bounds to a sane
+// minimum span instead.
+function safeBounds(points: { lat: number; lng: number }[]) {
   const bounds = new google.maps.LatLngBounds()
-  CITIES.filter((c) => c.region === region).forEach((c) => bounds.extend({ lat: c.lat, lng: c.lng }))
-  bounds.extend({ lat: HUB.lat, lng: HUB.lng })
+  points.forEach((p) => bounds.extend(p))
+  const ne = bounds.getNorthEast()
+  const sw = bounds.getSouthWest()
+  if (Math.abs(ne.lat() - sw.lat()) < 0.02 && Math.abs(ne.lng() - sw.lng()) < 0.02) {
+    const center = bounds.getCenter()
+    const delta = 0.06
+    bounds.extend({ lat: center.lat() - delta, lng: center.lng() - delta })
+    bounds.extend({ lat: center.lat() + delta, lng: center.lng() + delta })
+  }
   return bounds
 }
 
+function regionBounds(region: RegionId) {
+  const points = CITIES.filter((c) => c.region === region).map((c) => ({ lat: c.lat, lng: c.lng }))
+  points.push({ lat: HUB.lat, lng: HUB.lng })
+  return safeBounds(points)
+}
+
 function allCityBounds() {
-  const bounds = new google.maps.LatLngBounds()
-  CITIES.forEach((c) => bounds.extend({ lat: c.lat, lng: c.lng }))
-  return bounds
+  return safeBounds(CITIES.map((c) => ({ lat: c.lat, lng: c.lng })))
+}
+
+function cityBounds(city: City) {
+  return safeBounds([{ lat: HUB.lat, lng: HUB.lng }, { lat: city.lat, lng: city.lng }])
 }
 
 export default function ServiceAreaMapGoogle({
   activeRegion,
+  activeCityName,
   onRegionHover,
   className,
 }: {
   activeRegion: RegionId | null
+  activeCityName?: string | null
   onRegionHover?: (region: RegionId | null) => void
   className?: string
 }) {
@@ -92,6 +124,7 @@ export default function ServiceAreaMapGoogle({
   const mapRef = useRef<google.maps.Map | null>(null)
   const overlayRef = useRef<GoogleMapsOverlay | null>(null)
   const activeRegionRef = useRef(activeRegion)
+  const activeCityRef = useRef(activeCityName)
   const renderLayersRef = useRef<() => void>(() => {})
   const onRegionHoverRef = useRef(onRegionHover)
   onRegionHoverRef.current = onRegionHover
@@ -131,6 +164,15 @@ export default function ServiceAreaMapGoogle({
 
         const renderLayers = () => {
           const active = activeRegionRef.current
+          const activeCity = CITIES.find((c) => c.name === activeCityRef.current) ?? null
+          const distanceLabel = activeCity && activeCity.region !== 'dc'
+            ? [{
+              lat: (HUB.lat + activeCity.lat) / 2,
+              lng: (HUB.lng + activeCity.lng) / 2,
+              text: `~${Math.round(milesBetween(HUB, activeCity))} mi`,
+            }]
+            : []
+
           overlay.setProps({
             layers: [
               new ArcLayer<City>({
@@ -138,10 +180,15 @@ export default function ServiceAreaMapGoogle({
                 data: CITIES.filter((c) => c.region !== 'dc'),
                 getSourcePosition: () => [HUB.lng, HUB.lat],
                 getTargetPosition: (d) => [d.lng, d.lat],
-                getSourceColor: (d) => [...REGION_COLOR[d.region], active === null ? 130 : active === d.region ? 220 : 35],
-                getTargetColor: (d) => [...REGION_COLOR[d.region], active === null ? 130 : active === d.region ? 220 : 35],
-                getWidth: (d) => (active === d.region ? 3 : 1.4),
+                getSourceColor: (d) => [...REGION_COLOR[d.region], activeCity ? (d.name === activeCity.name ? 230 : 25) : active === null ? 130 : active === d.region ? 220 : 35],
+                getTargetColor: (d) => [...REGION_COLOR[d.region], activeCity ? (d.name === activeCity.name ? 230 : 25) : active === null ? 130 : active === d.region ? 220 : 35],
+                getWidth: (d) => (activeCity ? (d.name === activeCity.name ? 4 : 1) : active === d.region ? 3 : 1.4),
                 greatCircle: false,
+                updateTriggers: {
+                  getSourceColor: [active, activeCity?.name],
+                  getTargetColor: [active, activeCity?.name],
+                  getWidth: [active, activeCity?.name],
+                },
               }),
               new ScatterplotLayer<City>({
                 id: 'cities',
@@ -149,9 +196,13 @@ export default function ServiceAreaMapGoogle({
                 pickable: true,
                 autoHighlight: false,
                 getPosition: (d) => [d.lng, d.lat],
-                getFillColor: (d) => [...REGION_COLOR[d.region], active === null ? 255 : active === d.region ? 255 : 90],
-                getRadius: (d) => (d.region === 'dc' ? (active === 'dc' ? 950 : 720) : active === d.region ? 620 : 420),
+                getFillColor: (d) => [...REGION_COLOR[d.region], activeCity ? (d.name === activeCity.name ? 255 : 70) : active === null ? 255 : active === d.region ? 255 : 90],
+                getRadius: (d) => {
+                  if (activeCity) return d.name === activeCity.name ? 950 : d.region === 'dc' ? 500 : 300
+                  return d.region === 'dc' ? (active === 'dc' ? 950 : 720) : active === d.region ? 620 : 420
+                },
                 radiusUnits: 'meters',
+                radiusMaxPixels: 20,
                 stroked: true,
                 getLineColor: [255, 255, 255, 230],
                 lineWidthMinPixels: 1.5,
@@ -161,14 +212,18 @@ export default function ServiceAreaMapGoogle({
                   }
                   onRegionHoverRef.current?.(info.object ? info.object.region : null)
                 },
+                updateTriggers: {
+                  getFillColor: [active, activeCity?.name],
+                  getRadius: [active, activeCity?.name],
+                },
               }),
               new TextLayer<City>({
                 id: 'city-labels',
                 data: CITIES.filter((c) => c.region !== 'dc'),
                 getPosition: (d) => [d.lng, d.lat],
                 getText: (d) => d.name,
-                getColor: (d) => [58, 63, 75, active === null ? 235 : active === d.region ? 255 : 60],
-                getSize: (d) => (active === d.region ? 12 : 11),
+                getColor: (d) => [58, 63, 75, activeCity ? (d.name === activeCity.name ? 255 : 30) : active === null ? 235 : active === d.region ? 255 : 60],
+                getSize: (d) => (activeCity ? (d.name === activeCity.name ? 13 : 11) : active === d.region ? 12 : 11),
                 getPixelOffset: (d) => d.labelOffset,
                 getTextAnchor: (d) => d.labelAnchor,
                 getAlignmentBaseline: 'center',
@@ -177,20 +232,44 @@ export default function ServiceAreaMapGoogle({
                 fontSettings: { sdf: true },
                 outlineWidth: 2,
                 outlineColor: [255, 255, 255, 220],
+                updateTriggers: {
+                  getColor: [active, activeCity?.name],
+                  getSize: [active, activeCity?.name],
+                },
               }),
               new TextLayer<(typeof REGION_LABELS)[number]>({
                 id: 'region-labels',
                 data: REGION_LABELS,
                 getPosition: (d) => [d.lng, d.lat],
                 getText: (d) => d.text,
-                getColor: (d) => [...REGION_COLOR[d.region], active === null ? 255 : active === d.region ? 255 : 110],
-                getSize: (d) => (active === d.region ? 15 : 13),
+                getColor: (d) => [...REGION_COLOR[d.region], activeCity ? 90 : active === null ? 255 : active === d.region ? 255 : 110],
+                getSize: (d) => (active === d.region && !activeCity ? 15 : 13),
                 getPixelOffset: (d) => d.pixelOffset,
                 fontFamily: 'system-ui, sans-serif',
                 fontWeight: 700,
                 fontSettings: { sdf: true },
                 outlineWidth: 3,
                 outlineColor: [255, 255, 255, 220],
+                getTextAnchor: 'middle',
+                updateTriggers: {
+                  getColor: [active, activeCity?.name],
+                  getSize: [active, activeCity?.name],
+                },
+              }),
+              new TextLayer<{ lat: number; lng: number; text: string }>({
+                id: 'distance-label',
+                data: distanceLabel,
+                getPosition: (d) => [d.lng, d.lat],
+                getText: (d) => d.text,
+                getColor: [255, 255, 255, 255],
+                getSize: 12,
+                fontFamily: 'system-ui, sans-serif',
+                fontWeight: 700,
+                fontSettings: { sdf: true },
+                background: true,
+                getBackgroundColor: [18, 130, 98, 230],
+                backgroundPadding: [6, 3],
+                backgroundBorderRadius: 4,
                 getTextAnchor: 'middle',
               }),
             ],
@@ -216,17 +295,21 @@ export default function ServiceAreaMapGoogle({
 
   useEffect(() => {
     activeRegionRef.current = activeRegion
+    activeCityRef.current = activeCityName
     renderLayersRef.current()
 
     const map = mapRef.current
     if (!map) return
 
-    if (activeRegion) {
+    const city = CITIES.find((c) => c.name === activeCityName)
+    if (city) {
+      map.fitBounds(cityBounds(city), 80)
+    } else if (activeRegion) {
       map.fitBounds(regionBounds(activeRegion), 70)
     } else {
       map.fitBounds(allCityBounds(), 56)
     }
-  }, [activeRegion])
+  }, [activeRegion, activeCityName])
 
   return (
     <div className={cn("relative overflow-hidden rounded-2xl border border-border bg-secondary", className)}>
