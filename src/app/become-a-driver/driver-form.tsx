@@ -1,6 +1,9 @@
 'use client'
 
-import PageHeader from "@/components/page-header"
+import DotGrid from "@/components/graphics/dot-grid"
+import RouteLine from "@/components/graphics/route-line"
+import SlideEffect from "@/components/slide-effect"
+import TextBlurEffect from "@/components/text-blur-effect"
 import Footer from "@/sections/footer"
 import { Button } from "@/components/ui/button"
 import { CheckboxPillGroup, FieldError, Input, Label, PhoneInput, PillGroup, Select, Textarea } from "@/components/ui/field"
@@ -8,6 +11,7 @@ import { FormError, FormSuccess } from "@/components/form-status"
 import { driverApplicationSchema, type DriverApplicationInput } from "@/lib/validations"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { ArrowLeft, ArrowRight, ShieldCheck } from "lucide-react"
+import Image from "next/image"
 import { Controller, useForm } from "react-hook-form"
 import { useEffect, useRef, useState } from "react"
 
@@ -93,11 +97,62 @@ export default function DriverForm() {
 
   return (
     <div className="px-4 xl:px-0 max-w-7xl mx-auto space-y-24 sm:space-y-32 md:space-y-40 lg:space-y-56 scroll-smooth">
-      <PageHeader
-        eyebrow="Become a Driver"
-        title="Drive With Iron Bridge"
-        description="Interested in driving or running your own vehicle with Iron Bridge? Tell us about yourself and we'll be in touch."
-      />
+      <div className="relative">
+        {/* Decorative background — breaks out to the full viewport width */}
+        <div
+          className="absolute inset-y-0 left-1/2 w-screen -translate-x-1/2 -z-10 pointer-events-none"
+          aria-hidden="true"
+          style={{
+            backgroundImage:
+              'radial-gradient(70% 90% at 90% 0%, rgba(18,130,98,0.08) 0%, transparent 65%), radial-gradient(70% 90% at 5% 100%, rgba(27,42,74,0.06) 0%, transparent 65%)',
+          }}
+        >
+          <RouteLine className="absolute inset-x-0 top-1/4 w-full h-[160px] md:h-[220px] text-navy/[0.07]" />
+        </div>
+
+        <section className="relative overflow-hidden pt-4 pb-4 md:pt-8 md:pb-8">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-12 items-center">
+            {/* Left: text content */}
+            <div className="flex flex-col gap-4 lg:gap-6 items-center lg:items-start text-center lg:text-left">
+              <SlideEffect>
+                <span className="inline-flex items-center rounded-full border border-border bg-secondary px-4 py-1.5 text-[11px] md:text-xs font-medium tracking-[0.14em] text-navy uppercase">
+                  Become a Driver
+                </span>
+              </SlideEffect>
+
+              <h1 className="font-serif text-navy text-3xl md:text-5xl font-semibold tracking-tight leading-[1.1] max-w-xl">
+                <TextBlurEffect>Drive With Iron Bridge</TextBlurEffect>
+              </h1>
+
+              <SlideEffect delay={0.15} className="text-sm lg:text-lg px-4 sm:px-10 lg:px-0 max-w-2xl mx-auto lg:max-w-none lg:mx-0 text-foreground">
+                Interested in driving or running your own vehicle with Iron Bridge? Tell us about yourself and we&apos;ll be in touch.
+              </SlideEffect>
+            </div>
+
+            {/* Right: image */}
+            <SlideEffect
+              direction="left"
+              isSpring={false}
+              className="relative w-full max-w-[19rem] mx-auto lg:max-w-[26rem] aspect-[1000/784]"
+            >
+              {/* Decorative backdrop behind the illustration */}
+              <div className="absolute -inset-6 md:-inset-10 -z-10 pointer-events-none" aria-hidden="true">
+                <div className="absolute inset-0 rounded-[2.5rem] bg-teal-tint/70" />
+                <DotGrid id="driver-hero-dots-tr" className="absolute -top-3 -right-3 w-20 h-20 md:w-24 md:h-24 text-teal/40" />
+                <DotGrid id="driver-hero-dots-bl" className="absolute -bottom-3 -left-3 w-16 h-16 md:w-20 md:h-20 text-navy/25" />
+              </div>
+
+              <Image
+                src="/brand/become-a-driver-hero.png"
+                alt="Driver joining the Iron Bridge team beside a delivery van"
+                fill
+                className="object-contain"
+                priority
+              />
+            </SlideEffect>
+          </div>
+        </section>
+      </div>
 
       <div className="max-w-2xl mx-auto w-full space-y-4">
         <div role="note" className="flex items-center gap-2 rounded-lg border border-border bg-secondary px-3.5 py-2 text-xs text-foreground">
