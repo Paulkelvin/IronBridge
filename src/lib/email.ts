@@ -65,7 +65,6 @@ export async function sendQuoteRequestEmails(data: QuoteRequestInput) {
     row("Time requirements", data.timeRequirements),
     row("Shipment type", data.shipmentType),
     row("Frequency", data.serviceFrequency),
-    row("Stop count", data.stopCount),
     row("Shipment size", data.shipmentSize),
     row("Temperature-sensitive", data.temperatureSensitive),
     row("Special handling", data.specialHandling),

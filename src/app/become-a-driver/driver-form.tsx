@@ -9,7 +9,7 @@ import { driverApplicationSchema, type DriverApplicationInput } from "@/lib/vali
 import { zodResolver } from "@hookform/resolvers/zod"
 import { ArrowLeft, ArrowRight, ShieldCheck } from "lucide-react"
 import { Controller, useForm } from "react-hook-form"
-import { useState } from "react"
+import { useEffect, useRef, useState } from "react"
 
 const STEP_FIELDS = [
   ['name', 'email', 'phone', 'location', 'vehicleType', 'vehicleYearMakeModel'],
@@ -34,6 +34,16 @@ export default function DriverForm() {
   const [step, setStep] = useState<1 | 2>(1)
   const [status, setStatus] = useState<'idle' | 'submitting' | 'success' | 'error'>('idle')
   const [errorMessage, setErrorMessage] = useState<string>('')
+  const cardRef = useRef<HTMLDivElement>(null)
+  const isFirstRender = useRef(true)
+
+  useEffect(() => {
+    if (isFirstRender.current) {
+      isFirstRender.current = false
+      return
+    }
+    cardRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+  }, [step])
 
   const {
     register,
@@ -101,7 +111,7 @@ export default function DriverForm() {
             description="Thanks for your interest. We've received your application and sent a confirmation to your email. We'll follow up if there's a fit."
           />
         ) : (
-          <div className="rounded-2xl border border-border bg-white shadow-sm p-6 md:p-8">
+          <div ref={cardRef} className="rounded-2xl border border-border bg-white shadow-sm p-6 md:p-8 scroll-mt-24">
             <div className="flex items-center gap-3 mb-6">
               <div className="flex-1 h-1 rounded-full bg-secondary overflow-hidden">
                 <div className="h-full bg-teal rounded-full transition-all duration-300" style={{ width: step === 1 ? '50%' : '100%' }} />

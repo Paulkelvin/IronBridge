@@ -10,12 +10,12 @@ import { quoteRequestSchema, type QuoteRequestInput } from "@/lib/validations"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { AlertTriangle, ArrowLeft, ArrowRight } from "lucide-react"
 import { Controller, useForm } from "react-hook-form"
-import { useState } from "react"
+import { useEffect, useRef, useState } from "react"
 
 const STEP_FIELDS = [
   ['name', 'company', 'email', 'phone'],
   ['pickupStreet', 'pickupCity', 'pickupState', 'pickupZip', 'deliveryStreet', 'deliveryCity', 'deliveryState', 'deliveryZip', 'serviceDate', 'timeRequirements'],
-  ['shipmentType', 'serviceFrequency', 'stopCount', 'shipmentSize', 'temperatureSensitive', 'specialHandling', 'stat', 'additionalInstructions'],
+  ['shipmentType', 'serviceFrequency', 'shipmentSize', 'temperatureSensitive', 'specialHandling', 'stat', 'additionalInstructions'],
 ] as const
 
 const STEP_TITLES = ['Contact Info', 'Shipment Route', 'Shipment Details'] as const
@@ -24,6 +24,16 @@ export default function QuoteForm() {
   const [step, setStep] = useState<1 | 2 | 3>(1)
   const [status, setStatus] = useState<'idle' | 'submitting' | 'success' | 'error'>('idle')
   const [errorMessage, setErrorMessage] = useState<string>('')
+  const cardRef = useRef<HTMLDivElement>(null)
+  const isFirstRender = useRef(true)
+
+  useEffect(() => {
+    if (isFirstRender.current) {
+      isFirstRender.current = false
+      return
+    }
+    cardRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+  }, [step])
 
   const {
     register,
@@ -38,7 +48,6 @@ export default function QuoteForm() {
     defaultValues: {
       company: '',
       timeRequirements: '',
-      stopCount: '',
       shipmentSize: '',
       additionalInstructions: '',
     },
@@ -93,7 +102,7 @@ export default function QuoteForm() {
             description="Thanks! We've received your request and sent a confirmation to your email. Our team will follow up shortly."
           />
         ) : (
-          <div className="rounded-2xl border border-border bg-white shadow-sm p-6 md:p-8">
+          <div ref={cardRef} className="rounded-2xl border border-border bg-white shadow-sm p-6 md:p-8 scroll-mt-24">
             <div className="flex items-center gap-3 mb-6">
               <div className="flex-1 h-1 rounded-full bg-secondary overflow-hidden">
                 <div className="h-full bg-teal rounded-full transition-all duration-300" style={{ width: `${(step / 3) * 100}%` }} />
@@ -171,15 +180,9 @@ export default function QuoteForm() {
                 </div>
               ) : (
                 <div className="space-y-6">
-                  <div className="grid grid-cols-1 sm:grid-cols-3 gap-5">
-                    <div>
-                      <Label htmlFor="stopCount">Number of Stops</Label>
-                      <Input id="stopCount" {...register('stopCount')} placeholder="e.g. 3" />
-                    </div>
-                    <div className="sm:col-span-2">
-                      <Label htmlFor="shipmentSize">Approximate Shipment Size / Weight</Label>
-                      <Input id="shipmentSize" {...register('shipmentSize')} placeholder="e.g. 2 coolers, ~15 lbs" />
-                    </div>
+                  <div>
+                    <Label htmlFor="shipmentSize">Approximate Shipment Size / Weight</Label>
+                    <Input id="shipmentSize" {...register('shipmentSize')} placeholder="e.g. 2 coolers, ~15 lbs" />
                   </div>
 
                   <div>

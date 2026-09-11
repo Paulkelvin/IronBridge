@@ -23,7 +23,6 @@ export const quoteRequestSchema = z.object({
   serviceFrequency: z.enum(["one-time", "recurring"], {
     error: "Select one-time or recurring",
   }),
-  stopCount: z.string().trim().max(20).optional().or(z.literal("")),
   shipmentSize: z.string().trim().max(200).optional().or(z.literal("")),
   temperatureSensitive: z.enum(["yes", "no"], { error: "Select yes or no" }),
   specialHandling: z.enum(["yes", "no"], { error: "Select yes or no" }),
