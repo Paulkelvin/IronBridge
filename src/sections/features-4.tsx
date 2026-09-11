@@ -1,11 +1,7 @@
-'use client'
-
 import SectionHeader from "@/components/section-header"
+import ServiceAreaExplorer from "@/components/service-area-explorer"
 import SlideEffect from "@/components/slide-effect"
 import { Button } from "@/components/ui/button"
-import { CardTitle } from "@/components/ui/card-text"
-import IconBadge from "@/components/ui/icon-badge"
-import { MapPin } from "lucide-react"
 import Link from "next/link"
 
 const settings = {
@@ -14,14 +10,17 @@ const settings = {
   description: 'Iron Bridge is based in the DMV and built to run daily throughout Maryland, Washington DC, and Northern Virginia.',
   regions: [
     {
+      id: 'maryland' as const,
       title: 'Maryland',
       cities: ['Baltimore', 'Bowie', 'Annapolis', 'Columbia', 'Silver Spring', 'Rockville', 'Bethesda', 'Hyattsville'],
     },
     {
+      id: 'dc' as const,
       title: 'Washington, DC',
       cities: ['Washington, DC'],
     },
     {
+      id: 'virginia' as const,
       title: 'Northern Virginia',
       cities: ['Arlington', 'Alexandria', 'Fairfax', 'Reston', 'Sterling', 'Ashburn'],
     },
@@ -35,27 +34,10 @@ const settings = {
 
 export default function Features4() {
   return (
-    <div id='service-area' className="space-y-8 md:space-y-10 lg:space-y-12 mx-auto text-center">
+    <div id='service-area' className="space-y-10 md:space-y-12 lg:space-y-14 mx-auto text-center">
       <SectionHeader eyebrow={settings.eyebrow} title={settings.title} description={settings.description} />
 
-      {/* Regions */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-        {settings.regions.map((region, i) => (
-          <SlideEffect key={region.title} direction="top" delay={0.1 * i} isSpring={false}>
-            <div className="rounded-2xl bg-secondary p-8 h-full text-left space-y-4">
-              <div className="flex items-center gap-2.5">
-                <IconBadge icon={MapPin} size={16} className="p-2 rounded-lg" />
-                <CardTitle className="text-lg">{region.title}</CardTitle>
-              </div>
-              <div className="flex flex-wrap gap-2">
-                {region.cities.map(city => (
-                  <span key={city} className="text-xs rounded-full border border-border px-3 py-1 text-foreground">{city}</span>
-                ))}
-              </div>
-            </div>
-          </SlideEffect>
-        ))}
-      </div>
+      <ServiceAreaExplorer regions={settings.regions} />
 
       <SlideEffect className="text-xs md:text-sm text-foreground/80 italic">{settings.note}</SlideEffect>
 
