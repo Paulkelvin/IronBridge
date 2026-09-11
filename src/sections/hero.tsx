@@ -54,7 +54,7 @@ export default function Hero() {
 
               {/* Headline + descriptor (tight to each other) */}
               <div className="space-y-1.5 md:space-y-2">
-                <h1 className="font-serif text-navy text-4xl md:text-6xl lg:text-hero font-semibold tracking-tight leading-[0.98]">
+                <h1 className="font-serif text-navy text-3xl md:text-5xl lg:text-4xl xl:text-5xl font-semibold tracking-tight leading-[0.98]">
                   <span className="block"><TextBlurEffect>{settings.headlineTop}</TextBlurEffect></span>
                   <span className="block"><TextBlurEffect>{settings.headlineBottom}</TextBlurEffect></span>
                 </h1>
