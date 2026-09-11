@@ -48,16 +48,27 @@ export default function ServiceAreaExplorer({
                 activeRegion === region.id ? "border-teal bg-teal-tint/50" : "border-border bg-transparent"
               )}
             >
-              <div className="flex items-center gap-2.5">
+              <button
+                type="button"
+                onClick={() => {
+                  setActiveCity(null)
+                  setActiveRegion(prev => prev === region.id ? null : region.id)
+                }}
+                className="flex items-center gap-2.5 cursor-pointer"
+              >
                 <IconBadge icon={MapPin} size={16} className="p-2 rounded-lg" />
                 <CardTitle className="text-lg">{region.title}</CardTitle>
-              </div>
+              </button>
               <div className="flex flex-wrap gap-2">
                 {region.cities.map(city => (
                   <button
                     key={city}
                     type="button"
-                    onClick={() => setActiveCity(prev => prev === city ? null : city)}
+                    onClick={(e) => {
+                      e.stopPropagation()
+                      setActiveRegion(region.id)
+                      setActiveCity(prev => prev === city ? null : city)
+                    }}
                     className={cn(
                       "text-xs rounded-full border px-3 py-1 transition-colors",
                       activeCity === city ? "border-teal bg-teal text-white" : "border-border text-foreground hover:border-teal/50"
