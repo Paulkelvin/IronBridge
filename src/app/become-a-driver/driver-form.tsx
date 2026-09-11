@@ -106,6 +106,8 @@ export default function DriverForm() {
           style={{
             backgroundImage:
               'radial-gradient(70% 90% at 90% 0%, rgba(18,130,98,0.08) 0%, transparent 65%), radial-gradient(70% 90% at 5% 100%, rgba(27,42,74,0.06) 0%, transparent 65%)',
+            WebkitMaskImage: 'linear-gradient(to bottom, black 0%, black 70%, transparent 100%)',
+            maskImage: 'linear-gradient(to bottom, black 0%, black 70%, transparent 100%)',
           }}
         >
           <RouteLine className="absolute inset-x-0 top-1/4 w-full h-[160px] md:h-[220px] text-navy/[0.07]" />
