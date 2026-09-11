@@ -11,10 +11,10 @@ export default function HomePage() {
   return (
     <div className="px-4 xl:px-0 max-w-7xl mx-auto space-y-24 sm:space-y-32 md:space-y-40 lg:space-y-56 scroll-smooth">
       <Hero />
+      <Features4 />
       <Features1 />
       <Features2 />
       <Features3 />
-      <Features4 />
       <CTA />
       <FAQ />
       <Footer />

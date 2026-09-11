@@ -32,9 +32,9 @@ export default function ServiceAreaPage() {
   return (
     <div className="px-4 xl:px-0 max-w-7xl mx-auto space-y-14 sm:space-y-16 md:space-y-20 scroll-smooth">
       <PageHeader
-        eyebrow="Where We Operate"
-        title="Service Area"
-        description="Iron Bridge is based in the DMV and built to run daily throughout Maryland, Washington DC, and Northern Virginia."
+        eyebrow="Service Area"
+        title="Do We Deliver to You?"
+        description="Find your city below. We run daily throughout Maryland, Washington DC, and Northern Virginia."
       />
 
       <ServiceAreaExplorer regions={regions} />

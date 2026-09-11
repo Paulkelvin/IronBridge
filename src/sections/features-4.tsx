@@ -5,9 +5,9 @@ import { Button } from "@/components/ui/button"
 import Link from "next/link"
 
 const settings = {
-  eyebrow: 'Where We Operate',
-  title: 'Service Area',
-  description: 'Iron Bridge is based in the DMV and built to run daily throughout Maryland, Washington DC, and Northern Virginia.',
+  eyebrow: 'Service Area',
+  title: 'Do We Deliver to You?',
+  description: 'Find your city below. We run daily throughout Maryland, Washington DC, and Northern Virginia.',
   regions: [
     {
       id: 'maryland' as const,

@@ -11,6 +11,7 @@ import { useEffect, useState } from "react"
 const settings = {
   navLinks: [
     { name: 'services', href: '/services' },
+    { name: 'service area', href: '/service-area' },
     { name: 'medical courier', href: '/medical-courier' },
     { name: 'dedicated routes', href: '/dedicated-routes' },
     { name: 'about', href: '/about' },
