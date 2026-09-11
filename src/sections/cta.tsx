@@ -21,7 +21,7 @@ const settings = {
 
 export default function CTA() {
   return (
-    <SlideEffect isSpring={false} className="relative overflow-hidden rounded-3xl bg-navy">
+    <SlideEffect isSpring={false} className="relative overflow-hidden bg-navy">
       {/* Decorative background */}
       <div
         className="absolute inset-0 -z-10 pointer-events-none"
