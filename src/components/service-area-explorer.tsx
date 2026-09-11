@@ -52,7 +52,7 @@ export default function ServiceAreaExplorer({
                 type="button"
                 onClick={() => {
                   setActiveCity(null)
-                  setActiveRegion(prev => prev === region.id ? null : region.id)
+                  setActiveRegion(region.id)
                 }}
                 className="flex items-center gap-2.5 cursor-pointer"
               >
