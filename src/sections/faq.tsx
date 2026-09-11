@@ -15,7 +15,11 @@ const settings = {
   faqs: [
     {
       question: 'What areas does Iron Bridge serve?',
-      answer: 'We operate throughout Maryland, Washington DC, and Northern Virginia, including Baltimore, Annapolis, Columbia, Silver Spring, Rockville, Bethesda, Arlington, Alexandria, Fairfax, and surrounding areas. Regional and Mid-Atlantic transportation may also be available depending on the assignment.',
+      answer: {
+        intro: 'We operate throughout Maryland, Washington DC, and Northern Virginia, including:',
+        cities: ['Baltimore', 'Annapolis', 'Columbia', 'Silver Spring', 'Rockville', 'Bethesda', 'Arlington', 'Alexandria', 'Fairfax'],
+        outro: 'Regional and Mid-Atlantic transportation may also be available depending on the assignment.',
+      },
     },
     {
       question: 'Are your drivers trained to handle medical specimens?',
@@ -47,11 +51,23 @@ export default function FAQ() {
 
       {/* Accordion */}
       <SlideEffect>
-        <Accordion type="single" collapsible className="max-w-2xl mx-auto text-base text-navy text-left">
+        <Accordion type="single" collapsible className="max-w-2xl mx-auto space-y-3 text-base text-navy text-left">
           {settings.faqs.map((faq, index) => (
             <AccordionItem key={index} value={index + '-item'}>
               <AccordionTrigger>{faq.question}</AccordionTrigger>
-              <AccordionContent className="text-foreground">{faq.answer}</AccordionContent>
+              <AccordionContent className="text-foreground">
+                {typeof faq.answer === 'string' ? faq.answer : (
+                  <>
+                    <p>{faq.answer.intro}</p>
+                    <div className="flex flex-wrap gap-2 mt-3">
+                      {faq.answer.cities.map(city => (
+                        <span key={city} className="text-xs rounded-full border border-border px-3 py-1">{city}</span>
+                      ))}
+                    </div>
+                    <p className="mt-3">{faq.answer.outro}</p>
+                  </>
+                )}
+              </AccordionContent>
             </AccordionItem>
           ))}
         </Accordion>
