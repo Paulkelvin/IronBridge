@@ -139,7 +139,7 @@ export default function QuoteForm() {
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
                     <div>
                       <Label required htmlFor="serviceDate">Requested Service Date</Label>
-                      <Input id="serviceDate" type="date" {...register('serviceDate')} aria-invalid={!!errors.serviceDate} aria-describedby={errors.serviceDate ? "serviceDate-error" : undefined} />
+                      <Input id="serviceDate" type="date" className="py-3 leading-normal" {...register('serviceDate')} aria-invalid={!!errors.serviceDate} aria-describedby={errors.serviceDate ? "serviceDate-error" : undefined} />
                       <FieldError id="serviceDate-error">{errors.serviceDate?.message}</FieldError>
                     </div>
                     <div>
