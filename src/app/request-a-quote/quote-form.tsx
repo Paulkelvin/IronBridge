@@ -102,7 +102,7 @@ export default function QuoteForm() {
             description="Thanks! We've received your request and sent a confirmation to your email. Our team will follow up shortly."
           />
         ) : (
-          <div ref={cardRef} className="rounded-2xl border border-border bg-white shadow-sm p-6 md:p-8 scroll-mt-24">
+          <div ref={cardRef} className="rounded-2xl border border-border bg-white shadow-sm p-6 md:p-8 scroll-mt-24 overflow-x-hidden">
             <div className="flex items-center gap-3 mb-6">
               <div className="flex-1 h-1 rounded-full bg-secondary overflow-hidden">
                 <div className="h-full bg-teal rounded-full transition-all duration-300" style={{ width: `${(step / 3) * 100}%` }} />
@@ -158,8 +158,8 @@ export default function QuoteForm() {
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
                     <div className="min-w-0">
                       <Label required htmlFor="serviceDate">Requested Service Date</Label>
-                      <div className="relative">
-                        <Input id="serviceDate" type="date" className="py-3 pr-10 leading-normal min-w-0 max-w-full" {...register('serviceDate')} aria-invalid={!!errors.serviceDate} aria-describedby={errors.serviceDate ? "serviceDate-error" : undefined} />
+                      <div className="relative overflow-hidden rounded-lg">
+                        <Input id="serviceDate" type="date" className="py-3 pr-10 leading-normal w-[1px] min-w-full box-border" {...register('serviceDate')} aria-invalid={!!errors.serviceDate} aria-describedby={errors.serviceDate ? "serviceDate-error" : undefined} />
                         <CalendarDays size={17} strokeWidth={1.5} className="pointer-events-none absolute right-3.5 top-1/2 -translate-y-1/2 text-teal" aria-hidden="true" />
                       </div>
                       <FieldError id="serviceDate-error">{errors.serviceDate?.message}</FieldError>
