@@ -8,7 +8,7 @@ import { FieldError, Input, Label, PhoneInput, PillGroup, Textarea } from "@/com
 import { FormError, FormSuccess } from "@/components/form-status"
 import { quoteRequestSchema, type QuoteRequestInput } from "@/lib/validations"
 import { zodResolver } from "@hookform/resolvers/zod"
-import { AlertTriangle, ArrowLeft, ArrowRight, CalendarDays, Facebook, Linkedin, Mail, Phone } from "lucide-react"
+import { AlertTriangle, ArrowLeft, ArrowRight, CalendarDays, Mail, Phone } from "lucide-react"
 import { Controller, useForm } from "react-hook-form"
 import { useEffect, useRef, useState } from "react"
 
@@ -300,14 +300,6 @@ export default function QuoteForm() {
             <a href="mailto:lbrent@ironbridgems.com" className="flex items-center gap-2 hover:text-navy transition-colors">
               <Mail size={16} strokeWidth={1.5} aria-hidden="true" />
               lbrent@ironbridgems.com
-            </a>
-          </div>
-          <div className="flex items-center justify-center gap-3">
-            <a href="#" aria-label="Iron Bridge on LinkedIn" className="flex items-center justify-center size-9 rounded-full border border-navy/20 text-navy/50 hover:text-navy hover:border-navy/40 transition-colors">
-              <Linkedin size={16} strokeWidth={1.5} aria-hidden="true" />
-            </a>
-            <a href="#" aria-label="Iron Bridge on Facebook" className="flex items-center justify-center size-9 rounded-full border border-navy/20 text-navy/50 hover:text-navy hover:border-navy/40 transition-colors">
-              <Facebook size={16} strokeWidth={1.5} aria-hidden="true" />
             </a>
           </div>
         </div>

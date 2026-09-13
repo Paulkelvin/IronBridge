@@ -30,11 +30,13 @@ export const metadata: Metadata = {
     siteName: "Iron Bridge Mobility Solutions",
     locale: "en_US",
     type: "website",
+    images: [{ url: "/og-image.png", width: 1200, height: 630, alt: "Iron Bridge Mobility Solutions — Medical Courier & Commercial Logistics" }],
   },
   twitter: {
-    card: "summary",
+    card: "summary_large_image",
     title,
     description,
+    images: ["/og-image.png"],
   },
   robots: {
     index: true,
