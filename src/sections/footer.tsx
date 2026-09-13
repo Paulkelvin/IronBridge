@@ -2,6 +2,7 @@
 
 import Logo from "@/components/logo"
 import { Button } from "@/components/ui/button"
+import { Clock, Mail, Phone } from "lucide-react"
 import Link from "next/link"
 
 const settings = {
@@ -55,10 +56,23 @@ export default function Footer() {
           ))}
         </div>
 
-        {/* CTA */}
+        {/* Contact */}
         <div className="flex flex-col gap-3 items-start md:items-end">
-          <span className="text-xs font-medium tracking-[0.12em] uppercase text-navy">Get Started</span>
-          <Link href="/request-a-quote">
+          <span className="text-xs font-medium tracking-[0.12em] uppercase text-navy">Contact</span>
+          <a href="tel:+13018181929" className="flex items-center gap-2 text-foreground/80 hover:text-navy transition-colors">
+            <Phone size={14} strokeWidth={1.5} aria-hidden="true" />
+            (301) 818-1929
+          </a>
+          <a href="mailto:lbrent@ironbridgems.com" className="flex items-center gap-2 text-foreground/80 hover:text-navy transition-colors">
+            <Mail size={14} strokeWidth={1.5} aria-hidden="true" />
+            lbrent@ironbridgems.com
+          </a>
+          <span className="flex items-center gap-2 text-foreground/80">
+            <Clock size={14} strokeWidth={1.5} aria-hidden="true" />
+            24/7 Availability
+          </span>
+          <p className="text-xs text-foreground/60">Business inquiries: same-day response</p>
+          <Link href="/request-a-quote" className="mt-1">
             <Button
               size='default'
               className="rounded-md bg-navy text-white border border-navy/80 text-sm font-medium px-6 hover:bg-transparent hover:text-navy transition-colors"

@@ -293,14 +293,14 @@ export default function QuoteForm() {
         <div className="rounded-2xl border border-border bg-secondary/40 p-6 text-center space-y-4">
           <h3 className="font-serif text-lg text-navy">Prefer to Talk to Someone?</h3>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4 text-sm text-foreground/70">
-            <span className="flex items-center gap-2">
+            <a href="tel:+13018181929" className="flex items-center gap-2 hover:text-navy transition-colors">
               <Phone size={16} strokeWidth={1.5} aria-hidden="true" />
-              Phone number coming soon
-            </span>
-            <span className="flex items-center gap-2">
+              (301) 818-1929
+            </a>
+            <a href="mailto:lbrent@ironbridgems.com" className="flex items-center gap-2 hover:text-navy transition-colors">
               <Mail size={16} strokeWidth={1.5} aria-hidden="true" />
-              Email coming soon
-            </span>
+              lbrent@ironbridgems.com
+            </a>
           </div>
           <div className="flex items-center justify-center gap-3">
             <a href="#" aria-label="Iron Bridge on LinkedIn" className="flex items-center justify-center size-9 rounded-full border border-navy/20 text-navy/50 hover:text-navy hover:border-navy/40 transition-colors">
