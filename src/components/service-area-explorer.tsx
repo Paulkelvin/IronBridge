@@ -45,22 +45,19 @@ export default function ServiceAreaExplorer({
             <div
               onMouseEnter={() => setHoveredRegion(region.id)}
               onMouseLeave={() => setHoveredRegion(null)}
+              onClick={() => {
+                setSelectedCity(null)
+                setSelectedRegion(region.id)
+              }}
               className={cn(
-                "rounded-2xl border p-6 md:p-7 space-y-3 transition-colors duration-300",
+                "rounded-2xl border p-6 md:p-7 space-y-3 transition-colors duration-300 cursor-pointer",
                 displayRegion === region.id ? "border-teal bg-teal-tint/50" : "border-border bg-transparent"
               )}
             >
-              <button
-                type="button"
-                onClick={() => {
-                  setSelectedCity(null)
-                  setSelectedRegion(region.id)
-                }}
-                className="flex items-center gap-2.5 cursor-pointer"
-              >
+              <div className="flex items-center gap-2.5">
                 <IconBadge icon={MapPin} size={16} className="p-2 rounded-lg" />
                 <CardTitle className="text-lg">{region.title}</CardTitle>
-              </button>
+              </div>
               <div className="flex flex-wrap gap-2">
                 {region.cities.map(city => (
                   <button
