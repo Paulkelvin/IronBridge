@@ -111,11 +111,13 @@ function cityBounds(city: City) {
 
 export default function ServiceAreaMapGoogle({
   activeRegion,
+  mapRegion,
   activeCityName,
   onRegionHover,
   className,
 }: {
   activeRegion: RegionId | null
+  mapRegion?: RegionId | null
   activeCityName?: string | null
   onRegionHover?: (region: RegionId | null) => void
   className?: string
@@ -297,19 +299,22 @@ export default function ServiceAreaMapGoogle({
     activeRegionRef.current = activeRegion
     activeCityRef.current = activeCityName
     renderLayersRef.current()
+  }, [activeRegion, activeCityName])
 
+  const fitRegion = mapRegion ?? activeRegion
+  useEffect(() => {
     const map = mapRef.current
     if (!map) return
 
     const city = CITIES.find((c) => c.name === activeCityName)
     if (city) {
       map.fitBounds(cityBounds(city), 80)
-    } else if (activeRegion) {
-      map.fitBounds(regionBounds(activeRegion), 70)
+    } else if (fitRegion) {
+      map.fitBounds(regionBounds(fitRegion), 70)
     } else {
       map.fitBounds(allCityBounds(), 56)
     }
-  }, [activeRegion, activeCityName])
+  }, [fitRegion, activeCityName])
 
   return (
     <div className={cn("relative overflow-hidden rounded-2xl border border-border bg-secondary", className)}>
