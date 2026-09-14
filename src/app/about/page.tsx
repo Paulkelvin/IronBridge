@@ -6,6 +6,7 @@ import PageHeader from "@/components/page-header"
 import SectionHeader from "@/components/section-header"
 import SlideEffect from "@/components/slide-effect"
 import TimelineSteps from "@/components/timeline-steps"
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion"
 import { CardBody, CardTitle } from "@/components/ui/card-text"
 import IconBadge from "@/components/ui/icon-badge"
 import { Handshake, Link2, MessageCircle, PackageCheck, Quote, ShieldCheck, Sparkles, UserCheck } from "lucide-react"
@@ -29,6 +30,16 @@ const milestones = [
   { title: 'Logistics Roots', content: 'Founder Lareon Brent began building a logistics and transportation business in 2018, with experience in transportation, public service, logistics, and operations.' },
   { title: 'Renamed Iron Bridge', content: 'In 2026, the company was renamed Iron Bridge Mobility Solutions — a name chosen to reflect the strength and connection at the center of the business.' },
   { title: 'Serving the Region Today', content: 'Now operating throughout Maryland, Washington DC, and Northern Virginia, with a commitment to serving clients throughout the region and beyond.' },
+]
+
+const fullStory = [
+  'Iron Bridge Mobility Solutions was founded on a simple but powerful belief: when people and businesses depend on something important arriving safely and on time, they deserve a transportation partner they can trust.',
+  'Founder Lareon Brent recognized that transportation is about more than moving packages from one location to another. It is about keeping promises, protecting what matters, and connecting people to the services and resources they depend on. With experience in transportation, public service, logistics, and operations, he saw an opportunity to build a company where reliability, accountability, and personal service would never be compromised.',
+  'The name Iron Bridge represents the character of the company. Iron symbolizes strength, resilience, and dependability. A bridge represents connection — bringing together businesses, healthcare providers, organizations, and the communities they serve. Together, those ideas express our purpose: to provide a strong and dependable connection between every pickup and every destination.',
+  'What began with one vehicle, a determined vision, and a commitment to creating a better future is being built into a trusted transportation company capable of serving clients throughout Maryland, Washington, D.C., Virginia, and beyond.',
+  'Iron Bridge Mobility Solutions approaches every assignment with professionalism and care. Whether transporting time-sensitive medical specimens, business materials, essential supplies, or other important deliveries, we understand that every shipment represents someone’s trust, reputation, and responsibility.',
+  'We are not simply building a courier company. We are building a legacy — one founded on faith, strengthened by perseverance, and measured by the quality of service we provide.',
+  'At Iron Bridge Mobility Solutions, we do more than deliver. We carry responsibility. We connect communities. We bridge the distance with strength.',
 ]
 
 export default function AboutPage() {
@@ -117,6 +128,20 @@ export default function AboutPage() {
           <p className="font-semibold text-navy">Lareon Brent</p>
           <p className="text-sm text-foreground/60">Founder, Iron Bridge Mobility Solutions</p>
         </div>
+      </SlideEffect>
+
+      {/* Full founding story, expandable */}
+      <SlideEffect isSpring={false} className="max-w-3xl mx-auto">
+        <Accordion type="single" collapsible className="text-navy text-left">
+          <AccordionItem value="full-story">
+            <AccordionTrigger className="justify-center gap-2 text-center text-base">Read Our Full Founding Story</AccordionTrigger>
+            <AccordionContent className="text-foreground space-y-4">
+              {fullStory.map((paragraph, i) => (
+                <p key={i} className="text-sm md:text-base leading-relaxed">{paragraph}</p>
+              ))}
+            </AccordionContent>
+          </AccordionItem>
+        </Accordion>
       </SlideEffect>
 
       <div className="space-y-8 md:space-y-10">
