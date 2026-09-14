@@ -5,26 +5,40 @@ import SectionHeader from "@/components/section-header"
 import SlideEffect from "@/components/slide-effect"
 import { Quote, Star } from "lucide-react"
 
-// Placeholder testimonials — replace with real client quotes.
 const settings = {
-  eyebrow: 'What Clients Say',
-  title: 'Trusted by Healthcare & Commercial Partners',
-  description: 'A few words from the organizations we deliver for, day in and day out.',
+  eyebrow: 'Testimonials',
+  title: 'What Our Customers Say',
+  description: 'A few words from the organizations and customers we deliver for, day in and day out.',
   testimonials: [
     {
-      quote: 'Iron Bridge has been rock-solid for our specimen transport. Pickups are on time, chain-of-custody is documented every time, and their team communicates proactively if anything changes.',
-      name: 'Sarah M.',
-      role: 'Lab Operations Manager',
+      quote: 'From pickup through delivery, Iron Bridge kept our team informed and handled everything professionally. Their attention to detail gave us confidence that our time-sensitive materials were in dependable hands.',
+      role: 'Medical Office Manager',
+      location: 'Baltimore, MD',
     },
     {
-      quote: 'We switched our commercial routes to Iron Bridge and haven’t looked back. Reliable drivers, clear communication, and they treat our deliveries like their own business depends on it.',
-      name: 'David R.',
-      role: 'Operations Director',
+      quote: 'Iron Bridge arrived when promised, treated our shipment carefully, and provided confirmation as soon as the delivery was completed. The entire process was smooth and professional.',
+      role: 'Small-Business Owner',
+      location: 'Ashburn, VA',
     },
     {
-      quote: 'Same-day requests are handled without hassle, even on short notice. It’s the kind of dependability that makes them an easy partner to work with.',
-      name: 'Angela T.',
-      role: 'Practice Manager',
+      quote: 'Our customer needed an important order delivered quickly, and Iron Bridge helped us keep our promise. Their communication and professionalism reflected positively on our business.',
+      role: 'Retail Manager',
+      location: 'Landover, MD',
+    },
+    {
+      quote: 'The bulk-item removal crew was courteous, organized, and respectful of our property. They removed everything safely and left the area clean. The service made a difficult job much easier for our family.',
+      role: 'Residential Customer',
+      location: 'Rockville, MD',
+    },
+    {
+      quote: 'What impressed me most was the communication. I always knew the status of my delivery and never had to wonder whether it had arrived. Iron Bridge provided the kind of dependable service every customer deserves.',
+      role: 'Last-Mile Delivery Customer',
+      location: 'Annapolis, MD',
+    },
+    {
+      quote: 'Iron Bridge treated our request with urgency without sacrificing care or professionalism. They provided a reliable solution when we needed one and made us feel like our business truly mattered.',
+      role: 'Commercial Client',
+      location: 'Rockville, MD',
     },
   ],
 }
@@ -34,9 +48,9 @@ export default function Testimonials() {
     <div className="space-y-8 md:space-y-10 lg:space-y-12 mx-auto text-center">
       <SectionHeader eyebrow={settings.eyebrow} title={settings.title} description={settings.description} />
 
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
         {settings.testimonials.map((t, i) => (
-          <SlideEffect key={t.name} direction="top" delay={0.1 * i} className="col-span-1 h-full" isSpring={false}>
+          <SlideEffect key={t.role + t.location} direction="top" delay={0.06 * i} className="col-span-1 h-full" isSpring={false}>
             <Card>
               <div className="flex items-center justify-between w-full">
                 <Quote size={28} strokeWidth={1.5} className="text-teal/50" aria-hidden="true" />
@@ -48,15 +62,13 @@ export default function Testimonials() {
               </div>
               <CardBody quote={t.quote} />
               <div>
-                <p className="font-semibold text-navy">{t.name}</p>
-                <p className="text-xs md:text-sm text-foreground/60">{t.role}</p>
+                <p className="font-semibold text-navy">{t.role}</p>
+                <p className="text-xs md:text-sm text-foreground/60">{t.location}</p>
               </div>
             </Card>
           </SlideEffect>
         ))}
       </div>
-
-      <p className="text-xs text-foreground/50 italic">Representative testimonials shown while we collect client reviews.</p>
     </div>
   )
 }
