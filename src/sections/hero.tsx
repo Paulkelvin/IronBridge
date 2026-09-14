@@ -3,9 +3,11 @@
 import SlideEffect from "@/components/slide-effect";
 import TextBlurEffect from "@/components/text-blur-effect";
 import { Button } from "@/components/ui/button";
-import { ArrowRight } from "lucide-react";
+import { useLenis } from "lenis/react";
+import { ArrowRight, ChevronDown } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
+import { useRef } from "react";
 
 const settings = {
   region: 'Maryland · Washington, DC · Northern Virginia',
@@ -24,8 +26,24 @@ const settings = {
 }
 
 export default function Hero() {
+  const heroRef = useRef<HTMLDivElement>(null)
+  const lenis = useLenis()
+
+  const scrollToNext = () => {
+    const el = heroRef.current
+    if (!el) return
+    // Header height (72px) is fixed/overlaying, so subtract it from the
+    // hero's document-relative bottom to land the next section right below it.
+    const target = el.getBoundingClientRect().bottom + window.scrollY - 72
+    if (lenis) lenis.scrollTo(target, { duration: 1.2 })
+    else window.scrollTo({ top: target, behavior: 'smooth' })
+  }
+
   return (
-    <div className="relative left-1/2 w-screen -translate-x-1/2">
+    <div
+      ref={heroRef}
+      className="relative left-1/2 w-screen -translate-x-1/2 lg:min-h-[calc(100vh-72px)] lg:flex lg:flex-col"
+    >
       {/* Background image */}
       <div className="absolute inset-0 -z-20">
         <Image
@@ -46,8 +64,8 @@ export default function Hero() {
         }}
       />
 
-      <section className="relative overflow-hidden px-4 xl:px-0 max-w-7xl mx-auto pt-12 pb-24 md:pt-20 md:pb-32 lg:pt-24 lg:pb-36">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-12 items-center xl:px-6">
+      <section className="relative overflow-hidden px-4 xl:px-0 max-w-7xl mx-auto pt-12 pb-24 md:pt-20 md:pb-32 lg:py-16 lg:flex-1 lg:flex lg:items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-12 items-center xl:px-6 w-full">
           {/* Left: text content */}
           <div className="flex flex-col gap-6 lg:gap-8 items-center lg:items-start text-center lg:text-left">
             <SlideEffect>
@@ -107,7 +125,7 @@ export default function Hero() {
           <SlideEffect
             direction="left"
             isSpring={false}
-            className="relative w-full max-w-[22rem] mx-auto lg:max-w-[30rem] aspect-[1000/775]"
+            className="relative w-full max-w-[22rem] mx-auto lg:max-w-[38rem] xl:max-w-[44rem] aspect-[784/735]"
           >
             {/* Soft light glow so the white van reads clearly against the dark background */}
             <div
@@ -125,6 +143,16 @@ export default function Hero() {
           </SlideEffect>
         </div>
       </section>
+
+      <button
+        type="button"
+        onClick={scrollToNext}
+        aria-label="Scroll to next section"
+        className="hidden lg:flex absolute bottom-6 left-1/2 -translate-x-1/2 flex-col items-center gap-1.5 text-white/60 hover:text-white/90 transition-colors cursor-pointer"
+      >
+        <span className="text-[10px] font-medium tracking-[0.14em] uppercase">Scroll</span>
+        <ChevronDown size={18} strokeWidth={1.5} className="animate-bounce" aria-hidden="true" />
+      </button>
     </div>
   )
 }
