@@ -28,17 +28,17 @@ const values = [
 
 const milestones = [
   { title: 'Logistics Roots', content: 'Founder Lareon Brent began building a logistics and transportation business in 2018, with experience in transportation, public service, logistics, and operations.' },
-  { title: 'Renamed Iron Bridge', content: 'In 2026, the company was renamed Iron Bridge Mobility Solutions — a name chosen to reflect the strength and connection at the center of the business.' },
+  { title: 'Renamed Iron Bridge', content: 'In 2026, the company was renamed Iron Bridge Mobility Solutions, a name chosen to reflect the strength and connection at the center of the business.' },
   { title: 'Serving the Region Today', content: 'Now operating throughout Maryland, Washington DC, and Northern Virginia, with a commitment to serving clients throughout the region and beyond.' },
 ]
 
 const fullStory = [
   'Iron Bridge Mobility Solutions was founded on a simple but powerful belief: when people and businesses depend on something important arriving safely and on time, they deserve a transportation partner they can trust.',
   'Founder Lareon Brent recognized that transportation is about more than moving packages from one location to another. It is about keeping promises, protecting what matters, and connecting people to the services and resources they depend on. With experience in transportation, public service, logistics, and operations, he saw an opportunity to build a company where reliability, accountability, and personal service would never be compromised.',
-  'The name Iron Bridge represents the character of the company. Iron symbolizes strength, resilience, and dependability. A bridge represents connection — bringing together businesses, healthcare providers, organizations, and the communities they serve. Together, those ideas express our purpose: to provide a strong and dependable connection between every pickup and every destination.',
+  'The name Iron Bridge represents the character of the company. Iron symbolizes strength, resilience, and dependability. A bridge represents connection, bringing together businesses, healthcare providers, organizations, and the communities they serve. Together, those ideas express our purpose: to provide a strong and dependable connection between every pickup and every destination.',
   'What began with one vehicle, a determined vision, and a commitment to creating a better future is being built into a trusted transportation company capable of serving clients throughout Maryland, Washington, D.C., Virginia, and beyond.',
   'Iron Bridge Mobility Solutions approaches every assignment with professionalism and care. Whether transporting time-sensitive medical specimens, business materials, essential supplies, or other important deliveries, we understand that every shipment represents someone’s trust, reputation, and responsibility.',
-  'We are not simply building a courier company. We are building a legacy — one founded on faith, strengthened by perseverance, and measured by the quality of service we provide.',
+  'We are not simply building a courier company. We are building a legacy, one founded on faith, strengthened by perseverance, and measured by the quality of service we provide.',
   'At Iron Bridge Mobility Solutions, we do more than deliver. We carry responsibility. We connect communities. We bridge the distance with strength.',
 ]
 
@@ -94,12 +94,12 @@ export default function AboutPage() {
           <SlideEffect direction="right" isSpring={false} className="space-y-3 rounded-2xl border border-border bg-secondary/40 p-6 md:p-8">
             <IconBadge icon={ShieldCheck} size={24} />
             <CardTitle className="text-lg">Iron</CardTitle>
-            <CardBody className="text-sm md:text-base">Symbolizes strength, resilience, and dependability — the standard every route is held to.</CardBody>
+            <CardBody className="text-sm md:text-base">Symbolizes strength, resilience, and dependability: the standard every route is held to.</CardBody>
           </SlideEffect>
           <SlideEffect direction="left" isSpring={false} className="space-y-3 rounded-2xl border border-border bg-secondary/40 p-6 md:p-8">
             <IconBadge icon={Link2} size={24} />
             <CardTitle className="text-lg">Bridge</CardTitle>
-            <CardBody className="text-sm md:text-base">Represents connection — bringing together businesses, healthcare providers, organizations, and the communities they serve.</CardBody>
+            <CardBody className="text-sm md:text-base">Represents connection, bringing together businesses, healthcare providers, organizations, and the communities they serve.</CardBody>
           </SlideEffect>
         </div>
         <SlideEffect isSpring={false}>
@@ -120,7 +120,7 @@ export default function AboutPage() {
       <SlideEffect isSpring={false} className="max-w-3xl mx-auto text-center space-y-5">
         <Quote size={32} strokeWidth={1.5} className="text-teal/50 mx-auto" aria-hidden="true" />
         <p className="font-serif text-lg md:text-2xl text-navy leading-snug">
-          &ldquo;We are not simply building a courier company. We are building a legacy —
+          &ldquo;We are not simply building a courier company. We are building a legacy,
           one founded on faith, strengthened by perseverance, and measured by the quality
           of service we provide.&rdquo;
         </p>
