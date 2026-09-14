@@ -148,20 +148,22 @@ export default function DriverForm() {
                 <DotGrid id="driver-hero-dots-bl" className="absolute -bottom-3 -left-3 w-16 h-16 md:w-20 md:h-20 text-navy/25" />
               </div>
 
+              {/* The photo itself fades to transparent toward the van's
+                  rear, so the backdrop blob's teal shows through and the
+                  image reads as dissolving into the background rather than
+                  something opaque sitting on top of it. The driver and
+                  bonnet stay fully solid. */}
               <Image
                 src="/brand/become-a-driver-hero.png"
                 alt="Driver joining the Iron Bridge team beside a delivery van"
                 fill
                 className="object-contain object-left"
+                style={{
+                  WebkitMaskImage: 'linear-gradient(to right, black 0%, black 55%, transparent 90%)',
+                  maskImage: 'linear-gradient(to right, black 0%, black 55%, transparent 90%)',
+                }}
                 priority
               />
-
-              {/* The same backdrop blob, repeated in front on the van side,
-                  so the page's own background shape covers that part of the
-                  photo instead of a separate crop/mask doing it. */}
-              <div className="absolute -left-10 md:-left-14 -top-4 -bottom-8 w-3/5 z-10 pointer-events-none" aria-hidden="true">
-                <BlobShape className="w-full h-full text-teal-tint" />
-              </div>
             </SlideEffect>
           </div>
         </section>
