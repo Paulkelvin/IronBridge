@@ -48,7 +48,8 @@ const settings = {
       caption: "Delivered like it's for our own family",
     },
   ],
-  // Shown only inside the full gallery, not in the staggered teaser.
+  // Reachable via the "See More" badge and by sliding past the last
+  // featured photo; not shown in the staggered teaser itself.
   morePhotos: [
     {
       src: '/brand/gallery-bulk-dresser.jpg',
@@ -80,7 +81,6 @@ const settings = {
 const allPhotos = [...settings.photos, ...settings.morePhotos]
 
 export default function Gallery() {
-  const [isOpen, setIsOpen] = useState(false)
   const [activeIndex, setActiveIndex] = useState<number | null>(null)
   const touchStartX = useRef<number | null>(null)
 
@@ -88,20 +88,11 @@ export default function Gallery() {
   const showNext = () => setActiveIndex((i) => (i === null ? null : (i + 1) % allPhotos.length))
 
   useEffect(() => {
-    if (!isOpen) setActiveIndex(null)
-  }, [isOpen])
-
-  useEffect(() => {
-    if (!isOpen) return
+    if (activeIndex === null) return
     const onKeyDown = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') {
-        if (activeIndex !== null) setActiveIndex(null)
-        else setIsOpen(false)
-      } else if (e.key === 'ArrowRight' && activeIndex !== null) {
-        showNext()
-      } else if (e.key === 'ArrowLeft' && activeIndex !== null) {
-        showPrev()
-      }
+      if (e.key === 'Escape') setActiveIndex(null)
+      else if (e.key === 'ArrowRight') showNext()
+      else if (e.key === 'ArrowLeft') showPrev()
     }
     window.addEventListener('keydown', onKeyDown)
     document.body.style.overflow = 'hidden'
@@ -109,7 +100,7 @@ export default function Gallery() {
       window.removeEventListener('keydown', onKeyDown)
       document.body.style.overflow = ''
     }
-  }, [isOpen, activeIndex])
+  }, [activeIndex])
 
   const handleTouchStart = (e: React.TouchEvent) => {
     touchStartX.current = e.touches[0]?.clientX ?? null
@@ -133,7 +124,6 @@ export default function Gallery() {
         {settings.photos.map((photo, i) => {
           const isLast = i === settings.photos.length - 1
           const hasMore = isLast && settings.morePhotos.length > 0
-          const Wrapper = hasMore ? 'button' : 'div'
 
           return (
             <SlideEffect
@@ -145,17 +135,12 @@ export default function Gallery() {
             >
               {/* Rotation lives on this inner div, not the motion wrapper, so it
                   doesn't fight framer-motion's own inline transform. */}
-              <Wrapper
-                type={hasMore ? 'button' : undefined}
-                onClick={hasMore ? () => setIsOpen(true) : undefined}
-                aria-label={hasMore ? `See ${settings.morePhotos.length} more photos` : undefined}
-                className={`group relative block w-full h-full rounded-2xl overflow-hidden shadow-lg text-left ${photo.rotate} ${hasMore ? 'cursor-pointer' : ''}`}
-              >
+              <div className={`group relative w-full h-full rounded-2xl overflow-hidden shadow-lg ${photo.rotate}`}>
                 <Image
                   src={photo.src}
                   alt={photo.alt}
                   fill
-                  className={`object-cover ${hasMore ? 'transition-transform duration-300 group-hover:scale-105' : ''}`}
+                  className="object-cover transition-transform duration-300 group-hover:scale-105"
                   sizes="(min-width: 768px) 45vw, 88vw"
                 />
                 {/* Bottom scrim: only the caption area darkens, the photo stays bright */}
@@ -164,77 +149,38 @@ export default function Gallery() {
                   style={{ background: 'linear-gradient(to top, rgba(16,26,48,0.92) 0%, rgba(16,26,48,0.78) 45%, rgba(16,26,48,0.35) 72%, transparent 100%)' }}
                   aria-hidden="true"
                 />
-                <div className="absolute inset-x-0 bottom-0 p-4 md:p-5">
+                <div className="absolute inset-x-0 bottom-0 p-4 md:p-5 pointer-events-none">
                   <span className="block text-[10px] md:text-[11px] font-semibold tracking-[0.08em] md:tracking-[0.1em] uppercase text-teal-light">{photo.kicker}</span>
                   <span className="block text-white text-sm md:text-lg font-semibold leading-snug mt-1 md:mt-0.5">{photo.caption}</span>
                 </div>
 
+                {/* Covers the whole card; the "more" badge below sits on top of it
+                    and, being later in DOM order, wins clicks in its own corner. */}
+                <button
+                  type="button"
+                  onClick={() => setActiveIndex(i)}
+                  aria-label={`View larger: ${photo.caption}`}
+                  className="absolute inset-0 cursor-pointer"
+                />
+
                 {hasMore && (
-                  <span className="absolute top-3 right-3 md:top-4 md:right-4 flex items-center gap-1.5 rounded-full bg-navy-dark/60 group-hover:bg-navy-dark/80 backdrop-blur-sm px-3 py-1.5 text-white text-xs font-medium transition-colors">
+                  <button
+                    type="button"
+                    onClick={() => setActiveIndex(settings.photos.length)}
+                    aria-label={`See ${settings.morePhotos.length} more photos`}
+                    className="absolute top-3 right-3 md:top-4 md:right-4 flex items-center gap-1.5 rounded-full bg-navy-dark/60 hover:bg-navy-dark/80 backdrop-blur-sm px-3 py-1.5 text-white text-xs font-medium transition-colors cursor-pointer"
+                  >
                     <Images size={13} strokeWidth={1.5} aria-hidden="true" />
                     See {settings.morePhotos.length} More Photos
-                  </span>
+                  </button>
                 )}
-              </Wrapper>
+              </div>
             </SlideEffect>
           )
         })}
       </div>
 
-      {isOpen && (
-        <div
-          className="fixed inset-0 z-50 flex items-center justify-center bg-navy-dark/90 backdrop-blur-sm p-4"
-          onClick={() => setIsOpen(false)}
-          role="dialog"
-          aria-modal="true"
-          aria-label="Iron Bridge photo gallery"
-        >
-          <div
-            className="relative w-full max-w-5xl max-h-[85vh] overflow-y-auto rounded-2xl bg-white p-5 md:p-8 text-left"
-            onClick={(e) => e.stopPropagation()}
-          >
-            <div className="flex items-center justify-between mb-6">
-              <h3 className="font-serif text-xl md:text-2xl text-navy font-semibold">Dependability in Action</h3>
-              <button
-                type="button"
-                onClick={() => setIsOpen(false)}
-                aria-label="Close gallery"
-                className="flex items-center justify-center size-9 rounded-full border border-border text-navy/70 hover:text-navy hover:border-navy/40 transition-colors cursor-pointer"
-              >
-                <X size={18} strokeWidth={1.5} />
-              </button>
-            </div>
-
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
-              {allPhotos.map((photo, idx) => (
-                <button
-                  key={photo.src}
-                  type="button"
-                  onClick={() => setActiveIndex(idx)}
-                  aria-label={`View larger: ${photo.caption}`}
-                  className="group space-y-2 text-left cursor-pointer"
-                >
-                  <div className="relative aspect-[4/3] rounded-xl overflow-hidden">
-                    <Image
-                      src={photo.src}
-                      alt={photo.alt}
-                      fill
-                      className="object-cover transition-transform duration-300 group-hover:scale-105"
-                      sizes="(min-width: 1024px) 30vw, (min-width: 640px) 45vw, 90vw"
-                    />
-                  </div>
-                  <div>
-                    <p className="text-[11px] font-semibold tracking-[0.08em] uppercase text-teal">{photo.kicker}</p>
-                    <p className="text-sm text-foreground/80">{photo.caption}</p>
-                  </div>
-                </button>
-              ))}
-            </div>
-          </div>
-        </div>
-      )}
-
-      {isOpen && activeIndex !== null && (
+      {activeIndex !== null && (
         <div
           className="fixed inset-0 z-[60] flex items-center justify-center bg-navy-dark/95 p-4"
           onClick={() => setActiveIndex(null)}
