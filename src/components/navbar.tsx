@@ -3,17 +3,33 @@
 import Logo from "./logo"
 import Link from "next/link"
 import { Button } from "./ui/button"
-import { AlignJustify, X } from "lucide-react"
+import { AlignJustify, ChevronDown, X } from "lucide-react"
 import { AnimatePresence } from 'motion/react'
 import * as motion from "motion/react-m"
+import * as NavigationMenu from "@radix-ui/react-navigation-menu"
 import { useEffect, useState } from "react"
 
 const settings = {
+  services: {
+    name: 'services',
+    href: '/services',
+    items: [
+      { name: 'Medical Courier', href: '/medical-courier', description: 'Specimen transport, cold-packed and STAT shipments.' },
+      { name: 'Commercial Logistics', href: '/commercial-logistics', description: 'Cargo van, same-day, and multi-stop delivery.' },
+      { name: 'Dedicated Routes', href: '/dedicated-routes', description: 'Consistent daily, weekly, or recurring coverage.' },
+    ],
+  },
   navLinks: [
-    { name: 'services', href: '/services' },
     { name: 'service area', href: '/service-area' },
+    { name: 'about', href: '/about' },
+    { name: 'become a driver', href: '/become-a-driver' },
+  ],
+  mobileLinks: [
+    { name: 'services', href: '/services' },
     { name: 'medical courier', href: '/medical-courier' },
+    { name: 'commercial logistics', href: '/commercial-logistics' },
     { name: 'dedicated routes', href: '/dedicated-routes' },
+    { name: 'service area', href: '/service-area' },
     { name: 'about', href: '/about' },
     { name: 'become a driver', href: '/become-a-driver' },
   ],
@@ -47,16 +63,48 @@ export default function Navbar() {
       </Link>
 
       {/* desktop menu */}
-      <div className="items-center justify-center gap-5 hidden lg:flex">
+      <div className="items-center justify-center gap-6 hidden lg:flex">
 
         {/* Nav Links */}
-        <ul className="flex items-center justify-center gap-5 text-black font-medium select-none text-link">
-          {settings.navLinks.map(link => (
-            <li key={link.name}>
-              <Link href={link.href} title={link.name} className="hover:opacity-80 transition-all capitalize">{link.name}</Link>
-            </li>
-          ))}
-        </ul>
+        <NavigationMenu.Root delayDuration={80} className="relative">
+          <NavigationMenu.List className="flex items-center justify-center gap-6 text-black font-medium select-none text-link">
+            <NavigationMenu.Item>
+              <NavigationMenu.Trigger className="group flex items-center gap-1 hover:opacity-80 transition-all capitalize cursor-pointer outline-none">
+                {settings.services.name}
+                <ChevronDown size={14} strokeWidth={2} className="text-teal transition-transform duration-200 group-data-[state=open]:rotate-180" aria-hidden="true" />
+              </NavigationMenu.Trigger>
+              <NavigationMenu.Content className="absolute top-full left-1/2 -translate-x-1/2 pt-3 data-[motion=from-start]:animate-in data-[motion=from-end]:animate-in data-[motion=to-start]:animate-out data-[motion=to-end]:animate-out data-[motion=from-start]:fade-in data-[motion=from-end]:fade-in data-[motion=to-start]:fade-out data-[motion=to-end]:fade-out data-[motion=from-start]:slide-in-from-top-1 data-[motion=from-end]:slide-in-from-top-1 duration-150">
+                <ul className="w-72 rounded-xl border border-border bg-white shadow-lg p-2">
+                  {settings.services.items.map(item => (
+                    <li key={item.name}>
+                      <NavigationMenu.Link asChild>
+                        <Link href={item.href} className="block rounded-lg px-3.5 py-2.5 hover:bg-secondary transition-colors">
+                          <span className="block text-sm font-semibold text-navy normal-case">{item.name}</span>
+                          <span className="block text-xs text-foreground/60 normal-case mt-0.5">{item.description}</span>
+                        </Link>
+                      </NavigationMenu.Link>
+                    </li>
+                  ))}
+                  <li className="border-t border-border mt-1 pt-1">
+                    <NavigationMenu.Link asChild>
+                      <Link href={settings.services.href} className="block rounded-lg px-3.5 py-2.5 text-sm font-semibold text-teal hover:bg-secondary transition-colors normal-case">
+                        View All Services →
+                      </Link>
+                    </NavigationMenu.Link>
+                  </li>
+                </ul>
+              </NavigationMenu.Content>
+            </NavigationMenu.Item>
+
+            {settings.navLinks.map(link => (
+              <NavigationMenu.Item key={link.name}>
+                <NavigationMenu.Link asChild>
+                  <Link href={link.href} title={link.name} className="hover:opacity-80 transition-all capitalize">{link.name}</Link>
+                </NavigationMenu.Link>
+              </NavigationMenu.Item>
+            ))}
+          </NavigationMenu.List>
+        </NavigationMenu.Root>
 
         {/* Call To Action */}
         <Link href={settings.cta.href} title={settings.cta.content}>
@@ -93,7 +141,7 @@ export default function Navbar() {
           >
             <div className="flex flex-col p-6 space-y-6">
               <ul className="flex flex-col space-y-2 text-black font-medium select-none text-base">
-                {settings.navLinks.map(link => (
+                {settings.mobileLinks.map(link => (
                   <li key={link.name}>
                     <Link href={link.href} title={link.name} onClick={toggleMenu} className="block py-2 capitalize">{link.name}</Link>
                   </li>
