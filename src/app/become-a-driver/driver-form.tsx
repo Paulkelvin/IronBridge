@@ -148,13 +148,18 @@ export default function DriverForm() {
                 <DotGrid id="driver-hero-dots-bl" className="absolute -bottom-3 -left-3 w-16 h-16 md:w-20 md:h-20 text-navy/25" />
               </div>
 
-              <Image
-                src="/brand/become-a-driver-hero.png"
-                alt="Driver joining the Iron Bridge team beside a delivery van"
-                fill
-                className="object-contain"
-                priority
-              />
+              {/* Clips to a circle so the photo reads as a close-up on the
+                  driver, with the rest of the van bleeding past the edge
+                  rather than being shrunk to fit. */}
+              <div className="absolute inset-0 rounded-full overflow-hidden">
+                <Image
+                  src="/brand/become-a-driver-hero.png"
+                  alt="Driver joining the Iron Bridge team beside a delivery van"
+                  fill
+                  className="object-cover scale-[1.05] object-[32%_12%]"
+                  priority
+                />
+              </div>
             </SlideEffect>
           </div>
         </section>
