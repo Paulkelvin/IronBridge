@@ -32,7 +32,7 @@ const services = [
   {
     icon: Truck,
     title: 'Commercial Logistics',
-    content: 'Cargo van transportation, same-day and expedited delivery, B2B and last-mile delivery, multi-stop routes, and overflow/backup route coverage for businesses across the region.',
+    content: 'Cargo van transportation, same-day and expedited delivery, B2B and last-mile delivery, multi-stop routes, bulk-item removal, and overflow/backup route coverage for businesses across the region.',
     href: '/commercial-logistics',
   },
   {

@@ -5,7 +5,7 @@ import Footer from "@/sections/footer"
 import PageHeader from "@/components/page-header"
 import SectionHeader from "@/components/section-header"
 import {
-  Boxes, Building2, Clock, MapPinned, Repeat, RotateCcw, Truck, Zap
+  Boxes, Building2, Clock, MapPinned, Repeat, RotateCcw, Trash2, Truck, Zap
 } from "lucide-react"
 
 export const metadata: Metadata = {
@@ -22,6 +22,7 @@ const capabilities = [
   { icon: RotateCcw, title: 'Overflow & Backup Route Coverage', content: 'Additional capacity when your own fleet is stretched or unavailable.' },
   { icon: Boxes, title: 'Contract Logistics Support', content: 'Ongoing logistics support structured around your business requirements.' },
   { icon: Repeat, title: 'Regional Transportation', content: 'Coverage across Maryland, Washington DC, Northern Virginia, and the wider region as needed.' },
+  { icon: Trash2, title: 'Bulk-Item Removal', content: 'Pickup and hauling of bulk items, surplus equipment, and large-item removal as a scheduled or on-demand add-on to your commercial route.' },
 ]
 
 export default function CommercialLogisticsPage() {

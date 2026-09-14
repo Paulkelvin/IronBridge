@@ -24,7 +24,7 @@ const settings = {
     {
       icon: Truck,
       title: 'Commercial Logistics',
-      content: 'Cargo van transportation, same-day and expedited delivery, and scheduled multi-stop routes for B2B and last-mile needs across the region.',
+      content: 'Cargo van transportation, same-day and expedited delivery, scheduled multi-stop routes, and bulk-item removal for B2B and last-mile needs across the region.',
       href: '/commercial-logistics',
     },
     {

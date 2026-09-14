@@ -13,6 +13,7 @@ const routes = [
   "/compliance-safety",
   "/become-a-driver",
   "/request-a-quote",
+  "/privacy-policy",
 ]
 
 export default function sitemap(): MetadataRoute.Sitemap {
