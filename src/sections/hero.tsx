@@ -107,7 +107,7 @@ export default function Hero() {
           <SlideEffect
             direction="left"
             isSpring={false}
-            className="relative w-full max-w-[22rem] mx-auto lg:max-w-[30rem] aspect-[1163/816]"
+            className="relative w-full max-w-[22rem] mx-auto lg:max-w-[30rem] aspect-[1163/819]"
           >
             {/* Soft light glow so the white van reads clearly against the dark background */}
             <div

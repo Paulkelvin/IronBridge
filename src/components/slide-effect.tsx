@@ -28,7 +28,7 @@ export default function SlideEffect(
     <motion.div
       initial={{ opacity: 0, y: direction === 'top' ? 70 : direction === 'bottom' ? -70 : 0, x: direction === 'left' ? 70 : direction === 'right' ? -70 : 0 }}
       whileInView={{ opacity: 1, y: 0, x: 0 }}
-      viewport={{ once: true, amount: 0.2, margin: '0px 0px 15% 0px' }}
+      viewport={{ once: true, amount: 0.1, margin: '0px 0px 35% 0px' }}
       transition={{ duration, ease, delay, type: isSpring ? 'spring' : '' }}
       className={className}
     >
