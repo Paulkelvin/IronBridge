@@ -93,7 +93,7 @@ export default function PrivacyPolicyPage() {
         <SlideEffect isSpring={false} className="space-y-3">
           <h2 className="font-serif text-navy text-lg md:text-xl font-semibold">Contact Us</h2>
           <p className="text-sm md:text-base text-foreground/80 leading-relaxed">
-            Questions about this Privacy Policy or the information you've submitted can be directed to{" "}
+            Questions about this Privacy Policy or the information you&apos;ve submitted can be directed to{" "}
             <a href="mailto:lbrent@ironbridgems.com" className="text-navy underline underline-offset-2 hover:text-teal transition-colors">
               lbrent@ironbridgems.com
             </a>{" "}
