@@ -13,7 +13,8 @@ const settings = {
       src: '/brand/gallery-medical-courier.jpg',
       alt: 'Iron Bridge staff handing a specimen cooler to a doctor outside a hospital',
       position: 'md:[grid-column:1/8] md:[grid-row:1/16]',
-      rotate: 'md:rotate-[-1.2deg]',
+      offset: 'md:mt-0',
+      rotate: 'rotate-[-1deg] md:rotate-[-1.2deg]',
       kicker: 'Medical Courier',
       caption: 'Every handoff, documented',
     },
@@ -21,7 +22,8 @@ const settings = {
       src: '/brand/gallery-bulk-item-removal.jpg',
       alt: 'Two Iron Bridge movers carrying an armchair into a van',
       position: 'md:[grid-column:8/13] md:[grid-row:3/13]',
-      rotate: 'md:rotate-[1.5deg]',
+      offset: 'mt-8 md:mt-0',
+      rotate: 'rotate-[1.2deg] md:rotate-[1.5deg]',
       kicker: 'Bulk-Item Removal',
       caption: 'Careful handling, every load',
     },
@@ -29,7 +31,8 @@ const settings = {
       src: '/brand/gallery-commercial-handoff.jpg',
       alt: 'Iron Bridge driver handing a box to a shop owner on a commercial street',
       position: 'md:[grid-column:1/6] md:[grid-row:17/27]',
-      rotate: 'md:rotate-[1deg]',
+      offset: 'md:mt-0',
+      rotate: 'rotate-[0.8deg] md:rotate-[1deg]',
       kicker: 'Commercial Logistics',
       caption: 'Reliable, every route',
     },
@@ -37,7 +40,8 @@ const settings = {
       src: '/brand/gallery-residential-delivery.jpg',
       alt: 'Iron Bridge driver handing a package to a family at their front door',
       position: 'md:[grid-column:6/13] md:[grid-row:14/27]',
-      rotate: 'md:rotate-[-0.8deg]',
+      offset: 'mt-8 md:mt-0',
+      rotate: 'rotate-[-0.6deg] md:rotate-[-0.8deg]',
       kicker: 'Last-Mile Delivery',
       caption: "Delivered like it's for our own family",
     },
@@ -56,7 +60,7 @@ export default function Gallery() {
             direction="top"
             delay={0.08 * i}
             isSpring={false}
-            className={`relative aspect-[4/3] md:aspect-auto ${photo.position}`}
+            className={`relative aspect-[4/3] md:aspect-auto ${photo.offset} ${photo.position}`}
           >
             {/* Rotation lives on this inner div, not the motion wrapper, so it
                 doesn't fight framer-motion's own inline transform. */}
