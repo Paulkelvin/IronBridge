@@ -136,7 +136,7 @@ export default function DriverForm() {
             <SlideEffect
               direction="left"
               isSpring={false}
-              className="relative w-full max-w-[19rem] mx-auto lg:max-w-[26rem] aspect-[1000/784]"
+              className="relative w-full max-w-[19rem] mx-auto lg:max-w-[30rem] aspect-[807/798]"
             >
               {/* Decorative backdrop behind the illustration */}
               <div className="absolute -inset-8 md:-inset-12 -z-10 pointer-events-none" aria-hidden="true">
