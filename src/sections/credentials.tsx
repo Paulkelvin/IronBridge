@@ -2,6 +2,7 @@
 
 import SectionHeader from "@/components/section-header"
 import SlideEffect from "@/components/slide-effect"
+import usePrefersReducedMotion from "@/hooks/use-prefers-reduced-motion"
 import { ClipboardCheck, MapPin, PackageCheck, ShieldAlert, ShieldCheck, Truck, type LucideIcon } from "lucide-react"
 
 const settings = {
@@ -28,6 +29,7 @@ function Badge({ icon: Icon, title }: { icon: LucideIcon; title: string }) {
 }
 
 export default function Credentials() {
+  const prefersReducedMotion = usePrefersReducedMotion()
   const track = [...settings.items, ...settings.items]
 
   return (
@@ -35,16 +37,27 @@ export default function Credentials() {
       <SectionHeader eyebrow={settings.eyebrow} title={settings.title} description={settings.description} />
 
       <SlideEffect isSpring={false}>
-        <div
-          className="relative left-1/2 w-screen -translate-x-1/2 overflow-hidden bg-secondary py-6 md:py-8 [mask-image:linear-gradient(to_right,transparent,black_8%,black_92%,transparent)] [-webkit-mask-image:linear-gradient(to_right,transparent,black_8%,black_92%,transparent)]"
-          aria-label="Iron Bridge credentials"
-        >
-          <div className="flex w-max animate-[marquee_32s_linear_infinite] hover:[animation-play-state:paused]">
-            {track.map((item, i) => (
-              <Badge key={`${item.title}-${i}`} icon={item.icon} title={item.title} />
-            ))}
+        {prefersReducedMotion ? (
+          // Static, wrapped layout — no auto-scrolling content for reduced-motion users.
+          <div className="rounded-2xl bg-secondary p-6 md:p-8">
+            <div className="flex flex-wrap justify-center gap-3">
+              {settings.items.map((item) => (
+                <Badge key={item.title} icon={item.icon} title={item.title} />
+              ))}
+            </div>
           </div>
-        </div>
+        ) : (
+          <div
+            className="relative left-1/2 w-screen -translate-x-1/2 overflow-hidden bg-secondary py-6 md:py-8 [mask-image:linear-gradient(to_right,transparent,black_8%,black_92%,transparent)] [-webkit-mask-image:linear-gradient(to_right,transparent,black_8%,black_92%,transparent)]"
+            aria-label="Iron Bridge credentials"
+          >
+            <div className="flex w-max animate-[marquee_32s_linear_infinite] hover:[animation-play-state:paused]">
+              {track.map((item, i) => (
+                <Badge key={`${item.title}-${i}`} icon={item.icon} title={item.title} />
+              ))}
+            </div>
+          </div>
+        )}
       </SlideEffect>
 
       <p className="text-xs md:text-sm text-foreground/60 italic max-w-2xl mx-auto">

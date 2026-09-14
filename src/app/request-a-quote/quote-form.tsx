@@ -47,8 +47,14 @@ export default function QuoteForm() {
     resolver: zodResolver(quoteRequestSchema),
     defaultValues: {
       company: '',
+      phone: '',
       timeRequirements: '',
+      shipmentType: '' as QuoteRequestInput['shipmentType'],
+      serviceFrequency: '' as QuoteRequestInput['serviceFrequency'],
       shipmentSize: '',
+      temperatureSensitive: '' as QuoteRequestInput['temperatureSensitive'],
+      specialHandling: '' as QuoteRequestInput['specialHandling'],
+      stat: '' as QuoteRequestInput['stat'],
       additionalInstructions: '',
     },
   })

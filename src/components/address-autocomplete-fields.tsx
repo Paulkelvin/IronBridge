@@ -8,6 +8,10 @@ import type { FieldErrors, Path, UseFormRegister, UseFormSetValue } from "react-
 
 type Prefix = 'pickup' | 'delivery'
 
+// setOptions must only be called once per app; guard against multiple
+// AddressFields instances (pickup + delivery) racing to configure it.
+let mapsOptionsConfigured = false
+
 function fieldName(prefix: Prefix, suffix: 'Street' | 'Unit' | 'City' | 'State' | 'Zip') {
   return `${prefix}${suffix}` as Path<QuoteRequestInput>
 }
@@ -44,7 +48,10 @@ export default function AddressFields({
     const apiKey = process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY
     if (!apiKey) return
     let cancelled = false
-    setOptions({ key: apiKey, v: 'weekly' })
+    if (!mapsOptionsConfigured) {
+      mapsOptionsConfigured = true
+      setOptions({ key: apiKey, v: 'weekly' })
+    }
     importLibrary('places')
       .then(() => { if (!cancelled) setPlacesReady(true) })
       .catch((err) => console.warn('Places library failed to load:', err))

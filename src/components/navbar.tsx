@@ -47,7 +47,7 @@ export default function Navbar() {
       </Link>
 
       {/* desktop menu */}
-      <div className="items-center justify-center gap-5 hidden md:flex">
+      <div className="items-center justify-center gap-5 hidden lg:flex">
 
         {/* Nav Links */}
         <ul className="flex items-center justify-center gap-5 text-black font-medium select-none text-link">
@@ -70,7 +70,7 @@ export default function Navbar() {
         initial={{ scale: 1, y: 0 }}
         whileTap={{ scale: 0.8 }}
         transition={{ duration: 0.3 }}
-        className="bg-white shadow-none flex md:hidden cursor-pointer text-black"
+        className="bg-white shadow-none flex lg:hidden cursor-pointer text-black"
         onClick={toggleMenu}
         aria-expanded={isOpen}
         aria-controls="mobile-menu"
@@ -89,7 +89,7 @@ export default function Navbar() {
             animate={{ height: '100vh', opacity: 1, y: 0 }}
             exit={{ height: 0, opacity: 1, y: -20 }}
             transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-            className="fixed flex flex-col md:hidden top-[72px] left-0 w-full bg-white z-40 overflow-hidden"
+            className="fixed flex flex-col lg:hidden top-[72px] left-0 w-full bg-white z-40 overflow-hidden"
           >
             <div className="flex flex-col p-6 space-y-6">
               <ul className="flex flex-col space-y-2 text-black font-medium select-none text-base">

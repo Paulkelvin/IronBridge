@@ -4,10 +4,16 @@
 import { HTMLMotionProps } from "motion/react"
 import * as motion from "motion/react-m"
 import { Fragment } from "react"
+import usePrefersReducedMotion from "@/hooks/use-prefers-reduced-motion"
 
 export default function TextBlurEffect({ children, ...props }: { children: string } & HTMLMotionProps<'span'>) {
+  const shouldReduceMotion = usePrefersReducedMotion()
   const words = children.split(' ')
   let i = 0
+
+  if (shouldReduceMotion) {
+    return <>{children}</>
+  }
 
   return (
     <>
