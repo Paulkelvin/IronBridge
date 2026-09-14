@@ -6,6 +6,7 @@ import Features2 from "@/sections/features-2";
 import Features3 from "@/sections/features-3";
 import Features4 from "@/sections/features-4";
 import Footer from "@/sections/footer";
+import Gallery from "@/sections/gallery";
 import Hero from "@/sections/hero";
 import Testimonials from "@/sections/testimonials";
 
@@ -18,6 +19,7 @@ export default function HomePage() {
       <Features2 />
       <Credentials />
       <Features3 />
+      <Gallery />
       <Testimonials />
       <CTA />
       <FAQ />
