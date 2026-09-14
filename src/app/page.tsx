@@ -1,3 +1,4 @@
+import Credentials from "@/sections/credentials";
 import CTA from "@/sections/cta";
 import FAQ from "@/sections/faq";
 import Features1 from "@/sections/features-1";
@@ -12,6 +13,7 @@ export default function HomePage() {
   return (
     <div className="px-4 xl:px-0 max-w-7xl mx-auto space-y-24 sm:space-y-32 md:space-y-40 lg:space-y-56 scroll-smooth">
       <Hero />
+      <Credentials />
       <Features1 />
       <Features4 />
       <Features2 />
