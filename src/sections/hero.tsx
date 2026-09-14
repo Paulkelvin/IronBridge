@@ -109,11 +109,17 @@ export default function Hero() {
             isSpring={false}
             className="relative w-full max-w-[22rem] mx-auto lg:max-w-[30rem] aspect-[1163/816]"
           >
+            {/* Soft light glow so the white van reads clearly against the dark background */}
+            <div
+              className="absolute -inset-[4%] -z-10 rounded-full blur-3xl"
+              style={{ background: 'radial-gradient(circle, rgba(255,255,255,0.32) 0%, rgba(255,255,255,0.12) 55%, transparent 75%)' }}
+              aria-hidden="true"
+            />
             <Image
               src="/brand/hero-van-courier.png"
               alt="Iron Bridge delivery courier and van"
               fill
-              className="object-contain drop-shadow-2xl"
+              className="object-contain"
               priority
             />
           </SlideEffect>
