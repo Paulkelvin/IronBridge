@@ -2,9 +2,9 @@
 
 import SectionHeader from "@/components/section-header"
 import SlideEffect from "@/components/slide-effect"
-import { Images, X } from "lucide-react"
+import { ChevronLeft, ChevronRight, Images, X } from "lucide-react"
 import Image from "next/image"
-import { useEffect, useState } from "react"
+import { useEffect, useRef, useState } from "react"
 
 const settings = {
   eyebrow: 'On The Road',
@@ -81,11 +81,27 @@ const allPhotos = [...settings.photos, ...settings.morePhotos]
 
 export default function Gallery() {
   const [isOpen, setIsOpen] = useState(false)
+  const [activeIndex, setActiveIndex] = useState<number | null>(null)
+  const touchStartX = useRef<number | null>(null)
+
+  const showPrev = () => setActiveIndex((i) => (i === null ? null : (i - 1 + allPhotos.length) % allPhotos.length))
+  const showNext = () => setActiveIndex((i) => (i === null ? null : (i + 1) % allPhotos.length))
+
+  useEffect(() => {
+    if (!isOpen) setActiveIndex(null)
+  }, [isOpen])
 
   useEffect(() => {
     if (!isOpen) return
     const onKeyDown = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') setIsOpen(false)
+      if (e.key === 'Escape') {
+        if (activeIndex !== null) setActiveIndex(null)
+        else setIsOpen(false)
+      } else if (e.key === 'ArrowRight' && activeIndex !== null) {
+        showNext()
+      } else if (e.key === 'ArrowLeft' && activeIndex !== null) {
+        showPrev()
+      }
     }
     window.addEventListener('keydown', onKeyDown)
     document.body.style.overflow = 'hidden'
@@ -93,7 +109,21 @@ export default function Gallery() {
       window.removeEventListener('keydown', onKeyDown)
       document.body.style.overflow = ''
     }
-  }, [isOpen])
+  }, [isOpen, activeIndex])
+
+  const handleTouchStart = (e: React.TouchEvent) => {
+    touchStartX.current = e.touches[0]?.clientX ?? null
+  }
+  const handleTouchEnd = (e: React.TouchEvent) => {
+    const endX = e.changedTouches[0]?.clientX
+    if (touchStartX.current === null || endX === undefined) return
+    const delta = endX - touchStartX.current
+    if (Math.abs(delta) > 40) {
+      if (delta > 0) showPrev()
+      else showNext()
+    }
+    touchStartX.current = null
+  }
 
   return (
     <div className="space-y-8 md:space-y-10 mx-auto text-center">
@@ -176,17 +206,85 @@ export default function Gallery() {
             </div>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
-              {allPhotos.map((photo) => (
-                <div key={photo.src} className="space-y-2">
+              {allPhotos.map((photo, idx) => (
+                <button
+                  key={photo.src}
+                  type="button"
+                  onClick={() => setActiveIndex(idx)}
+                  aria-label={`View larger: ${photo.caption}`}
+                  className="group space-y-2 text-left cursor-pointer"
+                >
                   <div className="relative aspect-[4/3] rounded-xl overflow-hidden">
-                    <Image src={photo.src} alt={photo.alt} fill className="object-cover" sizes="(min-width: 1024px) 30vw, (min-width: 640px) 45vw, 90vw" />
+                    <Image
+                      src={photo.src}
+                      alt={photo.alt}
+                      fill
+                      className="object-cover transition-transform duration-300 group-hover:scale-105"
+                      sizes="(min-width: 1024px) 30vw, (min-width: 640px) 45vw, 90vw"
+                    />
                   </div>
                   <div>
                     <p className="text-[11px] font-semibold tracking-[0.08em] uppercase text-teal">{photo.kicker}</p>
                     <p className="text-sm text-foreground/80">{photo.caption}</p>
                   </div>
-                </div>
+                </button>
               ))}
+            </div>
+          </div>
+        </div>
+      )}
+
+      {isOpen && activeIndex !== null && (
+        <div
+          className="fixed inset-0 z-[60] flex items-center justify-center bg-navy-dark/95 p-4"
+          onClick={() => setActiveIndex(null)}
+          onTouchStart={handleTouchStart}
+          onTouchEnd={handleTouchEnd}
+          role="dialog"
+          aria-modal="true"
+          aria-label={`${allPhotos[activeIndex].caption}, photo ${activeIndex + 1} of ${allPhotos.length}`}
+        >
+          <button
+            type="button"
+            onClick={() => setActiveIndex(null)}
+            aria-label="Close"
+            className="absolute top-4 right-4 md:top-6 md:right-6 flex items-center justify-center size-10 rounded-full bg-white/10 text-white hover:bg-white/20 transition-colors cursor-pointer"
+          >
+            <X size={20} strokeWidth={1.5} />
+          </button>
+
+          <button
+            type="button"
+            onClick={(e) => { e.stopPropagation(); showPrev() }}
+            aria-label="Previous photo"
+            className="absolute left-2 md:left-6 top-1/2 -translate-y-1/2 flex items-center justify-center size-10 md:size-12 rounded-full bg-white/10 text-white hover:bg-white/20 transition-colors cursor-pointer"
+          >
+            <ChevronLeft size={22} strokeWidth={1.5} />
+          </button>
+          <button
+            type="button"
+            onClick={(e) => { e.stopPropagation(); showNext() }}
+            aria-label="Next photo"
+            className="absolute right-2 md:right-6 top-1/2 -translate-y-1/2 flex items-center justify-center size-10 md:size-12 rounded-full bg-white/10 text-white hover:bg-white/20 transition-colors cursor-pointer"
+          >
+            <ChevronRight size={22} strokeWidth={1.5} />
+          </button>
+
+          <div className="w-full max-w-4xl" onClick={(e) => e.stopPropagation()}>
+            <div className="relative w-full aspect-[4/3] md:aspect-[16/10] rounded-xl overflow-hidden">
+              <Image
+                src={allPhotos[activeIndex].src}
+                alt={allPhotos[activeIndex].alt}
+                fill
+                className="object-contain bg-navy-dark"
+                sizes="90vw"
+                priority
+              />
+            </div>
+            <div className="mt-4 text-center">
+              <p className="text-[11px] font-semibold tracking-[0.1em] uppercase text-teal-light">{allPhotos[activeIndex].kicker}</p>
+              <p className="text-white text-base md:text-lg font-medium mt-1">{allPhotos[activeIndex].caption}</p>
+              <p className="text-white/50 text-xs mt-2">{activeIndex + 1} / {allPhotos.length}</p>
             </div>
           </div>
         </div>
