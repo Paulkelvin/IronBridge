@@ -3,6 +3,7 @@
 import SectionHeader from "@/components/section-header"
 import SlideEffect from "@/components/slide-effect"
 import { ChevronLeft, ChevronRight, Images, X } from "lucide-react"
+import { useLenis } from "lenis/react"
 import Image from "next/image"
 import { useEffect, useRef, useState } from "react"
 
@@ -87,20 +88,37 @@ export default function Gallery() {
   const showPrev = () => setActiveIndex((i) => (i === null ? null : (i - 1 + allPhotos.length) % allPhotos.length))
   const showNext = () => setActiveIndex((i) => (i === null ? null : (i + 1) % allPhotos.length))
 
+  const isLightboxOpen = activeIndex !== null
+  const lenis = useLenis()
+
+  // Keyed on open/closed only (not on activeIndex itself), so the lock
+  // doesn't briefly release and reapply on every Next/Prev.
   useEffect(() => {
-    if (activeIndex === null) return
+    if (!isLightboxOpen) return
     const onKeyDown = (e: KeyboardEvent) => {
       if (e.key === 'Escape') setActiveIndex(null)
       else if (e.key === 'ArrowRight') showNext()
       else if (e.key === 'ArrowLeft') showPrev()
     }
     window.addEventListener('keydown', onKeyDown)
-    document.body.style.overflow = 'hidden'
+
+    // The site's smooth-scroll (Lenis) drives native window scroll itself,
+    // so pause it through its own API rather than fighting it with body
+    // CSS. Locking documentElement's overflow (not body's, and without a
+    // position:fixed/top-offset trick) blocks any remaining native scroll
+    // path (wheel, keyboard, scrollbar) without collapsing the page's
+    // scrollable height, so there's nothing to restore on close.
+    lenis?.stop()
+    const { documentElement } = document
+    const prevOverflow = documentElement.style.overflow
+    documentElement.style.overflow = 'hidden'
+
     return () => {
       window.removeEventListener('keydown', onKeyDown)
-      document.body.style.overflow = ''
+      documentElement.style.overflow = prevOverflow
+      lenis?.start()
     }
-  }, [activeIndex])
+  }, [isLightboxOpen, lenis])
 
   const handleTouchStart = (e: React.TouchEvent) => {
     touchStartX.current = e.touches[0]?.clientX ?? null
@@ -182,7 +200,8 @@ export default function Gallery() {
 
       {activeIndex !== null && (
         <div
-          className="fixed inset-0 z-[60] flex items-center justify-center bg-navy-dark/95 p-4"
+          data-lenis-prevent
+          className="fixed inset-0 z-[60] flex items-center justify-center bg-navy-dark/95 p-4 touch-none overscroll-none"
           onClick={() => setActiveIndex(null)}
           onTouchStart={handleTouchStart}
           onTouchEnd={handleTouchEnd}
@@ -218,14 +237,23 @@ export default function Gallery() {
 
           <div className="w-full max-w-4xl" onClick={(e) => e.stopPropagation()}>
             <div className="relative w-full aspect-[4/3] md:aspect-[16/10] rounded-xl overflow-hidden">
-              <Image
-                src={allPhotos[activeIndex].src}
-                alt={allPhotos[activeIndex].alt}
-                fill
-                className="object-contain bg-navy-dark"
-                sizes="90vw"
-                priority
-              />
+              <div
+                className="flex h-full transition-transform duration-300 ease-out"
+                style={{ transform: `translateX(-${activeIndex * 100}%)` }}
+              >
+                {allPhotos.map((photo, idx) => (
+                  <div key={photo.src} className="relative h-full w-full shrink-0">
+                    <Image
+                      src={photo.src}
+                      alt={photo.alt}
+                      fill
+                      className="object-contain bg-navy-dark"
+                      sizes="90vw"
+                      priority={Math.abs(idx - activeIndex) <= 1}
+                    />
+                  </div>
+                ))}
+              </div>
             </div>
             <div className="mt-4 text-center">
               <p className="text-[11px] font-semibold tracking-[0.1em] uppercase text-teal-light">{allPhotos[activeIndex].kicker}</p>
