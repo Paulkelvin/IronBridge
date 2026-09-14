@@ -24,7 +24,7 @@ const settings = {
     {
       icon: FileCheck,
       title: 'Proof of Delivery',
-      content: 'Every delivery is confirmed with proof-of-delivery documentation, on request for standard routes.',
+      content: 'Every completed delivery is documented through time-stamped proof of delivery appropriate to the client’s service requirements.',
     },
     {
       icon: UserCheck,
