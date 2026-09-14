@@ -131,7 +131,7 @@ export default function Gallery() {
               direction="top"
               delay={0.08 * i}
               isSpring={false}
-              className={`relative w-[87%] aspect-[4/3] md:w-full md:aspect-auto ${photo.align} ${photo.position}`}
+              className={`relative w-[96%] aspect-[4/3] md:w-full md:aspect-auto ${photo.align} ${photo.position}`}
             >
               {/* Rotation lives on this inner div, not the motion wrapper, so it
                   doesn't fight framer-motion's own inline transform. */}
