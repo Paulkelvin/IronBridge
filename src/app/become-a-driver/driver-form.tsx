@@ -1,6 +1,5 @@
 'use client'
 
-import BlobShape from "@/components/graphics/blob-shape"
 import DotGrid from "@/components/graphics/dot-grid"
 import RouteLine from "@/components/graphics/route-line"
 import SlideEffect from "@/components/slide-effect"
@@ -136,11 +135,10 @@ export default function DriverForm() {
             <SlideEffect
               direction="left"
               isSpring={false}
-              className="relative w-full max-w-[20rem] mx-auto lg:max-w-[26rem] aspect-square"
+              className="relative w-full max-w-[26rem] mx-auto lg:max-w-[36rem] aspect-square"
             >
               {/* Decorative backdrop behind the photo */}
               <div className="absolute -inset-8 md:-inset-12 -z-10 pointer-events-none" aria-hidden="true">
-                <BlobShape className="absolute inset-0 h-full w-full text-teal-tint" />
                 <div className="absolute top-3 right-6 md:top-4 md:right-10 size-3.5 md:size-4 rounded-full bg-gold" />
                 <div className="absolute bottom-10 right-2 md:bottom-14 md:right-4 size-2.5 md:size-3 rotate-45 bg-teal-light/70" />
                 <div className="absolute bottom-4 left-8 md:bottom-6 md:left-12 size-3 md:size-3.5 rounded-full border-2 border-navy/30" />
