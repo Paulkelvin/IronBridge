@@ -44,6 +44,25 @@ export const metadata: Metadata = {
   },
 };
 
+const localBusinessJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "LocalBusiness",
+  name: "Iron Bridge Mobility Solutions",
+  description,
+  url: siteUrl,
+  telephone: "+13018181929",
+  email: "lbrent@ironbridgems.com",
+  address: {
+    "@type": "PostalAddress",
+    streetAddress: "12530 Fairwood Parkway, Ste 102 #568",
+    addressLocality: "Bowie",
+    addressRegion: "MD",
+    postalCode: "20720",
+    addressCountry: "US",
+  },
+  areaServed: ["Maryland", "Washington, DC", "Northern Virginia"],
+}
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -54,6 +73,10 @@ export default function RootLayout({
       <body
         className={`${sans.variable} ${serif.variable} ${sans.className} antialiased w-full min-h-screen overflow-x-hidden`}
       >
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(localBusinessJsonLd) }}
+        />
         <ScrollRestoration />
         <LenisProvider>
           <Header />

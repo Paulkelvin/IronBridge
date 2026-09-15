@@ -8,7 +8,7 @@ import { FieldError, Input, Label, PhoneInput, PillGroup, Textarea } from "@/com
 import { FormError, FormSuccess } from "@/components/form-status"
 import { quoteRequestSchema, type QuoteRequestInput } from "@/lib/validations"
 import { zodResolver } from "@hookform/resolvers/zod"
-import { AlertTriangle, ArrowLeft, ArrowRight, CalendarDays, Mail, Phone } from "lucide-react"
+import { AlertTriangle, ArrowLeft, ArrowRight, CalendarDays, Mail, MapPin, Phone } from "lucide-react"
 import { Controller, useForm } from "react-hook-form"
 import { useEffect, useRef, useState } from "react"
 
@@ -90,6 +90,7 @@ export default function QuoteForm() {
 
   return (
     <div className="px-4 xl:px-6 max-w-7xl mx-auto space-y-24 sm:space-y-32 md:space-y-40 scroll-smooth">
+      <div className="space-y-8 md:space-y-10">
       <PageHeader
         eyebrow="Request a Quote"
         title="Request a Quote"
@@ -307,8 +308,18 @@ export default function QuoteForm() {
               <Mail size={16} strokeWidth={1.5} aria-hidden="true" />
               lbrent@ironbridgems.com
             </a>
+            <a
+              href="https://maps.google.com/?q=12530+Fairwood+Parkway+Ste+102+%23568+Bowie+MD+20720"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-2 hover:text-navy transition-colors"
+            >
+              <MapPin size={16} strokeWidth={1.5} aria-hidden="true" />
+              12530 Fairwood Parkway, Ste 102 #568, Bowie, MD 20720
+            </a>
           </div>
         </div>
+      </div>
       </div>
 
       <Footer />
