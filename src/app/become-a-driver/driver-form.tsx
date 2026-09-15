@@ -135,7 +135,7 @@ export default function DriverForm() {
             <SlideEffect
               direction="left"
               isSpring={false}
-              className="relative w-full max-w-[26rem] mx-auto lg:max-w-[36rem] aspect-square"
+              className="relative w-full max-w-[22rem] mx-auto lg:max-w-[28rem] aspect-[928/1152]"
             >
               {/* Decorative backdrop behind the photo */}
               <div className="absolute -inset-8 md:-inset-12 -z-10 pointer-events-none" aria-hidden="true">
@@ -151,8 +151,10 @@ export default function DriverForm() {
                 style={{
                   WebkitMaskImage: 'url(/brand/blob-mask.svg)',
                   maskImage: 'url(/brand/blob-mask.svg)',
-                  WebkitMaskSize: '100% 100%',
-                  maskSize: '100% 100%',
+                  WebkitMaskSize: '112% 130%',
+                  maskSize: '112% 130%',
+                  WebkitMaskPosition: 'center',
+                  maskPosition: 'center',
                   WebkitMaskRepeat: 'no-repeat',
                   maskRepeat: 'no-repeat',
                 }}
