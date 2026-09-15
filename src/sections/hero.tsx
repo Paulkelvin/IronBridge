@@ -64,7 +64,7 @@ export default function Hero() {
         }}
       />
 
-      <section className="relative overflow-hidden px-4 xl:px-0 max-w-7xl mx-auto pt-12 pb-24 md:pt-20 md:pb-32 lg:py-16 lg:flex-1 lg:flex lg:items-center">
+      <section className="relative overflow-hidden px-4 xl:px-6 max-w-7xl mx-auto pt-12 pb-24 md:pt-20 md:pb-32 lg:py-16 lg:flex-1 lg:flex lg:items-center">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-12 items-center xl:px-6 w-full">
           {/* Left: text content */}
           <div className="flex flex-col gap-6 lg:gap-8 items-center lg:items-start text-center lg:text-left">
