@@ -12,7 +12,7 @@ const settings = {
   items: [
     { icon: ShieldCheck, title: 'Insured Transportation Provider' },
     { icon: ShieldAlert, title: 'HIPAA & Bloodborne Pathogens Trained' },
-    { icon: PackageCheck, title: 'Owner DOT Category B Trained' },
+    { icon: PackageCheck, title: 'DOT Category B Trained (Owner-Operator)' },
     { icon: ClipboardCheck, title: 'Documented Chain-of-Custody Procedures' },
     { icon: Truck, title: 'Professional Commercial Vehicle' },
     { icon: MapPin, title: 'Maryland-Based Business' },
