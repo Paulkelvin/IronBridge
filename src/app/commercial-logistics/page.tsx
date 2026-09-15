@@ -27,7 +27,7 @@ const capabilities = [
 
 export default function CommercialLogisticsPage() {
   return (
-    <div className="px-4 xl:px-6 max-w-7xl mx-auto space-y-24 sm:space-y-32 md:space-y-40 lg:space-y-56 scroll-smooth">
+    <div className="px-4 xl:px-6 max-w-7xl mx-auto space-y-24 sm:space-y-32 md:space-y-40 scroll-smooth">
       <PageHeader
         eyebrow="Commercial Logistics"
         title="Commercial Logistics"
