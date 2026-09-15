@@ -1,7 +1,6 @@
 import RouteLine from "@/components/graphics/route-line"
 import ServiceAreaMapBg from "@/components/graphics/service-area-map-bg"
 import SlideEffect from "@/components/slide-effect"
-import TextBlurEffect from "@/components/text-blur-effect"
 
 export default function PageHeader({
   eyebrow,
@@ -43,7 +42,7 @@ export default function PageHeader({
             </SlideEffect>
 
             <h1 className="font-serif text-navy text-3xl md:text-5xl font-semibold tracking-tight leading-[1.1] max-w-3xl">
-              <TextBlurEffect>{title}</TextBlurEffect>
+              {title}
             </h1>
           </div>
 

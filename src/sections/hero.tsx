@@ -1,7 +1,6 @@
 'use client'
 
 import SlideEffect from "@/components/slide-effect";
-import TextBlurEffect from "@/components/text-blur-effect";
 import { Button } from "@/components/ui/button";
 import { useLenis } from "lenis/react";
 import { ArrowRight, ChevronDown } from "lucide-react";
@@ -77,8 +76,8 @@ export default function Hero() {
 
             <div className="space-y-1.5 md:space-y-2">
               <h1 className="font-serif text-white text-3xl md:text-5xl lg:text-4xl xl:text-5xl font-semibold tracking-tight leading-[0.98]">
-                <span className="block"><TextBlurEffect>{settings.headlineTop}</TextBlurEffect></span>
-                <span className="block"><TextBlurEffect>{settings.headlineBottom}</TextBlurEffect></span>
+                <span className="block">{settings.headlineTop}</span>
+                <span className="block">{settings.headlineBottom}</span>
               </h1>
 
               <SlideEffect delay={0.1}>

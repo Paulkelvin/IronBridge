@@ -3,7 +3,6 @@
 import DotGrid from "@/components/graphics/dot-grid"
 import RouteLine from "@/components/graphics/route-line"
 import SlideEffect from "@/components/slide-effect"
-import TextBlurEffect from "@/components/text-blur-effect"
 import Footer from "@/sections/footer"
 import { Button } from "@/components/ui/button"
 import { CheckboxPillGroup, FieldError, Input, Label, PhoneInput, PillGroup, Select, Textarea } from "@/components/ui/field"
@@ -123,7 +122,7 @@ export default function DriverForm() {
               </SlideEffect>
 
               <h1 className="font-serif text-navy text-3xl md:text-5xl font-semibold tracking-tight leading-[1.1] max-w-xl">
-                <TextBlurEffect>Drive With Iron Bridge</TextBlurEffect>
+                Drive With Iron Bridge
               </h1>
 
               <SlideEffect delay={0.15} className="text-sm lg:text-lg px-4 sm:px-10 lg:px-0 max-w-2xl mx-auto lg:max-w-none lg:mx-0 text-foreground">

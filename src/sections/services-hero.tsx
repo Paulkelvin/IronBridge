@@ -4,7 +4,6 @@ import CurvedArrow from "@/components/graphics/curved-arrow"
 import DotGrid from "@/components/graphics/dot-grid"
 import HexDot from "@/components/graphics/hex-dot"
 import SlideEffect from "@/components/slide-effect"
-import TextBlurEffect from "@/components/text-blur-effect"
 import Link from "next/link"
 
 export default function ServicesHero() {
@@ -44,7 +43,7 @@ export default function ServicesHero() {
             <span className="text-teal-light font-medium">Services</span>
           </p>
           <h1 className="font-serif text-4xl md:text-6xl font-semibold text-white tracking-tight leading-[1.05]">
-            <TextBlurEffect>Services</TextBlurEffect>
+            Services
           </h1>
           <p className="text-sm md:text-base text-white/70 max-w-md">
             Iron Bridge supports healthcare organizations and commercial businesses with professionally handled transportation throughout Maryland, Washington DC, and Northern Virginia.
