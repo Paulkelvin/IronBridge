@@ -11,10 +11,10 @@ interface CapabilityItem {
 
 export default function CapabilityList({ items }: { items: CapabilityItem[] }) {
   return (
-    <div className="divide-y divide-border">
+    <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-10 gap-y-8">
       {items.map((item, i) => (
         <SlideEffect key={item.title} direction="top" delay={0.04 * i} isSpring={false}>
-          <div className="flex flex-row items-start gap-4 py-5">
+          <div className="flex flex-row items-start gap-4 border-l-2 border-teal/30 pl-5">
             <IconBadge icon={item.icon} size={20} />
             <div className="space-y-1">
               <CardTitle className="text-base">{item.title}</CardTitle>

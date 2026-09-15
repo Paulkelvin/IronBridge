@@ -51,7 +51,7 @@ export default function FAQ() {
 
       {/* Accordion */}
       <SlideEffect>
-        <Accordion type="single" collapsible className="max-w-2xl mx-auto space-y-3 text-base text-navy text-left">
+        <Accordion type="single" collapsible className="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-3 text-base text-navy text-left">
           {settings.faqs.map((faq, index) => (
             <AccordionItem key={index} value={index + '-item'}>
               <AccordionTrigger>{faq.question}</AccordionTrigger>
