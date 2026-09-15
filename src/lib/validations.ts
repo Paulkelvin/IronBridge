@@ -17,7 +17,7 @@ export const quoteRequestSchema = z.object({
   deliveryZip: z.string().trim().regex(/^\d{5}(-\d{4})?$/, "Enter a valid ZIP code"),
   serviceDate: z.string().trim().min(1, "Select a requested service date"),
   timeRequirements: z.string().trim().max(200).optional().or(z.literal("")),
-  shipmentType: z.enum(["medical", "commercial", "other"], {
+  shipmentType: z.enum(["medical", "commercial", "bulk-item-removal", "other"], {
     error: "Select a shipment type",
   }),
   serviceFrequency: z.enum(["one-time", "recurring"], {

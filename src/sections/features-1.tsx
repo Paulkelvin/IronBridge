@@ -6,7 +6,7 @@ import SectionHeader from "@/components/section-header"
 import SlideEffect from "@/components/slide-effect"
 import IconBadge from "@/components/ui/icon-badge"
 import { CardBody, CardTitle } from "@/components/ui/card-text"
-import { ArrowRight, Repeat, Stethoscope, Truck } from "lucide-react"
+import { ArrowRight, Repeat, Sofa, Stethoscope, Truck } from "lucide-react"
 import Link from "next/link"
 
 const settings = {
@@ -33,6 +33,12 @@ const settings = {
       content: 'Consistent daily, weekly, or recurring transportation for businesses, labs, and organizations that need reliable coverage without the cost of maintaining their own fleet.',
       href: '/dedicated-routes',
     },
+    {
+      icon: Sofa,
+      title: 'Bulk-Item Removal',
+      content: 'Furniture, appliance, and large-item removal for property managers, businesses, and residential customers, including unit turnovers and eviction cleanouts.',
+      href: '/bulk-item-removal',
+    },
   ]
 }
 
@@ -46,7 +52,7 @@ export default function Features1() {
       <SectionHeader eyebrow={settings.eyebrow} title={settings.title} description={settings.description} mobileDescription={settings.mobileDescription} />
 
       {/* Cards */}
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
         {settings.services.map((service, i) => (
           <SlideEffect key={service.title} direction="top" delay={0.1 * i} className="col-span-1 h-full" isSpring={false}>
             <Card>

@@ -13,6 +13,7 @@ const settings = {
         { title: 'Medical Courier', href: '/medical-courier' },
         { title: 'Commercial Logistics', href: '/commercial-logistics' },
         { title: 'Dedicated Routes', href: '/dedicated-routes' },
+        { title: 'Bulk-Item Removal', href: '/bulk-item-removal' },
         { title: 'Industries Served', href: '/#industries' },
       ],
     },

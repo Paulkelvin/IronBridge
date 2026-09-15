@@ -209,6 +209,7 @@ export default function QuoteForm() {
                           options={[
                             { label: 'Medical', value: 'medical' },
                             { label: 'Commercial', value: 'commercial' },
+                            { label: 'Bulk-Item Removal', value: 'bulk-item-removal' },
                             { label: 'Other', value: 'other' },
                           ]}
                         />

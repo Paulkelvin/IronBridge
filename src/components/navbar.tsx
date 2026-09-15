@@ -17,6 +17,7 @@ const settings = {
       { name: 'Medical Courier', href: '/medical-courier', description: 'Specimen transport, cold-packed and STAT shipments.' },
       { name: 'Commercial Logistics', href: '/commercial-logistics', description: 'Cargo van, same-day, and multi-stop delivery.' },
       { name: 'Dedicated Routes', href: '/dedicated-routes', description: 'Consistent daily, weekly, or recurring coverage.' },
+      { name: 'Bulk-Item Removal', href: '/bulk-item-removal', description: 'Furniture, appliance, and large-item removal.' },
     ],
   },
   navLinks: [
@@ -29,6 +30,7 @@ const settings = {
     { name: 'medical courier', href: '/medical-courier' },
     { name: 'commercial logistics', href: '/commercial-logistics' },
     { name: 'dedicated routes', href: '/dedicated-routes' },
+    { name: 'bulk-item removal', href: '/bulk-item-removal' },
     { name: 'service area', href: '/service-area' },
     { name: 'about', href: '/about' },
     { name: 'become a driver', href: '/become-a-driver' },

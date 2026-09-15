@@ -8,7 +8,7 @@ import SlideEffect from "@/components/slide-effect"
 import TimelineSteps from "@/components/timeline-steps"
 import { CardBody, CardTitle } from "@/components/ui/card-text"
 import IconBadge from "@/components/ui/icon-badge"
-import { ArrowRight, Repeat, Stethoscope, Truck } from "lucide-react"
+import { ArrowRight, Repeat, Sofa, Stethoscope, Truck } from "lucide-react"
 import Link from "next/link"
 
 export const metadata: Metadata = {
@@ -41,6 +41,12 @@ const services = [
     content: 'Consistent daily, weekly, or recurring transportation for businesses, laboratories, and healthcare organizations that need reliable coverage without maintaining their own fleet.',
     href: '/dedicated-routes',
   },
+  {
+    icon: Sofa,
+    title: 'Bulk-Item Removal',
+    content: 'Furniture, appliance, and large-item removal for property managers, businesses, and residential customers, including unit turnovers and eviction cleanouts.',
+    href: '/bulk-item-removal',
+  },
 ]
 
 export default function ServicesPage() {
@@ -48,7 +54,7 @@ export default function ServicesPage() {
     <div className="px-4 xl:px-6 max-w-7xl mx-auto space-y-24 sm:space-y-32 md:space-y-40 scroll-smooth">
       <ServicesHero />
 
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
         {services.map((service, i) => (
           <SlideEffect key={service.title} direction="top" delay={0.1 * i} className="col-span-1 h-full" isSpring={false}>
             <Card>

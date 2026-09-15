@@ -8,6 +8,7 @@ const routes = [
   "/medical-courier",
   "/commercial-logistics",
   "/dedicated-routes",
+  "/bulk-item-removal",
   "/about",
   "/service-area",
   "/compliance-safety",
