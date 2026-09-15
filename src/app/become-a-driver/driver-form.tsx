@@ -1,5 +1,7 @@
 'use client'
 
+import BlobShape from "@/components/graphics/blob-shape"
+import DotGrid from "@/components/graphics/dot-grid"
 import RouteLine from "@/components/graphics/route-line"
 import SlideEffect from "@/components/slide-effect"
 import TextBlurEffect from "@/components/text-blur-effect"
@@ -10,6 +12,7 @@ import { FormError, FormSuccess } from "@/components/form-status"
 import { driverApplicationSchema, type DriverApplicationInput } from "@/lib/validations"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { ArrowLeft, ArrowRight, ShieldCheck } from "lucide-react"
+import Image from "next/image"
 import { Controller, useForm } from "react-hook-form"
 import { useEffect, useRef, useState } from "react"
 
@@ -111,19 +114,59 @@ export default function DriverForm() {
         </div>
 
         <section className="relative overflow-hidden pt-4 pb-4 md:pt-8 md:pb-8">
-          <div className="flex flex-col gap-4 lg:gap-6 items-center text-center max-w-2xl mx-auto">
-            <SlideEffect>
-              <span className="inline-flex items-center rounded-full border border-border bg-secondary px-4 py-1.5 text-[11px] md:text-xs font-medium tracking-[0.14em] text-navy uppercase">
-                Become a Driver
-              </span>
-            </SlideEffect>
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-12 items-center">
+            {/* Left: text content */}
+            <div className="flex flex-col gap-4 lg:gap-6 items-center lg:items-start text-center lg:text-left">
+              <SlideEffect>
+                <span className="inline-flex items-center rounded-full border border-border bg-secondary px-4 py-1.5 text-[11px] md:text-xs font-medium tracking-[0.14em] text-navy uppercase">
+                  Become a Driver
+                </span>
+              </SlideEffect>
 
-            <h1 className="font-serif text-navy text-3xl md:text-5xl font-semibold tracking-tight leading-[1.1] max-w-xl">
-              <TextBlurEffect>Drive With Iron Bridge</TextBlurEffect>
-            </h1>
+              <h1 className="font-serif text-navy text-3xl md:text-5xl font-semibold tracking-tight leading-[1.1] max-w-xl">
+                <TextBlurEffect>Drive With Iron Bridge</TextBlurEffect>
+              </h1>
 
-            <SlideEffect delay={0.15} className="text-sm lg:text-lg px-4 sm:px-10 lg:px-0 text-foreground">
-              Interested in driving or running your own vehicle with Iron Bridge? Tell us about yourself and we&apos;ll be in touch.
+              <SlideEffect delay={0.15} className="text-sm lg:text-lg px-4 sm:px-10 lg:px-0 max-w-2xl mx-auto lg:max-w-none lg:mx-0 text-foreground">
+                Interested in driving or running your own vehicle with Iron Bridge? Tell us about yourself and we&apos;ll be in touch.
+              </SlideEffect>
+            </div>
+
+            {/* Right: photo, clipped to the same organic blob used as its backdrop */}
+            <SlideEffect
+              direction="left"
+              isSpring={false}
+              className="relative w-full max-w-[20rem] mx-auto lg:max-w-[26rem] aspect-square"
+            >
+              {/* Decorative backdrop behind the photo */}
+              <div className="absolute -inset-8 md:-inset-12 -z-10 pointer-events-none" aria-hidden="true">
+                <BlobShape className="absolute inset-0 h-full w-full text-teal-tint" />
+                <div className="absolute top-3 right-6 md:top-4 md:right-10 size-3.5 md:size-4 rounded-full bg-gold" />
+                <div className="absolute bottom-10 right-2 md:bottom-14 md:right-4 size-2.5 md:size-3 rotate-45 bg-teal-light/70" />
+                <div className="absolute bottom-4 left-8 md:bottom-6 md:left-12 size-3 md:size-3.5 rounded-full border-2 border-navy/30" />
+                <DotGrid id="driver-hero-dots-tr" className="absolute -top-3 -right-3 w-20 h-20 md:w-24 md:h-24 text-teal/40" />
+                <DotGrid id="driver-hero-dots-bl" className="absolute -bottom-3 -left-3 w-16 h-16 md:w-20 md:h-20 text-navy/25" />
+              </div>
+
+              <div
+                className="relative w-full h-full shadow-xl"
+                style={{
+                  WebkitMaskImage: 'url(/brand/blob-mask.svg)',
+                  maskImage: 'url(/brand/blob-mask.svg)',
+                  WebkitMaskSize: '100% 100%',
+                  maskSize: '100% 100%',
+                  WebkitMaskRepeat: 'no-repeat',
+                  maskRepeat: 'no-repeat',
+                }}
+              >
+                <Image
+                  src="/brand/become-a-driver-hero.jpg"
+                  alt="Iron Bridge driver standing confidently in front of a delivery van"
+                  fill
+                  className="object-cover"
+                  priority
+                />
+              </div>
             </SlideEffect>
           </div>
         </section>
