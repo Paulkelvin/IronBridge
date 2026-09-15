@@ -140,7 +140,7 @@ export default function DriverForm() {
             >
               {/* Decorative backdrop behind the illustration */}
               <div className="absolute -inset-8 md:-inset-12 -z-10 pointer-events-none" aria-hidden="true">
-                <BlobShape className="absolute -left-6 md:-left-10 inset-y-0 right-0 w-[calc(100%+1.5rem)] md:w-[calc(100%+2.5rem)] h-full text-teal-tint" />
+                <BlobShape className="absolute inset-0 h-full w-full text-teal-tint" />
                 <div className="absolute top-3 right-6 md:top-4 md:right-10 size-3.5 md:size-4 rounded-full bg-gold" />
                 <div className="absolute bottom-10 right-2 md:bottom-14 md:right-4 size-2.5 md:size-3 rotate-45 bg-teal-light/70" />
                 <div className="absolute bottom-4 left-8 md:bottom-6 md:left-12 size-3 md:size-3.5 rounded-full border-2 border-navy/30" />
@@ -155,15 +155,6 @@ export default function DriverForm() {
                 className="object-contain object-left"
                 priority
               />
-
-              {/* A second copy of the same backdrop blob, in front, sized
-                  and positioned to cross the middle of the bonnet only —
-                  the front bumper pokes out past its edge, fully visible,
-                  while the driver and cab further right stay clear of it
-                  entirely. */}
-              <div className="absolute left-[16%] -top-4 -bottom-8 w-[42%] z-10 pointer-events-none" aria-hidden="true">
-                <BlobShape className="w-full h-full text-teal-tint" />
-              </div>
             </SlideEffect>
           </div>
         </section>
