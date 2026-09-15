@@ -10,7 +10,7 @@ import { useEffect, useRef, useState } from "react"
 const settings = {
   eyebrow: 'On The Road',
   title: 'Dependability in Action',
-  description: 'Real routes, real handoffs, real care, from hospital docks to front doors.',
+  description: 'Professional service at every stage—from healthcare handoffs to commercial and residential deliveries.',
   photos: [
     {
       src: '/brand/gallery-commercial-unload.jpg',
