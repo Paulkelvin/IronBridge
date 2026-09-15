@@ -76,6 +76,12 @@ const settings = {
       kicker: 'Medical Courier',
       caption: 'Specimen delivered, custody confirmed',
     },
+    {
+      src: '/brand/gallery-commercial-unload.jpg',
+      alt: 'Iron Bridge driver unloading boxes from a branded cargo van onto a hand truck',
+      kicker: 'Commercial Logistics',
+      caption: 'Unloaded with care, every stop',
+    },
   ],
 }
 
