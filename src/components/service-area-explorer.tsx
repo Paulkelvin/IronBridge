@@ -1,6 +1,7 @@
 'use client'
 
 import type { RegionId } from "@/components/graphics/service-area-map-google"
+import ErrorBoundary from "@/components/error-boundary"
 import SlideEffect from "@/components/slide-effect"
 import { CardTitle } from "@/components/ui/card-text"
 import IconBadge from "@/components/ui/icon-badge"
@@ -16,6 +17,12 @@ const ServiceAreaMapGoogle = dynamic(() => import("@/components/graphics/service
   ),
 })
 
+const mapUnavailableFallback = (
+  <div className="relative w-full h-[380px] md:h-[460px] lg:h-[560px] rounded-2xl border border-border bg-secondary flex items-center justify-center">
+    <p className="text-sm text-foreground/70 text-center px-6">Map unavailable right now, service areas are listed on the right.</p>
+  </div>
+)
+
 export default function ServiceAreaExplorer({
   regions,
 }: {
@@ -30,13 +37,15 @@ export default function ServiceAreaExplorer({
   return (
     <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-14 items-center text-left">
       <SlideEffect direction="right" isSpring={false}>
-        <ServiceAreaMapGoogle
-          activeRegion={displayRegion}
-          mapRegion={selectedRegion}
-          activeCityName={selectedCity}
-          onRegionHover={setHoveredRegion}
-          className="w-full h-[380px] md:h-[460px] lg:h-[560px]"
-        />
+        <ErrorBoundary fallback={mapUnavailableFallback}>
+          <ServiceAreaMapGoogle
+            activeRegion={displayRegion}
+            mapRegion={selectedRegion}
+            activeCityName={selectedCity}
+            onRegionHover={setHoveredRegion}
+            className="w-full h-[380px] md:h-[460px] lg:h-[560px]"
+          />
+        </ErrorBoundary>
       </SlideEffect>
 
       <div className="space-y-3">
