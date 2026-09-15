@@ -2,7 +2,7 @@
 
 import Logo from "@/components/logo"
 import { Button } from "@/components/ui/button"
-import { Clock, Mail, Phone } from "lucide-react"
+import { Clock, Mail, MapPin, Phone } from "lucide-react"
 import Link from "next/link"
 
 const settings = {
@@ -67,6 +67,15 @@ export default function Footer() {
           <a href="mailto:lbrent@ironbridgems.com" className="flex items-center gap-2 text-foreground/80 hover:text-navy transition-colors">
             <Mail size={14} strokeWidth={1.5} aria-hidden="true" />
             lbrent@ironbridgems.com
+          </a>
+          <a
+            href="https://maps.google.com/?q=12530+Fairwood+Parkway+Ste+102+%23568+Bowie+MD+20720"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-start gap-2 text-foreground/80 hover:text-navy transition-colors text-left md:text-right"
+          >
+            <MapPin size={14} strokeWidth={1.5} className="shrink-0 mt-0.5" aria-hidden="true" />
+            <span>12530 Fairwood Parkway, Ste 102 #568<br />Bowie, MD 20720</span>
           </a>
           <span className="flex items-center gap-2 text-foreground/80">
             <Clock size={14} strokeWidth={1.5} aria-hidden="true" />
