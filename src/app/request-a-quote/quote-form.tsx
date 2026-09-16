@@ -298,7 +298,7 @@ export default function QuoteForm() {
           </div>
         )}
 
-        <div className="rounded-2xl border border-border bg-secondary/40 p-6 text-center space-y-4">
+        <div className="rounded-2xl bg-teal-tint p-6 text-center space-y-4">
           <h3 className="font-serif text-lg text-navy">Prefer to Talk to Someone?</h3>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4 text-sm text-foreground/70">
             <a href="tel:+13018181929" className="flex items-center gap-2 hover:text-navy transition-colors">
