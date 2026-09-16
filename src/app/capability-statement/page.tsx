@@ -71,8 +71,6 @@ const snapshot = [
   { label: 'Legal Name', value: 'Iron Bridge Mobility Solutions LLC' },
   { label: 'Location', value: 'Bowie, Maryland' },
   { label: 'Coverage', value: 'MD | DC | Northern VA' },
-  { label: 'Primary NAICS', value: '492110' },
-  { label: 'Additional NAICS', value: '492210 | 484110' },
   { label: 'Vehicle', value: 'Full-size commercial cargo van' },
 ]
 
