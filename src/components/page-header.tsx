@@ -11,7 +11,7 @@ export default function PageHeader({
 }: {
   eyebrow: string
   title: string
-  description: string
+  description?: string
   mobileDescription?: string
   background?: 'default' | 'map'
 }) {
@@ -46,14 +46,16 @@ export default function PageHeader({
             </h1>
           </div>
 
-          <SlideEffect delay={0.15} className="text-sm lg:text-lg px-4 sm:px-10 md:px-0 md:max-w-2xl mx-auto text-foreground">
-            {mobileDescription ? (
-              <>
-                <span className="md:hidden">{mobileDescription}</span>
-                <span className="hidden md:inline">{description}</span>
-              </>
-            ) : description}
-          </SlideEffect>
+          {description && (
+            <SlideEffect delay={0.15} className="text-sm lg:text-lg px-4 sm:px-10 md:px-0 md:max-w-2xl mx-auto text-foreground">
+              {mobileDescription ? (
+                <>
+                  <span className="md:hidden">{mobileDescription}</span>
+                  <span className="hidden md:inline">{description}</span>
+                </>
+              ) : description}
+            </SlideEffect>
+          )}
         </section>
       </div>
     </div>

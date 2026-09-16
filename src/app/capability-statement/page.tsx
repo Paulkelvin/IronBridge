@@ -82,10 +82,8 @@ export default function CapabilityStatementPage() {
         <PageHeader
           eyebrow="Capability Statement"
           title="What We Bring to the Table"
-          description="Dependable transportation. Documented handoffs. Responsive regional coverage across Maryland, Washington DC, and Northern Virginia."
         />
-        <SlideEffect className="flex flex-col items-center gap-3">
-          <p className="text-sm text-foreground/60">Save a copy of our capability statement for your records</p>
+        <SlideEffect className="flex justify-center">
           <DownloadButton href="/Iron-Bridge-Capability-Statement.pdf" filename="Iron-Bridge-Capability-Statement.pdf" label="Download PDF" />
         </SlideEffect>
       </div>
