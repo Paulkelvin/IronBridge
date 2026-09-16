@@ -54,7 +54,7 @@ export default function DownloadButton({ href, filename, label }: { href: string
       aria-label={state === 'done' ? 'Download complete' : state === 'downloading' ? `Downloading ${progress}%` : `Download ${label}`}
     >
       {/* Outer shell */}
-      <div className="absolute inset-0 rounded-full bg-white/80 shadow-[0_2px_12px_rgba(0,0,0,0.08),inset_0_1px_2px_rgba(255,255,255,0.9)] backdrop-blur-sm border border-white/60" />
+      <div className="absolute inset-0 rounded-full bg-white shadow-[0_2px_16px_rgba(0,0,0,0.10)] border border-border" />
 
       {/* Progress fill */}
       <AnimatePresence>
