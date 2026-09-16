@@ -15,6 +15,7 @@ import {
 } from "lucide-react"
 import Image from "next/image"
 import Link from "next/link"
+import DotGrid from "@/components/graphics/dot-grid"
 
 export const metadata: Metadata = {
   title: "Capability Statement | Iron Bridge Mobility Solutions",
@@ -132,17 +133,19 @@ export default function CapabilityStatementPage() {
       </div>
 
       {/* Industries Served */}
-      <div className="space-y-8 md:space-y-10">
-        <SectionHeader eyebrow="Industries Served" title="Who We Work With" />
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-          {industries.map((ind, i) => (
-            <SlideEffect key={ind.name} delay={0.05 * i}>
-              <div className="flex items-center gap-3 rounded-xl border border-border p-4">
-                <ind.icon size={18} strokeWidth={1.5} className="text-teal shrink-0" aria-hidden="true" />
-                <span className="text-sm font-medium text-navy">{ind.name}</span>
-              </div>
-            </SlideEffect>
-          ))}
+      <div className="relative left-1/2 w-screen -translate-x-1/2 bg-teal-tint/50">
+        <div className="px-4 xl:px-6 max-w-7xl mx-auto py-16 md:py-20 space-y-8 md:space-y-10">
+          <SectionHeader eyebrow="Industries Served" title="Who We Work With" />
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+            {industries.map((ind, i) => (
+              <SlideEffect key={ind.name} delay={0.05 * i}>
+                <div className="flex items-center gap-3 rounded-xl bg-white shadow-[0_1px_8px_rgba(27,42,74,0.06)] p-4">
+                  <ind.icon size={18} strokeWidth={1.5} className="text-teal shrink-0" aria-hidden="true" />
+                  <span className="text-sm font-medium text-navy">{ind.name}</span>
+                </div>
+              </SlideEffect>
+            ))}
+          </div>
         </div>
       </div>
 
@@ -168,7 +171,7 @@ export default function CapabilityStatementPage() {
             <ul className="space-y-3">
               {qualifications.map((item) => (
                 <li key={item} className="flex items-start gap-3 text-sm text-foreground">
-                  <ShieldCheck size={16} strokeWidth={1.5} className="text-teal shrink-0 mt-0.5" aria-hidden="true" />
+                  <ShieldCheck size={16} strokeWidth={1.5} className="text-gold-dark shrink-0 mt-0.5" aria-hidden="true" />
                   {item}
                 </li>
               ))}
@@ -178,20 +181,30 @@ export default function CapabilityStatementPage() {
       </div>
 
       {/* Company Snapshot */}
-      <div className="space-y-8 md:space-y-10">
-        <SectionHeader eyebrow="Company Snapshot" title="At a Glance" />
-        <SlideEffect>
-          <div className="rounded-2xl border border-border bg-secondary p-6 md:p-8">
-            <dl className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-4">
+      <div className="relative left-1/2 w-screen -translate-x-1/2 overflow-hidden bg-navy">
+        <div className="absolute inset-0 -z-10 pointer-events-none" aria-hidden="true">
+          <DotGrid id="capability-snapshot-dot-grid" className="absolute inset-0 h-full w-full text-white/[0.06]" />
+        </div>
+        <div className="relative px-4 xl:px-6 max-w-7xl mx-auto py-16 md:py-20 space-y-8 md:space-y-10">
+          <div className="text-center space-y-1.5 md:space-y-2">
+            <SlideEffect>
+              <span className="text-xs md:text-sm font-medium tracking-[0.14em] uppercase text-teal-light">Company Snapshot</span>
+            </SlideEffect>
+            <SlideEffect>
+              <h2 className="font-serif text-2xl md:text-4xl lg:text-header font-semibold leading-tight text-white">At a Glance</h2>
+            </SlideEffect>
+          </div>
+          <SlideEffect>
+            <dl className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-x-8 gap-y-6 max-w-4xl mx-auto">
               {snapshot.map((item) => (
-                <div key={item.label}>
-                  <dt className="text-xs font-medium tracking-[0.1em] uppercase text-foreground/60">{item.label}</dt>
-                  <dd className="text-sm font-semibold text-navy mt-0.5">{item.value}</dd>
+                <div key={item.label} className="text-center sm:text-left">
+                  <dt className="text-xs font-medium tracking-[0.1em] uppercase text-white/50">{item.label}</dt>
+                  <dd className="text-sm font-semibold text-white mt-0.5">{item.value}</dd>
                 </div>
               ))}
             </dl>
-          </div>
-        </SlideEffect>
+          </SlideEffect>
+        </div>
       </div>
 
       {/* Service Approach + CTA */}
