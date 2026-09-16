@@ -85,7 +85,7 @@ export default function CapabilityStatementPage() {
           description="Dependable transportation. Documented handoffs. Responsive regional coverage across Maryland, Washington DC, and Northern Virginia."
         />
         <SlideEffect className="flex justify-center">
-          <DownloadButton href="/Iron-Bridge-Capability-Statement.pdf" filename="Iron-Bridge-Capability-Statement.pdf" />
+          <DownloadButton href="/Iron-Bridge-Capability-Statement.pdf" filename="Iron-Bridge-Capability-Statement.pdf" label="Download PDF" />
         </SlideEffect>
       </div>
 

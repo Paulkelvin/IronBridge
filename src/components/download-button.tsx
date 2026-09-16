@@ -6,7 +6,7 @@ import { ArrowDown, ArrowRight, Check } from 'lucide-react'
 
 type State = 'idle' | 'downloading' | 'done'
 
-export default function DownloadButton({ href, filename }: { href: string; filename?: string }) {
+export default function DownloadButton({ href, filename, label }: { href: string; filename?: string; label: string }) {
   const [state, setState] = useState<State>('idle')
   const [progress, setProgress] = useState(0)
 
@@ -50,8 +50,8 @@ export default function DownloadButton({ href, filename }: { href: string; filen
     <button
       type="button"
       onClick={handleClick}
-      className="relative h-14 w-52 rounded-full cursor-pointer outline-none focus-visible:ring-2 focus-visible:ring-teal/50 focus-visible:ring-offset-2"
-      aria-label={state === 'done' ? 'Download complete' : state === 'downloading' ? `Downloading ${progress}%` : 'Download PDF'}
+      className="relative h-14 min-w-52 px-2 rounded-full cursor-pointer outline-none focus-visible:ring-2 focus-visible:ring-teal/50 focus-visible:ring-offset-2"
+      aria-label={state === 'done' ? 'Download complete' : state === 'downloading' ? `Downloading ${progress}%` : `Download ${label}`}
     >
       {/* Outer shell */}
       <div className="absolute inset-0 rounded-full bg-white/80 shadow-[0_2px_12px_rgba(0,0,0,0.08),inset_0_1px_2px_rgba(255,255,255,0.9)] backdrop-blur-sm border border-white/60" />
@@ -84,7 +84,7 @@ export default function DownloadButton({ href, filename }: { href: string; filen
               <span className="flex items-center justify-center w-9 h-9 rounded-full bg-teal">
                 <ArrowDown size={18} strokeWidth={2.5} className="text-white" />
               </span>
-              <span className="text-base font-semibold text-navy pr-2">Download</span>
+              <span className="text-sm font-semibold text-navy pr-3">{label}</span>
             </motion.div>
           )}
 
@@ -116,7 +116,7 @@ export default function DownloadButton({ href, filename }: { href: string; filen
                 initial={{ scale: 0 }}
                 animate={{ scale: 1 }}
                 transition={{ delay: 0.15, type: 'spring', stiffness: 400, damping: 15 }}
-                className="flex items-center justify-center w-9 h-9 rounded-full bg-emerald-500"
+                className="flex items-center justify-center w-9 h-9 rounded-full bg-teal-light"
               >
                 <Check size={18} strokeWidth={3} className="text-white" />
               </motion.span>
