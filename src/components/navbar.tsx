@@ -32,23 +32,43 @@ const settings = {
     { name: 'service area', href: '/service-area' },
     { name: 'become a driver', href: '/become-a-driver' },
   ],
-  mobileLinks: [
-    { name: 'home', href: '/' },
-    { name: 'services', href: '/services' },
-    { name: 'medical courier', href: '/medical-courier' },
-    { name: 'commercial logistics', href: '/commercial-logistics' },
-    { name: 'dedicated routes', href: '/dedicated-routes' },
-    { name: 'bulk-item removal', href: '/bulk-item-removal' },
-    { name: 'about', href: '/about' },
-    { name: 'testimonials', href: '/#testimonials' },
-    { name: 'capability statement', href: '/capability-statement' },
-    { name: 'service area', href: '/service-area' },
-    { name: 'become a driver', href: '/become-a-driver' },
-  ],
   cta: {
     content: 'request a quote',
     href: '/request-a-quote'
   }
+}
+
+function MobileAccordion({ title, items, onNavigate }: { title: string; items: { name: string; href: string }[]; onNavigate: () => void }) {
+  const [open, setOpen] = useState(false)
+  return (
+    <li>
+      <button
+        type="button"
+        onClick={() => setOpen(!open)}
+        className="flex items-center justify-between w-full py-2 capitalize font-medium text-black cursor-pointer"
+      >
+        {title}
+        <ChevronDown size={16} strokeWidth={2} className={`text-teal transition-transform duration-200 ${open ? 'rotate-180' : ''}`} aria-hidden="true" />
+      </button>
+      <AnimatePresence>
+        {open && (
+          <motion.ul
+            initial={{ height: 0, opacity: 0 }}
+            animate={{ height: 'auto', opacity: 1 }}
+            exit={{ height: 0, opacity: 0 }}
+            transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
+            className="overflow-hidden pl-4 border-l border-border"
+          >
+            {items.map(item => (
+              <li key={item.name}>
+                <Link href={item.href} onClick={onNavigate} className="block py-2 text-foreground/80 capitalize">{item.name}</Link>
+              </li>
+            ))}
+          </motion.ul>
+        )}
+      </AnimatePresence>
+    </li>
+  )
 }
 
 export default function Navbar() {
@@ -174,9 +194,25 @@ export default function Navbar() {
           >
             <div className="flex flex-col p-6 space-y-6">
               <ul className="flex flex-col space-y-2 text-black font-medium select-none text-base">
-                {settings.mobileLinks.map(link => (
+                <li>
+                  <Link href="/" onClick={toggleMenu} className="block py-2 capitalize">Home</Link>
+                </li>
+                <MobileAccordion
+                  title="Services"
+                  items={[
+                    { name: 'All Services', href: '/services' },
+                    ...settings.services.items,
+                  ]}
+                  onNavigate={toggleMenu}
+                />
+                <MobileAccordion
+                  title="Company"
+                  items={settings.company.items}
+                  onNavigate={toggleMenu}
+                />
+                {settings.navLinks.map(link => (
                   <li key={link.name}>
-                    <Link href={link.href} title={link.name} onClick={toggleMenu} className="block py-2 capitalize">{link.name}</Link>
+                    <Link href={link.href} onClick={toggleMenu} className="block py-2 capitalize">{link.name}</Link>
                   </li>
                 ))}
               </ul>
