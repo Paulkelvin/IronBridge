@@ -4,12 +4,13 @@ import Footer from "@/sections/footer"
 import PageHeader from "@/components/page-header"
 import SectionHeader from "@/components/section-header"
 import SlideEffect from "@/components/slide-effect"
+import DownloadButton from "@/components/download-button"
 import { Button } from "@/components/ui/button"
 import IconBadge from "@/components/ui/icon-badge"
 import { CardBody, CardTitle } from "@/components/ui/card-text"
 import Card from "@/components/card"
 import {
-  ArrowRight, Building2, ClipboardCheck, Download, Factory,
+  ArrowRight, Building2, ClipboardCheck, Factory,
   FileText, Hammer, MapPin, Package, ShieldCheck, Stethoscope,
   Store, Truck, UserCheck, Briefcase, Globe
 } from "lucide-react"
@@ -84,12 +85,7 @@ export default function CapabilityStatementPage() {
           description="Dependable transportation. Documented handoffs. Responsive regional coverage across Maryland, Washington DC, and Northern Virginia."
         />
         <SlideEffect className="flex justify-center">
-          <a href="/Iron-Bridge-Capability-Statement.pdf" download>
-            <Button size="lg" className="bg-teal hover:bg-teal-light text-white">
-              <Download size={16} strokeWidth={1.5} />
-              Download PDF
-            </Button>
-          </a>
+          <DownloadButton href="/Iron-Bridge-Capability-Statement.pdf" filename="Iron-Bridge-Capability-Statement.pdf" />
         </SlideEffect>
       </div>
 
