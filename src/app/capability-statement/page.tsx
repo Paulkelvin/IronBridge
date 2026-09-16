@@ -79,21 +79,21 @@ const snapshot = [
 export default function CapabilityStatementPage() {
   return (
     <div className="px-4 xl:px-6 max-w-7xl mx-auto space-y-24 sm:space-y-32 md:space-y-40 scroll-smooth">
-      <PageHeader
-        eyebrow="Capability Statement"
-        title="What We Bring to the Table"
-        description="Dependable transportation. Documented handoffs. Responsive regional coverage across Maryland, Washington DC, and Northern Virginia."
-      />
-
-      {/* Download PDF */}
-      <SlideEffect className="flex justify-center">
-        <a href="/Iron-Bridge-Capability-Statement.pdf" download>
-          <Button size="lg" className="bg-teal hover:bg-teal-light text-white">
-            <Download size={16} strokeWidth={1.5} />
-            Download PDF
-          </Button>
-        </a>
-      </SlideEffect>
+      <div className="space-y-8">
+        <PageHeader
+          eyebrow="Capability Statement"
+          title="What We Bring to the Table"
+          description="Dependable transportation. Documented handoffs. Responsive regional coverage across Maryland, Washington DC, and Northern Virginia."
+        />
+        <SlideEffect className="flex justify-center">
+          <a href="/Iron-Bridge-Capability-Statement.pdf" download>
+            <Button size="lg" className="bg-teal hover:bg-teal-light text-white">
+              <Download size={16} strokeWidth={1.5} />
+              Download PDF
+            </Button>
+          </a>
+        </SlideEffect>
+      </div>
 
       {/* Core Capabilities */}
       <div className="space-y-8 md:space-y-10">
@@ -174,29 +174,29 @@ export default function CapabilityStatementPage() {
         </SlideEffect>
       </div>
 
-      {/* Service Approach */}
-      <SlideEffect>
-        <div className="rounded-2xl border border-teal/20 bg-teal-tint/30 p-6 md:p-8 space-y-3 text-center">
-          <div className="flex justify-center">
-            <IconBadge icon={FileText} />
+      {/* Service Approach + CTA */}
+      <div className="space-y-10">
+        <SlideEffect>
+          <div className="rounded-2xl border border-teal/20 bg-teal-tint/30 p-6 md:p-8 space-y-3 text-center">
+            <div className="flex justify-center">
+              <IconBadge icon={FileText} />
+            </div>
+            <h3 className="font-serif text-xl md:text-2xl font-semibold text-navy">Service Approach</h3>
+            <p className="text-sm md:text-base text-foreground max-w-2xl mx-auto">
+              Each assignment is confirmed around the client&apos;s pickup window, delivery requirements, authorized recipient,
+              handling instructions, and documentation needs. Completed service is supported by proof of delivery appropriate to the account.
+            </p>
           </div>
-          <h3 className="font-serif text-xl md:text-2xl font-semibold text-navy">Service Approach</h3>
-          <p className="text-sm md:text-base text-foreground max-w-2xl mx-auto">
-            Each assignment is confirmed around the client&apos;s pickup window, delivery requirements, authorized recipient,
-            handling instructions, and documentation needs. Completed service is supported by proof of delivery appropriate to the account.
-          </p>
-        </div>
-      </SlideEffect>
-
-      {/* CTA */}
-      <SlideEffect className="flex justify-center">
-        <Link href="/request-a-quote">
-          <Button size="lg" className="bg-navy hover:bg-navy/90 text-white">
-            Let&apos;s Discuss Your Route
-            <ArrowRight size={16} strokeWidth={1.5} />
-          </Button>
-        </Link>
-      </SlideEffect>
+        </SlideEffect>
+        <SlideEffect className="flex justify-center">
+          <Link href="/request-a-quote">
+            <Button size="lg" className="bg-navy hover:bg-navy/90 text-white">
+              Let&apos;s Discuss Your Route
+              <ArrowRight size={16} strokeWidth={1.5} />
+            </Button>
+          </Link>
+        </SlideEffect>
+      </div>
 
       <CTA />
       <Footer />
