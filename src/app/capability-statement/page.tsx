@@ -191,6 +191,10 @@ export default function CapabilityStatementPage() {
         </SlideEffect>
       </div>
 
+      <SlideEffect className="flex justify-center">
+        <DownloadButton href="/Iron-Bridge-Capability-Statement.pdf" filename="Iron-Bridge-Capability-Statement.pdf" label="Download PDF" />
+      </SlideEffect>
+
       <CTA />
       <Footer />
     </div>
