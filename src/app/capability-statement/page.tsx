@@ -105,12 +105,12 @@ export default function CapabilityStatementPage() {
               </span>
             </SlideEffect>
             <SlideEffect delay={0.05}>
-              <h1 className="font-serif text-white text-3xl md:text-5xl font-semibold tracking-tight leading-[1.1] max-w-3xl">
+              <h1 className="font-serif text-white text-2xl sm:text-4xl md:text-5xl font-semibold tracking-tight leading-[1.1] max-w-3xl whitespace-nowrap">
                 What We Bring to the Table
               </h1>
             </SlideEffect>
             <SlideEffect delay={0.1} className="flex justify-center">
-              <DownloadButton href="/Iron-Bridge-Capability-Statement.pdf" filename="Iron-Bridge-Capability-Statement.pdf" label="Capability Statement" />
+              <DownloadButton href="/Iron-Bridge-Capability-Statement.pdf" filename="Iron-Bridge-Capability-Statement.pdf" label="Download Our Capability Statements" />
             </SlideEffect>
           </section>
         </div>
@@ -232,7 +232,7 @@ export default function CapabilityStatementPage() {
       </div>
 
       <SlideEffect className="flex justify-center">
-        <DownloadButton href="/Iron-Bridge-Capability-Statement.pdf" filename="Iron-Bridge-Capability-Statement.pdf" label="Capability Statement" />
+        <DownloadButton href="/Iron-Bridge-Capability-Statement.pdf" filename="Iron-Bridge-Capability-Statement.pdf" label="Download Our Capability Statements" />
       </SlideEffect>
 
       <CTA />

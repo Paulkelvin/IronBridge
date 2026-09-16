@@ -51,7 +51,7 @@ export default function DownloadButton({ href, filename, label }: { href: string
       type="button"
       onClick={handleClick}
       className="relative h-14 min-w-52 px-2 rounded-full cursor-pointer outline-none focus-visible:ring-2 focus-visible:ring-teal/50 focus-visible:ring-offset-2"
-      aria-label={state === 'done' ? 'Download complete' : state === 'downloading' ? `Downloading ${progress}%` : `Download ${label}`}
+      aria-label={state === 'done' ? 'Download complete' : state === 'downloading' ? `Downloading ${progress}%` : label}
     >
       {/* Outer shell */}
       <div className="absolute inset-0 rounded-full bg-white shadow-[0_2px_16px_rgba(0,0,0,0.10)] border border-border" />
@@ -81,10 +81,11 @@ export default function DownloadButton({ href, filename, label }: { href: string
               transition={{ duration: 0.2 }}
               className="flex items-center gap-3"
             >
-              <span className="flex items-center justify-center w-9 h-9 rounded-full bg-teal">
-                <ArrowDown size={18} strokeWidth={2.5} className="text-white" />
+              <span className="flex items-center justify-center w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-teal shrink-0">
+                <ArrowDown size={16} strokeWidth={2.5} className="text-white sm:hidden" />
+                <ArrowDown size={18} strokeWidth={2.5} className="text-white hidden sm:block" />
               </span>
-              <span className="text-sm font-semibold text-navy pr-3">{label}</span>
+              <span className="text-xs sm:text-sm font-semibold text-navy pr-3 whitespace-nowrap">{label}</span>
             </motion.div>
           )}
 
