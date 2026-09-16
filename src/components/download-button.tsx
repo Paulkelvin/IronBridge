@@ -50,7 +50,7 @@ export default function DownloadButton({ href, filename, label }: { href: string
     <button
       type="button"
       onClick={handleClick}
-      className="relative h-14 min-w-52 px-2 rounded-full cursor-pointer outline-none focus-visible:ring-2 focus-visible:ring-teal/50 focus-visible:ring-offset-2"
+      className="relative h-11 sm:h-12 min-w-44 px-1.5 rounded-full cursor-pointer outline-none focus-visible:ring-2 focus-visible:ring-teal/50 focus-visible:ring-offset-2"
       aria-label={state === 'done' ? 'Download complete' : state === 'downloading' ? `Downloading ${progress}%` : label}
     >
       {/* Outer shell */}
@@ -79,13 +79,13 @@ export default function DownloadButton({ href, filename, label }: { href: string
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -8 }}
               transition={{ duration: 0.2 }}
-              className="flex items-center gap-3"
+              className="flex items-center gap-2"
             >
-              <span className="flex items-center justify-center w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-teal shrink-0">
-                <ArrowDown size={16} strokeWidth={2.5} className="text-white sm:hidden" />
-                <ArrowDown size={18} strokeWidth={2.5} className="text-white hidden sm:block" />
+              <span className="flex items-center justify-center w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-teal shrink-0">
+                <ArrowDown size={14} strokeWidth={2.5} className="text-white sm:hidden" />
+                <ArrowDown size={16} strokeWidth={2.5} className="text-white hidden sm:block" />
               </span>
-              <span className="text-xs sm:text-sm font-semibold text-navy pr-3 whitespace-nowrap">{label}</span>
+              <span className="text-xs sm:text-sm font-semibold text-navy pr-2.5 whitespace-nowrap">{label}</span>
             </motion.div>
           )}
 
@@ -110,16 +110,16 @@ export default function DownloadButton({ href, filename, label }: { href: string
               animate={{ opacity: 1, scale: 1 }}
               exit={{ opacity: 0, y: -8 }}
               transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
-              className="flex items-center gap-3"
+              className="flex items-center gap-2"
             >
-              <span className="text-base font-semibold text-navy pl-2">Done</span>
+              <span className="text-sm font-semibold text-navy pl-2">Done</span>
               <motion.span
                 initial={{ scale: 0 }}
                 animate={{ scale: 1 }}
                 transition={{ delay: 0.15, type: 'spring', stiffness: 400, damping: 15 }}
-                className="flex items-center justify-center w-9 h-9 rounded-full bg-teal-light"
+                className="flex items-center justify-center w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-teal-light"
               >
-                <Check size={18} strokeWidth={3} className="text-white" />
+                <Check size={16} strokeWidth={3} className="text-white" />
               </motion.span>
             </motion.div>
           )}
