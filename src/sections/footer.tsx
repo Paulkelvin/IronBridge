@@ -21,6 +21,8 @@ const settings = {
       title: 'Company',
       links: [
         { title: 'About', href: '/about' },
+        { title: 'Testimonials', href: '/#testimonials' },
+        { title: 'Capability Statement', href: '/capability-statement' },
         { title: 'Service Area', href: '/service-area' },
         { title: 'Compliance & Safety', href: '/compliance-safety' },
         { title: 'Become a Driver', href: '/become-a-driver' },

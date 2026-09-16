@@ -9,6 +9,7 @@ const routes = [
   "/commercial-logistics",
   "/dedicated-routes",
   "/bulk-item-removal",
+  "/capability-statement",
   "/about",
   "/service-area",
   "/compliance-safety",

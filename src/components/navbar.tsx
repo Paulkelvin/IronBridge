@@ -20,19 +20,29 @@ const settings = {
       { name: 'Bulk-Item Removal', href: '/bulk-item-removal', description: 'Furniture, appliance, and large-item removal.' },
     ],
   },
+  company: {
+    name: 'company',
+    items: [
+      { name: 'About', href: '/about', description: 'Our story, mission, and the team behind Iron Bridge.' },
+      { name: 'Testimonials', href: '/#testimonials', description: 'What our clients say about working with us.' },
+      { name: 'Capability Statement', href: '/capability-statement', description: 'Qualifications, NAICS codes, and company overview.' },
+    ],
+  },
   navLinks: [
     { name: 'service area', href: '/service-area' },
-    { name: 'about', href: '/about' },
     { name: 'become a driver', href: '/become-a-driver' },
   ],
   mobileLinks: [
+    { name: 'home', href: '/' },
     { name: 'services', href: '/services' },
     { name: 'medical courier', href: '/medical-courier' },
     { name: 'commercial logistics', href: '/commercial-logistics' },
     { name: 'dedicated routes', href: '/dedicated-routes' },
     { name: 'bulk-item removal', href: '/bulk-item-removal' },
-    { name: 'service area', href: '/service-area' },
     { name: 'about', href: '/about' },
+    { name: 'testimonials', href: '/#testimonials' },
+    { name: 'capability statement', href: '/capability-statement' },
+    { name: 'service area', href: '/service-area' },
     { name: 'become a driver', href: '/become-a-driver' },
   ],
   cta: {
@@ -94,6 +104,27 @@ export default function Navbar() {
                       </Link>
                     </NavigationMenu.Link>
                   </li>
+                </ul>
+              </NavigationMenu.Content>
+            </NavigationMenu.Item>
+
+            <NavigationMenu.Item>
+              <NavigationMenu.Trigger className="group flex items-center gap-1 hover:opacity-80 transition-all capitalize cursor-pointer outline-none">
+                {settings.company.name}
+                <ChevronDown size={14} strokeWidth={2} className="text-teal transition-transform duration-200 group-data-[state=open]:rotate-180" aria-hidden="true" />
+              </NavigationMenu.Trigger>
+              <NavigationMenu.Content className="absolute top-full left-1/2 -translate-x-1/2 pt-3 data-[motion=from-start]:animate-in data-[motion=from-end]:animate-in data-[motion=to-start]:animate-out data-[motion=to-end]:animate-out data-[motion=from-start]:fade-in data-[motion=from-end]:fade-in data-[motion=to-start]:fade-out data-[motion=to-end]:fade-out data-[motion=from-start]:slide-in-from-top-1 data-[motion=from-end]:slide-in-from-top-1 duration-150">
+                <ul className="w-72 rounded-xl border border-border bg-white shadow-lg p-2">
+                  {settings.company.items.map(item => (
+                    <li key={item.name}>
+                      <NavigationMenu.Link asChild>
+                        <Link href={item.href} className="block rounded-lg px-3.5 py-2.5 hover:bg-secondary transition-colors">
+                          <span className="block text-sm font-semibold text-navy normal-case">{item.name}</span>
+                          <span className="block text-xs text-foreground/60 normal-case mt-0.5">{item.description}</span>
+                        </Link>
+                      </NavigationMenu.Link>
+                    </li>
+                  ))}
                 </ul>
               </NavigationMenu.Content>
             </NavigationMenu.Item>

@@ -83,7 +83,7 @@ export default function Testimonials() {
   }
 
   return (
-    <div className="space-y-8 md:space-y-10 lg:space-y-12 mx-auto text-center">
+    <div id="testimonials" className="space-y-8 md:space-y-10 lg:space-y-12 mx-auto text-center scroll-mt-24">
       <SectionHeader eyebrow={settings.eyebrow} title={settings.title} description={settings.description} />
 
       {/* Desktop / tablet: static grid */}
