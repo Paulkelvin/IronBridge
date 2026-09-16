@@ -84,7 +84,7 @@ export default function CapabilityStatementPage() {
           title="What We Bring to the Table"
         />
         <SlideEffect className="flex justify-center">
-          <DownloadButton href="/Iron-Bridge-Capability-Statement.pdf" filename="Iron-Bridge-Capability-Statement.pdf" label="Download PDF" />
+          <DownloadButton href="/Iron-Bridge-Capability-Statement.pdf" filename="Iron-Bridge-Capability-Statement.pdf" label="Capability Statement" />
         </SlideEffect>
       </div>
 
@@ -192,7 +192,7 @@ export default function CapabilityStatementPage() {
       </div>
 
       <SlideEffect className="flex justify-center">
-        <DownloadButton href="/Iron-Bridge-Capability-Statement.pdf" filename="Iron-Bridge-Capability-Statement.pdf" label="Download PDF" />
+        <DownloadButton href="/Iron-Bridge-Capability-Statement.pdf" filename="Iron-Bridge-Capability-Statement.pdf" label="Capability Statement" />
       </SlideEffect>
 
       <CTA />
