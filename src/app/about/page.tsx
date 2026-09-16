@@ -91,12 +91,12 @@ export default function AboutPage() {
       <div className="space-y-8 md:space-y-10">
         <SectionHeader eyebrow="The Name" title="Why 'Iron Bridge'" description="The name represents the character of the company." />
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
-          <SlideEffect direction="right" isSpring={false} className="space-y-3 rounded-2xl border border-border bg-secondary/40 p-6 md:p-8">
+          <SlideEffect direction="right" isSpring={false} className="space-y-3 rounded-2xl bg-teal-tint p-6 md:p-8">
             <IconBadge icon={ShieldCheck} size={24} />
             <CardTitle className="text-lg">Iron</CardTitle>
             <CardBody className="text-sm md:text-base">Symbolizes strength, resilience, and dependability: the standard every route is held to.</CardBody>
           </SlideEffect>
-          <SlideEffect direction="left" isSpring={false} className="space-y-3 rounded-2xl border border-border bg-secondary/40 p-6 md:p-8">
+          <SlideEffect direction="left" isSpring={false} className="space-y-3 rounded-2xl bg-teal-tint p-6 md:p-8">
             <IconBadge icon={Link2} size={24} />
             <CardTitle className="text-lg">Bridge</CardTitle>
             <CardBody className="text-sm md:text-base">Represents connection, bringing together businesses, healthcare providers, organizations, and the communities they serve.</CardBody>
