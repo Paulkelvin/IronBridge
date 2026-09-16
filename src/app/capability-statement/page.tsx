@@ -210,7 +210,7 @@ export default function CapabilityStatementPage() {
       {/* Service Approach + CTA */}
       <div className="space-y-10">
         <SlideEffect>
-          <div className="rounded-2xl border border-teal/20 bg-teal-tint/30 p-6 md:p-8 space-y-3 text-center">
+          <div className="rounded-2xl bg-teal-tint p-6 md:p-8 space-y-3 text-center">
             <div className="flex justify-center">
               <IconBadge icon={FileText} />
             </div>
