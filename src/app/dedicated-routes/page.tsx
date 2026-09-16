@@ -74,7 +74,7 @@ export default function DedicatedRoutesPage() {
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
           {audiences.map((a, i) => (
             <SlideEffect key={a.title} direction="top" delay={0.1 * i} isSpring={false}>
-              <Card variant="outline">
+              <Card>
                 <IconBadge icon={a.icon} size={22} />
                 <CardTitle className="text-base">{a.title}</CardTitle>
                 <CardBody className="text-sm">{a.content}</CardBody>
