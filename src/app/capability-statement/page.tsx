@@ -78,7 +78,7 @@ const snapshot = [
 
 export default function CapabilityStatementPage() {
   return (
-    <>
+    <div className="px-4 xl:px-6 max-w-7xl mx-auto space-y-24 sm:space-y-32 md:space-y-40 scroll-smooth">
       <PageHeader
         eyebrow="Capability Statement"
         title="What We Bring to the Table"
@@ -200,6 +200,6 @@ export default function CapabilityStatementPage() {
 
       <CTA />
       <Footer />
-    </>
+    </div>
   )
 }
