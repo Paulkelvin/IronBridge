@@ -1,7 +1,6 @@
 import type { Metadata } from "next"
 import CTA from "@/sections/cta"
 import Footer from "@/sections/footer"
-import PageHeader from "@/components/page-header"
 import SectionHeader from "@/components/section-header"
 import SlideEffect from "@/components/slide-effect"
 import DownloadButton from "@/components/download-button"
@@ -14,6 +13,7 @@ import {
   FileText, Hammer, MapPin, Package, ShieldCheck, Stethoscope,
   Store, Truck, UserCheck, Briefcase, Globe
 } from "lucide-react"
+import Image from "next/image"
 import Link from "next/link"
 
 export const metadata: Metadata = {
@@ -78,14 +78,41 @@ const snapshot = [
 export default function CapabilityStatementPage() {
   return (
     <div className="px-4 xl:px-6 max-w-7xl mx-auto space-y-24 sm:space-y-32 md:space-y-40 scroll-smooth">
-      <div className="space-y-8">
-        <PageHeader
-          eyebrow="Capability Statement"
-          title="What We Bring to the Table"
-        />
-        <SlideEffect className="flex justify-center">
-          <DownloadButton href="/Iron-Bridge-Capability-Statement.pdf" filename="Iron-Bridge-Capability-Statement.pdf" label="Capability Statement" />
-        </SlideEffect>
+      {/* Hero */}
+      <div className="relative left-1/2 w-screen -translate-x-1/2">
+        <div className="relative overflow-hidden">
+          <div className="absolute inset-0 -z-20">
+            <Image
+              src="/brand/capability-statement-hero.jpg"
+              alt="A courier and client completing a signed proof-of-delivery handoff"
+              fill
+              className="object-cover object-center"
+              priority
+              quality={85}
+            />
+          </div>
+          <div
+            className="absolute inset-0 -z-10"
+            style={{
+              background: 'linear-gradient(180deg, rgba(16,26,48,0.88) 0%, rgba(16,26,48,0.72) 45%, rgba(16,26,48,0.88) 100%)',
+            }}
+          />
+          <section className="relative px-4 xl:px-6 max-w-7xl mx-auto py-20 md:py-28 lg:py-32 flex flex-col items-center text-center gap-6 md:gap-8">
+            <SlideEffect>
+              <span className="inline-flex items-center rounded-full border border-white/20 bg-white/10 backdrop-blur-sm px-4 py-1.5 text-[11px] md:text-xs font-medium tracking-[0.14em] text-white/90 uppercase">
+                Capability Statement
+              </span>
+            </SlideEffect>
+            <SlideEffect delay={0.05}>
+              <h1 className="font-serif text-white text-3xl md:text-5xl font-semibold tracking-tight leading-[1.1] max-w-3xl">
+                What We Bring to the Table
+              </h1>
+            </SlideEffect>
+            <SlideEffect delay={0.1} className="flex justify-center">
+              <DownloadButton href="/Iron-Bridge-Capability-Statement.pdf" filename="Iron-Bridge-Capability-Statement.pdf" label="Capability Statement" />
+            </SlideEffect>
+          </section>
+        </div>
       </div>
 
       {/* Core Capabilities */}
