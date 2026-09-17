@@ -160,7 +160,7 @@ export default function DriverForm() {
               >
                 <Image
                   src="/brand/become-a-driver-hero.jpg"
-                  alt="Iron Bridge driver standing confidently in front of a delivery van"
+                  alt="Four Iron Bridge drivers of different backgrounds standing together in front of a delivery van"
                   fill
                   className="object-cover"
                   priority
