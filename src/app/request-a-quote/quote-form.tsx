@@ -35,6 +35,12 @@ export default function QuoteForm() {
     cardRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' })
   }, [step])
 
+  useEffect(() => {
+    if (status === 'success') {
+      cardRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+    }
+  }, [status])
+
   const {
     register,
     control,
@@ -104,10 +110,12 @@ export default function QuoteForm() {
         </div>
 
         {status === 'success' ? (
-          <FormSuccess
-            title="Request received"
-            description="Thanks! We've received your request and sent a confirmation to your email. Our team will follow up shortly."
-          />
+          <div ref={cardRef} className="scroll-mt-24">
+            <FormSuccess
+              title="Request received"
+              description="Thanks! We've received your request and sent a confirmation to your email. Our team will follow up shortly."
+            />
+          </div>
         ) : (
           <div ref={cardRef} className="rounded-2xl border border-border bg-white shadow-sm p-6 md:p-8 scroll-mt-24 overflow-x-hidden">
             <div className="flex items-center gap-3 mb-6">

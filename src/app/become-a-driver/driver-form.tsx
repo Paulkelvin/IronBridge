@@ -48,6 +48,12 @@ export default function DriverForm() {
     cardRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' })
   }, [step])
 
+  useEffect(() => {
+    if (status === 'success') {
+      cardRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+    }
+  }, [status])
+
   const {
     register,
     control,
@@ -178,10 +184,12 @@ export default function DriverForm() {
         </div>
 
         {status === 'success' ? (
-          <FormSuccess
-            title="Application received"
-            description="Thanks for your interest. We've received your application and sent a confirmation to your email. We'll follow up if there's a fit."
-          />
+          <div ref={cardRef} className="scroll-mt-24">
+            <FormSuccess
+              title="Application received"
+              description="Thanks for your interest. We've received your application and sent a confirmation to your email. We'll follow up if there's a fit."
+            />
+          </div>
         ) : (
           <div ref={cardRef} className="rounded-2xl border border-border bg-white shadow-sm p-6 md:p-8 scroll-mt-24">
             <div className="flex items-center gap-3 mb-6">
