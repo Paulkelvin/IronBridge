@@ -40,18 +40,24 @@ const settings = {
       caption: 'Careful handling, every load',
     },
     {
-      src: '/brand/gallery-commercial-handoff.jpg',
-      alt: 'Iron Bridge driver handing a box to a shop owner on a commercial street',
+      src: '/brand/gallery-warehouse-handoff.jpg',
+      alt: 'Two Iron Bridge drivers handing off a box between them at a loading dock',
       position: 'md:[grid-column:6/13] md:[grid-row:14/27]',
       align: 'ml-auto md:mx-0',
       rotate: 'rotate-[-0.6deg] md:rotate-[-0.8deg]',
       kicker: 'Commercial Logistics',
-      caption: 'Reliable, every route',
+      caption: 'Every handoff, a team effort',
     },
   ],
   // Reachable via the "See More" badge and by sliding past the last
   // featured photo; not shown in the staggered teaser itself.
   morePhotos: [
+    {
+      src: '/brand/gallery-commercial-handoff.jpg',
+      alt: 'Iron Bridge driver handing a box to a shop owner on a commercial street',
+      kicker: 'Commercial Logistics',
+      caption: 'Reliable, every route',
+    },
     {
       src: '/brand/gallery-residential-delivery.jpg',
       alt: 'Iron Bridge driver handing a package to a family at their front door',
