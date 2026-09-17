@@ -14,7 +14,6 @@ const settings = {
         { title: 'Commercial Logistics', href: '/commercial-logistics' },
         { title: 'Dedicated Routes', href: '/dedicated-routes' },
         { title: 'Bulk-Item Removal', href: '/bulk-item-removal' },
-        { title: 'Industries Served', href: '/#industries' },
       ],
     },
     {
@@ -22,6 +21,7 @@ const settings = {
       links: [
         { title: 'About', href: '/about' },
         { title: 'Testimonials', href: '/#testimonials' },
+        { title: 'Industries Served', href: '/#industries' },
         { title: 'Capability Statement', href: '/capability-statement' },
         { title: 'Service Area', href: '/service-area' },
         { title: 'Compliance & Safety', href: '/compliance-safety' },
