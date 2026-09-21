@@ -82,6 +82,7 @@ export default function AboutPage() {
             src="/brand/about-bridge.png"
             alt="Illustration of a bridge"
             fill
+            sizes="(min-width: 768px) 50vw, 100vw"
             className="object-contain"
           />
         </SlideEffect>

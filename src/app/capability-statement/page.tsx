@@ -87,6 +87,7 @@ export default function CapabilityStatementPage() {
               src="/brand/capability-statement-hero.jpg"
               alt="A courier and client completing a signed proof-of-delivery handoff"
               fill
+              sizes="100vw"
               className="object-cover object-center"
               priority
               quality={85}

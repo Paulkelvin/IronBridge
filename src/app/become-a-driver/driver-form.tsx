@@ -168,6 +168,7 @@ export default function DriverForm() {
                   src="/brand/become-a-driver-hero.jpg"
                   alt="Four Iron Bridge drivers of different backgrounds standing together in front of a delivery van"
                   fill
+                  sizes="(min-width: 1024px) 448px, 352px"
                   className="object-cover"
                   priority
                 />

@@ -49,6 +49,7 @@ export default function Hero() {
           src="/brand/services-hero-bg.jpg"
           alt=""
           fill
+          sizes="100vw"
           className="object-cover object-center"
           priority
           quality={85}
@@ -133,9 +134,10 @@ export default function Hero() {
               aria-hidden="true"
             />
             <Image
-              src="/brand/hero-van-courier.png"
+              src="/brand/hero-van-courier.webp"
               alt="Iron Bridge delivery courier and van"
               fill
+              sizes="(min-width: 1280px) 704px, (min-width: 1024px) 608px, 352px"
               className="object-contain"
               priority
             />
