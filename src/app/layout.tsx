@@ -4,6 +4,7 @@ import "./globals.css";
 import Header from "@/components/header";
 import LenisProvider from "@/providers/lenis";
 import ScrollRestoration from "@/components/scroll-restoration";
+import MobileCtaBar from "@/components/mobile-cta-bar";
 
 const sans = Inter({
   variable: "--font-ib-sans",
@@ -80,8 +81,9 @@ export default function RootLayout({
         <ScrollRestoration />
         <LenisProvider>
           <Header />
-          <div className="pt-[72px]">{children}</div>
+          <div className="pt-[72px] pb-14 md:pb-0">{children}</div>
         </LenisProvider>
+        <MobileCtaBar />
       </body>
     </html>
   );
