@@ -60,7 +60,7 @@ export default function Credentials() {
         )}
       </SlideEffect>
 
-      <p className="text-xs md:text-sm text-foreground/60 italic max-w-2xl mx-auto">
+      <p className="text-xs md:text-sm text-foreground/80 italic max-w-2xl mx-auto">
         These reflect training our personnel have completed, coverage and standards we maintain, and where
         we&apos;re based. They are not licenses, certifications, or endorsements issued by a government agency.
       </p>

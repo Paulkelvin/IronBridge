@@ -320,7 +320,7 @@ export default function ServiceAreaMapGoogle({
     <div className={cn("relative overflow-hidden rounded-2xl border border-border bg-secondary", className)}>
       <div ref={containerRef} style={{ position: 'absolute', inset: 0 }} />
       {loadFailed && (
-        <div className="absolute bottom-3 left-3 right-3 rounded-lg bg-white/90 backdrop-blur-sm px-3 py-2 text-xs text-foreground/70 text-center shadow-sm">
+        <div className="absolute bottom-3 left-3 right-3 rounded-lg bg-white/90 backdrop-blur-sm px-3 py-2 text-xs text-foreground/80 text-center shadow-sm">
           Map unavailable right now, service areas are listed on the right.
         </div>
       )}

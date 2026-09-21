@@ -19,7 +19,7 @@ const ServiceAreaMapGoogle = dynamic(() => import("@/components/graphics/service
 
 const mapUnavailableFallback = (
   <div className="relative w-full h-[380px] md:h-[460px] lg:h-[560px] rounded-2xl border border-border bg-secondary flex items-center justify-center">
-    <p className="text-sm text-foreground/70 text-center px-6">Map unavailable right now, service areas are listed on the right.</p>
+    <p className="text-sm text-foreground/80 text-center px-6">Map unavailable right now, service areas are listed on the right.</p>
   </div>
 )
 

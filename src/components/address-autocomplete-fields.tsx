@@ -94,7 +94,7 @@ export default function AddressFields({
   return (
     <div className="space-y-3">
       <Label required htmlFor={streetField}>{label}</Label>
-      <p className="text-xs text-foreground/50 -mt-2">Search for an address, or type your own in below.</p>
+      <p className="text-xs text-foreground/80 -mt-2">Search for an address, or type your own in below.</p>
 
       <div>
         <input

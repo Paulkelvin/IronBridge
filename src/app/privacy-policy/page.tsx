@@ -78,7 +78,7 @@ export default function PrivacyPolicyPage() {
 
       <div className="max-w-3xl mx-auto w-full space-y-10 md:space-y-12">
         <SlideEffect isSpring={false}>
-          <p className="text-sm text-foreground/60">Effective Date: September 14, 2026</p>
+          <p className="text-sm text-foreground/80">Effective Date: September 14, 2026</p>
         </SlideEffect>
 
         {sections.map((section, i) => (

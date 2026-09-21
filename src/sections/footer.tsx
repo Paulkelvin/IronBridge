@@ -42,7 +42,7 @@ export default function Footer() {
         <div className="flex flex-col gap-4 max-w-xs">
           <Logo />
           <p className="text-foreground/80">Dependability Delivered Daily.</p>
-          <p className="text-[11px] sm:text-xs text-foreground/60 uppercase tracking-[0.08em] sm:tracking-[0.1em] whitespace-nowrap">
+          <p className="text-[11px] sm:text-xs text-foreground/80 uppercase tracking-[0.08em] sm:tracking-[0.1em] whitespace-nowrap">
             <span className="sm:hidden">MD · DC · Northern VA</span>
             <span className="hidden sm:inline">Maryland · Washington, DC · Northern Virginia</span>
           </p>
@@ -84,7 +84,7 @@ export default function Footer() {
             <Clock size={14} strokeWidth={1.5} aria-hidden="true" />
             24/7 Availability
           </span>
-          <p className="text-xs text-foreground/60">Business inquiries: same-day response</p>
+          <p className="text-xs text-foreground/80">Business inquiries: same-day response</p>
           <Link href="/request-a-quote" className="mt-1">
             <Button
               size='default'
@@ -97,7 +97,7 @@ export default function Footer() {
       </div>
 
       {/* copyright */}
-      <p className="text-center text-xs text-foreground/60">{settings.copyright}</p>
+      <p className="text-center text-xs text-foreground/80">{settings.copyright}</p>
     </footer>
   )
 }

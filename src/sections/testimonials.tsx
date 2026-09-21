@@ -58,7 +58,7 @@ function TestimonialCard({ t }: { t: (typeof settings.testimonials)[number] }) {
       <p className="text-sm md:text-base text-foreground/80 leading-relaxed">&ldquo;{t.quote}&rdquo;</p>
       <div>
         <p className="font-semibold text-navy">{t.role}</p>
-        <p className="text-xs md:text-sm text-foreground/60">{t.location}</p>
+        <p className="text-xs md:text-sm text-foreground/80">{t.location}</p>
       </div>
     </Card>
   )

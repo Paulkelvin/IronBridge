@@ -103,7 +103,7 @@ export default function AboutPage() {
           </SlideEffect>
         </div>
         <SlideEffect isSpring={false}>
-          <p className="text-sm md:text-base text-foreground/70 max-w-3xl mx-auto text-center">
+          <p className="text-sm md:text-base text-foreground/80 max-w-3xl mx-auto text-center">
             Together, those ideas express our purpose: to provide a strong and dependable connection
             between every pickup and every destination.
           </p>
@@ -126,7 +126,7 @@ export default function AboutPage() {
         </p>
         <div>
           <p className="font-semibold text-navy">Lareon Brent</p>
-          <p className="text-sm text-foreground/60">Founder, Iron Bridge Mobility Solutions</p>
+          <p className="text-sm text-foreground/80">Founder, Iron Bridge Mobility Solutions</p>
         </div>
       </SlideEffect>
 

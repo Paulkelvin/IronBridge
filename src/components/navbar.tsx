@@ -112,7 +112,7 @@ export default function Navbar() {
                       <NavigationMenu.Link asChild>
                         <Link href={item.href} className="block rounded-lg px-3.5 py-2.5 hover:bg-secondary transition-colors">
                           <span className="block text-sm font-semibold text-navy normal-case">{item.name}</span>
-                          <span className="block text-xs text-foreground/60 normal-case mt-0.5">{item.description}</span>
+                          <span className="block text-xs text-foreground/80 normal-case mt-0.5">{item.description}</span>
                         </Link>
                       </NavigationMenu.Link>
                     </li>
@@ -140,7 +140,7 @@ export default function Navbar() {
                       <NavigationMenu.Link asChild>
                         <Link href={item.href} className="block rounded-lg px-3.5 py-2.5 hover:bg-secondary transition-colors">
                           <span className="block text-sm font-semibold text-navy normal-case">{item.name}</span>
-                          <span className="block text-xs text-foreground/60 normal-case mt-0.5">{item.description}</span>
+                          <span className="block text-xs text-foreground/80 normal-case mt-0.5">{item.description}</span>
                         </Link>
                       </NavigationMenu.Link>
                     </li>

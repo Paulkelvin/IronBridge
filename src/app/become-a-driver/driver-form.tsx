@@ -196,7 +196,7 @@ export default function DriverForm() {
               <div className="flex-1 h-1 rounded-full bg-secondary overflow-hidden">
                 <div className="h-full bg-teal rounded-full transition-all duration-300" style={{ width: step === 1 ? '50%' : '100%' }} />
               </div>
-              <span className="text-xs font-medium text-foreground/60 tracking-wide whitespace-nowrap">Step {step} of 2</span>
+              <span className="text-xs font-medium text-foreground/80 tracking-wide whitespace-nowrap">Step {step} of 2</span>
             </div>
 
             <h2 className="font-serif text-xl text-navy mb-6">

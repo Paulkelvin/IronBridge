@@ -122,7 +122,7 @@ export default function QuoteForm() {
               <div className="flex-1 h-1 rounded-full bg-secondary overflow-hidden">
                 <div className="h-full bg-teal rounded-full transition-all duration-300" style={{ width: `${(step / 3) * 100}%` }} />
               </div>
-              <span className="text-xs font-medium text-foreground/60 tracking-wide whitespace-nowrap">Step {step} of 3</span>
+              <span className="text-xs font-medium text-foreground/80 tracking-wide whitespace-nowrap">Step {step} of 3</span>
             </div>
 
             <h2 className="font-serif text-xl text-navy mb-6">
@@ -308,7 +308,7 @@ export default function QuoteForm() {
 
         <div className="rounded-2xl bg-teal-tint p-6 text-center space-y-4">
           <h3 className="font-serif text-lg text-navy">Prefer to Talk to Someone?</h3>
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 text-sm text-foreground/70">
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 text-sm text-foreground/80">
             <a href="tel:+13018181929" className="flex items-center gap-2 hover:text-navy transition-colors">
               <Phone size={16} strokeWidth={1.5} aria-hidden="true" />
               (301) 818-1929
