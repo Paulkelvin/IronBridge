@@ -1,4 +1,5 @@
 import type { Metadata } from "next"
+import { pageMetadata } from "@/lib/page-metadata"
 import Card from "@/components/card"
 import CapabilityList from "@/components/capability-list"
 import CTA from "@/sections/cta"
@@ -13,10 +14,11 @@ import {
   ShieldCheck, Syringe, Truck as TruckIcon
 } from "lucide-react"
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: "Medical Courier Services | Maryland, Washington DC, Northern Virginia",
   description: "Blood and lab specimen transport, cold-packed and temperature-sensitive shipments, and STAT courier support for healthcare organizations across Maryland, Washington DC, and Northern Virginia.",
-}
+  path: "/medical-courier",
+})
 
 const capabilities = [
   { icon: Syringe, title: 'Blood & Lab Specimen Transportation', content: 'Pickup and delivery of blood and laboratory specimens between healthcare facilities, labs, and testing sites.' },

@@ -1,3 +1,5 @@
+import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/page-metadata";
 import Credentials from "@/sections/credentials";
 import CTA from "@/sections/cta";
 import FAQ from "@/sections/faq";
@@ -9,6 +11,12 @@ import Footer from "@/sections/footer";
 import Gallery from "@/sections/gallery";
 import Hero from "@/sections/hero";
 import Testimonials from "@/sections/testimonials";
+
+export const metadata: Metadata = pageMetadata({
+  title: "Iron Bridge Mobility Solutions | Dependability Delivered Daily.",
+  description: "Professional medical courier and commercial logistics solutions throughout Maryland, Washington DC, Northern Virginia and surrounding areas.",
+  path: "/",
+})
 
 export default function HomePage() {
   return (

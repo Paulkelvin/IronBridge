@@ -1,4 +1,5 @@
 import type { Metadata } from "next"
+import { pageMetadata } from "@/lib/page-metadata"
 import Card from "@/components/card"
 import CTA from "@/sections/cta"
 import Footer from "@/sections/footer"
@@ -11,10 +12,11 @@ import IconBadge from "@/components/ui/icon-badge"
 import { ArrowRight, Repeat, Sofa, Stethoscope, Truck } from "lucide-react"
 import Link from "next/link"
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: "Services | Iron Bridge Mobility Solutions",
   description: "Medical courier and commercial logistics services throughout Maryland, Washington DC, and Northern Virginia, including specimen transport, same-day delivery, and dedicated routes.",
-}
+  path: "/services",
+})
 
 const howWeWork = [
   { title: '1. Tell us what you need', content: 'Submit a quote request with pickup/delivery details, timing, and any special handling requirements.' },

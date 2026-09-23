@@ -25,9 +25,11 @@ export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   title,
   description,
+  alternates: { canonical: "/" },
   openGraph: {
     title,
     description,
+    url: "/",
     siteName: "Iron Bridge Mobility Solutions",
     locale: "en_US",
     type: "website",

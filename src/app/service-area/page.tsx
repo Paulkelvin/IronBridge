@@ -1,14 +1,16 @@
 import type { Metadata } from "next"
+import { pageMetadata } from "@/lib/page-metadata"
 import CTA from "@/sections/cta"
 import Footer from "@/sections/footer"
 import PageHeader from "@/components/page-header"
 import ServiceAreaExplorer from "@/components/service-area-explorer"
 import SlideEffect from "@/components/slide-effect"
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: "Service Area | Maryland, Washington DC, Northern Virginia",
   description: "Iron Bridge Mobility Solutions operates throughout Maryland, Washington DC, and Northern Virginia, including Baltimore, Annapolis, Silver Spring, Arlington, Alexandria, and Fairfax.",
-}
+  path: "/service-area",
+})
 
 const regions = [
   {

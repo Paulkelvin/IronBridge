@@ -1,4 +1,5 @@
 import type { Metadata } from "next"
+import { pageMetadata } from "@/lib/page-metadata"
 import DotGrid from "@/components/graphics/dot-grid"
 import CTA from "@/sections/cta"
 import Footer from "@/sections/footer"
@@ -12,10 +13,11 @@ import IconBadge from "@/components/ui/icon-badge"
 import { Handshake, Link2, MessageCircle, PackageCheck, Quote, ShieldCheck, Sparkles, UserCheck } from "lucide-react"
 import Image from "next/image"
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: "About Us | Iron Bridge Mobility Solutions",
   description: "Iron Bridge Mobility Solutions is built on reliability, accountability, and professional handling for medical courier and commercial logistics across Maryland, Washington DC, and Northern Virginia.",
-}
+  path: "/about",
+})
 
 const values = [
   { icon: ShieldCheck, title: 'Reliability', content: 'Showing up when we say we will, and following through on every route.' },

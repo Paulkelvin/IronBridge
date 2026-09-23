@@ -1,4 +1,5 @@
 import type { Metadata } from "next"
+import { pageMetadata } from "@/lib/page-metadata"
 import CTA from "@/sections/cta"
 import Footer from "@/sections/footer"
 import PageHeader from "@/components/page-header"
@@ -10,10 +11,11 @@ import {
   FileCheck, IdCard, PackageCheck, ShieldAlert, ShieldCheck, Thermometer
 } from "lucide-react"
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: "Compliance & Safety | Iron Bridge Mobility Solutions",
   description: "How Iron Bridge trains, qualifies, and documents medical courier and logistics operations: HIPAA and Bloodborne Pathogens training, chain-of-custody, and driver qualification standards.",
-}
+  path: "/compliance-safety",
+})
 
 const pillars = [
   {

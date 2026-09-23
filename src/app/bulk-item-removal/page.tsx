@@ -1,4 +1,5 @@
 import type { Metadata } from "next"
+import { pageMetadata } from "@/lib/page-metadata"
 import Card from "@/components/card"
 import CapabilityList from "@/components/capability-list"
 import CTA from "@/sections/cta"
@@ -15,10 +16,11 @@ import {
 } from "lucide-react"
 import Link from "next/link"
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: "Bulk-Item Removal | Furniture & Appliance Removal",
   description: "Furniture, appliance, and large-item removal for property managers, businesses, and residential customers across Maryland, Washington DC, and Northern Virginia.",
-}
+  path: "/bulk-item-removal",
+})
 
 const capabilities = [
   { icon: Sofa, title: 'Furniture Removal', content: 'Couches, mattresses, dressers, office furniture, and other large furniture items.' },

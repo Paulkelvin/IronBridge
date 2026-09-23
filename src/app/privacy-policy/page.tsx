@@ -1,13 +1,15 @@
 import type { Metadata } from "next"
+import { pageMetadata } from "@/lib/page-metadata"
 import CTA from "@/sections/cta"
 import Footer from "@/sections/footer"
 import PageHeader from "@/components/page-header"
 import SlideEffect from "@/components/slide-effect"
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: "Privacy Policy | Iron Bridge Mobility Solutions",
   description: "How Iron Bridge Mobility Solutions collects, uses, and protects information submitted through this website.",
-}
+  path: "/privacy-policy",
+})
 
 const sections = [
   {

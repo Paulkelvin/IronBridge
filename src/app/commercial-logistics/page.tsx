@@ -1,4 +1,5 @@
 import type { Metadata } from "next"
+import { pageMetadata } from "@/lib/page-metadata"
 import CapabilityList from "@/components/capability-list"
 import CTA from "@/sections/cta"
 import Footer from "@/sections/footer"
@@ -8,10 +9,11 @@ import {
   Boxes, Building2, Clock, MapPinned, Repeat, RotateCcw, Trash2, Truck, Zap
 } from "lucide-react"
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: "Commercial Logistics | Cargo Van & Same-Day Delivery",
   description: "Cargo van transportation, same-day and expedited delivery, and scheduled commercial routes throughout Maryland, Washington DC, and Northern Virginia.",
-}
+  path: "/commercial-logistics",
+})
 
 const capabilities = [
   { icon: Truck, title: 'Cargo Van Transportation', content: 'Point-to-point and multi-stop cargo van delivery sized for business freight and packages.' },

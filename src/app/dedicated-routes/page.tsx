@@ -1,4 +1,5 @@
 import type { Metadata } from "next"
+import { pageMetadata } from "@/lib/page-metadata"
 import Card from "@/components/card"
 import CTA from "@/sections/cta"
 import Footer from "@/sections/footer"
@@ -12,10 +13,11 @@ import { Building2, CalendarClock, FlaskConical, Truck, Wallet } from "lucide-re
 import { ArrowRight } from "lucide-react"
 import Link from "next/link"
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: "Dedicated Delivery Routes | Iron Bridge Mobility Solutions",
   description: "Consistent daily, weekly, or recurring transportation for businesses, laboratories, and healthcare organizations across Maryland, Washington DC, and Northern Virginia.",
-}
+  path: "/dedicated-routes",
+})
 
 const audiences = [
   { icon: FlaskConical, title: 'Laboratories & Healthcare Organizations', content: 'Recurring specimen and supply routes built around your operating schedule.' },

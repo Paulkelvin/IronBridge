@@ -1,4 +1,5 @@
 import type { Metadata } from "next"
+import { pageMetadata } from "@/lib/page-metadata"
 import CTA from "@/sections/cta"
 import Footer from "@/sections/footer"
 import SectionHeader from "@/components/section-header"
@@ -17,10 +18,11 @@ import Image from "next/image"
 import Link from "next/link"
 import DotGrid from "@/components/graphics/dot-grid"
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: "Capability Statement | Iron Bridge Mobility Solutions",
   description: "Core capabilities, qualifications, and company snapshot for Iron Bridge Mobility Solutions — medical courier, commercial logistics, and bulk-item removal across Maryland, DC, and Northern Virginia.",
-}
+  path: "/capability-statement",
+})
 
 const capabilities = [
   {
