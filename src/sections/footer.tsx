@@ -2,12 +2,30 @@
 
 import Logo from "@/components/logo"
 import { Button } from "@/components/ui/button"
-import { Clock, Facebook, Instagram, Mail, MapPin, Phone } from "lucide-react"
+import { Clock, Mail, MapPin, Phone } from "lucide-react"
 import Link from "next/link"
 
+function FacebookIcon() {
+  return (
+    <svg viewBox="0 0 24 24" width={18} height={18} fill="currentColor" aria-hidden="true">
+      <path d="M14 13.5h2.5l1-4H14v-2c0-1.03 0-2 2-2h1.5V2.14c-.326-.043-1.557-.14-2.857-.14C11.928 2 10 3.657 10 6.7v2.8H7v4h3V22h4v-8.5z" />
+    </svg>
+  )
+}
+
+function InstagramIcon() {
+  return (
+    <svg viewBox="0 0 24 24" width={18} height={18} fill="none" stroke="currentColor" strokeWidth={2} aria-hidden="true">
+      <rect x="3" y="3" width="18" height="18" rx="5" />
+      <circle cx="12" cy="12" r="4" />
+      <circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none" />
+    </svg>
+  )
+}
+
 const socials = [
-  { title: 'Facebook', href: 'https://www.facebook.com/share/19ZmJDHUMG/?mibextid=wwXIfr', icon: Facebook },
-  { title: 'Instagram', href: 'https://www.instagram.com/iron_bridge_mobility?stkn=cGp5a2k1ZjF6anQw', icon: Instagram },
+  { title: 'Facebook', href: 'https://www.facebook.com/share/19ZmJDHUMG/?mibextid=wwXIfr', icon: FacebookIcon },
+  { title: 'Instagram', href: 'https://www.instagram.com/iron_bridge_mobility?stkn=cGp5a2k1ZjF6anQw', icon: InstagramIcon },
 ]
 
 const settings = {
@@ -58,10 +76,10 @@ export default function Footer() {
                 href={social.href}
                 target="_blank"
                 rel="noopener noreferrer"
-                aria-label={social.title}
-                className="text-foreground/80 hover:text-navy transition-colors"
+                aria-label={`Iron Bridge Mobility Solutions on ${social.title}`}
+                className="inline-flex items-center justify-center size-9 rounded-full bg-navy text-white hover:bg-teal transition-colors"
               >
-                <social.icon size={18} strokeWidth={1.5} />
+                <social.icon />
               </a>
             ))}
           </div>
