@@ -11,7 +11,10 @@ export default function MobileCtaBar() {
   if (HIDDEN_ON.includes(pathname)) return null
 
   return (
-    <div className="md:hidden fixed bottom-0 inset-x-0 z-40 bg-white border-t border-navy/10 shadow-[0_-2px_8px_rgba(27,42,74,0.08)]" style={{ paddingBottom: 'env(safe-area-inset-bottom)' }}>
+    <div
+      className="md:hidden fixed bottom-0 inset-x-0 z-40 bg-white border-t border-navy/10 shadow-[0_-2px_8px_rgba(27,42,74,0.08)] will-change-transform"
+      style={{ paddingBottom: 'env(safe-area-inset-bottom)', transform: 'translateZ(0)' }}
+    >
       <div className="grid grid-cols-2 h-14">
         <a
           href="tel:+13018181929"
