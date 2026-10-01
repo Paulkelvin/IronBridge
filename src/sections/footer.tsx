@@ -2,8 +2,12 @@
 
 import Logo from "@/components/logo"
 import { Button } from "@/components/ui/button"
-import { Clock, Mail, MapPin, Phone } from "lucide-react"
+import { Clock, Facebook, Mail, MapPin, Phone } from "lucide-react"
 import Link from "next/link"
+
+const socials = [
+  { title: 'Facebook', href: 'https://www.facebook.com/share/19ZmJDHUMG/?mibextid=wwXIfr', icon: Facebook },
+]
 
 const settings = {
   columns: [
@@ -46,6 +50,20 @@ export default function Footer() {
             <span className="sm:hidden">MD · DC · Northern VA</span>
             <span className="hidden sm:inline">Maryland · Washington, DC · Northern Virginia</span>
           </p>
+          <div className="flex items-center gap-3">
+            {socials.map(social => (
+              <a
+                key={social.title}
+                href={social.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={social.title}
+                className="text-foreground/80 hover:text-navy transition-colors"
+              >
+                <social.icon size={18} strokeWidth={1.5} />
+              </a>
+            ))}
+          </div>
         </div>
 
         {/* Link columns */}
