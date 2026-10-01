@@ -2,11 +2,12 @@
 
 import Logo from "@/components/logo"
 import { Button } from "@/components/ui/button"
-import { Clock, Facebook, Mail, MapPin, Phone } from "lucide-react"
+import { Clock, Facebook, Instagram, Mail, MapPin, Phone } from "lucide-react"
 import Link from "next/link"
 
 const socials = [
   { title: 'Facebook', href: 'https://www.facebook.com/share/19ZmJDHUMG/?mibextid=wwXIfr', icon: Facebook },
+  { title: 'Instagram', href: 'https://www.instagram.com/iron_bridge_mobility?stkn=cGp5a2k1ZjF6anQw', icon: Instagram },
 ]
 
 const settings = {
