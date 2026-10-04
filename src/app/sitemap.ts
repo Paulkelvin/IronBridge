@@ -16,13 +16,12 @@ const routes = [
   "/become-a-driver",
   "/request-a-quote",
   "/privacy-policy",
+  "/accessibility",
 ]
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const now = new Date()
   return routes.map((route) => ({
     url: `${siteUrl}${route}`,
-    lastModified: now,
     changeFrequency: route === "" ? "weekly" : "monthly",
     priority: route === "" ? 1 : 0.7,
   }))

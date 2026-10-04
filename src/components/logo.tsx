@@ -5,7 +5,7 @@ export default function Logo({ className }: { className?: string }) {
     <span className={`inline-flex items-center gap-2.5 ${className ?? ""}`}>
       <Image
         src="/brand/shield-mark.png"
-        alt="Iron Bridge Mobility Solutions"
+        alt=""
         width={40}
         height={41}
         className="h-9 w-auto"

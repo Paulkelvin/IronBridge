@@ -5,6 +5,7 @@ import Header from "@/components/header";
 import LenisProvider from "@/providers/lenis";
 import ScrollRestoration from "@/components/scroll-restoration";
 import MobileCtaBar from "@/components/mobile-cta-bar";
+import BreadcrumbJsonLd from "@/components/breadcrumb-json-ld";
 
 const sans = Inter({
   variable: "--font-ib-sans",
@@ -96,6 +97,7 @@ export default function RootLayout({
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(localBusinessJsonLd) }}
         />
+        <BreadcrumbJsonLd />
         <ScrollRestoration />
         <LenisProvider>
           <Header />

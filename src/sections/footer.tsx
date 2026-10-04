@@ -51,6 +51,7 @@ const settings = {
         { title: 'Compliance & Safety', href: '/compliance-safety' },
         { title: 'Become a Driver', href: '/become-a-driver' },
         { title: 'Privacy Policy', href: '/privacy-policy' },
+        { title: 'Accessibility', href: '/accessibility' },
       ],
     },
   ],
