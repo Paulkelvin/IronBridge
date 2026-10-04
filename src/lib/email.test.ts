@@ -88,20 +88,30 @@ describe("sendQuoteRequestEmails", () => {
 
 describe("sendAssistantLeadEmail", () => {
   const lead = {
+    inquiry_type: "service_request" as const,
     name: "Dana",
-    company: "Ridge Clinic",
+    organization: "Ridge Clinic",
     email: "dana@ridgeclinic.example",
-    phone: "",
-    service: "medical-courier" as const,
-    need: "Lab specimen route",
-    locations: "Silver Spring to Baltimore",
-    timing: "Next week",
-    frequency: "3 times a week",
-    rating: "hot" as const,
-    rating_reason: "Recurring healthcare route",
+    phone: "301-555-0142",
+    preferred_contact: "phone" as const,
+    service_type: "medical_courier" as const,
+    customer_type: "medical_facility" as const,
+    item_description: "Lab specimen boxes",
+    pickup_location: "20910",
+    delivery_location: "21201",
+    requested_timing: "Tomorrow by 10am",
+    frequency: "recurring" as const,
+    recurring_details: "3 times a week",
+    size_quantity: "2 coolers",
+    access_details: "",
+    special_handling: "Cold packs",
+    message: "",
+    urgent: true,
+    priority: "high" as const,
+    priority_reason: "Recurring medical route needed tomorrow",
   }
 
-  it("emails only the business inbox, marks the rating, and escapes the conversation", async () => {
+  it("emails lbrent@ironbridgems.com by default with urgent and recurring labels", async () => {
     send.mockResolvedValue({ data: { id: "ok" }, error: null })
     const { sendAssistantLeadEmail } = await loadEmailModule()
     await sendAssistantLeadEmail(lead, [
@@ -110,9 +120,46 @@ describe("sendAssistantLeadEmail", () => {
     ])
     expect(send).toHaveBeenCalledTimes(1)
     const message = send.mock.calls[0][0]
-    expect(message).toMatchObject({ to: "dispatch@example.com", replyTo: "dana@ridgeclinic.example" })
-    expect(message.subject).toBe("Hot lead from website chat: Dana (Ridge Clinic)")
+    expect(message).toMatchObject({ to: "lbrent@ironbridgems.com", replyTo: "dana@ridgeclinic.example" })
+    expect(message.subject).toBe("[URGENT] [RECURRING BUSINESS] Website chat service request from Dana (Ridge Clinic)")
+    for (const text of ["Contact", "Request", "Prefers", "Phone", "20910", "21201", "3 times a week", "Cold packs", "HIGH PRIORITY"]) {
+      expect(message.html).toContain(text)
+    }
     expect(message.html).toContain("&lt;b&gt;Hi&lt;/b&gt;")
+  })
+
+  it("labels a message for the team and leaves out labels that don't apply", async () => {
+    send.mockResolvedValue({ data: { id: "ok" }, error: null })
+    const { sendAssistantLeadEmail } = await loadEmailModule()
+    await sendAssistantLeadEmail({
+      ...lead,
+      inquiry_type: "message_for_team",
+      organization: "",
+      customer_type: "residential",
+      frequency: "one_time",
+      urgent: false,
+      priority: "standard",
+      message: "Can you move a piano?",
+    }, [])
+    const message = send.mock.calls[0][0]
+    expect(message.subject).toBe("Website chat message for the team from Dana")
+    expect(message.html).toContain("Can you move a piano?")
+    expect(message.html).toContain("STANDARD PRIORITY")
+  })
+
+  it("does not label recurring residential requests as business", async () => {
+    send.mockResolvedValue({ data: { id: "ok" }, error: null })
+    const { sendAssistantLeadEmail } = await loadEmailModule()
+    await sendAssistantLeadEmail({ ...lead, customer_type: "residential", urgent: false }, [])
+    expect(send.mock.calls[0][0].subject).not.toContain("RECURRING BUSINESS")
+  })
+
+  it("uses ASSISTANT_LEADS_EMAIL when it is set", async () => {
+    vi.stubEnv("ASSISTANT_LEADS_EMAIL", "leads@example.com")
+    send.mockResolvedValue({ data: { id: "ok" }, error: null })
+    const { sendAssistantLeadEmail } = await loadEmailModule()
+    await sendAssistantLeadEmail(lead, [])
+    expect(send.mock.calls[0][0].to).toBe("leads@example.com")
   })
 
   it("fails loudly when the email service rejects the lead", async () => {

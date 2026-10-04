@@ -1,6 +1,6 @@
 import { Resend } from "resend"
 import type { DriverApplicationInput, QuoteRequestInput } from "@/lib/validations"
-import type { Lead } from "@/lib/assistant/lead"
+import { isRecurringBusiness, type Lead } from "@/lib/assistant/lead"
 
 const FROM = process.env.EMAIL_FROM || "Iron Bridge Mobility Solutions <onboarding@resend.dev>"
 const QUOTE_NOTIFICATIONS_TO = process.env.QUOTE_NOTIFICATIONS_EMAIL
@@ -164,39 +164,90 @@ export async function sendDriverApplicationEmails(data: DriverApplicationInput) 
 
 export type TranscriptMessage = { role: "user" | "assistant", content: string }
 
-const SERVICE_LABELS: Record<Lead["service"], string> = {
-  "medical-courier": "Medical courier",
-  "commercial-logistics": "Commercial logistics",
-  "dedicated-route": "Dedicated route",
-  "bulk-item-removal": "Bulk-item removal",
+const ASSISTANT_LEADS_TO = process.env.ASSISTANT_LEADS_EMAIL || "lbrent@ironbridgems.com"
+
+const SERVICE_LABELS: Record<Lead["service_type"], string> = {
+  medical_courier: "Medical courier",
+  business_delivery: "Business / commercial delivery",
+  dedicated_route: "Dedicated or recurring route",
+  bulk_item_removal: "Bulk-item removal",
   other: "Other",
+  not_stated: "",
+}
+
+const CUSTOMER_LABELS: Record<Lead["customer_type"], string> = {
+  business: "Business",
+  medical_facility: "Medical facility",
+  organization: "Organization",
+  residential: "Residential",
+  unknown: "",
+}
+
+const CONTACT_LABELS: Record<Lead["preferred_contact"], string> = {
+  email: "Email",
+  phone: "Phone",
+  either: "Either",
+  not_stated: "",
+}
+
+const FREQUENCY_LABELS: Record<Lead["frequency"], string> = {
+  one_time: "One-time",
+  recurring: "Recurring",
+  unknown: "",
 }
 
 function singleLine(input: string) {
   return input.replace(/\s+/g, " ").trim()
 }
 
-export async function sendAssistantLeadEmail(lead: Lead, transcript: TranscriptMessage[]) {
-  if (!QUOTE_NOTIFICATIONS_TO) {
-    throw new Error(
-      "Email service is not configured yet (missing QUOTE_NOTIFICATIONS_EMAIL). See .env.example."
-    )
-  }
-  const resend = getClient()
-  const rating = lead.rating === "hot" ? "Hot" : "Warm"
-  const who = singleLine(lead.company ? `${lead.name} (${lead.company})` : lead.name)
+function section(title: string, rows: string) {
+  if (!rows) return ""
+  return `<h3 style="color:#1B2A4A;font-size:13px;letter-spacing:0.06em;text-transform:uppercase;margin:20px 0 8px">${title}</h3><table style="border-collapse:collapse">${rows}</table>`
+}
 
-  const detailRows = [
-    row("Rating", `${rating}: ${lead.rating_reason}`),
+function badge(text: string, color: string) {
+  return `<span style="display:inline-block;background:${color};color:#fff;font-size:11px;font-weight:bold;letter-spacing:0.06em;padding:3px 8px;border-radius:4px;margin-right:6px">${text}</span>`
+}
+
+export function assistantLeadLabels(lead: Lead) {
+  const labels: string[] = []
+  if (lead.urgent) labels.push("URGENT")
+  if (isRecurringBusiness(lead)) labels.push("RECURRING BUSINESS")
+  return labels
+}
+
+export async function sendAssistantLeadEmail(lead: Lead, transcript: TranscriptMessage[]) {
+  const resend = getClient()
+  const labels = assistantLeadLabels(lead)
+  const kind = lead.inquiry_type === "message_for_team" ? "message for the team" : "service request"
+  const who = singleLine(lead.organization ? `${lead.name} (${lead.organization})` : lead.name)
+  const subjectLabels = labels.map((l) => `[${l}] `).join("")
+  const frequency = [FREQUENCY_LABELS[lead.frequency], lead.recurring_details].filter(Boolean).join(": ")
+
+  const badges = [
+    ...labels.map((l) => badge(l, l === "URGENT" ? "#b42318" : "#128262")),
+    badge(lead.priority === "high" ? "HIGH PRIORITY" : "STANDARD PRIORITY", lead.priority === "high" ? "#1B2A4A" : "#5b6472"),
+  ].join("")
+
+  const contactRows = [
     row("Name", lead.name),
-    row("Company", lead.company),
+    row("Organization", lead.organization),
     row("Email", lead.email),
     row("Phone", lead.phone),
-    row("Service", SERVICE_LABELS[lead.service]),
-    row("Need", lead.need),
-    row("Locations", lead.locations),
-    row("Timing", lead.timing),
-    row("Frequency", lead.frequency),
+    row("Prefers", CONTACT_LABELS[lead.preferred_contact]),
+  ].join("")
+
+  const requestRows = [
+    row("Service", SERVICE_LABELS[lead.service_type]),
+    row("Customer type", CUSTOMER_LABELS[lead.customer_type]),
+    row("Item / shipment", lead.item_description),
+    row("Pickup", lead.pickup_location),
+    row("Delivery", lead.delivery_location),
+    row("Requested timing", lead.requested_timing),
+    row("Frequency", frequency),
+    row("Size / quantity", lead.size_quantity),
+    row("Access", lead.access_details),
+    row("Special handling", lead.special_handling),
   ].join("")
 
   const transcriptHtml = transcript
@@ -205,14 +256,18 @@ export async function sendAssistantLeadEmail(lead: Lead, transcript: TranscriptM
 
   await sendOrThrow(resend, {
     from: FROM,
-    to: QUOTE_NOTIFICATIONS_TO,
+    to: ASSISTANT_LEADS_TO,
     ...(lead.email ? { replyTo: lead.email } : {}),
-    subject: `${rating} lead from website chat: ${who}`,
-    html: wrapper(`${rating} lead from the website assistant`, `
-      <table style="border-collapse:collapse">${detailRows}</table>
-      <h3 style="color:#1B2A4A;font-size:14px;margin:20px 0 10px">Conversation</h3>
+    subject: `${subjectLabels}Website chat ${kind} from ${who}`,
+    html: wrapper(`New ${kind} from the website assistant`, `
+      <p style="margin:0 0 4px">${badges}</p>
+      ${lead.priority_reason ? `<p style="color:#5b6472;font-size:13px;margin:8px 0 0">${escapeHtml(lead.priority_reason)}</p>` : ""}
+      ${lead.message ? `<p style="color:#1B2A4A;font-size:14px;line-height:1.5;margin:16px 0 0;padding:12px;background:#f4f6f5;border-radius:6px"><strong>Message:</strong> ${escapeHtml(lead.message)}</p>` : ""}
+      ${section("Contact", contactRows)}
+      ${section("Request", requestRows)}
+      <h3 style="color:#1B2A4A;font-size:13px;letter-spacing:0.06em;text-transform:uppercase;margin:24px 0 8px">Conversation</h3>
       ${transcriptHtml}
-      <p style="color:#9aa2ad;font-size:11px;margin-top:16px">Captured automatically by the website assistant. Details were typed by the visitor and summarized by AI, so confirm them when you follow up.</p>
+      <p style="color:#9aa2ad;font-size:11px;margin-top:16px">Captured automatically by the website assistant. Details were typed by the visitor and organized by AI, so confirm them when you follow up. Nothing has been booked or promised.</p>
     `),
   })
 }

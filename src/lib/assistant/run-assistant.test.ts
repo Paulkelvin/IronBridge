@@ -1,4 +1,4 @@
-import { describe, expect, it, vi } from "vitest"
+import { afterEach, describe, expect, it, vi } from "vitest"
 import { runAssistant, type AssistantEvent } from "./run-assistant"
 import { buildInstructions } from "./knowledge"
 import type { Lead } from "./lead"
@@ -19,17 +19,27 @@ const textRound = (text: string, output: unknown[] = []) => [
 ]
 
 const leadArgs: Lead = {
+  inquiry_type: "service_request",
   name: "Dana",
-  company: "Ridge Clinic",
+  organization: "Ridge Clinic",
   email: "dana@ridgeclinic.example",
   phone: "",
-  service: "medical-courier",
-  need: "Lab specimen route from Silver Spring to Baltimore",
-  locations: "Silver Spring, MD to Baltimore, MD",
-  timing: "Starting next week",
-  frequency: "3 times a week",
-  rating: "hot",
-  rating_reason: "Recurring healthcare route in the service area with contact details",
+  preferred_contact: "email",
+  service_type: "medical_courier",
+  customer_type: "medical_facility",
+  item_description: "Lab specimen boxes",
+  pickup_location: "20910",
+  delivery_location: "21201",
+  requested_timing: "Starting next Monday, mornings",
+  frequency: "recurring",
+  recurring_details: "3 times a week",
+  size_quantity: "2 small coolers",
+  access_details: "",
+  special_handling: "Cold packs",
+  message: "",
+  urgent: false,
+  priority: "high",
+  priority_reason: "Recurring medical facility route with ZIP codes and email",
 }
 
 const toolCallRound = (args: unknown) => [
@@ -70,7 +80,7 @@ describe("runAssistant", () => {
     expect(params.model).toBe("gpt-6-luna")
     expect(params.store).toBe(false)
     expect(params.stream).toBe(true)
-    expect(params.instructions).toContain("Never give prices")
+    expect(params.instructions).toContain("Give a final price")
     expect(params.include).toEqual(["reasoning.encrypted_content"])
     expect((params.tools as { name: string }[])[0].name).toBe("save_lead")
   })
@@ -78,7 +88,7 @@ describe("runAssistant", () => {
   it("saves a valid lead, tells the browser, and lets the model confirm", async () => {
     const { saveLead, events, text, create } = await run([toolCallRound(leadArgs), textRound("Thanks, Dana. The team will follow up.")])
     expect(saveLead).toHaveBeenCalledTimes(1)
-    expect(saveLead.mock.calls[0][0]).toMatchObject({ name: "Dana", rating: "hot" })
+    expect(saveLead.mock.calls[0][0]).toMatchObject({ name: "Dana", priority: "high", frequency: "recurring" })
     expect(events).toContainEqual({ type: "lead_saved" })
     expect(text).toBe("Thanks, Dana. The team will follow up.")
 
@@ -136,18 +146,29 @@ describe("runAssistant", () => {
 })
 
 describe("assistant instructions", () => {
-  const instructions = buildInstructions()
+  afterEach(() => vi.unstubAllEnvs())
 
-  it("include the phone number, every listed city, and the no-pricing rule", () => {
-    expect(instructions).toContain("(301) 818-1929")
+  it("list every city on the website and the owner's prohibitions", () => {
+    const instructions = buildInstructions()
     for (const city of ["Silver Spring", "Hyattsville", "Ashburn", "Sterling", "Washington, DC"]) {
       expect(instructions).toContain(city)
     }
-    expect(instructions).toContain("Never give prices")
+    for (const rule of ["Give medical advice", "Give a final price", "confirm a booking", "hazardous", "Guess.", "payment information"]) {
+      expect(instructions).toContain(rule)
+    }
   })
 
-  it("forbid off-topic answers and repeating patient information", () => {
-    expect(instructions).toContain("Only discuss Iron Bridge")
-    expect(instructions).toContain("do not repeat them")
+  it("give out no phone number unless an approved one is configured", () => {
+    vi.stubEnv("ASSISTANT_PHONE", "")
+    expect(buildInstructions()).not.toMatch(/\(\d{3}\) \d{3}-\d{4}/)
+    expect(buildInstructions()).toContain("Do not give out any phone number")
+    vi.stubEnv("ASSISTANT_PHONE", "(301) 818-1929")
+    expect(buildInstructions()).toContain("The approved business phone number is (301) 818-1929")
+  })
+
+  it("treat one-time residential requests as valid but send driver applicants elsewhere", () => {
+    const instructions = buildInstructions()
+    expect(instructions).toContain("one-time residential request is still a valid request")
+    expect(instructions).toContain("/become-a-driver")
   })
 })

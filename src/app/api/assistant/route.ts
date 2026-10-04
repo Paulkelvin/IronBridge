@@ -16,7 +16,7 @@ const REASONING_EFFORT: ReasoningEffort =
     : (REASONING_EFFORTS as readonly string[]).includes(configuredEffort ?? "") ? configuredEffort as ReasoningEffort
       : "low"
 
-const FALLBACK_MESSAGE = "Sorry, the assistant isn't available right now. Please call us at (301) 818-1929 or use /request-a-quote."
+const FALLBACK_MESSAGE = "Sorry, the assistant isn't available right now. Please use the quote form at /request-a-quote and our team will follow up."
 
 const requestSchema = z.object({
   messages: z.array(z.object({
@@ -38,14 +38,14 @@ export async function POST(req: NextRequest) {
 
   if (isRateLimited(req, { bucket: "assistant", max: 30 })) {
     return NextResponse.json(
-      { error: "You've sent a lot of messages in a short time. Please call us at (301) 818-1929." },
+      { error: "You've sent a lot of messages in a short time. Please use the quote form at /request-a-quote and our team will follow up." },
       { status: 429 }
     )
   }
 
   const parsed = requestSchema.safeParse(body)
   if (!parsed.success) {
-    return NextResponse.json({ error: "This conversation is too long. Please start a new chat or call (301) 818-1929." }, { status: 422 })
+    return NextResponse.json({ error: "This conversation is too long. Please start a new chat or use the quote form at /request-a-quote." }, { status: 422 })
   }
 
   const apiKey = process.env.OPENAI_API_KEY

@@ -11,7 +11,7 @@ type ChatMessage =
 
 const STORAGE_KEY = "ib-assistant-v1"
 const MAX_MESSAGES = 24
-const FALLBACK = `Sorry, the assistant isn't available right now. Please call us at ${contact.phoneDisplay} or use /request-a-quote.`
+const FALLBACK = "Sorry, the assistant isn't available right now. Please use the quote form at /request-a-quote and our team will follow up."
 const STARTERS = [
   "Do you serve my area?",
   "How do medical pickups work?",
@@ -211,7 +211,7 @@ export default function ChatPanel({ onClose }: { onClose: () => void }) {
         )}
         {atLimit && (
           <p className="self-center text-center text-xs text-foreground/80">
-            This chat is getting long. Start a new chat, or call <a href={contact.phoneHref} className="underline">{contact.phoneDisplay}</a>.
+            This chat is getting long. Start a new chat, or use the <Link href="/request-a-quote" className="underline">quote form</Link>.
           </p>
         )}
       </div>

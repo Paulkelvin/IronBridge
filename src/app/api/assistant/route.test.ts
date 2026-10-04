@@ -27,13 +27,15 @@ afterEach(() => {
 })
 
 describe("POST /api/assistant", () => {
-  it("shows the phone fallback when the OpenAI key isn't configured", async () => {
+  it("points to the quote form when the OpenAI key isn't configured", async () => {
     vi.stubEnv("OPENAI_API_KEY", "")
     vi.spyOn(console, "error").mockImplementation(() => {})
     const { POST } = await loadRoute()
     const res = await POST(post({ messages: [{ role: "user", content: "Hi" }] }))
     expect(res.status).toBe(503)
-    expect((await res.json()).error).toContain("(301) 818-1929")
+    const { error } = await res.json()
+    expect(error).toContain("/request-a-quote")
+    expect(error).not.toMatch(/\d{3}-\d{4}/)
   })
 
   it("rejects conversations that are too long or don't end with the visitor", async () => {
@@ -64,7 +66,7 @@ describe("POST /api/assistant", () => {
     const { POST } = await loadRoute()
     const res = await POST(post({ messages: [{ role: "user", content: "Hi" }] }, "198.51.100.4"))
     const lines = (await res.text()).trim().split("\n").map((l) => JSON.parse(l))
-    expect(lines).toEqual([{ type: "error", message: expect.stringContaining("(301) 818-1929") }])
+    expect(lines).toEqual([{ type: "error", message: expect.stringContaining("/request-a-quote") }])
   })
 
   it("limits each visitor to 30 messages per 10 minutes", async () => {
