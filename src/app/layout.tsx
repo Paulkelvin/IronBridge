@@ -102,7 +102,7 @@ export default function RootLayout({
         <ScrollRestoration />
         <LenisProvider>
           <Header />
-          <main id="main-content" tabIndex={-1} className="pt-[72px] pb-14 md:pb-0 outline-none">{children}</main>
+          <main id="main-content" tabIndex={-1} className="pt-[72px] pb-[calc(8rem+env(safe-area-inset-bottom))] md:pb-0 outline-none">{children}</main>
         </LenisProvider>
         <MobileCtaBar />
         <AssistantLauncher />
