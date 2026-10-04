@@ -44,9 +44,25 @@ const settings = {
   ]
 }
 
+const faqJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: settings.faqs.map((faq) => ({
+    "@type": "Question",
+    name: faq.question,
+    acceptedAnswer: {
+      "@type": "Answer",
+      text: typeof faq.answer === "string"
+        ? faq.answer
+        : `${faq.answer.intro} ${faq.answer.cities.join(", ")}. ${faq.answer.outro}`,
+    },
+  })),
+}
+
 export default function FAQ() {
   return (
     <div id='faq' className="space-y-8 md:space-y-10 lg:space-y-12 mx-auto text-center">
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }} />
       <SectionHeader eyebrow={settings.eyebrow} title={settings.title} />
 
       {/* Accordion */}
@@ -55,7 +71,7 @@ export default function FAQ() {
           {settings.faqs.map((faq, index) => (
             <AccordionItem key={index} value={index + '-item'}>
               <AccordionTrigger>{faq.question}</AccordionTrigger>
-              <AccordionContent className="text-foreground">
+              <AccordionContent forceMount className="text-foreground">
                 {typeof faq.answer === 'string' ? faq.answer : (
                   <>
                     <p>{faq.answer.intro}</p>

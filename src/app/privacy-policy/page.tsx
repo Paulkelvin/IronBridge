@@ -20,6 +20,13 @@ const sections = [
     ],
   },
   {
+    title: "Driver Applicants",
+    body: [
+      "If you apply through our Become a Driver form, we collect the details you provide: your name, email address, phone number, location, vehicle type and year/make/model, availability, the areas you can cover, medical courier experience, and training or certification status.",
+      "We use this information only to review your application and contact you about driving opportunities. The online form does not ask for your driver's license number, Social Security number, or date of birth. If we move forward with your application, we will request any documents needed for license, insurance, or background verification separately.",
+    ],
+  },
+  {
     title: "Protected Health Information",
     body: [
       "This website is not intended for the submission of patient names, diagnoses, or other protected health information (PHI), and our forms ask you not to include it. PHI we may handle in the course of providing medical courier services is governed separately by any applicable business associate agreement with our healthcare clients, not by this website's data collection.",

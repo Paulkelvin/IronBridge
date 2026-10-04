@@ -1,10 +1,13 @@
 import { z } from "zod"
 
+// Skips Zod's eval-based fast path, which the site's Content-Security-Policy blocks.
+z.config({ jitless: true })
+
 export const quoteRequestSchema = z.object({
   name: z.string().trim().min(2, "Enter your full name").max(120),
   company: z.string().trim().max(160).optional().or(z.literal("")),
   email: z.email("Enter a valid email address"),
-  phone: z.string().regex(/^\(\d{3}\) \d{3}-\d{4}$/, "Enter a valid US phone number"),
+  phone: z.string({ error: "Enter a valid US phone number" }).regex(/^\(\d{3}\) \d{3}-\d{4}$/, "Enter a valid US phone number"),
   pickupStreet: z.string().trim().min(3, "Enter a street address").max(200),
   pickupUnit: z.string().trim().max(50).optional().or(z.literal("")),
   pickupCity: z.string().trim().min(1, "Enter a city").max(100),
@@ -35,7 +38,7 @@ export type QuoteRequestInput = z.infer<typeof quoteRequestSchema>
 export const driverApplicationSchema = z.object({
   name: z.string().trim().min(2, "Enter your full name").max(120),
   email: z.email("Enter a valid email address"),
-  phone: z.string().regex(/^\(\d{3}\) \d{3}-\d{4}$/, "Enter a valid US phone number"),
+  phone: z.string({ error: "Enter a valid US phone number" }).regex(/^\(\d{3}\) \d{3}-\d{4}$/, "Enter a valid US phone number"),
   location: z.string().trim().min(2, "Enter your city and state").max(200),
   vehicleType: z.string().trim().min(2, "Enter your vehicle type").max(120),
   vehicleYearMakeModel: z.string().trim().min(2, "Enter year, make, and model").max(160),

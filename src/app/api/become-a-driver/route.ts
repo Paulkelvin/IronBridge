@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server"
 import { driverApplicationSchema } from "@/lib/validations"
 import { sendDriverApplicationEmails } from "@/lib/email"
+import { isLikelyBot, isRateLimited } from "@/lib/spam-guard"
 
 export async function POST(req: NextRequest) {
   let body: unknown
@@ -8,6 +9,15 @@ export async function POST(req: NextRequest) {
     body = await req.json()
   } catch {
     return NextResponse.json({ error: "Invalid request body." }, { status: 400 })
+  }
+
+  if (isLikelyBot(body)) return NextResponse.json({ ok: true })
+
+  if (isRateLimited(req)) {
+    return NextResponse.json(
+      { error: "Too many applications from this connection. Please call us at (301) 818-1929." },
+      { status: 429 }
+    )
   }
 
   const parsed = driverApplicationSchema.safeParse(body)
@@ -23,8 +33,9 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ ok: true })
   } catch (err) {
     console.error("become-a-driver submission failed:", err)
-    const isConfigError = err instanceof Error && err.message.startsWith("Email service is not configured")
-    const message = isConfigError ? err.message : "Something went wrong sending your application. Please try again or call us directly."
-    return NextResponse.json({ error: message }, { status: 500 })
+    return NextResponse.json(
+      { error: "We couldn't send your application. Please call us at (301) 818-1929 or email lbrent@ironbridgems.com." },
+      { status: 500 }
+    )
   }
 }

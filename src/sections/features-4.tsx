@@ -2,8 +2,7 @@ import DiagonalRoute from "@/components/graphics/diagonal-route"
 import SectionHeader from "@/components/section-header"
 import ServiceAreaExplorer from "@/components/service-area-explorer"
 import SlideEffect from "@/components/slide-effect"
-import { Button } from "@/components/ui/button"
-import Link from "next/link"
+import ButtonLink from "@/components/ui/button-link"
 
 const settings = {
   eyebrow: 'Service Area',
@@ -47,9 +46,7 @@ export default function Features4() {
       <SlideEffect className="text-xs md:text-sm text-foreground/80 italic">{settings.note}</SlideEffect>
 
       <SlideEffect>
-        <Link href={settings.CTA.href}>
-          <Button variant='outline' size='lg'>{settings.CTA.content}</Button>
-        </Link>
+        <ButtonLink href={settings.CTA.href} variant='outline' size='lg'>{settings.CTA.content}</ButtonLink>
       </SlideEffect>
     </div>
   )

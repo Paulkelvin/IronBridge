@@ -1,6 +1,10 @@
-import { Button } from "@/components/ui/button"
 import { ArrowLeft } from "lucide-react"
-import Link from "next/link"
+import type { Metadata } from "next"
+import ButtonLink from "@/components/ui/button-link"
+
+export const metadata: Metadata = {
+  title: "Page Not Found | Iron Bridge Mobility Solutions",
+}
 
 export default function NotFound() {
   return (
@@ -11,17 +15,13 @@ export default function NotFound() {
         The page you&apos;re looking for doesn&apos;t exist or has been moved. Let&apos;s get you back on track.
       </p>
       <div className="flex flex-col sm:flex-row gap-3 mt-2">
-        <Link href="/">
-          <Button className="bg-navy text-white hover:bg-navy/90">
-            <ArrowLeft size={16} strokeWidth={1.5} />
-            Back to Home
-          </Button>
-        </Link>
-        <Link href="/request-a-quote">
-          <Button variant="outline" className="border-navy/30 text-navy hover:bg-navy/5">
-            Request a Quote
-          </Button>
-        </Link>
+        <ButtonLink href="/" className="bg-navy text-white hover:bg-navy/90">
+          <ArrowLeft size={16} strokeWidth={1.5} aria-hidden="true" />
+          Back to Home
+        </ButtonLink>
+        <ButtonLink href="/request-a-quote" variant="outline" className="border-navy/30 text-navy hover:bg-navy/5">
+          Request a Quote
+        </ButtonLink>
       </div>
     </div>
   )

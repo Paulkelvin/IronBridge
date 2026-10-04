@@ -1,11 +1,10 @@
 'use client'
 
 import SlideEffect from "@/components/slide-effect";
-import { Button } from "@/components/ui/button";
+import ButtonLink from "@/components/ui/button-link";
 import { useLenis } from "lenis/react";
 import { ArrowRight, ChevronDown } from "lucide-react";
 import Image from "next/image";
-import Link from "next/link";
 import { useRef } from "react";
 
 const settings = {
@@ -77,7 +76,7 @@ export default function Hero() {
 
             <div className="space-y-1.5 md:space-y-2">
               <h1 className="font-serif text-white text-3xl md:text-5xl lg:text-4xl xl:text-5xl font-semibold tracking-tight leading-[0.98]">
-                <span className="block">{settings.headlineTop}</span>
+                <span className="block">{settings.headlineTop}</span>{" "}
                 <span className="block">{settings.headlineBottom}</span>
               </h1>
 
@@ -99,25 +98,14 @@ export default function Hero() {
               delay={0.2}
               className="flex flex-col md:flex-row items-center w-full md:w-fit justify-center lg:justify-start gap-3 md:gap-4 mt-1"
             >
-              <Link href={settings.mainCTA.href} className="w-full">
-                <Button size='lg' className="w-full hidden lg:flex bg-teal hover:bg-teal-light text-white">
-                  {settings.mainCTA.content}
-                  <ArrowRight strokeWidth={1.5} />
-                </Button>
-                <Button size='default' className="w-full flex lg:hidden bg-teal hover:bg-teal-light text-white">
-                  {settings.mainCTA.content}
-                  <ArrowRight strokeWidth={1.5} />
-                </Button>
-              </Link>
+              <ButtonLink href={settings.mainCTA.href} className="w-full bg-teal hover:bg-teal-light text-white lg:px-5 lg:py-3 lg:rounded-xl lg:text-[18px]">
+                {settings.mainCTA.content}
+                <ArrowRight strokeWidth={1.5} aria-hidden="true" />
+              </ButtonLink>
 
-              <Link href={settings.secondaryCTA.href} className="w-full">
-                <Button size='lg' className="w-full hidden lg:flex border-white/30 text-white bg-transparent hover:bg-white/10 hover:text-white hover:border-white/50" variant='outline'>
-                  {settings.secondaryCTA.content}
-                </Button>
-                <Button size='default' className="w-full flex lg:hidden border-white/30 text-white bg-transparent hover:bg-white/10 hover:text-white hover:border-white/50" variant='outline'>
-                  {settings.secondaryCTA.content}
-                </Button>
-              </Link>
+              <ButtonLink href={settings.secondaryCTA.href} variant='outline' className="w-full border-white/30 text-white bg-transparent hover:bg-white/10 hover:text-white hover:border-white/50 lg:px-5 lg:py-3 lg:rounded-xl lg:text-[18px]">
+                {settings.secondaryCTA.content}
+              </ButtonLink>
             </SlideEffect>
           </div>
 

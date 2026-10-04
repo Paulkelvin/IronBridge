@@ -1,5 +1,6 @@
 import type { Metadata } from "next"
 import { pageMetadata } from "@/lib/page-metadata"
+import ServiceJsonLd from "@/components/service-json-ld"
 import Card from "@/components/card"
 import CapabilityList from "@/components/capability-list"
 import CTA from "@/sections/cta"
@@ -16,7 +17,7 @@ import {
 
 export const metadata: Metadata = pageMetadata({
   title: "Medical Courier Services | Maryland, Washington DC, Northern Virginia",
-  description: "Blood and lab specimen transport, cold-packed and temperature-sensitive shipments, and STAT courier support for healthcare organizations across Maryland, Washington DC, and Northern Virginia.",
+  description: "Lab specimen, cold-packed, and STAT medical courier service for healthcare organizations across Maryland, Washington DC, and Northern Virginia.",
   path: "/medical-courier",
 })
 
@@ -34,6 +35,7 @@ const capabilities = [
 export default function MedicalCourierPage() {
   return (
     <div className="px-4 xl:px-6 max-w-7xl mx-auto space-y-24 sm:space-y-32 md:space-y-40 scroll-smooth">
+      <ServiceJsonLd name="Medical Courier Services" serviceType="Medical courier" description="Lab specimen, cold-packed, and STAT medical courier service with chain-of-custody and proof-of-delivery procedures." path="/medical-courier" />
       <PageHeader
         eyebrow="Medical Courier"
         title="Medical Courier Services"

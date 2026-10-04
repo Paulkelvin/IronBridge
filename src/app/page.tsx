@@ -13,8 +13,8 @@ import Hero from "@/sections/hero";
 import Testimonials from "@/sections/testimonials";
 
 export const metadata: Metadata = pageMetadata({
-  title: "Iron Bridge Mobility Solutions | Dependability Delivered Daily.",
-  description: "Professional medical courier and commercial logistics solutions throughout Maryland, Washington DC, Northern Virginia and surrounding areas.",
+  title: "Medical Courier & Same-Day Delivery in MD, DC & VA | Iron Bridge",
+  description: "Medical courier, same-day delivery, and dedicated routes across Maryland, Washington DC, and Northern Virginia. Request a quote or call (301) 818-1929.",
   path: "/",
 })
 

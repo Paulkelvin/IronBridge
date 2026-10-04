@@ -7,6 +7,7 @@ import Footer from "@/sections/footer"
 import { Button } from "@/components/ui/button"
 import { CheckboxPillGroup, FieldError, Input, Label, PhoneInput, PillGroup, Select, Textarea } from "@/components/ui/field"
 import { FormError, FormSuccess } from "@/components/form-status"
+import { FormConsent, focusFirstError, useSpamGuard } from "@/components/form-guard"
 import { driverApplicationSchema, type DriverApplicationInput } from "@/lib/validations"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { ArrowLeft, ArrowRight, ShieldCheck } from "lucide-react"
@@ -39,6 +40,7 @@ export default function DriverForm() {
   const [errorMessage, setErrorMessage] = useState<string>('')
   const cardRef = useRef<HTMLDivElement>(null)
   const isFirstRender = useRef(true)
+  const { honeypot, guardFields } = useSpamGuard()
 
   useEffect(() => {
     if (isFirstRender.current) {
@@ -74,6 +76,7 @@ export default function DriverForm() {
   const goNext = async () => {
     const valid = await trigger(STEP_FIELDS[0])
     if (valid) setStep(2)
+    else focusFirstError(cardRef.current)
   }
 
   const onSubmit = async (data: DriverApplicationInput) => {
@@ -83,7 +86,7 @@ export default function DriverForm() {
       const res = await fetch('/api/become-a-driver', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(data),
+        body: JSON.stringify({ ...data, ...guardFields() }),
       })
       const json = await res.json()
       if (!res.ok) {
@@ -204,7 +207,8 @@ export default function DriverForm() {
               {step === 1 ? 'Your Information' : 'Availability & Experience'}
             </h2>
 
-            <form onSubmit={handleSubmit(onSubmit)} className="space-y-6" noValidate aria-label="Become a driver application">
+            <form onSubmit={handleSubmit(onSubmit, () => focusFirstError(cardRef.current))} className="space-y-6" noValidate aria-label="Become a driver application">
+              {honeypot}
               {step === 1 ? (
                 <div className="space-y-5">
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
@@ -330,6 +334,8 @@ export default function DriverForm() {
                     <Label htmlFor="d-additionalInfo">Anything Else We Should Know?</Label>
                     <Textarea id="d-additionalInfo" {...register('additionalInfo')} placeholder="Optional" />
                   </div>
+
+                  <FormConsent subject="your application" />
 
                   {status === 'error' && <FormError message={errorMessage} />}
 

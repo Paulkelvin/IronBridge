@@ -27,7 +27,7 @@ export default function TimelineSteps({ steps }: { steps: Step[] }) {
           </span>
           <div className="space-y-1.5">
             <h3 className="font-bold text-slate-800 text-base md:text-lg">{step.title}</h3>
-            <p className="text-slate-500 text-sm leading-relaxed">{step.content}</p>
+            <p className="text-slate-600 text-sm leading-relaxed">{step.content}</p>
           </div>
         </SlideEffect>
       ))}

@@ -100,7 +100,10 @@ export default function Testimonials() {
         <div
           ref={trackRef}
           onScroll={handleScroll}
-          className="flex overflow-x-auto snap-x snap-mandatory gap-4 -mx-4 px-4 pb-1 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+          tabIndex={0}
+          role="region"
+          aria-label="Customer testimonials"
+          className="focus-visible:outline-solid focus-visible:outline-2 focus-visible:outline-teal flex overflow-x-auto snap-x snap-mandatory gap-4 -mx-4 px-4 pb-1 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
         >
           {settings.testimonials.map((t) => (
             <div key={t.role + t.location} className="shrink-0 w-[88%] snap-center">
@@ -108,15 +111,18 @@ export default function Testimonials() {
             </div>
           ))}
         </div>
-        <div className="flex items-center justify-center gap-2 mt-5">
+        <div className="flex items-center justify-center mt-3">
           {settings.testimonials.map((_, i) => (
             <button
               key={i}
               type="button"
               onClick={() => scrollToIndex(i)}
               aria-label={`Go to testimonial ${i + 1}`}
-              className={`h-1.5 rounded-full transition-all ${i === activeIndex ? 'w-5 bg-teal' : 'w-1.5 bg-border'}`}
-            />
+              aria-current={i === activeIndex ? 'true' : undefined}
+              className="p-[9px] rounded-full cursor-pointer focus-visible:outline-solid focus-visible:outline-2 focus-visible:outline-teal"
+            >
+              <span className={`block h-1.5 rounded-full transition-all ${i === activeIndex ? 'w-5 bg-teal' : 'w-1.5 bg-border'}`} />
+            </button>
           ))}
         </div>
       </SlideEffect>

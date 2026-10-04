@@ -8,13 +8,15 @@ import IconBadge from "@/components/ui/icon-badge"
 import { cn } from "@/lib/utils"
 import { MapPin } from "lucide-react"
 import dynamic from "next/dynamic"
-import { useState } from "react"
+import { useEffect, useRef, useState } from "react"
+
+const mapPlaceholder = (
+  <div className="w-full h-[380px] md:h-[460px] lg:h-[560px] rounded-2xl border border-border bg-secondary animate-pulse" />
+)
 
 const ServiceAreaMapGoogle = dynamic(() => import("@/components/graphics/service-area-map-google"), {
   ssr: false,
-  loading: () => (
-    <div className="w-full h-[380px] md:h-[460px] lg:h-[560px] rounded-2xl border border-border bg-secondary animate-pulse" />
-  ),
+  loading: () => mapPlaceholder,
 })
 
 const mapUnavailableFallback = (
@@ -34,18 +36,39 @@ export default function ServiceAreaExplorer({
 
   const displayRegion = selectedRegion ?? hoveredRegion
 
+  // The map pulls in Google Maps and deck.gl, so it only loads once it's about to scroll into view.
+  const mapSlotRef = useRef<HTMLDivElement>(null)
+  const [mapNearViewport, setMapNearViewport] = useState(false)
+
+  useEffect(() => {
+    const slot = mapSlotRef.current
+    if (!slot) return
+    const observer = new IntersectionObserver(([entry]) => {
+      if (entry.isIntersecting) {
+        setMapNearViewport(true)
+        observer.disconnect()
+      }
+    }, { rootMargin: "400px 0px" })
+    observer.observe(slot)
+    return () => observer.disconnect()
+  }, [])
+
   return (
     <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-14 items-center text-left">
       <SlideEffect direction="right" isSpring={false}>
-        <ErrorBoundary fallback={mapUnavailableFallback}>
-          <ServiceAreaMapGoogle
-            activeRegion={displayRegion}
-            mapRegion={selectedRegion}
-            activeCityName={selectedCity}
-            onRegionHover={setHoveredRegion}
-            className="w-full h-[380px] md:h-[460px] lg:h-[560px]"
-          />
-        </ErrorBoundary>
+        <div ref={mapSlotRef}>
+          {mapNearViewport ? (
+            <ErrorBoundary fallback={mapUnavailableFallback}>
+              <ServiceAreaMapGoogle
+                activeRegion={displayRegion}
+                mapRegion={selectedRegion}
+                activeCityName={selectedCity}
+                onRegionHover={setHoveredRegion}
+                className="w-full h-[380px] md:h-[460px] lg:h-[560px]"
+              />
+            </ErrorBoundary>
+          ) : mapPlaceholder}
+        </div>
       </SlideEffect>
 
       <div className="space-y-3">

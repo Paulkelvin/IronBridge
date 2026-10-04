@@ -5,22 +5,21 @@ import Footer from "@/sections/footer"
 import SectionHeader from "@/components/section-header"
 import SlideEffect from "@/components/slide-effect"
 import DownloadButton from "@/components/download-button"
-import { Button } from "@/components/ui/button"
 import IconBadge from "@/components/ui/icon-badge"
 import { CardBody, CardTitle } from "@/components/ui/card-text"
 import Card from "@/components/card"
 import {
-  ArrowRight, Building2, ClipboardCheck, Factory,
-  FileText, Hammer, MapPin, Package, ShieldCheck, Stethoscope,
+  ArrowRight, Building2, Factory,
+  FileText, Hammer, Package, ShieldCheck, Stethoscope,
   Store, Truck, UserCheck, Briefcase, Globe
 } from "lucide-react"
 import Image from "next/image"
-import Link from "next/link"
 import DotGrid from "@/components/graphics/dot-grid"
+import ButtonLink from "@/components/ui/button-link"
 
 export const metadata: Metadata = pageMetadata({
   title: "Capability Statement | Iron Bridge Mobility Solutions",
-  description: "Core capabilities, qualifications, and company snapshot for Iron Bridge Mobility Solutions — medical courier, commercial logistics, and bulk-item removal across Maryland, DC, and Northern Virginia.",
+  description: "Iron Bridge capability statement: medical courier, commercial logistics, and bulk-item removal across MD, DC, and Northern VA. NAICS 492110, 492210, 484110.",
   path: "/capability-statement",
 })
 
@@ -109,11 +108,11 @@ export default function CapabilityStatementPage() {
             </SlideEffect>
             <SlideEffect delay={0.05}>
               <h1 className="font-serif text-white text-2xl sm:text-4xl md:text-5xl font-semibold tracking-tight leading-[1.1] max-w-3xl whitespace-nowrap">
-                What We Bring to the Table
+                <span className="sr-only">Iron Bridge Capability Statement: </span>What We Bring to the Table
               </h1>
             </SlideEffect>
             <SlideEffect delay={0.1} className="flex justify-center">
-              <DownloadButton href="/Iron-Bridge-Capability-Statement.pdf" filename="Iron-Bridge-Capability-Statement.pdf" label="Download Our Capability Statements" />
+              <DownloadButton href="/Iron-Bridge-Capability-Statement.pdf" filename="Iron-Bridge-Capability-Statement.pdf" label="Download Our Capability Statement" />
             </SlideEffect>
           </section>
         </div>
@@ -136,7 +135,7 @@ export default function CapabilityStatementPage() {
       </div>
 
       {/* Industries Served */}
-      <div className="relative left-1/2 w-screen -translate-x-1/2 bg-teal-tint/50">
+      <div className="relative left-1/2 w-screen -translate-x-1/2 bg-teal-tint/30">
         <div className="px-4 xl:px-6 max-w-7xl mx-auto py-16 md:py-20 space-y-8 md:space-y-10">
           <SectionHeader eyebrow="Industries Served" title="Who We Work With" />
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
@@ -225,17 +224,15 @@ export default function CapabilityStatementPage() {
           </div>
         </SlideEffect>
         <SlideEffect className="flex justify-center">
-          <Link href="/request-a-quote">
-            <Button size="lg" className="bg-navy hover:bg-navy/90 text-white">
-              Let&apos;s Discuss Your Route
-              <ArrowRight size={16} strokeWidth={1.5} />
-            </Button>
-          </Link>
+          <ButtonLink href="/request-a-quote" size="lg" className="bg-navy hover:bg-navy/90 text-white">
+            Let&apos;s Discuss Your Route
+            <ArrowRight size={16} strokeWidth={1.5} aria-hidden="true" />
+          </ButtonLink>
         </SlideEffect>
       </div>
 
       <SlideEffect className="flex justify-center">
-        <DownloadButton href="/Iron-Bridge-Capability-Statement.pdf" filename="Iron-Bridge-Capability-Statement.pdf" label="Download Our Capability Statements" />
+        <DownloadButton href="/Iron-Bridge-Capability-Statement.pdf" filename="Iron-Bridge-Capability-Statement.pdf" label="Download Our Capability Statement" />
       </SlideEffect>
 
       <CTA />

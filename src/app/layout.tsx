@@ -25,11 +25,9 @@ export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   title,
   description,
-  alternates: { canonical: "/" },
   openGraph: {
     title,
     description,
-    url: "/",
     siteName: "Iron Bridge Mobility Solutions",
     locale: "en_US",
     type: "website",
@@ -41,18 +39,17 @@ export const metadata: Metadata = {
     description,
     images: ["/og-image.png"],
   },
-  robots: {
-    index: true,
-    follow: true,
-  },
 };
 
 const localBusinessJsonLd = {
   "@context": "https://schema.org",
   "@type": "LocalBusiness",
+  "@id": `${siteUrl}/#business`,
   name: "Iron Bridge Mobility Solutions",
   description,
   url: siteUrl,
+  logo: `${siteUrl}/brand/shield-mark.png`,
+  image: `${siteUrl}/og-image.png`,
   telephone: "+13018181929",
   email: "lbrent@ironbridgems.com",
   address: {
@@ -64,6 +61,16 @@ const localBusinessJsonLd = {
     addressCountry: "US",
   },
   areaServed: ["Maryland", "Washington, DC", "Northern Virginia"],
+  openingHoursSpecification: {
+    "@type": "OpeningHoursSpecification",
+    dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
+    opens: "00:00",
+    closes: "23:59",
+  },
+  sameAs: [
+    "https://www.facebook.com/share/19ZmJDHUMG/",
+    "https://www.instagram.com/iron_bridge_mobility",
+  ],
 }
 
 export default function RootLayout({
@@ -76,6 +83,15 @@ export default function RootLayout({
       <body
         className={`${sans.variable} ${serif.variable} ${sans.className} antialiased w-full min-h-screen overflow-x-hidden`}
       >
+        <noscript>
+          <style>{`[style*="opacity:0"]{opacity:1!important;transform:none!important}`}</style>
+        </noscript>
+        <a
+          href="#main-content"
+          className="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-[100] focus:rounded-md focus:bg-navy focus:px-4 focus:py-2 focus:text-white"
+        >
+          Skip to main content
+        </a>
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(localBusinessJsonLd) }}
@@ -83,7 +99,7 @@ export default function RootLayout({
         <ScrollRestoration />
         <LenisProvider>
           <Header />
-          <div className="pt-[72px] pb-14 md:pb-0">{children}</div>
+          <main id="main-content" tabIndex={-1} className="pt-[72px] pb-14 md:pb-0 outline-none">{children}</main>
         </LenisProvider>
         <MobileCtaBar />
       </body>

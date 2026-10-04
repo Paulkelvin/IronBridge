@@ -14,7 +14,7 @@ import Link from "next/link"
 
 export const metadata: Metadata = pageMetadata({
   title: "Services | Iron Bridge Mobility Solutions",
-  description: "Medical courier and commercial logistics services throughout Maryland, Washington DC, and Northern Virginia, including specimen transport, same-day delivery, and dedicated routes.",
+  description: "Medical courier, same-day delivery, dedicated routes, and bulk-item removal across Maryland, Washington DC, and Northern Virginia.",
   path: "/services",
 })
 
@@ -56,6 +56,7 @@ export default function ServicesPage() {
     <div className="px-4 xl:px-6 max-w-7xl mx-auto space-y-24 sm:space-y-32 md:space-y-40 scroll-smooth">
       <ServicesHero />
 
+      <h2 className="sr-only">Our Services</h2>
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
         {services.map((service, i) => (
           <SlideEffect key={service.title} direction="top" delay={0.1 * i} className="col-span-1 h-full" isSpring={false}>
@@ -64,7 +65,7 @@ export default function ServicesPage() {
               <CardTitle className="text-xl md:text-title">{service.title}</CardTitle>
               <CardBody>{service.content}</CardBody>
               <Link href={service.href} className="inline-flex items-center gap-1.5 text-sm font-semibold text-primary hover:text-teal transition-colors mt-auto">
-                Learn more <ArrowRight size={15} strokeWidth={1.5} />
+                Learn more<span className="sr-only"> about {service.title}</span> <ArrowRight size={15} strokeWidth={1.5} aria-hidden="true" />
               </Link>
             </Card>
           </SlideEffect>

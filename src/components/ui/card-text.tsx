@@ -5,5 +5,5 @@ export function CardTitle({ children, className }: { children: React.ReactNode, 
 }
 
 export function CardBody({ children, className }: { children: React.ReactNode, className?: string }) {
-  return <p className={cn("text-slate-500 font-normal leading-relaxed", className)}>{children}</p>
+  return <p className={cn("text-slate-600 font-normal leading-relaxed", className)}>{children}</p>
 }

@@ -60,7 +60,7 @@ export default function Features1() {
               <CardTitle className="text-xl md:text-title">{service.title}</CardTitle>
               <CardBody>{service.content}</CardBody>
               <Link href={service.href} className="inline-flex items-center gap-1.5 text-sm font-semibold text-primary hover:text-teal transition-colors mt-auto">
-                Learn more <ArrowRight size={15} strokeWidth={1.5} />
+                Learn more<span className="sr-only"> about {service.title}</span> <ArrowRight size={15} strokeWidth={1.5} aria-hidden="true" />
               </Link>
             </Card>
           </SlideEffect>

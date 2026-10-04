@@ -15,7 +15,7 @@ import Image from "next/image"
 
 export const metadata: Metadata = pageMetadata({
   title: "About Us | Iron Bridge Mobility Solutions",
-  description: "Iron Bridge Mobility Solutions is built on reliability, accountability, and professional handling for medical courier and commercial logistics across Maryland, Washington DC, and Northern Virginia.",
+  description: "Iron Bridge Mobility Solutions is a Maryland-based medical courier and logistics company built on reliability, accountability, and careful handling.",
   path: "/about",
 })
 

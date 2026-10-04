@@ -8,7 +8,7 @@ import SlideEffect from "@/components/slide-effect"
 
 export const metadata: Metadata = pageMetadata({
   title: "Service Area | Maryland, Washington DC, Northern Virginia",
-  description: "Iron Bridge Mobility Solutions operates throughout Maryland, Washington DC, and Northern Virginia, including Baltimore, Annapolis, Silver Spring, Arlington, Alexandria, and Fairfax.",
+  description: "Courier and delivery coverage across Maryland, Washington DC, and Northern Virginia, including Baltimore, Annapolis, Silver Spring, Arlington, and Fairfax.",
   path: "/service-area",
 })
 
@@ -35,11 +35,12 @@ export default function ServiceAreaPage() {
     <div className="px-4 xl:px-6 max-w-7xl mx-auto space-y-24 sm:space-y-32 md:space-y-40 scroll-smooth">
       <PageHeader
         eyebrow="Service Area"
-        title="Do We Deliver to You?"
-        description="Find your city below. We run daily throughout Maryland, Washington DC, and Northern Virginia."
+        title="Delivery Across Maryland, DC & Northern Virginia"
+        description="Do we deliver to you? Find your city below. We run daily throughout the region."
         background="map"
       />
 
+      <h2 className="sr-only">Cities We Serve</h2>
       <ServiceAreaExplorer regions={regions} />
 
       <SlideEffect isSpring={false} className="text-center text-sm md:text-base text-foreground/80 italic max-w-2xl mx-auto">

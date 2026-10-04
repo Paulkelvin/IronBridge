@@ -1,9 +1,9 @@
 'use client'
 
 import Logo from "@/components/logo"
-import { Button } from "@/components/ui/button"
 import { Clock, Mail, MapPin, Phone } from "lucide-react"
 import Link from "next/link"
+import ButtonLink from "@/components/ui/button-link"
 
 function FacebookIcon() {
   return (
@@ -37,6 +37,7 @@ const settings = {
         { title: 'Commercial Logistics', href: '/commercial-logistics' },
         { title: 'Dedicated Routes', href: '/dedicated-routes' },
         { title: 'Bulk-Item Removal', href: '/bulk-item-removal' },
+        { title: 'All Services', href: '/services' },
       ],
     },
     {
@@ -122,14 +123,12 @@ export default function Footer() {
             24/7 Availability
           </span>
           <p className="text-xs text-foreground/80">Business inquiries: same-day response</p>
-          <Link href="/request-a-quote" className="mt-1">
-            <Button
-              size='default'
-              className="rounded-md bg-navy text-white border border-navy/80 text-sm font-medium px-6 hover:bg-transparent hover:text-navy transition-colors"
-            >
-              Request a Quote
-            </Button>
-          </Link>
+          <ButtonLink
+            href="/request-a-quote"
+            className="mt-1 rounded-md bg-navy text-white border border-navy/80 text-sm font-medium px-6 hover:bg-transparent hover:text-navy transition-colors"
+          >
+            Request a Quote
+          </ButtonLink>
         </div>
       </div>
 

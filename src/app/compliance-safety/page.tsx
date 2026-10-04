@@ -13,7 +13,7 @@ import {
 
 export const metadata: Metadata = pageMetadata({
   title: "Compliance & Safety | Iron Bridge Mobility Solutions",
-  description: "How Iron Bridge trains, qualifies, and documents medical courier and logistics operations: HIPAA and Bloodborne Pathogens training, chain-of-custody, and driver qualification standards.",
+  description: "How Iron Bridge trains and documents its courier work: HIPAA and Bloodborne Pathogens training, chain-of-custody, proof of delivery, and driver standards.",
   path: "/compliance-safety",
 })
 
@@ -59,6 +59,7 @@ export default function ComplianceSafetyPage() {
         description="How we train personnel, qualify drivers, and document handling for medical courier and commercial logistics work."
       />
 
+      <h2 className="sr-only">How We Handle Medical and Commercial Shipments</h2>
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
         {pillars.map((p, i) => (
           <SlideEffect

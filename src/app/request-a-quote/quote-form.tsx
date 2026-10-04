@@ -6,6 +6,7 @@ import Footer from "@/sections/footer"
 import { Button } from "@/components/ui/button"
 import { FieldError, Input, Label, PhoneInput, PillGroup, Textarea } from "@/components/ui/field"
 import { FormError, FormSuccess } from "@/components/form-status"
+import { FormConsent, focusFirstError, useSpamGuard } from "@/components/form-guard"
 import { quoteRequestSchema, type QuoteRequestInput } from "@/lib/validations"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { AlertTriangle, ArrowLeft, ArrowRight, CalendarDays, Mail, MapPin, Phone } from "lucide-react"
@@ -26,6 +27,7 @@ export default function QuoteForm() {
   const [errorMessage, setErrorMessage] = useState<string>('')
   const cardRef = useRef<HTMLDivElement>(null)
   const isFirstRender = useRef(true)
+  const { honeypot, guardFields } = useSpamGuard()
 
   useEffect(() => {
     if (isFirstRender.current) {
@@ -68,6 +70,7 @@ export default function QuoteForm() {
   const goNext = async () => {
     const valid = await trigger(STEP_FIELDS[step - 1])
     if (valid) setStep((s) => (s + 1) as 1 | 2 | 3)
+    else focusFirstError(cardRef.current)
   }
 
   const onSubmit = async (data: QuoteRequestInput) => {
@@ -77,7 +80,7 @@ export default function QuoteForm() {
       const res = await fetch('/api/request-a-quote', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(data),
+        body: JSON.stringify({ ...data, ...guardFields() }),
       })
       const json = await res.json()
       if (!res.ok) {
@@ -129,7 +132,8 @@ export default function QuoteForm() {
               {STEP_TITLES[step - 1]}
             </h2>
 
-            <form onSubmit={handleSubmit(onSubmit)} className="space-y-6" noValidate aria-label="Request a quote">
+            <form onSubmit={handleSubmit(onSubmit, () => focusFirstError(cardRef.current))} className="space-y-6" noValidate aria-label="Request a quote">
+              {honeypot}
               {step === 1 ? (
                 <div className="space-y-5">
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
@@ -287,6 +291,8 @@ export default function QuoteForm() {
                     <Label htmlFor="additionalInstructions">Additional Instructions</Label>
                     <Textarea id="additionalInstructions" {...register('additionalInstructions')} placeholder="Anything else we should know?" />
                   </div>
+
+                  <FormConsent subject="this request" />
 
                   {status === 'error' && <FormError message={errorMessage} />}
 

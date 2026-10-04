@@ -15,6 +15,18 @@ function getClient() {
   return new Resend(apiKey)
 }
 
+type EmailMessage = Parameters<Resend["emails"]["send"]>[0]
+
+async function sendOrThrow(resend: Resend, message: EmailMessage) {
+  const { error } = await resend.emails.send(message)
+  if (error) throw new Error(`Email delivery failed: ${error.message}`)
+}
+
+async function sendConfirmation(resend: Resend, message: EmailMessage) {
+  const { error } = await resend.emails.send(message)
+  if (error) console.error("Confirmation email failed:", error.message)
+}
+
 function formatAddress(street: string, unit: string | undefined, city: string, state: string, zip: string) {
   const line1 = unit ? `${street}, ${unit}` : street
   return `${line1}, ${city}, ${state} ${zip}`
@@ -71,7 +83,7 @@ export async function sendQuoteRequestEmails(data: QuoteRequestInput) {
     row("STAT / expedited", data.stat),
   ].join("")
 
-  await resend.emails.send({
+  await sendOrThrow(resend, {
     from: FROM,
     to: QUOTE_NOTIFICATIONS_TO,
     replyTo: data.email,
@@ -82,7 +94,7 @@ export async function sendQuoteRequestEmails(data: QuoteRequestInput) {
     `),
   })
 
-  await resend.emails.send({
+  await sendConfirmation(resend, {
     from: FROM,
     to: data.email,
     subject: "We received your request | Iron Bridge Mobility Solutions",
@@ -121,7 +133,7 @@ export async function sendDriverApplicationEmails(data: DriverApplicationInput) 
     row("Other certifications", data.otherCertifications),
   ].join("")
 
-  await resend.emails.send({
+  await sendOrThrow(resend, {
     from: FROM,
     to,
     replyTo: data.email,
@@ -132,7 +144,7 @@ export async function sendDriverApplicationEmails(data: DriverApplicationInput) 
     `),
   })
 
-  await resend.emails.send({
+  await sendConfirmation(resend, {
     from: FROM,
     to: data.email,
     subject: "We received your application | Iron Bridge Mobility Solutions",

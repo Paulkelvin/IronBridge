@@ -2,9 +2,8 @@
 
 import DotGrid from "@/components/graphics/dot-grid"
 import SlideEffect from "@/components/slide-effect"
-import { Button } from "@/components/ui/button"
 import { ArrowRight } from "lucide-react"
-import Link from "next/link"
+import ButtonLink from "@/components/ui/button-link"
 
 const settings = {
   title: 'Ready to Move Something That Matters?',
@@ -44,24 +43,22 @@ export default function CTA() {
 
         {/* CTA */}
         <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 w-full sm:w-fit">
-          <Link href={settings.primaryCTA.href} className="w-full sm:w-fit">
-            <Button
-              size='lg'
-              className="w-full rounded-none bg-white text-navy border border-white uppercase tracking-[0.14em] text-xs sm:text-sm font-semibold hover:bg-transparent hover:text-white transition-colors"
-            >
-              {settings.primaryCTA.content}
-              <ArrowRight strokeWidth={1.5} />
-            </Button>
-          </Link>
-          <Link href={settings.secondaryCTA.href} className="w-full sm:w-fit">
-            <Button
-              variant='outline'
-              size='lg'
-              className="w-full rounded-none bg-transparent border border-white/60 text-white uppercase tracking-[0.14em] text-xs sm:text-sm font-semibold hover:bg-white hover:text-navy hover:border-white transition-colors"
-            >
-              {settings.secondaryCTA.content}
-            </Button>
-          </Link>
+          <ButtonLink
+            href={settings.primaryCTA.href}
+            size='lg'
+            className="w-full sm:w-fit rounded-none bg-white text-navy border border-white uppercase tracking-[0.14em] text-xs sm:text-sm font-semibold hover:bg-transparent hover:text-white transition-colors"
+          >
+            {settings.primaryCTA.content}
+            <ArrowRight strokeWidth={1.5} aria-hidden="true" />
+          </ButtonLink>
+          <ButtonLink
+            href={settings.secondaryCTA.href}
+            variant='outline'
+            size='lg'
+            className="w-full sm:w-fit rounded-none bg-transparent border border-white/60 text-white uppercase tracking-[0.14em] text-xs sm:text-sm font-semibold hover:bg-white hover:text-navy hover:border-white transition-colors"
+          >
+            {settings.secondaryCTA.content}
+          </ButtonLink>
         </div>
       </div>
     </SlideEffect>

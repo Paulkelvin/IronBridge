@@ -1,5 +1,6 @@
 import type { Metadata } from "next"
 import { pageMetadata } from "@/lib/page-metadata"
+import ServiceJsonLd from "@/components/service-json-ld"
 import Card from "@/components/card"
 import CapabilityList from "@/components/capability-list"
 import CTA from "@/sections/cta"
@@ -7,14 +8,13 @@ import Footer from "@/sections/footer"
 import PageHeader from "@/components/page-header"
 import SectionHeader from "@/components/section-header"
 import SlideEffect from "@/components/slide-effect"
-import { Button } from "@/components/ui/button"
 import { CardBody, CardTitle } from "@/components/ui/card-text"
 import IconBadge from "@/components/ui/icon-badge"
 import {
   ArrowRight, Building2, CalendarClock, ClipboardCheck, DoorOpen,
   Home, MapPinned, Refrigerator, Sofa
 } from "lucide-react"
-import Link from "next/link"
+import ButtonLink from "@/components/ui/button-link"
 
 export const metadata: Metadata = pageMetadata({
   title: "Bulk-Item Removal | Furniture & Appliance Removal",
@@ -46,6 +46,7 @@ const howItWorks = [
 export default function BulkItemRemovalPage() {
   return (
     <div className="px-4 xl:px-6 max-w-7xl mx-auto space-y-24 sm:space-y-32 md:space-y-40 scroll-smooth">
+      <ServiceJsonLd name="Bulk-Item Removal" serviceType="Furniture and appliance removal" description="Furniture, appliance, and large-item removal for property managers, businesses, and residential customers." path="/bulk-item-removal" />
       <PageHeader
         eyebrow="Bulk-Item Removal"
         title="Bulk-Item Removal"
@@ -70,7 +71,7 @@ export default function BulkItemRemovalPage() {
                 <span className="shrink-0 flex items-center justify-center h-8 w-8 rounded-full border-2 border-teal bg-background text-teal text-sm font-semibold">
                   {i + 1}
                 </span>
-                <span className="text-sm text-slate-500 pt-1">{step}</span>
+                <span className="text-sm text-slate-600 pt-1">{step}</span>
               </li>
             ))}
           </ol>
@@ -104,12 +105,10 @@ export default function BulkItemRemovalPage() {
       </div>
 
       <SlideEffect isSpring={false} className="text-center">
-        <Link href="/request-a-quote">
-          <Button size="lg">
-            Request a Bulk-Item Pickup
-            <ArrowRight strokeWidth={1.5} />
-          </Button>
-        </Link>
+        <ButtonLink href="/request-a-quote" size="lg">
+          Request a Bulk-Item Pickup
+          <ArrowRight strokeWidth={1.5} aria-hidden="true" />
+        </ButtonLink>
       </SlideEffect>
 
       <CTA />

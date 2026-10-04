@@ -2,12 +2,12 @@
 
 import Logo from "./logo"
 import Link from "next/link"
-import { Button } from "./ui/button"
 import { AlignJustify, ChevronDown, X } from "lucide-react"
 import { AnimatePresence } from 'motion/react'
 import * as motion from "motion/react-m"
 import * as NavigationMenu from "@radix-ui/react-navigation-menu"
 import { useEffect, useState } from "react"
+import ButtonLink from "@/components/ui/button-link"
 
 const settings = {
   services: {
@@ -101,7 +101,7 @@ export default function Navbar() {
         <NavigationMenu.Root delayDuration={80} className="relative">
           <NavigationMenu.List className="flex items-center justify-center gap-6 text-black font-medium select-none text-link">
             <NavigationMenu.Item>
-              <NavigationMenu.Trigger className="group flex items-center gap-1 hover:opacity-80 transition-all capitalize cursor-pointer outline-none">
+              <NavigationMenu.Trigger className="group flex items-center gap-1 hover:opacity-80 transition-all capitalize cursor-pointer outline-none focus-visible:outline-solid focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-teal rounded-sm">
                 {settings.services.name}
                 <ChevronDown size={14} strokeWidth={2} className="text-teal transition-transform duration-200 group-data-[state=open]:rotate-180" aria-hidden="true" />
               </NavigationMenu.Trigger>
@@ -129,7 +129,7 @@ export default function Navbar() {
             </NavigationMenu.Item>
 
             <NavigationMenu.Item>
-              <NavigationMenu.Trigger className="group flex items-center gap-1 hover:opacity-80 transition-all capitalize cursor-pointer outline-none">
+              <NavigationMenu.Trigger className="group flex items-center gap-1 hover:opacity-80 transition-all capitalize cursor-pointer outline-none focus-visible:outline-solid focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-teal rounded-sm">
                 {settings.company.name}
                 <ChevronDown size={14} strokeWidth={2} className="text-teal transition-transform duration-200 group-data-[state=open]:rotate-180" aria-hidden="true" />
               </NavigationMenu.Trigger>
@@ -152,7 +152,7 @@ export default function Navbar() {
             {settings.navLinks.map(link => (
               <NavigationMenu.Item key={link.name}>
                 <NavigationMenu.Link asChild>
-                  <Link href={link.href} title={link.name} className="hover:opacity-80 transition-all capitalize">{link.name}</Link>
+                  <Link href={link.href} title={link.name} className="hover:opacity-80 transition-all capitalize focus-visible:outline-solid focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-teal rounded-sm">{link.name}</Link>
                 </NavigationMenu.Link>
               </NavigationMenu.Item>
             ))}
@@ -160,9 +160,7 @@ export default function Navbar() {
         </NavigationMenu.Root>
 
         {/* Call To Action */}
-        <Link href={settings.cta.href} title={settings.cta.content}>
-          <Button className="capitalize">{settings.cta.content}</Button>
-        </Link>
+        <ButtonLink href={settings.cta.href} className="capitalize">{settings.cta.content}</ButtonLink>
       </div>
 
       {/* mobile only - burger menu icon */}
@@ -171,7 +169,7 @@ export default function Navbar() {
         initial={{ scale: 1, y: 0 }}
         whileTap={{ scale: 0.8 }}
         transition={{ duration: 0.3 }}
-        className="bg-white shadow-none flex lg:hidden cursor-pointer text-black"
+        className="bg-white shadow-none flex lg:hidden cursor-pointer text-black p-3 -m-3 rounded-md focus-visible:outline-solid focus-visible:outline-2 focus-visible:outline-teal"
         onClick={toggleMenu}
         aria-expanded={isOpen}
         aria-controls="mobile-menu"
@@ -217,9 +215,7 @@ export default function Navbar() {
                 ))}
               </ul>
 
-              <Link href={settings.cta.href} title={settings.cta.content} onClick={toggleMenu}>
-                <Button className="w-full capitalize">{settings.cta.content}</Button>
-              </Link>
+              <ButtonLink href={settings.cta.href} onClick={toggleMenu} className="w-full capitalize">{settings.cta.content}</ButtonLink>
             </div>
           </motion.div>
         )}

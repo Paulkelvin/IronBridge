@@ -1,5 +1,6 @@
 import type { Metadata } from "next"
 import { pageMetadata } from "@/lib/page-metadata"
+import ServiceJsonLd from "@/components/service-json-ld"
 import CapabilityList from "@/components/capability-list"
 import CTA from "@/sections/cta"
 import Footer from "@/sections/footer"
@@ -30,6 +31,7 @@ const capabilities = [
 export default function CommercialLogisticsPage() {
   return (
     <div className="px-4 xl:px-6 max-w-7xl mx-auto space-y-24 sm:space-y-32 md:space-y-40 scroll-smooth">
+      <ServiceJsonLd name="Commercial Logistics" serviceType="Same-day and expedited cargo van delivery" description="Cargo van transportation, same-day and expedited delivery, B2B and last-mile delivery, and multi-stop routes." path="/commercial-logistics" />
       <PageHeader
         eyebrow="Commercial Logistics"
         title="Commercial Logistics"
