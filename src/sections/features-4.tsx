@@ -3,28 +3,13 @@ import SectionHeader from "@/components/section-header"
 import ServiceAreaExplorer from "@/components/service-area-explorer"
 import SlideEffect from "@/components/slide-effect"
 import ButtonLink from "@/components/ui/button-link"
+import { serviceRegions } from "@/content/site-facts"
 
 const settings = {
   eyebrow: 'Service Area',
   title: 'Do We Deliver to You?',
   description: 'Find your city below. We run daily throughout Maryland, Washington DC, and Northern Virginia.',
-  regions: [
-    {
-      id: 'maryland' as const,
-      title: 'Maryland',
-      cities: ['Baltimore', 'Bowie', 'Annapolis', 'Columbia', 'Silver Spring', 'Rockville', 'Bethesda', 'Hyattsville'],
-    },
-    {
-      id: 'dc' as const,
-      title: 'Washington, DC',
-      cities: ['Washington, DC'],
-    },
-    {
-      id: 'virginia' as const,
-      title: 'Northern Virginia',
-      cities: ['Arlington', 'Alexandria', 'Fairfax', 'Reston', 'Sterling', 'Ashburn'],
-    },
-  ],
+  regions: serviceRegions,
   note: 'Regional and Mid-Atlantic transportation may also be available depending on the assignment.',
   CTA: {
     content: 'Discuss Your Service Area',

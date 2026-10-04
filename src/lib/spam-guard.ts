@@ -16,11 +16,15 @@ export function isLikelyBot(body: unknown): boolean {
   return false
 }
 
-export function isRateLimited(req: NextRequest): boolean {
+export function isRateLimited(
+  req: NextRequest,
+  { bucket = "forms", max = RATE_MAX_PER_WINDOW, windowMs = RATE_WINDOW_MS }: { bucket?: string, max?: number, windowMs?: number } = {}
+): boolean {
   const ip = req.headers.get("x-forwarded-for")?.split(",")[0]?.trim() || "unknown"
+  const key = `${bucket}:${ip}`
   const now = Date.now()
-  const recent = (recentSubmissions.get(ip) ?? []).filter((t) => now - t < RATE_WINDOW_MS)
+  const recent = (recentSubmissions.get(key) ?? []).filter((t) => now - t < windowMs)
   recent.push(now)
-  recentSubmissions.set(ip, recent)
-  return recent.length > RATE_MAX_PER_WINDOW
+  recentSubmissions.set(key, recent)
+  return recent.length > max
 }

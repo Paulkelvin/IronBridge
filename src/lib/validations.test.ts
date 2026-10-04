@@ -50,8 +50,7 @@ describe("quote request validation", () => {
   })
 
   it("asks for a phone number in plain language when it's missing", () => {
-    const { phone: _phone, ...withoutPhone } = validQuote
-    const result = quoteRequestSchema.safeParse(withoutPhone)
+    const result = quoteRequestSchema.safeParse({ ...validQuote, phone: undefined })
     expect(fieldErrors(result).phone).toEqual(["Enter a valid US phone number"])
   })
 
@@ -78,8 +77,7 @@ describe("driver application validation", () => {
   })
 
   it("asks for a phone number in plain language when it's missing", () => {
-    const { phone: _phone, ...withoutPhone } = validDriver
-    const result = driverApplicationSchema.safeParse(withoutPhone)
+    const result = driverApplicationSchema.safeParse({ ...validDriver, phone: undefined })
     expect(fieldErrors(result).phone).toEqual(["Enter a valid US phone number"])
   })
 

@@ -27,6 +27,13 @@ const sections = [
     ],
   },
   {
+    title: "Website Chat Assistant",
+    body: [
+      "Our website offers an automated chat assistant that answers questions about our services. Messages you type are sent to our AI provider, OpenAI, to generate replies. OpenAI does not use these messages to train its models, and we ask OpenAI not to store them.",
+      "Chats are not saved on our systems. If you choose to share your name and contact details so our team can follow up, the assistant sends those details, a short summary of your request, and the chat conversation to our team by email. Please don't share patient or health information in the chat.",
+    ],
+  },
+  {
     title: "Protected Health Information",
     body: [
       "This website is not intended for the submission of patient names, diagnoses, or other protected health information (PHI), and our forms ask you not to include it. PHI we may handle in the course of providing medical courier services is governed separately by any applicable business associate agreement with our healthcare clients, not by this website's data collection.",

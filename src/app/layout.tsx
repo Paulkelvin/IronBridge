@@ -6,6 +6,7 @@ import LenisProvider from "@/providers/lenis";
 import ScrollRestoration from "@/components/scroll-restoration";
 import MobileCtaBar from "@/components/mobile-cta-bar";
 import BreadcrumbJsonLd from "@/components/breadcrumb-json-ld";
+import AssistantLauncher from "@/components/assistant/assistant-launcher";
 
 const sans = Inter({
   variable: "--font-ib-sans",
@@ -104,6 +105,7 @@ export default function RootLayout({
           <main id="main-content" tabIndex={-1} className="pt-[72px] pb-14 md:pb-0 outline-none">{children}</main>
         </LenisProvider>
         <MobileCtaBar />
+        <AssistantLauncher />
       </body>
     </html>
   );

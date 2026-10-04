@@ -85,3 +85,39 @@ describe("sendQuoteRequestEmails", () => {
     expect(send).not.toHaveBeenCalled()
   })
 })
+
+describe("sendAssistantLeadEmail", () => {
+  const lead = {
+    name: "Dana",
+    company: "Ridge Clinic",
+    email: "dana@ridgeclinic.example",
+    phone: "",
+    service: "medical-courier" as const,
+    need: "Lab specimen route",
+    locations: "Silver Spring to Baltimore",
+    timing: "Next week",
+    frequency: "3 times a week",
+    rating: "hot" as const,
+    rating_reason: "Recurring healthcare route",
+  }
+
+  it("emails only the business inbox, marks the rating, and escapes the conversation", async () => {
+    send.mockResolvedValue({ data: { id: "ok" }, error: null })
+    const { sendAssistantLeadEmail } = await loadEmailModule()
+    await sendAssistantLeadEmail(lead, [
+      { role: "user", content: "<b>Hi</b> I need a route" },
+      { role: "assistant", content: "Happy to help." },
+    ])
+    expect(send).toHaveBeenCalledTimes(1)
+    const message = send.mock.calls[0][0]
+    expect(message).toMatchObject({ to: "dispatch@example.com", replyTo: "dana@ridgeclinic.example" })
+    expect(message.subject).toBe("Hot lead from website chat: Dana (Ridge Clinic)")
+    expect(message.html).toContain("&lt;b&gt;Hi&lt;/b&gt;")
+  })
+
+  it("fails loudly when the email service rejects the lead", async () => {
+    send.mockResolvedValueOnce({ data: null, error: { message: "Invalid API key" } })
+    const { sendAssistantLeadEmail } = await loadEmailModule()
+    await expect(sendAssistantLeadEmail(lead, [])).rejects.toThrow("Email delivery failed")
+  })
+})

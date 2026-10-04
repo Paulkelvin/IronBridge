@@ -7,45 +7,13 @@ import ServiceAreaExplorer from "@/components/service-area-explorer"
 import SectionHeader from "@/components/section-header"
 import SlideEffect from "@/components/slide-effect"
 import { CardBody, CardTitle } from "@/components/ui/card-text"
+import { regionCoverage, serviceRegions } from "@/content/site-facts"
 
 export const metadata: Metadata = pageMetadata({
   title: "Service Area | Maryland, Washington DC, Northern Virginia",
   description: "Courier and delivery coverage across Maryland, Washington DC, and Northern Virginia, including Baltimore, Annapolis, Silver Spring, Arlington, and Fairfax.",
   path: "/service-area",
 })
-
-const regions = [
-  {
-    id: 'maryland' as const,
-    title: 'Maryland',
-    cities: ['Baltimore', 'Bowie', 'Annapolis', 'Columbia', 'Silver Spring', 'Rockville', 'Bethesda', 'Hyattsville'],
-  },
-  {
-    id: 'dc' as const,
-    title: 'Washington, DC',
-    cities: ['Washington, DC'],
-  },
-  {
-    id: 'virginia' as const,
-    title: 'Northern Virginia',
-    cities: ['Arlington', 'Alexandria', 'Fairfax', 'Reston', 'Sterling', 'Ashburn'],
-  },
-]
-
-const regionCoverage = [
-  {
-    title: 'Maryland',
-    content: "From our base in Bowie, we cover Prince George's, Montgomery, Anne Arundel, Howard, and Baltimore counties and Baltimore City, including Silver Spring, Rockville, Bethesda, Hyattsville, Annapolis, Columbia, and Baltimore.",
-  },
-  {
-    title: 'Washington, DC',
-    content: 'Pickups and deliveries anywhere in the District, including runs between DC and the Maryland and Northern Virginia suburbs.',
-  },
-  {
-    title: 'Northern Virginia',
-    content: 'Arlington, Fairfax, and Loudoun counties and the City of Alexandria, including Reston, Sterling, and Ashburn.',
-  },
-]
 
 export default function ServiceAreaPage() {
   return (
@@ -58,7 +26,7 @@ export default function ServiceAreaPage() {
       />
 
       <h2 className="sr-only">Cities We Serve</h2>
-      <ServiceAreaExplorer regions={regions} />
+      <ServiceAreaExplorer regions={serviceRegions} />
 
       <div className="space-y-8 md:space-y-10">
         <SectionHeader

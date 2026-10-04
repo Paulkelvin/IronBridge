@@ -1,5 +1,6 @@
 import { Resend } from "resend"
 import type { DriverApplicationInput, QuoteRequestInput } from "@/lib/validations"
+import type { Lead } from "@/lib/assistant/lead"
 
 const FROM = process.env.EMAIL_FROM || "Iron Bridge Mobility Solutions <onboarding@resend.dev>"
 const QUOTE_NOTIFICATIONS_TO = process.env.QUOTE_NOTIFICATIONS_EMAIL
@@ -157,6 +158,61 @@ export async function sendDriverApplicationEmails(data: DriverApplicationInput) 
         If it's a fit, we'll follow up with the next steps, including any license, insurance, and training
         documentation needed before you're assigned a route.
       </p>
+    `),
+  })
+}
+
+export type TranscriptMessage = { role: "user" | "assistant", content: string }
+
+const SERVICE_LABELS: Record<Lead["service"], string> = {
+  "medical-courier": "Medical courier",
+  "commercial-logistics": "Commercial logistics",
+  "dedicated-route": "Dedicated route",
+  "bulk-item-removal": "Bulk-item removal",
+  other: "Other",
+}
+
+function singleLine(input: string) {
+  return input.replace(/\s+/g, " ").trim()
+}
+
+export async function sendAssistantLeadEmail(lead: Lead, transcript: TranscriptMessage[]) {
+  if (!QUOTE_NOTIFICATIONS_TO) {
+    throw new Error(
+      "Email service is not configured yet (missing QUOTE_NOTIFICATIONS_EMAIL). See .env.example."
+    )
+  }
+  const resend = getClient()
+  const rating = lead.rating === "hot" ? "Hot" : "Warm"
+  const who = singleLine(lead.company ? `${lead.name} (${lead.company})` : lead.name)
+
+  const detailRows = [
+    row("Rating", `${rating}: ${lead.rating_reason}`),
+    row("Name", lead.name),
+    row("Company", lead.company),
+    row("Email", lead.email),
+    row("Phone", lead.phone),
+    row("Service", SERVICE_LABELS[lead.service]),
+    row("Need", lead.need),
+    row("Locations", lead.locations),
+    row("Timing", lead.timing),
+    row("Frequency", lead.frequency),
+  ].join("")
+
+  const transcriptHtml = transcript
+    .map((m) => `<p style="margin:0 0 10px;font-size:13px;line-height:1.5;color:#333"><strong style="color:${m.role === "user" ? "#1B2A4A" : "#128262"}">${m.role === "user" ? "Visitor" : "Assistant"}:</strong> ${escapeHtml(m.content)}</p>`)
+    .join("")
+
+  await sendOrThrow(resend, {
+    from: FROM,
+    to: QUOTE_NOTIFICATIONS_TO,
+    ...(lead.email ? { replyTo: lead.email } : {}),
+    subject: `${rating} lead from website chat: ${who}`,
+    html: wrapper(`${rating} lead from the website assistant`, `
+      <table style="border-collapse:collapse">${detailRows}</table>
+      <h3 style="color:#1B2A4A;font-size:14px;margin:20px 0 10px">Conversation</h3>
+      ${transcriptHtml}
+      <p style="color:#9aa2ad;font-size:11px;margin-top:16px">Captured automatically by the website assistant. Details were typed by the visitor and summarized by AI, so confirm them when you follow up.</p>
     `),
   })
 }
