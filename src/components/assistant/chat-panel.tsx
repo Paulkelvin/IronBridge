@@ -4,6 +4,7 @@ import { contact } from "@/content/site-facts"
 import { RotateCcw, Send, X } from "lucide-react"
 import Link from "next/link"
 import { Fragment, useEffect, useRef, useState } from "react"
+import BrentAvatar from "./brent-avatar"
 
 type ChatMessage =
   | { role: "user" | "assistant", content: string }
@@ -13,10 +14,10 @@ const STORAGE_KEY = "ib-assistant-v1"
 const MAX_MESSAGES = 24
 const FALLBACK = "Sorry, the assistant isn't available right now. Please use the quote form at /request-a-quote and our team will follow up."
 const STARTERS = [
+  "Get a delivery quote",
   "Do you serve my area?",
-  "How do medical pickups work?",
-  "Can you set up a recurring route?",
-  "How do I get a quote?",
+  "Set up a regular route",
+  "Furniture or junk pickup",
 ]
 const LINKABLE_PATHS = [
   "request-a-quote", "become-a-driver", "services", "medical-courier", "commercial-logistics", "dedicated-routes",
@@ -153,13 +154,19 @@ export default function ChatPanel({ onClose }: { onClose: () => void }) {
     <div
       id="ib-assistant"
       role="dialog"
-      aria-labelledby="ib-assistant-title"
+      aria-labelledby="ib-assistant-title ib-assistant-subtitle"
       className="fixed z-50 inset-x-2 bottom-[calc(4.5rem+env(safe-area-inset-bottom))] md:inset-x-auto md:right-6 md:bottom-6 md:w-[380px] h-[min(560px,calc(100dvh-8rem))] flex flex-col rounded-2xl border border-border bg-white shadow-[0_16px_48px_rgba(27,42,74,0.22)] overflow-hidden"
     >
       <div className="flex items-center justify-between gap-3 bg-navy px-4 py-3 text-white">
-        <div>
-          <h2 id="ib-assistant-title" className="text-sm font-semibold">Iron Bridge Assistant</h2>
-          <p className="text-[11px] text-white/75">Automated assistant</p>
+        <div className="flex items-center gap-3 min-w-0">
+          <span className="relative shrink-0">
+            <BrentAvatar size={42} className="rounded-full ring-2 ring-white/20" />
+            <span className="absolute bottom-0 right-0 h-3 w-3 rounded-full bg-[#22c55e] ring-2 ring-navy" aria-hidden="true" />
+          </span>
+          <div className="min-w-0">
+            <h2 id="ib-assistant-title" className="text-[15px] font-semibold leading-tight">Brent</h2>
+            <p id="ib-assistant-subtitle" className="text-xs text-white/80">Virtual assistant · Online</p>
+          </div>
         </div>
         <div className="flex items-center gap-1">
           {messages.length > 0 && (
@@ -173,36 +180,53 @@ export default function ChatPanel({ onClose }: { onClose: () => void }) {
         </div>
       </div>
 
-      <div ref={logRef} role="log" aria-live="polite" className="flex-1 overflow-y-auto px-4 py-4 flex flex-col gap-3 text-sm leading-relaxed">
-        <p className="self-start max-w-[88%] rounded-2xl rounded-bl-sm bg-secondary px-3.5 py-2.5 text-foreground">
-          Hi! I can answer questions about Iron Bridge&apos;s courier and delivery services. Please don&apos;t share patient names or health details here.
-        </p>
+      <div ref={logRef} role="log" aria-live="polite" aria-label="Conversation with Brent" tabIndex={0} className="flex-1 overflow-y-auto px-4 py-4 flex flex-col gap-3 text-sm leading-relaxed focus-visible:outline-solid focus-visible:outline-2 focus-visible:-outline-offset-2 focus-visible:outline-teal">
+        <div className="flex items-end gap-2 self-start max-w-[92%]">
+          <BrentAvatar size={28} className="shrink-0 rounded-full" />
+          <p className="rounded-2xl rounded-bl-sm bg-secondary px-3.5 py-2.5 text-foreground">
+            Hi, I&apos;m Brent, Iron Bridge&apos;s virtual assistant. What can I help you with today?
+          </p>
+        </div>
         {messages.map((m, i) => {
           if (m.role === "note") {
             return <p key={i} className="self-center rounded-full bg-teal-tint px-3 py-1 text-xs font-medium text-teal-dark">{m.content}</p>
           }
-          const isUser = m.role === "user"
+          if (m.role === "user") {
+            return (
+              <p key={i} className="self-end max-w-[85%] whitespace-pre-wrap rounded-2xl rounded-br-sm bg-navy px-3.5 py-2.5 text-white">
+                <span className="sr-only">You: </span>
+                {m.content}
+              </p>
+            )
+          }
           return (
-            <p
-              key={i}
-              className={`max-w-[88%] whitespace-pre-wrap rounded-2xl px-3.5 py-2.5 ${isUser ? "self-end rounded-br-sm bg-navy text-white" : "self-start rounded-bl-sm bg-secondary text-foreground"}`}
-            >
-              <span className="sr-only">{isUser ? "You: " : "Assistant: "}</span>
-              {isUser ? m.content : <MessageText text={m.content} />}
-            </p>
+            <div key={i} className="flex items-end gap-2 self-start max-w-[92%]">
+              <BrentAvatar size={28} className="shrink-0 rounded-full" />
+              <p className="whitespace-pre-wrap rounded-2xl rounded-bl-sm bg-secondary px-3.5 py-2.5 text-foreground">
+                <span className="sr-only">Brent: </span>
+                <MessageText text={m.content} />
+              </p>
+            </div>
           )
         })}
         {busy && messages[messages.length - 1]?.role === "user" && (
-          <p className="self-start rounded-2xl rounded-bl-sm bg-secondary px-3.5 py-2.5 text-foreground/80" aria-label="Assistant is typing">…</p>
+          <div className="flex items-end gap-2 self-start">
+            <BrentAvatar size={28} className="shrink-0 rounded-full" />
+            <p className="flex items-center gap-1 rounded-2xl rounded-bl-sm bg-secondary px-4 py-3.5" aria-label="Brent is typing">
+              {[0, 150, 300].map((delay) => (
+                <span key={delay} className="h-1.5 w-1.5 rounded-full bg-navy/60 motion-safe:animate-bounce" style={{ animationDelay: `${delay}ms` }} />
+              ))}
+            </p>
+          </div>
         )}
         {messages.length === 0 && (
-          <div className="flex flex-wrap gap-2 pt-1">
+          <div className="flex flex-wrap gap-2 pl-9">
             {STARTERS.map((q) => (
               <button
                 key={q}
                 type="button"
                 onClick={() => send(q)}
-                className="rounded-full border border-border px-3 py-1.5 text-xs text-navy hover:border-teal cursor-pointer focus-visible:outline-solid focus-visible:outline-2 focus-visible:outline-teal"
+                className="rounded-full border border-teal/40 bg-white px-3 py-1.5 text-xs font-medium text-teal-dark hover:bg-teal-tint cursor-pointer focus-visible:outline-solid focus-visible:outline-2 focus-visible:outline-teal"
               >
                 {q}
               </button>
@@ -235,7 +259,7 @@ export default function ChatPanel({ onClose }: { onClose: () => void }) {
           rows={1}
           maxLength={2000}
           disabled={atLimit}
-          placeholder="Type your question…"
+          placeholder="Message Brent…"
           className="flex-1 resize-none rounded-xl border border-navy/20 bg-white px-3 py-2 text-[16px] md:text-sm text-foreground placeholder:text-foreground/50 outline-none focus:border-teal focus:ring-2 focus:ring-teal/20 max-h-28"
         />
         <button
@@ -248,7 +272,7 @@ export default function ChatPanel({ onClose }: { onClose: () => void }) {
         </button>
       </form>
       <p className="px-4 pb-3 text-[11px] leading-snug text-foreground/80">
-        Automated assistant. Answers may be wrong, and the team confirms every booking. Don&apos;t share patient information.
+        Brent is an AI assistant, not a person. Answers may be wrong, and our team confirms every booking. Please don&apos;t share patient information.
       </p>
     </div>
   )

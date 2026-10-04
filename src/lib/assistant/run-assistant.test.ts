@@ -166,6 +166,12 @@ describe("assistant instructions", () => {
     expect(buildInstructions()).toContain("The approved business phone number is (301) 818-1929")
   })
 
+  it("introduce the assistant as Brent, an AI rather than a person", () => {
+    const instructions = buildInstructions()
+    expect(instructions).toContain("You are Brent")
+    expect(instructions).toContain("never claim to be human, the business owner")
+  })
+
   it("treat one-time residential requests as valid but send driver applicants elsewhere", () => {
     const instructions = buildInstructions()
     expect(instructions).toContain("one-time residential request is still a valid request")
