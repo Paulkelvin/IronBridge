@@ -19,6 +19,10 @@ const STARTERS = [
   "Set up a regular route",
   "Furniture or junk pickup",
 ]
+const MOBILE_QUERY = "(max-width: 767px)"
+
+type VisibleArea = { top: number, height: number, keyboardOpen: boolean }
+
 const LINKABLE_PATHS = [
   "request-a-quote", "become-a-driver", "services", "medical-courier", "commercial-logistics", "dedicated-routes",
   "bulk-item-removal", "capability-statement", "about", "service-area", "compliance-safety", "privacy-policy", "accessibility",
@@ -55,6 +59,7 @@ export default function ChatPanel({ onClose }: { onClose: () => void }) {
   const [leadSaved, setLeadSaved] = useState(false)
   const [draft, setDraft] = useState("")
   const [busy, setBusy] = useState(false)
+  const [visibleArea, setVisibleArea] = useState<VisibleArea | null>(null)
   const inputRef = useRef<HTMLTextAreaElement>(null)
   const logRef = useRef<HTMLDivElement>(null)
 
@@ -62,8 +67,45 @@ export default function ChatPanel({ onClose }: { onClose: () => void }) {
     const saved = loadSaved()
     setMessages(saved.messages)
     setLeadSaved(saved.leadSaved)
-    inputRef.current?.focus()
+    if (window.matchMedia(MOBILE_QUERY).matches) logRef.current?.focus({ preventScroll: true })
+    else inputRef.current?.focus()
   }, [])
+
+  useEffect(() => {
+    const mobile = window.matchMedia(MOBILE_QUERY)
+    const viewport = window.visualViewport
+    const update = () => {
+      if (!mobile.matches) return setVisibleArea(null)
+      const height = viewport?.height ?? window.innerHeight
+      setVisibleArea({
+        top: viewport?.offsetTop ?? 0,
+        height,
+        keyboardOpen: document.documentElement.clientHeight - height > 120,
+      })
+    }
+    update()
+    viewport?.addEventListener("resize", update)
+    viewport?.addEventListener("scroll", update)
+    mobile.addEventListener("change", update)
+    return () => {
+      viewport?.removeEventListener("resize", update)
+      viewport?.removeEventListener("scroll", update)
+      mobile.removeEventListener("change", update)
+    }
+  }, [])
+
+  const isMobile = visibleArea !== null
+  useEffect(() => {
+    if (!isMobile) return
+    const { documentElement: html, body } = document
+    const previous = [html.style.overflow, body.style.overflow]
+    html.style.overflow = "hidden"
+    body.style.overflow = "hidden"
+    return () => {
+      html.style.overflow = previous[0]
+      body.style.overflow = previous[1]
+    }
+  }, [isMobile])
 
   useEffect(() => {
     try {
@@ -155,9 +197,11 @@ export default function ChatPanel({ onClose }: { onClose: () => void }) {
       id="ib-assistant"
       role="dialog"
       aria-labelledby="ib-assistant-title ib-assistant-subtitle"
-      className="fixed z-50 inset-x-0 bottom-0 h-[calc(100dvh-4.5rem)] rounded-t-2xl md:inset-x-auto md:right-6 md:bottom-6 md:w-[380px] md:h-[min(600px,calc(100dvh-3rem))] md:rounded-2xl flex flex-col border border-border bg-white shadow-[0_16px_48px_rgba(27,42,74,0.22)] overflow-hidden"
+      aria-modal={isMobile || undefined}
+      className="fixed z-50 inset-x-0 top-0 h-dvh md:top-auto md:inset-x-auto md:right-6 md:bottom-6 md:w-[380px] md:h-[min(600px,calc(100dvh-3rem))] md:rounded-2xl md:border md:border-border flex flex-col bg-white md:shadow-[0_16px_48px_rgba(27,42,74,0.22)] overflow-hidden overscroll-contain"
+      style={visibleArea ? { top: visibleArea.top, height: visibleArea.height } : undefined}
     >
-      <div className="flex items-center justify-between gap-3 bg-navy px-4 py-3 text-white">
+      <div className="flex shrink-0 items-center justify-between gap-3 bg-navy px-4 py-3 text-white" style={isMobile ? { paddingTop: "calc(0.75rem + env(safe-area-inset-top))" } : undefined}>
         <div className="flex items-center gap-3 min-w-0">
           <span className="relative shrink-0">
             <BrentAvatar size={42} className="rounded-full ring-2 ring-white/20" />
@@ -180,7 +224,7 @@ export default function ChatPanel({ onClose }: { onClose: () => void }) {
         </div>
       </div>
 
-      <div ref={logRef} role="log" aria-live="polite" aria-label="Conversation with Brent" tabIndex={0} className="flex-1 overflow-y-auto px-4 py-4 flex flex-col gap-3 text-sm leading-relaxed focus-visible:outline-solid focus-visible:outline-2 focus-visible:-outline-offset-2 focus-visible:outline-teal">
+      <div ref={logRef} role="log" aria-live="polite" aria-label="Conversation with Brent" tabIndex={0} className="flex-1 min-h-0 overflow-y-auto overscroll-contain px-4 py-4 flex flex-col gap-3 text-sm leading-relaxed focus-visible:outline-solid focus-visible:outline-2 focus-visible:-outline-offset-2 focus-visible:outline-teal">
         <div className="flex items-end gap-2 self-start max-w-[92%]">
           <BrentAvatar size={28} className="shrink-0 rounded-full" />
           <p className="rounded-2xl rounded-bl-sm bg-secondary px-3.5 py-2.5 text-foreground">
@@ -242,8 +286,8 @@ export default function ChatPanel({ onClose }: { onClose: () => void }) {
 
       <form
         onSubmit={(e) => { e.preventDefault(); send(draft) }}
-        className="border-t border-border px-3 pt-3 flex items-end gap-2"
-        style={{ paddingBottom: "calc(0.75rem + env(safe-area-inset-bottom))" }}
+        className="shrink-0 border-t border-border px-3 pt-3 flex items-end gap-2"
+        style={{ paddingBottom: visibleArea?.keyboardOpen ? "0.75rem" : "calc(0.75rem + env(safe-area-inset-bottom))" }}
       >
         <label htmlFor="ib-assistant-input" className="sr-only">Your message</label>
         <textarea
