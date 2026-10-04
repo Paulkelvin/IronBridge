@@ -165,7 +165,7 @@ export default function ChatPanel({ onClose }: { onClose: () => void }) {
           </span>
           <div className="min-w-0">
             <h2 id="ib-assistant-title" className="text-[15px] font-semibold leading-tight">Brent</h2>
-            <p id="ib-assistant-subtitle" className="text-xs text-white/80">Virtual assistant · Online</p>
+            <p id="ib-assistant-subtitle" className="text-xs text-white/80">AI assistant · Online</p>
           </div>
         </div>
         <div className="flex items-center gap-1">
@@ -271,9 +271,6 @@ export default function ChatPanel({ onClose }: { onClose: () => void }) {
           <Send size={18} aria-hidden="true" />
         </button>
       </form>
-      <p className="px-4 pb-3 text-[11px] leading-snug text-foreground/80">
-        Brent is an AI assistant, not a person. Answers may be wrong, and our team confirms every booking. Please don&apos;t share patient information.
-      </p>
     </div>
   )
 }
