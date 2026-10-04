@@ -155,7 +155,7 @@ export default function ChatPanel({ onClose }: { onClose: () => void }) {
       id="ib-assistant"
       role="dialog"
       aria-labelledby="ib-assistant-title ib-assistant-subtitle"
-      className="fixed z-50 inset-x-2 bottom-[calc(4.5rem+env(safe-area-inset-bottom))] md:inset-x-auto md:right-6 md:bottom-6 md:w-[380px] h-[min(560px,calc(100dvh-8rem))] flex flex-col rounded-2xl border border-border bg-white shadow-[0_16px_48px_rgba(27,42,74,0.22)] overflow-hidden"
+      className="fixed z-50 inset-x-0 bottom-0 h-[calc(100dvh-4.5rem)] rounded-t-2xl md:inset-x-auto md:right-6 md:bottom-6 md:w-[380px] md:h-[min(600px,calc(100dvh-3rem))] md:rounded-2xl flex flex-col border border-border bg-white shadow-[0_16px_48px_rgba(27,42,74,0.22)] overflow-hidden"
     >
       <div className="flex items-center justify-between gap-3 bg-navy px-4 py-3 text-white">
         <div className="flex items-center gap-3 min-w-0">
@@ -242,7 +242,8 @@ export default function ChatPanel({ onClose }: { onClose: () => void }) {
 
       <form
         onSubmit={(e) => { e.preventDefault(); send(draft) }}
-        className="border-t border-border p-3 flex items-end gap-2"
+        className="border-t border-border px-3 pt-3 flex items-end gap-2"
+        style={{ paddingBottom: "calc(0.75rem + env(safe-area-inset-bottom))" }}
       >
         <label htmlFor="ib-assistant-input" className="sr-only">Your message</label>
         <textarea
