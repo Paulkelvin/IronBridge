@@ -250,8 +250,9 @@ export async function sendAssistantLeadEmail(lead: Lead, transcript: TranscriptM
     row("Special handling", lead.special_handling),
   ].join("")
 
-  const transcriptHtml = transcript
-    .map((m) => `<p style="margin:0 0 10px;font-size:13px;line-height:1.5;color:#333"><strong style="color:${m.role === "user" ? "#1B2A4A" : "#128262"}">${m.role === "user" ? "Visitor" : "Assistant"}:</strong> ${escapeHtml(m.content)}</p>`)
+  const transcriptHtml = lead.patient_info_shared
+    ? `<p style="margin:0;font-size:13px;line-height:1.5;color:#b42318">Not included: the visitor typed patient or health details during the chat, so the conversation was withheld to keep that information out of email.</p>`
+    : transcript.map((m) => `<p style="margin:0 0 10px;font-size:13px;line-height:1.5;color:#333"><strong style="color:${m.role === "user" ? "#1B2A4A" : "#128262"}">${m.role === "user" ? "Visitor" : "Assistant"}:</strong> ${escapeHtml(m.content)}</p>`)
     .join("")
 
   await sendOrThrow(resend, {

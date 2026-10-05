@@ -38,6 +38,7 @@ const leadArgs: Lead = {
   special_handling: "Cold packs",
   message: "",
   urgent: false,
+  patient_info_shared: false,
   priority: "high",
   priority_reason: "Recurring medical facility route with ZIP codes and email",
 }

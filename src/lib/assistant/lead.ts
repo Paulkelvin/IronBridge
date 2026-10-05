@@ -33,13 +33,14 @@ export const saveLeadTool: FunctionTool = {
       special_handling: optionalText("Special handling needs such as temperature control or fragile items."),
       message: optionalText("The visitor's question or message for the team, in their own words."),
       urgent: { type: "boolean", description: "True when the visitor needs it soon and gave a clear timeframe (for example today or tomorrow)." },
+      patient_info_shared: { type: "boolean", description: "True if the visitor typed any patient names, dates of birth, diagnoses, or other health details anywhere in the conversation." },
       priority: { type: "string", enum: ["high", "standard"] },
       priority_reason: { type: "string", description: "Short reason for the priority." },
     },
     required: [
       "inquiry_type", "name", "organization", "email", "phone", "preferred_contact", "service_type", "customer_type",
       "item_description", "pickup_location", "delivery_location", "requested_timing", "frequency", "recurring_details",
-      "size_quantity", "access_details", "special_handling", "message", "urgent", "priority", "priority_reason",
+      "size_quantity", "access_details", "special_handling", "message", "urgent", "patient_info_shared", "priority", "priority_reason",
     ],
     additionalProperties: false,
   },
@@ -67,6 +68,7 @@ export const leadSchema = z.object({
   special_handling: text(300),
   message: text(1000),
   urgent: z.boolean(),
+  patient_info_shared: z.boolean(),
   priority: z.enum(["high", "standard"]),
   priority_reason: text(300),
 }).refine((lead) => lead.email !== "" || lead.phone.replace(/\D/g, "").length >= 10, {

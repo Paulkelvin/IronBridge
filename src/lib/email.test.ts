@@ -107,6 +107,7 @@ describe("sendAssistantLeadEmail", () => {
     special_handling: "Cold packs",
     message: "",
     urgent: true,
+    patient_info_shared: false,
     priority: "high" as const,
     priority_reason: "Recurring medical route needed tomorrow",
   }
@@ -126,6 +127,18 @@ describe("sendAssistantLeadEmail", () => {
       expect(message.html).toContain(text)
     }
     expect(message.html).toContain("&lt;b&gt;Hi&lt;/b&gt;")
+  })
+
+  it("withholds the conversation when the visitor typed patient details", async () => {
+    send.mockResolvedValue({ data: { id: "ok" }, error: null })
+    const { sendAssistantLeadEmail } = await loadEmailModule()
+    await sendAssistantLeadEmail({ ...lead, patient_info_shared: true }, [
+      { role: "user", content: "Pickup for patient John Smith, DOB 4/2/1960" },
+    ])
+    const message = send.mock.calls[0][0]
+    expect(message.html).not.toContain("John Smith")
+    expect(message.html).toContain("conversation was withheld")
+    expect(message.html).toContain("20910")
   })
 
   it("labels a message for the team and leaves out labels that don't apply", async () => {

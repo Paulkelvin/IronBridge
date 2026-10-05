@@ -16,6 +16,8 @@ const REASONING_EFFORT: ReasoningEffort =
     : (REASONING_EFFORTS as readonly string[]).includes(configuredEffort ?? "") ? configuredEffort as ReasoningEffort
       : "low"
 
+const LEAD_EMAILS_PER_HOUR = 3
+
 const FALLBACK_MESSAGE = "Sorry, the assistant isn't available right now. Please use the quote form at /request-a-quote and our team will follow up."
 
 const requestSchema = z.object({
@@ -66,7 +68,12 @@ export async function POST(req: NextRequest) {
           model: MODEL,
           reasoningEffort: REASONING_EFFORT,
           leadAlreadySaved: parsed.data.leadSaved ?? false,
-          saveLead: sendAssistantLeadEmail,
+          saveLead: async (lead, transcript) => {
+            if (isRateLimited(req, { bucket: "assistant-lead", max: LEAD_EMAILS_PER_HOUR, windowMs: 60 * 60 * 1000 })) {
+              throw new Error("Lead email limit reached for this visitor.")
+            }
+            await sendAssistantLeadEmail(lead, transcript)
+          },
           emit,
           signal: req.signal,
         })

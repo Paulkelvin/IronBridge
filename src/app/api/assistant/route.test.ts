@@ -2,6 +2,8 @@ import { NextRequest } from "next/server"
 import { afterEach, describe, expect, it, vi } from "vitest"
 
 const create = vi.fn()
+const sendAssistantLeadEmail = vi.fn()
+vi.mock("@/lib/email", () => ({ sendAssistantLeadEmail }))
 vi.mock("openai", () => ({
   default: vi.fn(function OpenAI() {
     return { responses: { create } }
@@ -24,6 +26,7 @@ async function loadRoute() {
 afterEach(() => {
   vi.unstubAllEnvs()
   create.mockReset()
+  sendAssistantLeadEmail.mockReset()
 })
 
 describe("POST /api/assistant", () => {
@@ -77,5 +80,33 @@ describe("POST /api/assistant", () => {
     for (let i = 0; i < 31; i++) statuses.push((await POST(post({ messages: [{ role: "user", content: "Hi" }] }, "198.51.100.9"))).status)
     expect(statuses.slice(0, 30).every((s) => s === 503)).toBe(true)
     expect(statuses[30]).toBe(429)
+  })
+
+  it("sends at most 3 lead emails per visitor per hour", async () => {
+    vi.stubEnv("OPENAI_API_KEY", "sk-test")
+    vi.spyOn(console, "error").mockImplementation(() => {})
+    const lead = {
+      inquiry_type: "service_request", name: "Dana", organization: "", email: "dana@example.com", phone: "",
+      preferred_contact: "email", service_type: "business_delivery", customer_type: "business", item_description: "Boxes",
+      pickup_location: "20715", delivery_location: "21201", requested_timing: "", frequency: "one_time", recurring_details: "",
+      size_quantity: "", access_details: "", special_handling: "", message: "", urgent: false, patient_info_shared: false,
+      priority: "standard", priority_reason: "",
+    }
+    create.mockImplementation(async ({ input }: { input: { type?: string }[] }) => {
+      const answered = input.some((item) => item.type === "function_call_output")
+      return (async function* () {
+        yield answered
+          ? { type: "response.completed", response: { output: [] } }
+          : { type: "response.completed", response: { output: [{ type: "function_call", call_id: "c1", name: "save_lead", arguments: JSON.stringify(lead) }] } }
+      })()
+    })
+    const { POST } = await loadRoute()
+    const saved: boolean[] = []
+    for (let i = 0; i < 4; i++) {
+      const res = await POST(post({ messages: [{ role: "user", content: "Send my request" }] }, "198.51.100.20"))
+      saved.push((await res.text()).includes("lead_saved"))
+    }
+    expect(sendAssistantLeadEmail).toHaveBeenCalledTimes(3)
+    expect(saved).toEqual([true, true, true, false])
   })
 })
