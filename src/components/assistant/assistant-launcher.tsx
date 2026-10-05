@@ -8,7 +8,7 @@ import BrentAvatar from "./brent-avatar"
 
 const ChatPanel = dynamic(() => import("./chat-panel"), { ssr: false })
 
-const HIDDEN_ON = ['/request-a-quote', '/become-a-driver', '/viewport-test']
+const HIDDEN_ON = ['/request-a-quote', '/become-a-driver']
 const TEASER_SEEN_KEY = "ib-assistant-teaser-seen"
 const TEASER_DELAY_MS = 4000
 
@@ -54,7 +54,7 @@ export default function AssistantLauncher() {
       {open && <ChatPanel onClose={close} />}
 
       {teaser && !open && (
-        <div className="fixed z-40 w-[220px] right-[76px] bottom-[calc(var(--mobile-bar-h)+16px)] md:right-[100px] md:bottom-8 rounded-2xl bg-white pl-4 pr-8 py-3 text-sm text-foreground shadow-[0_8px_28px_rgba(27,42,74,0.18)] border border-border motion-safe:animate-in motion-safe:fade-in motion-safe:slide-in-from-bottom-2">
+        <div className="fixed z-40 w-[220px] right-[76px] bottom-[calc(var(--mobile-bar-h)+16px)] md:right-[100px] md:bottom-8 translate-y-(--viewport-gap) md:translate-y-0 rounded-2xl bg-white pl-4 pr-8 py-3 text-sm text-foreground shadow-[0_8px_28px_rgba(27,42,74,0.18)] border border-border motion-safe:animate-in motion-safe:fade-in motion-safe:slide-in-from-bottom-2">
           <button type="button" onClick={openChat} className="text-left cursor-pointer focus-visible:outline-solid focus-visible:outline-2 focus-visible:outline-teal rounded">
             <span className="block font-semibold text-navy">Hi, I&apos;m Brent</span>
             <span className="block">Need something delivered? I can help.</span>
@@ -78,7 +78,7 @@ export default function AssistantLauncher() {
         aria-expanded={open}
         aria-controls="ib-assistant"
         aria-label="Chat with Brent, Iron Bridge's AI assistant"
-        className="fixed right-4 bottom-[calc(var(--mobile-bar-h)+12px)] md:right-6 md:bottom-6 z-40 rounded-full shadow-[0_8px_24px_rgba(27,42,74,0.3)] ring-[3px] ring-white transition-transform motion-safe:hover:scale-105 cursor-pointer focus-visible:outline-solid focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-teal"
+        className="fixed right-4 bottom-[calc(var(--mobile-bar-h)+12px)] md:right-6 md:bottom-6 translate-y-(--viewport-gap) md:translate-y-0 z-40 rounded-full shadow-[0_8px_24px_rgba(27,42,74,0.3)] ring-[3px] ring-white transition-transform motion-safe:hover:scale-105 cursor-pointer focus-visible:outline-solid focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-teal"
       >
         <BrentAvatar size={60} className="size-[48px] md:size-[60px] rounded-full" />
         <span className="absolute bottom-0.5 right-0.5 h-3.5 w-3.5 rounded-full bg-[#22c55e] ring-2 ring-white" aria-hidden="true" />

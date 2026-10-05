@@ -35,6 +35,7 @@
 :root {
   --mobile-bar-pad: max(0px, calc(env(safe-area-inset-bottom) - 12px));
   --mobile-bar-h: calc(49px + var(--mobile-bar-pad));
+  --viewport-gap: 0px;
   color: var(--color-foreground);
   background: var(--color-background);
   font-size: var(--text-base);
