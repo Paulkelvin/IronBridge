@@ -89,7 +89,7 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body
-        className={`${sans.variable} ${serif.variable} ${sans.className} antialiased w-full min-h-screen overflow-x-hidden`}
+        className={`${sans.variable} ${serif.variable} ${sans.className} antialiased w-full min-h-screen overflow-x-clip`}
       >
         <noscript>
           <style>{`[style*="opacity:0"]{opacity:1!important;transform:none!important}`}</style>
