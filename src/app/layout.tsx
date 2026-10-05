@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Inter, Playfair_Display } from "next/font/google";
 import "./globals.css";
 import Header from "@/components/header";
@@ -7,6 +7,12 @@ import ScrollRestoration from "@/components/scroll-restoration";
 import MobileCtaBar from "@/components/mobile-cta-bar";
 import BreadcrumbJsonLd from "@/components/breadcrumb-json-ld";
 import AssistantLauncher from "@/components/assistant/assistant-launcher";
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  viewportFit: "cover",
+};
 
 const sans = Inter({
   variable: "--font-ib-sans",
@@ -102,7 +108,7 @@ export default function RootLayout({
         <ScrollRestoration />
         <LenisProvider>
           <Header />
-          <main id="main-content" tabIndex={-1} className="pt-[72px] pb-[calc(8rem+env(safe-area-inset-bottom))] md:pb-0 outline-none">{children}</main>
+          <main id="main-content" tabIndex={-1} className="pt-[72px] pb-[calc(var(--mobile-bar-h)+72px)] md:pb-0 outline-none">{children}</main>
         </LenisProvider>
         <MobileCtaBar />
         <AssistantLauncher />
